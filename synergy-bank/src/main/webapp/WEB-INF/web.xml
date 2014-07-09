@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+ 
+ 
+  <context-param>
+  	<param-name>pageTitle</param-name>
+    <param-value>Synergy Bank</param-value> 		
+  </context-param>
+ 
+  <welcome-file-list>
+  	<welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  
+
+  	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/context/synergy-bank-root-context.xml</param-value>
+	</context-param> 
+  
+  	<!-- Responsible for instantiating spring root web application context container 
+		ApplicationContext context=new ClassPathXmlApplicationContext("arm-strong-service-dao.xml");
+		/WEB-INF/applicationContext.xml
+		who gives this listener = spring web module
+	-->
+	
+ 	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+  
+  <!-- Here as per spring mvc front controller 
+  who gives this DispatcherServlet = spring mvc module
+  
+  -->
+  <servlet>
+    <servlet-name>synergy-bank</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- 
+  	extension mapping *.do
+  	below  is 	path prefix mapping
+   -->
+  <servlet-mapping>
+    <servlet-name>synergy-bank</servlet-name>
+    <url-pattern>/bank/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>
