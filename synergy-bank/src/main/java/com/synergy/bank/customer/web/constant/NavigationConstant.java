@@ -6,5 +6,8 @@ package com.synergy.bank.customer.web.constant;
  *
  */
 public interface NavigationConstant {
+	
+	final public static String CUSTOMER_PAGE="WEB-INF/jsp/customer/";
+	final public static String CUSTOMER_REGISTRATION_PAGE="customerRegistration";
 
 }
