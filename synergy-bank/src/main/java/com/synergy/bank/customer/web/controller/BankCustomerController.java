@@ -1,5 +1,7 @@
 package com.synergy.bank.customer.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -36,5 +38,13 @@ public class BankCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 		
-
+	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
+	public String showCustomerInformation(Model model) {
+		
+		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
+		System.out.println(customerDetailList);
+		model.addAttribute("customerList",customerDetailList);
+		return "customer/customerDetailsTableView";
+	}
+	
 }

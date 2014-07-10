@@ -1,5 +1,6 @@
 package com.synergy.bank.customer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -37,7 +38,17 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public List<CustomerForm> findCustomers() {
-		return null;
+		List<CustomerEntity> customerEntityList =bankCustomerDao.findCustomers();
+		List<CustomerForm> customerFormList= new ArrayList<CustomerForm>(customerEntityList.size());
+
+		for(int i=0;i<customerEntityList.size();i++)
+		{
+			CustomerForm customerForm = new CustomerForm();	
+			BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
+			customerFormList.add(customerForm);
+		}
+		
+		return customerFormList;
 	}
 
 	@Override

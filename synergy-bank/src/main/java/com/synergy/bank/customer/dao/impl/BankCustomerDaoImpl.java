@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
@@ -72,12 +73,14 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public List<CustomerEntity> findCustomers() {
-		return null;
+		List<CustomerEntity> customerList = super.getJdbcTemplate().query(CustomerQuery.FIND_CUTOMER,
+				new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
+		return customerList;
 	}
 
 	@Override
 	public CustomerEntity findCustomerByUserId(String userid) {
-
+		
 		return null;
 	}
 
