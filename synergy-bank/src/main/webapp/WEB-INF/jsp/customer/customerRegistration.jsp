@@ -40,7 +40,7 @@
 			 <br/>
 			<h3>Customer Registration Page:</h3> 
 			<br/>
-			<ff:form method="post" commandName="customerCommand"> 
+			<ff:form method="post" action="${pageContext.request.contextPath}/bank/customerRegistration" commandName="customerCommand"> 
 				<table align="right" width="70%" border="0" cellspacing="8" cellpadding="3">
 					<tr>
 						<td>User Id:</td>
