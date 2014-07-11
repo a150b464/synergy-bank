@@ -6,6 +6,17 @@
 <title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="customerDataValidations.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type = "text/javascript">
+   $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+  
+
 </head>
 <body>
 	<div class="meta">
@@ -18,7 +29,7 @@
 		<p>Recruiters: <a href="#">Log in</a> or <a href="#">Find out more</a></p>																																															
 	</div>
 	<div id="header">
-		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="50" height="50" /></a>
+		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
 		<ul id="menu">
 			<li><a href="#">Home</a></li>
@@ -30,22 +41,29 @@
 			<li><a href="#">Help</a></li>
 			<li class="last"><a href="#">Register</a></li>
 		</ul>
-		<img src="${pageContext.request.contextPath}/images/bigpicture.jpg" alt="" width="892" height="303" />
+		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
+		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
+		
 	</div>
 	<div id="content">
 			
 			 <br/>
 			<h3>Customer Registration Page:</h3> 
 			<br/>
-			<ff:form  name="customerForm" action="${pageContext.request.contextPath}/bank/customerRegistration" method="post"  commandName="customerForm"> 
-				<table align="right" width="70%" border="0" cellspacing="8" cellpadding="3">
+			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" onSubmit="validateregdform()"> 
+				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
 					<tr>
-						<td>User Id:</td>
-						<td><ff:input path="userId" size="60" style="background:#FFF380;"/></td>
+						<td>User Id:*</td>
+						<td><ff:input path="userId" id="userId" size="40" />
+						<span id="iderror"></span>
+						</td>
+						
 					</tr>
 					<tr>
-						<td><b>Password:</b></td>
-						<td><ff:password path="password" size="40"/></td>
+						<td><b>Password:*</b></td>
+						<td><ff:password path="password" id="password" size="40"/>
+						<span id="passerror"></span>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Salutation:</b></td>
@@ -73,7 +91,7 @@
 					</tr>
 					<tr>
 						<td><b>Date of Birth:</b></td>
-						<td><ff:input path="dob" size="40"/></td>
+						<td><ff:input path="dob" id ="datepicker" size="40"/></td>
 					</tr>
 					<tr>
 						<td><b>Category:</b></td>
@@ -88,12 +106,15 @@
 						<td><ff:input path="fatherName" size="40" /></td>
 					</tr>
 					<tr>
-						<td><b>Email:</b></td>
-						<td><ff:input path="email" size="40" /></td>
+						<td><b>Email:*</b></td>
+						<td><ff:input path="email" size="40" />
+						<span id="emailerror"></span>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Mobile:</b></td>
-						<td><ff:input path="mobile" size="40" /></td>
+						<td><ff:input path="mobile" size="40" />
+						<span id="phoneerror"></span></td>
 					</tr>
 					<tr>
 						<td><b>SSN:</b></td>
@@ -123,14 +144,14 @@
 						<td><b>Role:</b></td>
 						<td><ff:input path="role" size="40" /></td>
 					</tr>
-					<%-- <tr>
+					 <tr>
 						<td><b>Date of Entry:</b></td>
-						<td><ff:input path="doe" size="40"/></td>
+						<td><ff:input path="doe" id ="datepicker" size="40"/></td>
 					</tr>
 					<tr>
 						<td><b>Date of Modification:</b></td>
-						<td><ff:input path="dom" size="40" /></td>
-					</tr> --%>
+						<td><ff:input path="dom" id ="datepicker" size="40" /></td>
+					</tr> 
 					<tr>
 						<td><b>Photo:</b></td>
 						<td><ff:input path="photo" size="40" /></td>
@@ -138,7 +159,7 @@
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="40" /></td>
-						<td><input type="submit" value="Registration"  style="background:pink;" size="30" /></td>
+						<td><input id = "submit" type="submit" value="Register Me" size="50" /></td>
 					</tr>
 			</table>
 			
