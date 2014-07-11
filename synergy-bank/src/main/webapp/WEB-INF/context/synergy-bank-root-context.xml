@@ -14,5 +14,7 @@
    <import resource="synergyDataSource.xml"/>
    <import resource="customer-service.xml"/>
    <import resource="customer-dao.xml"/>
+   <import resource="spring-hibernate.xml"/>
+   
 </beans>
 	
