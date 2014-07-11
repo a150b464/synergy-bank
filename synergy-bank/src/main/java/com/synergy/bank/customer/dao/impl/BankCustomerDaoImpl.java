@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 /**
@@ -82,6 +83,14 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 	public CustomerEntity findCustomerByUserId(String userid) {
 		
 		return null;
+	}
+	
+	@Override
+	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId) {
+		
+		List<PayeeDetailsEntity> payeeList = super.getJdbcTemplate().query(CustomerQuery.SHOW_PAYEE_LIST+userId, new BeanPropertyRowMapper(PayeeDetailsEntity.class));
+			
+		return payeeList;
 	}
 
 }
