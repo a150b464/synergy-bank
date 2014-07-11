@@ -14,7 +14,6 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.admin.web.constant.NavigationConstantAdmin;
 import com.synergy.bank.customer.service.BankAdminService;
-import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
 
