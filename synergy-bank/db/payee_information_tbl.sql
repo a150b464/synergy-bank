@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : synergy_bank_db
 Target Host     : localhost:3306
 Target Database : synergy_bank_db
-Date: 2014-07-10 23:38:32
+Date: 2014-07-11 14:29:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,12 +20,13 @@ CREATE TABLE `payee_information_tbl` (
   `payeeNickName` varchar(40) DEFAULT NULL,
   `mobile` varchar(30) DEFAULT NULL,
   `doe` datetime DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`sno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of payee_information_tbl
 -- ----------------------------
-INSERT INTO `payee_information_tbl` VALUES ('1', '1', '1234', 'Tridib', 'Banerjee', '123-3455043', '2014-07-09 21:42:30');
-INSERT INTO `payee_information_tbl` VALUES ('2', '1', '2345', 'Jeff', 'Chen', '111-2223333', '2014-07-08 21:42:45');
-INSERT INTO `payee_information_tbl` VALUES ('3', '1', '564', 'Swapnil', 'swapnil', '987-5431345', '2014-07-07 22:30:19');
+INSERT INTO `payee_information_tbl` VALUES ('1', '1', '1234', 'Tridib', 'Banerjee', '123-3455043', '2014-07-09 21:42:30', null);
+INSERT INTO `payee_information_tbl` VALUES ('2', '1', '2345', 'Jeff', 'Chen', '111-2223333', '2014-07-08 21:42:45', null);
+INSERT INTO `payee_information_tbl` VALUES ('3', '1', '564', 'Swapnil', 'swapnil', '987-5431345', '2014-07-07 22:30:19', null);
