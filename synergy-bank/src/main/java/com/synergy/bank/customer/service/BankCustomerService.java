@@ -3,6 +3,7 @@ package com.synergy.bank.customer.service;
 import java.util.List;
 
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 /**
  * @author this nagendra.yadav
@@ -15,5 +16,5 @@ public interface BankCustomerService {
 	public String updateCustomer(CustomerForm customerForm);
 	public List<CustomerForm> findCustomers();
 	public CustomerForm findCustomerByUserId(String userid);
-	
+	public List<PayeeDetailsForm> showPayeeListByUserId(String userId);
 }

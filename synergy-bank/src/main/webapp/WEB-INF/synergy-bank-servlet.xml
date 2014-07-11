@@ -11,6 +11,7 @@
         
  <!-- This is scanning the package where your controller resides -->       
  <context:component-scan base-package="com.synergy.bank.customer.web.controller"/>
+ <context:component-scan base-package="com.synergy.bank.admin.web.controller"/>
  
  <!-- 
  welcome =>>

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 
 @Controller
@@ -37,9 +38,9 @@ public class BankCustomerController {
 	}
 	
 	
-	@RequestMapping(value="customerRegistration",method=RequestMethod.POST) 
+	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
-		//
+		
 		bankCustomerService.addCustomer(customerForm);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
@@ -51,6 +52,17 @@ public class BankCustomerController {
 		System.out.println(customerDetailList);
 		model.addAttribute("customerList",customerDetailList);
 		return "customer/customerDetailsTableView";
+	}
+	
+	@RequestMapping(value="showPayeeList",method=RequestMethod.GET) 
+	public String showPayeeList(Model model) {
+		
+		String userId = "1";
+		List<PayeeDetailsForm> payeeList = bankCustomerService.showPayeeListByUserId(userId);
+		model.addAttribute("payeeDetailsList",payeeList);
+		System.out.println(payeeList);
+		//return "customer/payeeList";
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	}
 	
 	@InitBinder

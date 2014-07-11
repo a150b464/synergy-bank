@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankCustomerServiceImpl")
 @Scope("singleton")
@@ -56,6 +58,20 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		return null;
 	}
 
-	
+	@Override
+	public List<PayeeDetailsForm> showPayeeListByUserId(String userId) {				
+		
+		List<PayeeDetailsEntity> payeeList = bankCustomerDao.showPayeeListByUserId(userId);		
+		System.out.println(payeeList);
+		List<PayeeDetailsForm> payeeListForms = new ArrayList<PayeeDetailsForm>();
+		
+		for (PayeeDetailsEntity pde : payeeList) {
+			PayeeDetailsForm pdf = new PayeeDetailsForm();
+			BeanUtils.copyProperties(pde, pdf);
+			payeeListForms.add(pdf);
+		}
+		
+		return payeeListForms;
+	}
 
 }

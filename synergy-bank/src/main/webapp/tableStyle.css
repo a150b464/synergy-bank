@@ -1,0 +1,32 @@
+table {
+	width:100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid green;
+}
+
+table tbody tr:nth-child(even) {
+	background-color: #D0F5A9;
+}
+
+table tbody tr:nth-child(odd) {
+	background-color: #FAFAFA;
+}
+
+thead tr td {
+	/* background-color: #01DF74; */
+	background-color: #04B45F;
+	padding: 5px;
+	font-size: 17px;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+tbody tr td{
+	padding: 5px;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Tahoma, Geneva, sans-serif;
+}
