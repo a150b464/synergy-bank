@@ -11,7 +11,15 @@ public class PayeeDetailsForm {
 	private String payeeNickName;
 	private String mobile;
 	private Date doe;
+	private String email;
 	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getSno() {
 		return sno;
 	}
@@ -54,15 +62,13 @@ public class PayeeDetailsForm {
 	public void setDoe(Date doe) {
 		this.doe = doe;
 	}
-
 	@Override
 	public String toString() {
-		return "PayeeDetailsForm [sno=" + sno + ", userid=" + userid
+		return "PayeeDetailsEntity [sno=" + sno + ", userid=" + userid
 				+ ", payeeAccountNo=" + payeeAccountNo + ", payeeName="
 				+ payeeName + ", payeeNickName=" + payeeNickName + ", mobile="
-				+ mobile + ", doe=" + doe + "]";
+				+ mobile + ", doe=" + doe + ", email=" + email + "]";
 	}
 	
 	
-
 }

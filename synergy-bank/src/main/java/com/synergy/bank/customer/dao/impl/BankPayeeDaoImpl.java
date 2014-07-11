@@ -6,18 +6,17 @@ package com.synergy.bank.customer.dao.impl;
  * This is contract for customer for the bank.
  */
 
+
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
+import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("BankPayeeDaoImpl")
 @Scope("singleton")
@@ -33,11 +32,9 @@ implements BankPayeeDao{
 	
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
-		/*Object[] data = new Object[] { entity.getPayeeAccountNumber(),entity.getPayeeReAccountNumber(),
-				entity.getPayeeName(),entity.getPayeeNickName(),entity.getPayeeEmailId(),
-				entity.getPayeeAccountType() };
-		super.getJdbcTemplate().update(PayeeTransferAmountToCustomerQuery.INSERT_Payee, data);
-		System.out.println("____AHAHAHA____");*/
+		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
+		System.out.println("____AHAHAHA____");
 		return "success";
 	}
 

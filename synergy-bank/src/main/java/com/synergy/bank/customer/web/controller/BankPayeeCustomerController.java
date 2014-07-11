@@ -1,7 +1,6 @@
 package com.synergy.bank.customer.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,25 +23,20 @@ public class BankPayeeCustomerController {
 	
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.GET)
 	public String addpayee(Model model) {
-		/*PayeeTransferAmountToCustomerEntity payeeTransferAmountToCustomerEntity = new PayeeTransferAmountToCustomerEntity();
-		model.addAttribute("addPayeeCommand",payeeTransferAmountToCustomerEntity);
-	*/	System.out.println("in controller");
+		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+		model.addAttribute("addPayeeCommand", payeeDetailsForm);
+		System.out.println("in controller");
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.ADD_PAYEE_PAGE;
 	}
-	
-	@ModelAttribute("acclist")
-	public List<String> populateAccType(){
-		List<String> accList=new  ArrayList<String>();
-		accList.add("Checking");
-		accList.add("Saving");
-		return accList;
-	}
-	
+		
 	
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
 	public String addpayee(@ModelAttribute("addPayeeCommand")PayeeDetailsForm payeeDetailsForm) {
 		System.out.println("in post");
-		//payeeTransferAmountToCustomerDao.addPayee(payeeTransferAmountToCustomerEntity);
+		String id = "11";
+		payeeDetailsForm.setDoe(new Date());
+		payeeDetailsForm.setUserid(id);
+		bankPayeeService.addPayee(payeeDetailsForm);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.ADD_PAYEE_PAGE;
 	}
 }

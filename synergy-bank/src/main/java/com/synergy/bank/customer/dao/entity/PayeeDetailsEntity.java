@@ -18,6 +18,15 @@ public class PayeeDetailsEntity {
 	private String payeeNickName;
 	private String mobile;
 	private Date doe;
+	private String email;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getSno() {
 		return sno;
 	}
@@ -65,7 +74,8 @@ public class PayeeDetailsEntity {
 		return "PayeeDetailsEntity [sno=" + sno + ", userid=" + userid
 				+ ", payeeAccountNo=" + payeeAccountNo + ", payeeName="
 				+ payeeName + ", payeeNickName=" + payeeNickName + ", mobile="
-				+ mobile + ", doe=" + doe + "]";
+				+ mobile + ", doe=" + doe + ", email=" + email + "]";
 	}
+	
 	
 }
