@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.synergy.bank.admin.dao.query.AdminQuery;
-import com.synergy.bank.customer.dao.BankAdminDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 
 /**
@@ -24,7 +23,7 @@ import com.synergy.bank.customer.dao.entity.CustomerEntity;
 
 @Repository("BankAdminDaoImpl")
 @Scope("singleton")
-public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
+public class BankAdminDaoImpl extends JdbcDaoSupport implements com.synergy.bank.admin.dao.BankAdminDao{
 
 	
 	@Autowired
