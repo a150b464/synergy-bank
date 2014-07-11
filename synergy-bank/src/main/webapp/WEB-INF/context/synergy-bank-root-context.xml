@@ -14,6 +14,5 @@
    <import resource="synergyDataSource.xml"/>
    <import resource="customer-service.xml"/>
    <import resource="customer-dao.xml"/>
-	<import resource="payee-dao.xml"/>
 </beans>
 	

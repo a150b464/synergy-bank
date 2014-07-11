@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="customerDataValidations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type = "text/javascript">
@@ -50,7 +50,7 @@
 			 <br/>
 			<h3>Customer Registration Page:</h3> 
 			<br/>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" onSubmit="validateregdform()"> 
+			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm"> 
 				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
 					<tr>
 						<td>User Id:*</td>
@@ -144,14 +144,7 @@
 						<td><b>Role:</b></td>
 						<td><ff:input path="role" size="40" /></td>
 					</tr>
-					 <tr>
-						<td><b>Date of Entry:</b></td>
-						<td><ff:input path="doe" id ="datepicker" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Date of Modification:</b></td>
-						<td><ff:input path="dom" id ="datepicker" size="40" /></td>
-					</tr> 
+					
 					<tr>
 						<td><b>Photo:</b></td>
 						<td><ff:input path="photo" size="40" /></td>
@@ -159,7 +152,7 @@
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="40" /></td>
-						<td><input id = "submit" type="submit" value="Register Me" size="50" /></td>
+						<td><input id = "submit" type="button" value="Register Me" size="50" onclick="validateCustomerForm();"/></td>
 					</tr>
 			</table>
 			
