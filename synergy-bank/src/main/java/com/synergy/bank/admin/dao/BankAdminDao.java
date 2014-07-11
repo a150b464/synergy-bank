@@ -1,4 +1,4 @@
-package com.synergy.bank.customer.dao;
+package com.synergy.bank.admin.dao;
 
 import java.util.List;
 
