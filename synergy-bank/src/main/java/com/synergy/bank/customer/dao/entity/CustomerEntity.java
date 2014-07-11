@@ -2,6 +2,13 @@ package com.synergy.bank.customer.dao.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="customer_details_tbl")
 public class CustomerEntity {
 
 	private String userId;
@@ -30,8 +37,8 @@ public class CustomerEntity {
 	private byte[] photo;
 	private String description;
 
-	
 
+	@Column(name="photo",columnDefinition="longblob")
 	public byte[] getPhoto() {
 		return photo;
 	}
@@ -184,6 +191,7 @@ public class CustomerEntity {
 		this.sourceOfFunds = sourceOfFunds;
 	}
 
+	@Id
 	public String getUserId() {
 		return userId;
 	}

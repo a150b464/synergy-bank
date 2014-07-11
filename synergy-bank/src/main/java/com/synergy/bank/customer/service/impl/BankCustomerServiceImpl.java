@@ -22,7 +22,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	
 	
 	@Autowired
-	@Qualifier("BankCustomerDaoImpl")
+	@Qualifier("BankCustomerHibernateDaoImpl")
 	private BankCustomerDao bankCustomerDao;
 
 	@Override

@@ -29,6 +29,16 @@ public class BankCustomerController {
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
 	
+	@RequestMapping(value="dummy",method=RequestMethod.GET) 
+	public String dummy(Model model) {
+		CustomerForm customerForm=new CustomerForm();
+		customerForm.setUserId("8733yye");
+		customerForm.setEmail("dd@gmail.com");
+		customerForm.setMobile("34342");
+		bankCustomerService.addCustomer(customerForm);
+		return null;
+	}
+	
 	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm=new CustomerForm();
