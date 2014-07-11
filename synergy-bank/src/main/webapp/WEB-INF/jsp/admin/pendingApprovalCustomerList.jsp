@@ -98,6 +98,8 @@
 	<div id="content">
 			
 		<br/> <h2 align="center">PENDING APPROVAL CUSTOMER LIST:</h2>  <br/>
+		
+		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
 		<table align="center" id="tab1">
 		<thead>
 			<tr>
@@ -106,7 +108,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
+			
 				<c:forEach items="${pendingCustomerList}" var="item" varStatus="myIndex">		
 					<tr>
 		    			<td>${myIndex.count}</td>
@@ -117,12 +119,14 @@
 		    			<td><input type="checkbox" class="chkbox" value="${item.userId}"/>  </td>
 		    		</tr>
 				</c:forEach>
-			</ff:form>
+				
 		</tbody>
 		
 		</table>	
 			
-			
+		<input type="submit"  value="Approve"/>
+				
+		</ff:form>	
 			
 			
 		<br/>
