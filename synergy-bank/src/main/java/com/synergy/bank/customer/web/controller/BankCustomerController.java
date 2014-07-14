@@ -1,8 +1,7 @@
 package com.synergy.bank.customer.web.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.customer.service.BankCustomerService;
@@ -29,21 +29,13 @@ public class BankCustomerController {
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
 	
-	@RequestMapping(value="dummy",method=RequestMethod.GET) 
-	public String dummy(Model model) {
-		CustomerForm customerForm=new CustomerForm();
-		customerForm.setUserId("8733yye");
-		customerForm.setEmail("dd@gmail.com");
-		customerForm.setMobile("34342");
-		bankCustomerService.addCustomer(customerForm);
-		return null;
-	}
-	
 	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm=new CustomerForm();
+		
 		model.addAttribute("customerForm",customerForm);
-		System.out.println("entred...!!!!!!!!!");
+		 UUID idOne = UUID.randomUUID();
+		 System.out.println("Random Id: " +idOne);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 	
@@ -89,4 +81,17 @@ public class BankCustomerController {
 		binder.registerCustomEditor(Date.class, editor);
 	}
 	
+
+	@RequestMapping(value="selectPayee",method=RequestMethod.GET) 
+	public String selectPayee(Model model) {
+		
+		//bankCustomerService.selectPayee(accno);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
+	}
+	@RequestMapping(value="makePayments",method=RequestMethod.GET) 
+	public String makePayment(Model model) {
+		
+		//bankCustomerService.selectPayee(accno);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
+	}
 }
