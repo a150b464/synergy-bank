@@ -11,12 +11,8 @@
 	http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-   <import resource="synergyDataSource.xml"/>
-   <import resource="customer-service.xml"/>
-   <import resource="customer-dao.xml"/>
-   <import resource="common-dao.xml"/>
-   <import resource="common-service.xml"/>
-   <import resource="spring-hibernate.xml"/>
+   <context:component-scan base-package="com.synergy.bank.common.dao.impl"/>
    
+
 </beans>
 	
