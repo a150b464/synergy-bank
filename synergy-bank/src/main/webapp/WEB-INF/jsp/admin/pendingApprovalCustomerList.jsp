@@ -9,35 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/WEB-INF/js/jquery1.9.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery1.9.1.js"></script>
 <script type="text/javascript">
-	
-	
-
-	/* function checkAll() {
-	    
-		if(document.getElementById('checkAll').checked){
-			
-			var checkboxes = new Array();
-		    checkboxes = document.getElementsByTagName('input');
-		    for (var i = 0; i < checkboxes.length; i++) {
-		        if (checkboxes[i].type == 'checkbox') {
-		            checkboxes[i].setAttribute('checked', true)
-		        }
-		    }
-		}
-		else{
-			var checkboxes = new Array();
-		    checkboxes = document.getElementsByTagName('input');
-		    for (var i = 0; i < checkboxes.length; i++) {
-		        if (checkboxes[i].type == 'checkbox') {
-		            checkboxes[i].setAttribute('checked', false)
-		        }
-		    }
-		}
-	} */
-	
-	
+		
 	$(document).ready(function(){	
 	
 	$("#checkAll").change(function () {
@@ -50,23 +24,22 @@
             $(".chkbox").prop("checked", false);
         }
     }); 
-	
-	 
-	/*  $("#checkAll").change(function() {
-
-	     if (this.checked) {
-	    	$(".chkbox").prop("checked", true);
-	    }
-	    	
-	    else {
-	    	$(".chkbox").prop("checked", false);
-	    } 
-	});  */
  
   });
 
 </script>
+<style type="text/css">
 
+#submitBtn{
+	
+	background-color: #04B45F; 
+	padding: 5px; 
+	margin-top: 5px; 
+	font-weight: bold;
+}
+
+
+</style>
 
 
 </head>
@@ -100,41 +73,34 @@
 		<br/> <h2 align="center">PENDING APPROVAL CUSTOMER LIST:</h2>  <br/>
 		
 		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
-		<table align="center" id="tab1">
-		<thead>
-			<tr>
-				<td><b>SNO</b></td>	<td><b>Customer Name</b></td>	 <td><b>Email ID</b></td>	<td><b>Mobile No.</b></td>
-				<td><b>Photo</b></td>		<td><b>Approve</b> &nbsp; <input type="checkbox" onchange="checkAll()" id="checkAll" value="All"/>(All) </td>
-			</tr>
-		</thead>
-		<tbody>
-			
-				<c:forEach items="${pendingCustomerList}" var="item" varStatus="myIndex">		
+			<table align="center" id="tab1">
+				<thead>
 					<tr>
-		    			<td>${myIndex.count}</td>
-		    			<td>${item.firstName} ${item.middleName} ${item.lastName}</td>
-		    			<td>${item.email}</td>
-		    			<td>${item.mobile}</td>
-		    			<td>${photo}</td>
-		    			<td><input type="checkbox" class="chkbox" value="${item.userId}"/>  </td>
-		    		</tr>
-				</c:forEach>
+						<td><b>SNO</b></td>	
+						<td><b>Customer Name</b></td>	 <td><b>Email ID</b></td>	<td><b>Mobile No.</b></td>
+						<td><b>Photo</b></td>	<td><b>Approve</b> &nbsp; <input type="checkbox" onchange="checkAll()" id="checkAll" value="All"/>(All) </td>
+					</tr>
+				</thead>
+				<tbody>		
+					<c:forEach items="${pendingCustomerList}" var="item" varStatus="myIndex">		
+						<tr>
+			    			<td>${myIndex.count}</td>
+			    			<td>${item.firstName} ${item.middleName} ${item.lastName}</td>
+			    			<td>${item.email}</td>
+			    			<td>${item.mobile}</td>
+			    			<td>${photo}</td>
+			    			<td><input type="checkbox" name="approveCheckbox" class="chkbox" value="${item.userId}"/>  </td>
+			    		</tr>
+					</c:forEach>	
+				</tbody>
+			</table>	
 				
-		</tbody>
-		
-		</table>	
-			
-		<input type="submit"  value="Approve"/>
+			<div align="right"><input type="submit"  value="Approve" id="submitBtn" /></div>
 				
 		</ff:form>	
 			
 			
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+
 		<br/>
 		<br/>
 		<br/>
