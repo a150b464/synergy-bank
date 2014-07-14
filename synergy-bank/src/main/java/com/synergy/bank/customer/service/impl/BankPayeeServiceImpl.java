@@ -1,7 +1,5 @@
 package com.synergy.bank.customer.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,7 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
-import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
@@ -31,8 +28,10 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	}
 
 	@Override
-	public List<PayeeDetailsForm> showPayee() {
-		return null;
+	public String confirmPayee(PayeeDetailsForm payeeDetailsForm) {
+		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
+		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
+		return bankPayeeDao.confirmPayee(payeeDetailsEntity);
 	}
 
 	
