@@ -9,14 +9,39 @@
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-<title>Customer Details</title>
-
 </head>
 <body>
-<br></br>					    
-<br></br>					    
-<br></br>					    
-<br></br>					    
+	<div class="meta">
+		<div class="metalinks">
+			<a href="#"><img src="${pageContext.request.contextPath}/images/meta1.gif" alt="" width="15" height="14" /></a>
+			<a href="#"><img src="${pageContext.request.contextPath}/images/meta2.gif" alt="" width="17" height="14" /></a>
+			<a href="#"><img src="${pageContext.request.contextPath}/images/meta3.gif" alt="" width="17" height="14" /></a>
+			<a href="#"><img src="${pageContext.request.contextPath}/images/meta4.gif" alt="" width="15" height="14" /></a>
+		</div>
+		<p>Recruiters: <a href="#">Log in</a> or <a href="#">Find out more</a></p>																																															
+	</div>
+	<div id="header">
+		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
+		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
+		<ul id="menu">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Employer</a></li>
+			<li><a href="#">Personal Bank</a></li>
+			<li><a href="#">Loan</a></li>
+			<li><a href="#">Credit Card</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Help</a></li>
+			<li class="last"><a href="#">Register</a></li>
+		</ul>
+		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
+		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
+		
+	</div>
+	<div id="content">
+
+ <h3> Current Customers </h3>			    
+</br>
+
 
 <form action="searchCustomerInformation" method="get">	
 				    				    
@@ -52,70 +77,69 @@
 		<input type="submit" value="Search"/>
 </form>
  
- <h3> Current Customers </h3>
 
-	<table align="center">
+	<table align="left">
 	<thead>
 		<tr>
-			<td><b>userId</b></td>
-			<td><b>password</b></td>
+			<td><b>USERID</b></td>
+	<!-- 		<td><b>password</b></td>
 			<td><b>salutation</b></td>
-			<td><b>gender</b></td>
-			<td><b>firstName</b></td>
-			<td><b>middleName</b></td>
-			<td><b>lastName</b></td>
-			<td><b>maritalStatus</b></td>
-			<td><b>dob</b></td>
-			<td><b>category</b></td>
-			<td><b>motderMaidenName</b></td>
+	 --><!-- 		<td><b>GENDER</b></td>
+		 -->	<td><b>Name</b></td>
+	<!-- 		<td><b>Middle Name</b></td>
+	 -->
+	 	<!-- 		<td><b>maritalStatus</b></td>
+	 --><!-- 		<td><b>DOB</b></td>
+		 -->	<td><b>Category</b></td>
+		<!-- 	<td><b>motderMaidenName</b></td>
 			<td><b>fatderName</b></td>
-			<td><b>email</b></td>
-			<td><b>mobile</b></td>
-			<td><b>ssn</b></td>
-			<td><b>occupation</b></td>
-			<td><b>occupationType</b></td>
-			<td><b>education</b></td>
-			<td><b>grossAnualIncome</b></td>
-			<td><b>sourceOfFunds</b></td>
-			<td><b>role</b></td>
+		 -->	<td><b>Email</b></td>
+			<td><b>Mobile</b></td>
+<!-- 			<td><b>SSN</b></td>
+ -->			<td><b>Occupation</b></td>
+		<!-- 	<td><b>occupationType</b></td>
+		 -->	<td><b>Education</b></td>
+			<td><b>Gross Income</b></td>
+<!-- 			<td><b>Source</b></td>
+ --><!-- 			<td><b>role</b></td>
 			<td><b>doe</b></td>
 			<td><b>dom</b></td>
-			<td><b>photo</b></td>
-			<td><b>description</b></td>
+ -->			<td><b>Photo</b></td>
+			<td><b>Description</b></td>
 		</tr>		
 	</thead>
 	<tbody>		
 	<c:forEach items="${customerList}" var="item">		
 		<tr>
 			<td>${item.userId}</td>
-			<td>${item.password}</td>
+	<%-- 		<td>${item.password}</td>
 			<td>${item.salutation}</td>
-			<td>${item.gender}</td>
-			<td>${item.firstName}</td>
-			<td>${item.middleName}</td>
-			<td>${item.lastName}</td>
-			<td>${item.maritalStatus}</td>
-			<td>${item.dob}</td>
-			<td>${item.category}</td>
-			<td>${item.motherMaidenName}</td>
+	 --%><%-- 		<td>${item.gender}</td>
+		 --%>	<td>${item.firstName} ${item.lastName}</td>
+<%-- 			<td>${item.middleName}</td>
+ --%>
+		<%-- 	<td>${item.maritalStatus}</td>
+		 --%><%-- 	<td>${item.dob}</td>
+		 --%>	<td>${item.category}</td>
+<%-- 			<td>${item.motherMaidenName}</td>
 			<td>${item.fatherName}</td>
-			<td>${item.email}</td>
+ --%>			<td>${item.email}</td>
 			<td>${item.mobile}</td>
-			<td>${item.ssn}</td>
+<%-- 			<td>${item.ssn}</td>
 			<td>${item.occupation}</td>
-			<td>${item.occupationType}</td>
-			<td>${item.education}</td>
+ --%>	<%-- 		<td>${item.occupationType}</td>
+	 --%>		<td>${item.education}</td>
 			<td>${item.grossAnualIncome}</td>
-			<td>${item.sourceOfFunds}</td>
-			<td>${item.role}</td>
+		<%-- 	<td>${item.sourceOfFunds}</td> --%>
+<%-- 			<td>${item.role}</td>
 			<td>${item.doe}</td>
 			<td>${item.dom}</td>
-			<td>${item.photo}</td>
+ --%>			<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
 			<td>${item.description}</td>
    			<td>
-			<a href="deleteEmployee?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
-<%-- 			<a href="editRegistration?id=${item.id}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
- --%>			</td>	 	
+			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
+			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
+			</td>	 	
 	 	</tr>
 	</c:forEach>
 	</tbody>		

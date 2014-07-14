@@ -12,9 +12,12 @@ import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
  */
 public interface BankCustomerDao {
 
-	public String addCustomer(CustomerEntity entity);
-	public String updateCustomer(CustomerEntity entity);
-	public List<CustomerEntity> findCustomers();
-	public CustomerEntity findCustomerByUserId(String userid);
-	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId);
+	public abstract String addCustomer(CustomerEntity entity);
+	public abstract String updateCustomer(CustomerEntity entity);
+	public abstract List<CustomerEntity> findCustomers();
+	public abstract List<CustomerEntity> findCustomerByColumnNameAndValue(String columnName, String value);
+	public abstract CustomerEntity findCustomerByUserId(String userid);
+	public abstract List<PayeeDetailsEntity> showPayeeListByUserId(String userId);
+	public abstract String deleteCustomer(CustomerEntity entity);
+	public abstract byte[] findPhotoById(String userId);
 }

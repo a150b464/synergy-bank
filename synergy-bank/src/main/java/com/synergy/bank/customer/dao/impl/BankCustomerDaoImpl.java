@@ -93,4 +93,23 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		return payeeList;
 	}
 
+	@Override
+	public String deleteCustomer(CustomerEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CustomerEntity> findCustomerByColumnNameAndValue(
+			String columnName, String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] findPhotoById(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

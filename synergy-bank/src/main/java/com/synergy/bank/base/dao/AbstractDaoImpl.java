@@ -32,7 +32,8 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
         return psessionFactory.getCurrentSession();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public E findById(I id) {
         return (E) getCurrentSession().get(entityClass, id);
     }
@@ -47,15 +48,24 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
         getCurrentSession().delete(e);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<E> findByCriteria(Criterion criterion) {
         Criteria criteria = getCurrentSession().createCriteria(entityClass);
         criteria.add(criterion);
         return criteria.list();
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<E> findAll() {
     	return getCurrentSession().createQuery("from "+entityClass.getName()).list();
+    }
+    
+    @Override    
+    public List<E> findByAttributeAndValue(I attribute,I value){
+    	@SuppressWarnings("unchecked")
+		List<E> list = getCurrentSession().createQuery("from "+entityClass.getName() +" e where e."+attribute+" like '"+value+"'").list();
+		return list;    	
     }
 }

@@ -17,4 +17,8 @@ public interface BankCustomerService {
 	public List<CustomerForm> findCustomers();
 	public CustomerForm findCustomerByUserId(String userid);
 	public List<PayeeDetailsForm> showPayeeListByUserId(String userId);
+	public String deleteCustomerById(String userId);
+	public List<CustomerForm> findCustomersByAttributeAndValue(String attribute,String value);
+	public byte[] findPhotoById(String userId);
+
 }

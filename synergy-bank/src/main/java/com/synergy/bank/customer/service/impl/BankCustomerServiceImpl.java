@@ -40,8 +40,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public List<CustomerForm> findCustomers() {
-		List<CustomerEntity> customerEntityList =bankCustomerDao.findCustomers();
-		List<CustomerForm> customerFormList= new ArrayList<CustomerForm>(customerEntityList.size());
+		List<CustomerEntity> customerEntityList = bankCustomerDao.findCustomers();
+		List<CustomerForm>   customerFormList   = new ArrayList<CustomerForm>(customerEntityList.size());
 
 		for(int i=0;i<customerEntityList.size();i++)
 		{
@@ -49,13 +49,14 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 			BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
 			customerFormList.add(customerForm);
 		}
-		
 		return customerFormList;
 	}
 
 	@Override
 	public CustomerForm findCustomerByUserId(String userid) {
-		return null;
+		CustomerForm customerForm=new CustomerForm(); 
+		BeanUtils.copyProperties(bankCustomerDao.findCustomerByUserId(userid), customerForm);
+		return customerForm;
 	}
 
 	@Override
@@ -65,13 +66,40 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		System.out.println(payeeList);
 		List<PayeeDetailsForm> payeeListForms = new ArrayList<PayeeDetailsForm>();
 		
-		for (PayeeDetailsEntity pde : payeeList) {
+		for (PayeeDetailsEntity pde : payeeList) 
+		{
 			PayeeDetailsForm pdf = new PayeeDetailsForm();
 			BeanUtils.copyProperties(pde, pdf);
 			payeeListForms.add(pdf);
 		}
 		
 		return payeeListForms;
+	}
+
+	@Override
+	public String deleteCustomerById(String userId) {
+		bankCustomerDao.deleteCustomer(bankCustomerDao.findCustomerByUserId(userId));
+		return "success";
+	}
+
+	@Override
+	public List<CustomerForm> findCustomersByAttributeAndValue(
+			String attribute, String value) {
+		List<CustomerEntity> customerEntityList = bankCustomerDao.findCustomerByColumnNameAndValue(attribute, value);
+		List<CustomerForm>   customerFormList   = new ArrayList<CustomerForm>(customerEntityList.size());
+
+		for(int i=0;i<customerEntityList.size();i++)
+		{
+			CustomerForm customerForm = new CustomerForm();	
+			BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
+			customerFormList.add(customerForm);
+		}
+		return customerFormList;
+	}
+
+	@Override
+	public byte[] findPhotoById(String userId) {
+		return bankCustomerDao.findPhotoById(userId);
 	}
 
 }

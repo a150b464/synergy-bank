@@ -16,4 +16,5 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_HOME_PAGE="customerHome";
 	final public static String FUND_TRANSFER_PAGE="fundTransfer";
 	final public static String MAKE_PAYMENT_PAGE="makePayment";
+	final public static String CUSTOMER_INFORMATION       = "customerDetailsTableView";
 }

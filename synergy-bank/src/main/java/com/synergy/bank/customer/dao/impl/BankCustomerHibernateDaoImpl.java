@@ -32,6 +32,12 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	}
 
 	@Override
+	public String deleteCustomer(CustomerEntity entity) {
+		super.delete(entity);
+		return "success";
+	}
+	
+	@Override
 	public List<CustomerEntity> findCustomers() {
 		return super.findAll();
 	}
@@ -46,5 +52,14 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 				return null;
 	}
 
+	@Override
+	public List<CustomerEntity> findCustomerByColumnNameAndValue(
+			String columnName, String value) {
+		return super.findByAttributeAndValue(columnName, value);
+	}
 
+	@Override
+	public byte[] findPhotoById(String userId) {
+		return super.findById(userId).getPhoto();
+	}
 }

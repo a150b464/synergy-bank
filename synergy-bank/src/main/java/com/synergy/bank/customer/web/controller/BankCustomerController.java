@@ -1,7 +1,13 @@
 package com.synergy.bank.customer.web.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,14 +53,6 @@ public class BankCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 		
-	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
-	public String showCustomerInformation(Model model) {
-		
-		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
-		System.out.println(customerDetailList);
-		model.addAttribute("customerList",customerDetailList);
-		return "customer/customerDetailsTableView";
-	}
 	
 	@RequestMapping(value="showPayeeList",method=RequestMethod.GET) 
 	public String showPayeeList(Model model) {
@@ -66,6 +64,59 @@ public class BankCustomerController {
 		//return "customer/payeeList";
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	}
+
+	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
+	public String editRegistration(@RequestParam("userId") String userId,Model model) {
+		CustomerForm customerForm = bankCustomerService.findCustomerByUserId(userId);
+		model.addAttribute("customerForm", customerForm);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+	}
+	
+	
+	@RequestMapping(value = "/editRegistration", method = RequestMethod.POST)
+	public String editRegistrationSubmit(@ModelAttribute("customerForm") CustomerForm customerForm) {
+		System.out.println("Inside edit registration post");
+		bankCustomerService.updateCustomer(customerForm);
+		return "redirect:bank/customerInformation";
+	}
+
+	@RequestMapping(value = "/findPhotoById", method = RequestMethod.GET)
+	public void findPhotoById(@RequestParam("userId") String userId,HttpServletResponse response) throws IOException{
+	
+		response.setContentType("image/jpg");
+		byte[] photo=bankCustomerService.findPhotoById(userId);
+		System.out.println("Inside find photo by id");
+		if(photo!=null){
+			System.out.println("found photo");
+			ServletOutputStream outputStream=response.getOutputStream();
+			outputStream.write(photo);
+			outputStream.flush();
+		}
+	}
+	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
+	public String showCustomerInformation(Model model) {
+		
+		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
+		System.out.println(customerDetailList);
+		model.addAttribute("customerList",customerDetailList);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+	}
+	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
+	public String deleteCustomerbyId(@RequestParam("userId") String UserId)
+	{
+		bankCustomerService.deleteCustomerById(UserId);
+		return "bank/customerInformation";
+	}
+	@RequestMapping(value="searchCustomerInformation",method=RequestMethod.GET) 
+	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
+			                                        @RequestParam("searchValue") String value,    
+			                                        Model model){
+		
+		List<CustomerForm> customerDetailList = bankCustomerService.findCustomersByAttributeAndValue(attribute, value);
+		model.addAttribute("customerList",customerDetailList);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+	}
+
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
