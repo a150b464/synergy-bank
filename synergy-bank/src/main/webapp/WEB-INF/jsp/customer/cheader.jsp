@@ -12,12 +12,11 @@
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
 		<ul id="menu">
 			<li><a href="#">Home</a></li>
-			<li><a href="#">Employer</a></li>
-			<li><a href="#">Personal Bank</a></li>
-			<li><a href="#">Loan</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/addpayee.do">Add Payee</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/selectPayee">Fund Transfer</a></li>
+			<li><a href="#">Account Summary</a></li>
+			<li><a href="#">Accounts</a></li>
 			<li><a href="#">Credit Card</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Help</a></li>
 			<li class="last"><a href="#">Register</a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
 		</ul>
