@@ -8,11 +8,12 @@ package com.synergy.bank.customer.service;
 
 import java.util.List;
 
+import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 public interface BankPayeeService {
 	
 	public String addPayee(PayeeDetailsForm payeeDetailsForm);
-	public List<PayeeDetailsForm> showPayee();
-
+	public String confirmPayee(PayeeDetailsForm payeeDetailsForm);
+	
 }
