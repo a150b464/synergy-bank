@@ -19,28 +19,7 @@
 
 </head>
 <body>
-	<div class="meta">
-		<div class="metalinks">
-			<a href="#"><img src="${pageContext.request.contextPath}/images/meta1.gif" alt="" width="15" height="14" /></a>
-			<a href="#"><img src="${pageContext.request.contextPath}/images/meta2.gif" alt="" width="17" height="14" /></a>
-			<a href="#"><img src="${pageContext.request.contextPath}/images/meta3.gif" alt="" width="17" height="14" /></a>
-			<a href="#"><img src="${pageContext.request.contextPath}/images/meta4.gif" alt="" width="15" height="14" /></a>
-		</div>
-		<p>Recruiters: <a href="#">Log in</a> or <a href="#">Find out more</a></p>																																															
-	</div>
-	<div id="header">
-		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
-		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
-		<ul id="menu">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Employer</a></li>
-			<li><a href="#">Personal Bank</a></li>
-			<li><a href="#">Loan</a></li>
-			<li><a href="#">Credit Card</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Help</a></li>
-			<li class="last"><a href="#">Register</a></li>
-		</ul>
+<%@include file="cheader.jsp"%>
 		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
@@ -50,9 +29,21 @@
 			 <br/>
 			<h3>Customer Registration Page:</h3> 
 			<br/>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
+			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm"> 
 				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
-					
+					<tr>
+						<td>User Id:*</td>
+						<td><ff:input path="userId" id="userId" size="40" />
+						<span id="iderror"></span>
+						</td>
+						
+					</tr>
+					<tr>
+						<td><b>Password:*</b></td>
+						<td><ff:password path="password" id="password" size="40"/>
+						<span id="passerror"></span>
+						</td>
+					</tr>
 					<tr>
 						<td><b>Salutation:</b></td>
 						<td><ff:input path="salutation" size="40" /></td>
@@ -100,7 +91,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><b>Mobile:*</b></td>
+						<td><b>Mobile:</b></td>
 						<td><ff:input path="mobile" size="40" />
 						<span id="phoneerror"></span></td>
 					</tr>
@@ -135,18 +126,13 @@
 					
 					<tr>
 						<td><b>Photo:</b></td>
-						<td><ff:input path="photo" type="file" size="40" /></td>
-						<!-- <td><input type="submit" value="Upload File" /></td> -->
+						<td><ff:input path="photo" size="40" /></td>
 					</tr>
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="40" /></td>
-
-
-						<td><input id = "submit" type="submit" value="Register Me" size="50" onsubmit= "validateCustomerForm();" /></td>
-
+						<td><input id = "submit" type="button" value="Register Me" size="50" onclick="validateCustomerForm();"/></td>
 					</tr>
-					<!-- <tr><td><input id = "submit" align="right" type="button" value="Register Me" size="50" /></td></tr> -->
 			</table>
 			
 	</ff:form> 
