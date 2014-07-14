@@ -3,63 +3,40 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>${pageContext.request.contextPath}</title>
+<title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-</head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type = "text/javascript">
+   $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 
+</head>
 <body>
 	<%@include file="cheader.jsp"%>
-		<img src="${pageContext.request.contextPath}/transfer_money3.swf" alt="" width="892" height="303" />
+		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
+		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
+		
 	</div>
 	<div id="content">
 			
-			 <br/>
-			<h1>Payee Details</h1> 
+			 <br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
+			<h3>This page is under construction:</h3> 
 			<br/>
-			<ff:form action="addpayee.do" method="post" commandName="addPayeeCommand">
-				<table align="center" width="80%" border="0" cellspacing="3" cellpadding="3">
-					<tr>
-						<td>
-						<ff:hidden path=""/>
-						<b>Payee Account Number</b></td>
-						<td><ff:input path="payeeAccountNo" size="40" style="background:orange; font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Payee Name</b></td>
-						<td><ff:input  path="payeeName" size="40" style="background:orange;font-family: Palatino Linotype"/></td>
-					</tr>	
-					<tr>
-						<td><b>Payee Nick Name</b></td>
-						<td><ff:input path="payeeNickName" size="40" style="background:orange;font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Mobile Number</b></td>
-						<td><ff:input path="mobile" size="40" style="background:orange;font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Payee Registration alert to be sent on email.</b></td>
-						<td><ff:input path="email" size="40" style="background:orange;font-family: Palatino Linotype"/></td>
-					</tr>
-							
-				</table><br><br>
-				<h3 style="font-family: Palatino Linotype; font-size: 13px; color: grey">
-					Notes: <br>
-					1. To add/update your email id,  please contact the customer service.<br>
-					2. Please make sure the account number is correct.<br>
-					3. Synergy Bank is not responsible for funds transferred to unintended recipient.<br>
-					4. Before you proceed make sure you have entered all the details correctly.<br>					
-					</h3>
-					<br>
-					<table>
-					<tr>
-						<td><input type="submit" value="Next" style="background: orange; font-family: Palatino Linotype; font-size: 17px;"/></td>
-						<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-						<td><input type="submit" value="Back" style="background: orange; font-family: Palatino Linotype; font-size: 17px;"/></td>
-					</tr>
-					</table>
-					
-			</ff:form>			
+			sssssssssssssssssssssssssssssssssssssssssssssssss
+			s
+			s
+			s
+			s
+			s
+			s
+			s
+			
 		<br/>
 		<br/>
 		<br/>
