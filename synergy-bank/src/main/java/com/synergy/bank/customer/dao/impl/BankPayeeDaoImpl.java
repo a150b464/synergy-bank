@@ -12,9 +12,11 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import com.synergy.bank.customer.dao.BankPayeeDao;
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
@@ -32,15 +34,21 @@ implements BankPayeeDao{
 	
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
-		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
 		System.out.println("____AHAHAHA____");
 		return "success";
 	}
 
+
 	@Override
-	public List<PayeeDetailsEntity> showPayee() {
-	
-		return null;
+	public String confirmPayee(PayeeDetailsEntity entity) {
+		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS,data);
+		System.out.println("____updated____");
+		return "success";
 	}
+
 }

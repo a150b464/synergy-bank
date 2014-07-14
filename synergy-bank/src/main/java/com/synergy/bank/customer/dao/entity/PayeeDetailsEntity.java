@@ -2,13 +2,6 @@ package com.synergy.bank.customer.dao.entity;
 
 import java.util.Date;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-/*@Component("PayeeDetailsEntity")
-@Scope("prototype")
-@Lazy*/
 public class PayeeDetailsEntity {
 	
 	private int sno;
@@ -19,8 +12,14 @@ public class PayeeDetailsEntity {
 	private String mobile;
 	private Date doe;
 	private String email;
+	private String status;
 	
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -74,8 +73,10 @@ public class PayeeDetailsEntity {
 		return "PayeeDetailsEntity [sno=" + sno + ", userid=" + userid
 				+ ", payeeAccountNo=" + payeeAccountNo + ", payeeName="
 				+ payeeName + ", payeeNickName=" + payeeNickName + ", mobile="
-				+ mobile + ", doe=" + doe + ", email=" + email + "]";
+				+ mobile + ", doe=" + doe + ", email=" + email + ", status="
+				+ status + "]";
 	}
+	
 	
 	
 }
