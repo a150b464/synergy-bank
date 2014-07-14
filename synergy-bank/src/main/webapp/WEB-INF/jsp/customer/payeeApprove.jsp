@@ -6,8 +6,6 @@
 <title>${pageContext.request.contextPath}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-<link href="${pageContext.request.contextPath}/css/breadcrumb.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
 </head>
 
 <body onload="javascript:breadcrumbs()">
@@ -33,41 +31,36 @@
 			<li><a href="#">Help</a></li>
 			<li class="last"><a href="#">Register</a></li>
 		</ul>
-		<img src="${pageContext.request.contextPath}/images/cash3.jpg" width="892" height="260" />
+		<img src="${pageContext.request.contextPath}/images/AABanking.jpg" width="892" height="130" />
 	</div>
 	
 	<div id="content">
-			<h1>Payee Details</h1> 
+			<h1>Approve Payee</h1> 
 			<br/>
-			<ff:form action="addpayee.do" method="post" commandName="addPayeeCommand">
-				<table align="center" width="80%" border="0" cellspacing="3" cellpadding="3">
-					<tr>
-						<td>
-						<ff:hidden path=""/>
-						<b>Payee Account Number</b></td>
-						<td><ff:input path="payeeAccountNo" size="40" style="background:#D0F5A9; font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Payee Name</b></td>
-						<td><ff:input  path="payeeName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/></td>
-					</tr>	
-					<tr>
-						<td><b>Payee Nick Name</b></td>
-						<td><ff:input path="payeeNickName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Mobile Number</b></td>
-						<td><ff:input path="mobile" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/></td>
-					</tr>
-					<tr>
-						<td><b>Payee Registration alert to be sent on email.</b></td>
-						<td><ff:input path="email" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/></td>
-					</tr>
-							
-				</table><br><br>
+			<ff:form action="confirmpayee.do" method="post" commandName="addPayeeCommand">
+				<table align="center" border="2" cellspacing="10" cellpadding="10" width="90%" style="color: green">
+		<thead>
+			<tr>
+				<td><b>User ID</b></td>	 <td><b>Payee Account No.</b></td>	<td><b>Payee Name</b></td>
+				<td><b>Status</b></td>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<c:forEach items="${payeeDetailsList}" var="item" varStatus="myIndex">		
+				<tr>
+	    			<td>${item.userid}</td>
+	    			<td>${item.payeeAccountNo}</td>
+	    			<td>${item.payeeName}</td>
+	    			<td>${item.status}</td>
+	    		</tr>
+			</c:forEach>
+		
+		</tbody>
+		</table>	
 				<h3 style="font-family: Palatino Linotype; font-size: 13px; color: grey">
 					Notes: <br>
-					1. To add/update your email id,  please contact the customer service.<br>
+					1. As per Synergy Bank circular dated June 2014, transfer of funds through electronic mode will take 1 bussiness days.<br>
 					2. Please make sure the account number is correct.<br>
 					3. Synergy Bank is not responsible for funds transferred to unintended recipient.<br>
 					4. Before you proceed make sure you have entered all the details correctly.<br>					
@@ -75,7 +68,7 @@
 					<br>
 					<table>
 					<tr>
-						<td><input type="submit" value="Next" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
+						<td><input type="submit" value="Approve" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
 						<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 						<td><input type="submit" value="Back" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
 					</tr>
