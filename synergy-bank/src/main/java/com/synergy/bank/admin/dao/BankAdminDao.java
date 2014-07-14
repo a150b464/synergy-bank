@@ -7,5 +7,6 @@ import com.synergy.bank.customer.dao.entity.CustomerEntity;
 public interface BankAdminDao {
 	
 	public List<CustomerEntity> findPendingCustomerList();
+	public String approvePendingCustomers(String[] cusomerUserNames);
 
 }

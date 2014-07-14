@@ -6,5 +6,6 @@ import com.synergy.bank.customer.web.controller.form.CustomerForm;
 public interface BankAdminService {
 	
 	public List<CustomerForm> findPendingCustomerList();
+	public String approvePendingCustomers(String[] cusomerUserNames);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.admin.service.BankAdminService;
@@ -35,9 +36,29 @@ public class BankAdminController {
 		
 		List<CustomerForm> pendingCustomerList = bankAdminService.findPendingCustomerList();
 		model.addAttribute("pendingCustomerList",pendingCustomerList);
-		
 		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.PENDING_APPROVAL_CUSTOMER_LIST_PAGE ;
 	}
+	
+	@RequestMapping(value="approvePendingCustomers", method=RequestMethod.POST)
+	public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds){
+		
+		String msg;
+		
+		if(approvedIds.length>0){
+			String approvalStatus =  bankAdminService.approvePendingCustomers(approvedIds);
+			if(approvalStatus.equals("success")){
+				msg = approvedIds.length+" new customer(s) are approved successfully.";
+			}
+			else{
+				msg = "Failed to approve customer.";
+			}
+		}
+		else{
+			msg = "No customer was selected for approval.";
+		}
+		return "redirect:showPendingApprovalCustomerList";
+	}
+	
 	
 	
 	
