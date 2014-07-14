@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/fundTransfer.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type = "text/javascript">
@@ -48,105 +48,42 @@
 	<div id="content">
 			
 			 <br/>
-			<h3>Customer Registration Page:</h3> 
+			<h3>Fund Transfer - Add Payee :</h3> 
 			<br/>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
-				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
+			<ff:form name="makePayments" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" style= "background-color:#D9E8F7" onsubmit= "return emailSent()" > 
+				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
+					<tr>
+						</br><b>From account: </b>
+						<select name = "acc" align="right"> 
+						<option value="Saving">Saving</option>
+						<option value="Checking">Checking</option>
+						<option value="Credit">Credit</option>
+						</select>
 					
-					<tr>
-						<td><b>Salutation:</b></td>
-						<td><ff:input path="salutation" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>First Name:</b></td>
-						<td><ff:input path="firstName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Middle Name:</b></td>
-						<td><ff:input path="middleName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Last Name:</b></td>
-						<td><ff:input path="lastName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Gender:</b></td>
-						<td><ff:input path="gender" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Marital Status:</b></td>
-						<td><ff:input path="maritalStatus" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Date of Birth:</b></td>
-						<td><ff:input path="dob" id ="datepicker" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Category:</b></td>
-						<td><ff:input path="category" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Mother's Maiden Name:</b></td>
-						<td><ff:input path="motherMaidenName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Father's Name:</b></td>
-						<td><ff:input path="fatherName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Email:*</b></td>
-						<td><ff:input path="email" size="40" />
-						<span id="emailerror"></span>
-						</td>
-					</tr>
-					<tr>
-						<td><b>Mobile:*</b></td>
-						<td><ff:input path="mobile" size="40" />
-						<span id="phoneerror"></span></td>
-					</tr>
-					<tr>
-						<td><b>SSN:</b></td>
-						<td><ff:input path="ssn" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Occupation:</b></td>
-						<td><ff:input path="occupation" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Occupation Type:</b></td>
-						<td><ff:input path="occupationType" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Education:</b></td>
-						<td><ff:input path="education" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Gross Anual Income:</b></td>
-						<td><ff:input path="grossAnualIncome" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Source of Funds:</b></td>
-						<td><ff:input path="sourceOfFunds" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Role:</b></td>
-						<td><ff:input path="role" size="40" /></td>
 					</tr>
 					
 					<tr>
-						<td><b>Photo:</b></td>
-						<td><ff:input path="photo" type="file" size="40" /></td>
-						<!-- <td><input type="submit" value="Upload File" /></td> -->
+						</br></br><b>Select a Payee to Make Payment: </b>
+						<select name = "accno"> 
+						<option value="Swapnil">Swapnil</option>
+						<option value="Ashish">Ashish</option>
+						<option value="Nagendra">Nagendra</option>
+						<option value="Naim">Naim</option>
+						</select>
+					
 					</tr>
 					<tr>
-						<td><b>Description:</b></td>
-						<td><ff:input path="description" size="40" /></td>
-
-
-						<td><input id = "submit" type="submit" value="Register Me" size="50" onsubmit= "validateCustomerForm();" /></td>
-
+						</br></br><b>Quick Comments </b>
+						<input text="comments" name="comments" size="60" width="40" align="right" /></br>
 					</tr>
-					<!-- <tr><td><input id = "submit" align="right" type="button" value="Register Me" size="50" /></td></tr> -->
+					
+					<tr>
+						
+						</br><input id = "button" type="submit" value="Make a Payment" size="20"/></br>
+						Payee Registration alert to be sent on mobile number
+						
+					</tr>
+					
 			</table>
 			
 	</ff:form> 

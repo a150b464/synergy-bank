@@ -48,105 +48,39 @@
 	<div id="content">
 			
 			 <br/>
-			<h3>Customer Registration Page:</h3> 
+			<h3>Fund Transfer - Add Payee :</h3> 
 			<br/>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
-				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
+			<ff:form name="selectPayee" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" style= "background-color:#D9E8F7" > 
+				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
 					
 					<tr>
-						<td><b>Salutation:</b></td>
-						<td><ff:input path="salutation" size="40" /></td>
+						<b>Register a new Payee:</b></br>
+						</br><input id = "button" type="button" value="Add Payee" size="20" /></br>
+												
 					</tr>
 					<tr>
-						<td><b>First Name:</b></td>
-						<td><ff:input path="firstName" size="40" /></td>
+						<b></b></br>
+						<input id = "button" type="button" value="Confirm Payee" size="20" /></br>
+												
 					</tr>
 					<tr>
-						<td><b>Middle Name:</b></td>
-						<td><ff:input path="middleName" size="40" /></td>
+						</br><b>Select a Payee to Make Payment:</b>
+						<select name = "accno"> 
+						<option value="Swapnil">Swapnil</option>
+						<option value="Ashish">Ashish</option>
+						<option value="Nagendra">Nagendra</option>
+						<option value="Naim">Naim</option>
+						</select>
+					
 					</tr>
+							
 					<tr>
-						<td><b>Last Name:</b></td>
-						<td><ff:input path="lastName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Gender:</b></td>
-						<td><ff:input path="gender" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Marital Status:</b></td>
-						<td><ff:input path="maritalStatus" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Date of Birth:</b></td>
-						<td><ff:input path="dob" id ="datepicker" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Category:</b></td>
-						<td><ff:input path="category" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Mother's Maiden Name:</b></td>
-						<td><ff:input path="motherMaidenName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Father's Name:</b></td>
-						<td><ff:input path="fatherName" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Email:*</b></td>
-						<td><ff:input path="email" size="40" />
-						<span id="emailerror"></span>
-						</td>
-					</tr>
-					<tr>
-						<td><b>Mobile:*</b></td>
-						<td><ff:input path="mobile" size="40" />
-						<span id="phoneerror"></span></td>
-					</tr>
-					<tr>
-						<td><b>SSN:</b></td>
-						<td><ff:input path="ssn" size="40"/></td>
-					</tr>
-					<tr>
-						<td><b>Occupation:</b></td>
-						<td><ff:input path="occupation" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Occupation Type:</b></td>
-						<td><ff:input path="occupationType" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Education:</b></td>
-						<td><ff:input path="education" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Gross Anual Income:</b></td>
-						<td><ff:input path="grossAnualIncome" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Source of Funds:</b></td>
-						<td><ff:input path="sourceOfFunds" size="40" /></td>
-					</tr>
-					<tr>
-						<td><b>Role:</b></td>
-						<td><ff:input path="role" size="40" /></td>
+						
+						</br></br><input id = "button" type="button" value="Make a Payment" size="20" onclick=/></br>
+						<b>Payee Registration alert to be sent on mobile number</b>
+						
 					</tr>
 					
-					<tr>
-						<td><b>Photo:</b></td>
-						<td><ff:input path="photo" type="file" size="40" /></td>
-						<!-- <td><input type="submit" value="Upload File" /></td> -->
-					</tr>
-					<tr>
-						<td><b>Description:</b></td>
-						<td><ff:input path="description" size="40" /></td>
-
-
-						<td><input id = "submit" type="submit" value="Register Me" size="50" onsubmit= "validateCustomerForm();" /></td>
-
-					</tr>
-					<!-- <tr><td><input id = "submit" align="right" type="button" value="Register Me" size="50" /></td></tr> -->
 			</table>
 			
 	</ff:form> 
