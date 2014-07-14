@@ -76,7 +76,9 @@
 <input type="text" name="searchValue" align="middle"/>	
 		<input type="submit" value="Search"/>
 </form>
- 
+<form action="customerInformation" method="get">						    
+	<input type="submit" value="Clear Search"/>
+</form> 
 
 	<table align="left">
 	<thead>
@@ -105,7 +107,7 @@
 			<td><b>doe</b></td>
 			<td><b>dom</b></td>
  -->			<td><b>Photo</b></td>
-			<td><b>Description</b></td>
+			<td><b>Edit and Delete</b></td>
 		</tr>		
 	</thead>
 	<tbody>		
@@ -126,17 +128,17 @@
  --%>			<td>${item.email}</td>
 			<td>${item.mobile}</td>
 <%-- 			<td>${item.ssn}</td>
-			<td>${item.occupation}</td>
- --%>	<%-- 		<td>${item.occupationType}</td>
-	 --%>		<td>${item.education}</td>
+ --%>			<td>${item.occupation}</td>
+<%-- 			<td>${item.occupationType}</td>
+ --%>			<td>${item.education}</td>
 			<td>${item.grossAnualIncome}</td>
 		<%-- 	<td>${item.sourceOfFunds}</td> --%>
 <%-- 			<td>${item.role}</td>
 			<td>${item.doe}</td>
 			<td>${item.dom}</td>
  --%>			<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
-			<td>${item.description}</td>
-   			<td>
+<%-- 			<td>${item.description}</td>
+ --%>   			<td>
 			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
 			</td>	 	
