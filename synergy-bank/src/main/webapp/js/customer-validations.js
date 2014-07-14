@@ -15,7 +15,6 @@ function  validateCustomerForm() {
 		return;
 	}
 	
-	
 
 	//here we are submitting the form
 	document.customerRegistration.submit();

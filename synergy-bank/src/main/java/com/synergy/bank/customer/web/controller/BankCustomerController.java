@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import com.synergy.bank.common.service.BankEmailService;
+import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
@@ -34,6 +36,11 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
+	
+	@Autowired
+	@Qualifier("BankEmailServiceImpl")
+	private BankEmailService bankEmailService;
+	
 	
 	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
 	public String showCustomerRegistrationPage(Model model) {
@@ -48,8 +55,10 @@ public class BankCustomerController {
 	
 	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
-		
 		bankCustomerService.addCustomer(customerForm);
+		//here we are making this call asynchronous so we are creating  
+		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Hello Dear! Ahahahah", "Regarding Registration");
+		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 		

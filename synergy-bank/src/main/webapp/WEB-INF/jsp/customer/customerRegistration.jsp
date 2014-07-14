@@ -131,7 +131,7 @@
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="40" /></td>
-						<td><input id = "submit" type="button" value="Register Me" size="50" onclick="validateCustomerForm();"/></td>
+						<td><input id = "submitid" type="button" value="Register Me" size="50" onclick="validateCustomerForm();"/></td>
 					</tr>
 			</table>
 			
