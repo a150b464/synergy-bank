@@ -25,7 +25,6 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
-import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
@@ -38,7 +37,6 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
-	//private BankAuthService bankAuthService;
 	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
@@ -48,27 +46,28 @@ public class BankCustomerController {
 	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm=new CustomerForm();
+		
 		model.addAttribute("customerForm",customerForm);
+		 UUID idOne = UUID.randomUUID();
+		 System.out.println("Random Id: " +idOne);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 	
 	
 	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
-		String useridAndPassword=bankCustomerService.addCustomer(customerForm);
-		//bankCustomerService.addCustomerDetails(customerForm);
+		bankCustomerService.addCustomer(customerForm);
 		//here we are making this call asynchronous so we are creating  
-		String uptokens[]=useridAndPassword.split("-");
-		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Your user id is: "+ uptokens[0] + "\nAnd password is: "+ uptokens[1], "Regarding Registration");
+		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Hello Dear! Ahahahah", "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 		
 	
 	@RequestMapping(value="showPayeeList",method=RequestMethod.GET) 
-	public String showPayeeList(Model model,HttpSession session) {
-		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
-		String userId = loginForm.getUserId();
+	public String showPayeeList(Model model) {
+		
+		String userId = "1";
 		List<PayeeDetailsForm> payeeList = bankCustomerService.showPayeeListByUserId(userId);
 		model.addAttribute("payeeDetailsList",payeeList);
 		System.out.println(payeeList);
@@ -111,7 +110,7 @@ public class BankCustomerController {
 		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
 		System.out.println(customerDetailList);
 		model.addAttribute("customerList",customerDetailList);
-		return NavigationConstant.ADMIN_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
 	
 	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
@@ -125,12 +124,13 @@ public class BankCustomerController {
 	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
 			                                        @RequestParam("searchValue") String value,    
 			                                        Model model){
+		
 		List<CustomerForm> customerDetailList = bankCustomerService.findCustomersByAttributeAndValue(attribute, value);
 		model.addAttribute("customerList",customerDetailList);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
-
 	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		// to actually be able to convert Multipart instance to byte[]
@@ -138,27 +138,10 @@ public class BankCustomerController {
 		binder.registerCustomEditor(byte[].class,
 				new ByteArrayMultipartFileEditor());
 		// now Spring knows how to handle multipart object and convert them
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/DD/YYYY");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //Create a new CustomDateEditor
 		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
         //Register it as custom editor for the Date type
 		binder.registerCustomEditor(Date.class, editor);
 	}
-	
-
-	@RequestMapping(value="selectPayee",method=RequestMethod.GET) 
-	public String selectPayee(Model model) {
-		
-		//bankCustomerService.selectPayee(accno);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
-	}
-	@RequestMapping(value="makePayments",method=RequestMethod.GET) 
-	public String makePayment(Model model) {
-		
-		//bankCustomerService.selectPayee(accno);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
-	}
-	
-
-
 }

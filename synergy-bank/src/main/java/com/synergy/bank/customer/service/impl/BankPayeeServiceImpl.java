@@ -1,5 +1,6 @@
 package com.synergy.bank.customer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
-import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankPayeeServiceImpl")
@@ -24,8 +24,7 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 	@Override
 	public String addPayee(PayeeDetailsForm payeeDetailsForm) {
-		System.out.println(payeeDetailsForm);
-		System.out.println("In service Layer");
+		
 		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
 		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
 		return bankPayeeDao.addPayee(payeeDetailsEntity);
@@ -39,12 +38,24 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	}
 
 	@Override
+	public List<PayeeDetailsForm> getPayeeListForUserId(String userId) {
+		List<PayeeDetailsEntity> payeeDetailsEntityList = bankPayeeDao.getPayeeListForUserId(userId);
+		List<PayeeDetailsForm>   payeeDetailsFormList   = new ArrayList<PayeeDetailsForm>(payeeDetailsEntityList.size());
+
+		for(int i=0;i<payeeDetailsEntityList.size();i++)
+		{
+			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();	
+			BeanUtils.copyProperties(payeeDetailsEntityList.get(i),payeeDetailsForm);
+			payeeDetailsFormList.add(payeeDetailsForm);
+		}
+		return payeeDetailsFormList;		
+	}
+	
+	@Override
 	public PayeeDetailsForm findPayeeByUserId(String userid) {
 		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 		BeanUtils.copyProperties(bankPayeeDao.findPayeeByUserId(userid), payeeDetailsForm);
 		return payeeDetailsForm;
 	}
 
-
-	
 }

@@ -25,7 +25,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     }
 
     @Autowired
-    @Qualifier("synegySessionFactory")
+    @Qualifier("synegySessionFactory") 
     private SessionFactory psessionFactory;
 
     public Session getCurrentSession() {
@@ -40,6 +40,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
 
     @Override
     public void saveOrUpdate(E e) {
+    	System.out.println("Object to save"+e);
         getCurrentSession().saveOrUpdate(e);
     }
 

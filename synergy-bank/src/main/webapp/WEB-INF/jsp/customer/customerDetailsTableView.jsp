@@ -1,27 +1,17 @@
+<%-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
 <head>
-<title>${initParam.titlePage}</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script type = "text/javascript">
-
-$(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
-  
-
 </head>
 <body>
 	<div class="meta">
@@ -51,57 +41,114 @@ $(function() {
 		
 	</div>
 	<div id="content">
-			
-			 <br/>
-			<h3>Fund Transfer - Add Payee :</h3> 
-			<br/>
-			<ff:form name="selectPayee"  method="post"  commandName="customerTransactionCommand" style= "background-color:#D9E8F7" > 
-				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
-					
-					<tr>
-						<td>
-							<b>Register a new Payee:</b></br>
-							<br/><input id = "button" type="button" value="Add Payee" size="20" /><br/>
-						</td>						
-					</tr>
-					<tr>
-						<td>
-						</br>
-							<input id = "button" type="button" value="Confirm Payee" size="20" /></br>
-						</td>						
-					</tr>
-					<tr>
-						<td>
-						</br></br><b>Select a Payee to Make Payment: </b>
-						<ff:select path = "payeeAccountNumber">
-							<ff:options items="${payeeDetailsFormList}"/> 
-						</ff:select>						
-						</td>
-					</tr>
-							
-					<tr>
-						<td>		    
-							<input type="submit" value="Make Payment"/>
-	 						<b>Payee Registration alert to be sent on mobile number</b>
-						</td>
-					</tr>
-			</table>
-			
-	</ff:form> 
-			
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		
+
+ <h3> Current Customers </h3>			    
+</br>
+
+
+<form action="searchCustomerInformation" method="get">	
+				    				    
+	    Search by
+<select name="searchAttr">
+	<option value="userId" >userId</option>
+	<option value="password">password</option>
+	<option value="salutation">salutation</option>
+	<option value="gender">gender</option>
+	<option value="firstName">firstName</option>
+	<option value="middleName">middleName</option>
+	<option value="lastName">lastName</option>
+	<option value="maritalStatus">maritalStatus</option>
+	<option value="dob">dob</option>
+	<option value="category">category</option>
+	<option value="motherMaidenName">motherMaidenName</option>
+	<option value="fatherName">fatherName</option>
+	<option value="email">email</option>
+	<option value="mobile">mobile</option>
+	<option value="ssn">ssn</option>
+	<option value="occupation">occupation</option>
+	<option value="occupationType">occupationType</option>
+	<option value="education">education</option>
+	<option value="grossAnualIncome">grossAnualIncome</option>
+	<option value="sourceOfFunds">sourceOfFunds</option>
+	<option value="role">role</option>
+	<option value="doe">doe</option>
+	<option value="dom">dom</option>
+	<option value="photo">photo</option>
+	<option value="description">description</option>
+</select>					
+<input type="text" name="searchValue" align="middle"/>	
+		<input type="submit" value="Search"/>
+</form>
+<form action="customerInformation" method="get">						    
+	<input type="submit" value="Clear Search"/>
+</form> 
+
+	<table align="left">
+	<thead>
+		<tr>
+			<td><b>USERID</b></td>
+	<!-- 		<td><b>password</b></td>
+			<td><b>salutation</b></td>
+	 --><!-- 		<td><b>GENDER</b></td>
+		 -->	<td><b>Name</b></td>
+	<!-- 		<td><b>Middle Name</b></td>
+	 -->
+	 	<!-- 		<td><b>maritalStatus</b></td>
+	 --><!-- 		<td><b>DOB</b></td>
+		 -->	<td><b>Category</b></td>
+		<!-- 	<td><b>motderMaidenName</b></td>
+			<td><b>fatderName</b></td>
+		 -->	<td><b>Email</b></td>
+			<td><b>Mobile</b></td>
+<!-- 			<td><b>SSN</b></td>
+ -->			<td><b>Occupation</b></td>
+		<!-- 	<td><b>occupationType</b></td>
+		 -->	<td><b>Education</b></td>
+			<td><b>Gross Income</b></td>
+<!-- 			<td><b>Source</b></td>
+ --><!-- 			<td><b>role</b></td>
+			<td><b>doe</b></td>
+			<td><b>dom</b></td>
+ -->			<td><b>Photo</b></td>
+			<td><b>Edit and Delete</b></td>
+		</tr>		
+	</thead>
+	<tbody>		
+	<c:forEach items="${customerList}" var="item">		
+		<tr>
+			<td>${item.userId}</td>
+	<%-- 		<td>${item.password}</td>
+			<td>${item.salutation}</td>
+	 --%><%-- 		<td>${item.gender}</td>
+		 --%>	<td>${item.firstName} ${item.lastName}</td>
+<%-- 			<td>${item.middleName}</td>
+ --%>
+		<%-- 	<td>${item.maritalStatus}</td>
+		 --%><%-- 	<td>${item.dob}</td>
+		 --%>	<td>${item.category}</td>
+<%-- 			<td>${item.motherMaidenName}</td>
+			<td>${item.fatherName}</td>
+ --%>			<td>${item.email}</td>
+			<td>${item.mobile}</td>
+<%-- 			<td>${item.ssn}</td>
+ --%>			<td>${item.occupation}</td>
+<%-- 			<td>${item.occupationType}</td>
+ --%>			<td>${item.education}</td>
+			<td>${item.grossAnualIncome}</td>
+		<%-- 	<td>${item.sourceOfFunds}</td> --%>
+<%-- 			<td>${item.role}</td>
+			<td>${item.doe}</td>
+			<td>${item.dom}</td>
+ --%>			<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
+<%-- 			<td>${item.description}</td>
+ --%>   			<td>
+			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
+			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
+			</td>	 	
+	 	</tr>
+	</c:forEach>
+	</tbody>		
+</table>
 		<div id="blocks">																																																																																																																													
 			
 		</div>
@@ -155,7 +202,7 @@ $(function() {
 				</ul>
 			</div>
 		</div>
-	</div>
-	<%@ include file="../common/footer.jsp" %>
+
+	<%@ include file="../common/footer.jsp" %>		
 </body>
 </html>
