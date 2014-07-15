@@ -2,4 +2,4 @@ org.hibernate.HibernateException: No Session found for current thread
 at org.springframework.orm.hibernate4.SpringSessionContext.currentSession(SpringSessionContext.java:97)
 
 Solution : -
- Since spring transaction cannot be applied for super class method automatically.
+Since spring transaction cannot be applied for super class method automatically.
