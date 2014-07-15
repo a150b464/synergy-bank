@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class PayeeDetailsEntity {
 	
+	
 	private int sno;
 	private String userid;
 	private String payeeAccountNo;

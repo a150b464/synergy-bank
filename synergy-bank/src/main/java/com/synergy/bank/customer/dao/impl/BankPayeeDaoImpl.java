@@ -7,6 +7,7 @@ package com.synergy.bank.customer.dao.impl;
  */
 
 
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ implements BankPayeeDao{
 	
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
-		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
-				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+		Object[] data = new Object[]{entity.getSno(),entity.getUserid(),entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),entity.getMobile(),entity.getDoe(),
+				entity.getEmail(),entity.getStatus()};
+		System.out.println(data);
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
 		System.out.println("____AHAHAHA____");
 		return "success";
@@ -44,11 +46,18 @@ implements BankPayeeDao{
 
 	@Override
 	public String confirmPayee(PayeeDetailsEntity entity) {
-		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
-				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
-		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS,data);
+		Object[] data = new Object[]{entity.getSno(),entity.getUserid(),entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),entity.getMobile(),entity.getDoe(),
+				entity.getEmail(),entity.getStatus()};
+		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS+ "'" +data+"'");
 		System.out.println("____updated____");
 		return "success";
+	}
+
+	@Override
+	public PayeeDetailsEntity findPayeeByUserId(String userid) {
+		PayeeDetailsEntity payeeDetailsEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.SHOW_PART_PAYEELIST + "'"+ 
+	userid +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntity;
 	}
 
 }

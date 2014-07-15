@@ -7,10 +7,14 @@ package com.synergy.bank.customer.dao;
  */
 
 
+import java.util.List;
+
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 
 public interface BankPayeeDao {
 	
 	public String addPayee(PayeeDetailsEntity payeeDetailsEntity);	
 	public String confirmPayee(PayeeDetailsEntity payeeDetailsEntity);
+	public abstract PayeeDetailsEntity findPayeeByUserId(String userid);
 }
