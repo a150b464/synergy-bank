@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
@@ -46,34 +48,27 @@ public class BankCustomerController {
 	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm=new CustomerForm();
-		
 		model.addAttribute("customerForm",customerForm);
-		
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 	
 	
 	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
-		
-		//Hibernate 
-		bankCustomerService.addCustomer(customerForm);
+		String useridAndPassword=bankCustomerService.addCustomer(customerForm);
 		//bankCustomerService.addCustomerDetails(customerForm);
-		 UUID userid = UUID.randomUUID();
-		 UUID pwd = UUID.randomUUID();
-		 System.out.println("New Generated User Id is: " +userid);
-		 System.out.println("New Generated Password is: " +pwd);
 		//here we are making this call asynchronous so we are creating  
-		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Your user id is: "+ userid.toString() + "\nAnd password is: "+ pwd.toString(), "Regarding Registration");
+		String uptokens[]=useridAndPassword.split("-");
+		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Your user id is: "+ uptokens[0] + "\nAnd password is: "+ uptokens[1], "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 		
 	
 	@RequestMapping(value="showPayeeList",method=RequestMethod.GET) 
-	public String showPayeeList(Model model) {
-		
-		String userId = "1";
+	public String showPayeeList(Model model,HttpSession session) {
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		String userId = loginForm.getUserId();
 		List<PayeeDetailsForm> payeeList = bankCustomerService.showPayeeListByUserId(userId);
 		model.addAttribute("payeeDetailsList",payeeList);
 		System.out.println(payeeList);
@@ -116,7 +111,7 @@ public class BankCustomerController {
 		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
 		System.out.println(customerDetailList);
 		model.addAttribute("customerList",customerDetailList);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+		return NavigationConstant.ADMIN_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
 	
 	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
@@ -130,7 +125,6 @@ public class BankCustomerController {
 	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
 			                                        @RequestParam("searchValue") String value,    
 			                                        Model model){
-		
 		List<CustomerForm> customerDetailList = bankCustomerService.findCustomersByAttributeAndValue(attribute, value);
 		model.addAttribute("customerList",customerDetailList);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;

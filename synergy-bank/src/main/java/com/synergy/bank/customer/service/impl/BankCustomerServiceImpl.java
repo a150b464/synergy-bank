@@ -66,7 +66,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		customerLoginDetailEntity.setPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setRole("customer");
 		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
-		return bankCustomerDao.addCustomer(customerEntity);
+		bankCustomerDao.addCustomer(customerEntity);
+		return userid+"-"+new String(password);
 	}
 	
 	

@@ -1,6 +1,5 @@
 package com.synergy.bank.customer.web.controller;
-import java.sql.Date;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.service.BankPayeeService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
@@ -33,12 +33,13 @@ public class BankPayeeCustomerController {
 		
 	
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
-	public String addpayee(@ModelAttribute("addPayeeCommand")PayeeDetailsForm payeeDetailsForm,Model model) {
-		System.out.println("in post");
-		String id = "6056701129";
+	public String addpayee(@ModelAttribute("addPayeeCommand")PayeeDetailsForm payeeDetailsForm,HttpSession session,Model model) {
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		String userId = loginForm.getUserId();
+		//String id = "6056701129";
 		String stst = "pending";
 		payeeDetailsForm.setDoe(new java.util.Date());
-		payeeDetailsForm.setUserid(id);
+		payeeDetailsForm.setUserid(userId);
 		payeeDetailsForm.setStatus(stst);
 		//first check wheather account exist or not
 		//second check weather payee is already addded or not

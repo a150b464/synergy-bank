@@ -7,17 +7,19 @@ package com.synergy.bank.common.web.controller.form;
  */
 public class LoginForm {
 
-	private String userid;
+	private String userId;
 	private String password;
 	private String role;
 	private String description;
 
-	public String getUserid() {
-		return userid;
+	
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -46,7 +48,7 @@ public class LoginForm {
 
 	@Override
 	public String toString() {
-		return "LoginForm [userid=" + userid + ", password=" + password
+		return "LoginForm [userid=" + userId + ", password=" + password
 				+ ", role=" + role + ", description=" + description + "]";
 	}
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.synergy.bank.common.service.BankAuthService;
-import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
@@ -38,12 +37,17 @@ public class LoginController {
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public String auth(@RequestParam("login") String login,
-			@RequestParam("password") String password,Model model) {
+			@RequestParam("password") String password,HttpSession session,Model model) {
 		LoginForm loginForm=bankAuthService.authUser(login, password);
-		if(loginForm.getUserid()!=null){
+		loginForm.setPassword(null);
+		if(loginForm.getUserId()!=null){
+			session.setAttribute(NavigationConstant.USER_SESSION_DATA, loginForm);
 			if("customer".equals(loginForm.getRole())){
 				return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_HOME_PAGE;
+			}else if("admin".equals(loginForm.getRole())){
+				return NavigationConstant.ADMIN_PAGE+NavigationConstant.ADMIN_HOME_PAGE;
 			}
+			
 		}else{
 			model.addAttribute("applicationMessage", "User id and password are not valid.");
 			return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
@@ -54,7 +58,6 @@ public class LoginController {
 	//@RequestMapping(value="/customerLogin",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
 		bankAuthService.addCustomerDetails(customerForm);
-		
 		//here we are making this call asynchronous so we are creating  
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
