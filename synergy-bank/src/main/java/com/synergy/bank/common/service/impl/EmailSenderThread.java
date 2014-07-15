@@ -34,5 +34,4 @@ public class EmailSenderThread extends Thread {
 			e.printStackTrace();
 		}
 	}
-
 }

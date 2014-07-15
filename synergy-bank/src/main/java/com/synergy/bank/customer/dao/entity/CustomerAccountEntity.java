@@ -14,6 +14,7 @@ public class CustomerAccountEntity {
 	private String currency;
 	private Date doe;
 	private Date dom;
+	private String customerEmail;
 	
 	public int getId() {
 		return id;
@@ -75,6 +76,12 @@ public class CustomerAccountEntity {
 	public void setDom(Date dom) {
 		this.dom = dom;
 	}
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
 	@Override
 	public String toString() {
 		return "CustomerAccountEntity [id=" + id + ", userid=" + userid
@@ -82,7 +89,7 @@ public class CustomerAccountEntity {
 				+ customerAccountNo + ", accountType=" + accountType
 				+ ", availBalance=" + availBalance + ", totalAvailBalance="
 				+ totalAvailBalance + ", currency=" + currency + ", doe=" + doe
-				+ ", dom=" + dom + "]";
+				+ ", dom=" + dom + ", customerEmail="+ customerEmail+"]";
 	}
 	
 }

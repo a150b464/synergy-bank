@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.synergy.bank.admin.dao.BankAdminDao;
 import com.synergy.bank.admin.service.BankAdminService;
+import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
 
@@ -38,9 +40,18 @@ public class BankAdminServiceImpl implements BankAdminService{
 	}
 
 	@Override
-	public String approvePendingCustomers(String[] cusomerUserNames) {
+	public List<CustomerAccountForm> approvePendingCustomers(String[] cusomerUserNames) {
 		
-		return bankAdminDao.approvePendingCustomers(cusomerUserNames);
+		List<CustomerAccountEntity> customerAccountEntities = bankAdminDao.approvePendingCustomers(cusomerUserNames);
+		List<CustomerAccountForm> customerAccountForms = new ArrayList<CustomerAccountForm>();
+		
+		for (CustomerAccountEntity customerAccountEntity : customerAccountEntities) {
+			CustomerAccountForm customerAccountForm = new CustomerAccountForm();
+			BeanUtils.copyProperties(customerAccountEntity, customerAccountForm);
+			customerAccountForms.add(customerAccountForm);
+		}
+		
+		return customerAccountForms;
 	}
 	
 	

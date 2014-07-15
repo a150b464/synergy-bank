@@ -1,5 +1,6 @@
 package com.synergy.bank.admin.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.admin.dao.BankAdminDao;
 import com.synergy.bank.admin.dao.query.AdminQuery;
+import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.util.BankDaoUtil;
 
@@ -26,8 +30,8 @@ import com.synergy.bank.util.BankDaoUtil;
 
 @Repository("BankAdminDaoImpl")
 @Scope("singleton")
+@Transactional(propagation=Propagation.REQUIRED)
 public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
-
 	
 	@Autowired
 	@Qualifier("bankDataSource")
@@ -49,7 +53,7 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 
 
 	@Override
-	public String approvePendingCustomers(String[] cusomerUserNames) {
+	public List<CustomerAccountEntity> approvePendingCustomers(String[] cusomerUserNames) {
 		
 		if(cusomerUserNames.length>0){
 			
@@ -57,24 +61,25 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 					+ "("
 					+ new BankDaoUtil()
 							.stringArrayToCommaSeperatedString(cusomerUserNames)
-					+ ")";
+					+ ") and approve='no'";
+			System.out.println(findPendingCustomerDetailsSql);
+			
 			List<CustomerEntity> customerDetailsList = super.getJdbcTemplate().query(findPendingCustomerDetailsSql,
 					new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));			
 			
+			List<CustomerAccountEntity> customerAccountEntities = new ArrayList<CustomerAccountEntity>();
+			
 			for (CustomerEntity customerEntity : customerDetailsList) {
-				
-				String recentAccountNoSql = "select accountNumber from customer_account_numbers_tbl  where id=  (select  MAX(id) from customer_account_numbers_tbl)";
-				
+								
 				String recentAccountNo = null;
 				try{
-					recentAccountNo = super.getJdbcTemplate().queryForObject(recentAccountNoSql, String.class);
+					recentAccountNo = super.getJdbcTemplate().queryForObject(AdminQuery.FIND_MOST_RECENT_ACC_NO, String.class);
 				}
 				catch(Exception e){
-					recentAccountNo = "empty";
+					recentAccountNo = "empty";					
 				}
 								
-				Long recentAccoNo;
-				Long newAccNo;				
+				Long recentAccoNo,newAccNo;		
 				if(recentAccountNo==null || "empty".equals(recentAccountNo)){
 					recentAccoNo = 999999999L;
 					newAccNo=1000000000L;
@@ -83,9 +88,6 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 					recentAccoNo = Long.parseLong(recentAccountNo);
 					newAccNo = recentAccoNo+1;
 				}
-				
-				System.out.println("Recent Acc No: "+recentAccoNo);
-				System.out.println("New Acc No: "+newAccNo);
 				
 				Object[] accNumbersData = new Object[]{
 						customerEntity.getUserId(), customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName(),
@@ -98,14 +100,26 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 						"AccType", 1000D,
 						1000D, "Currency", 
 						customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName(),
-						new Date(), new Date()
+						new Date(), new Date(),customerEntity.getEmail()
 					};																	
-				super.getJdbcTemplate().update(AdminQuery.APPROVE_PENDING_CUSTOMER, data);					
+
+				super.getJdbcTemplate().update(AdminQuery.APPROVE_PENDING_CUSTOMER, data);	
+				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_DETAILS_APPROVE,customerEntity.getUserId());
+				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_LOGIN_APPROVE,customerEntity.getUserId());
+				
+				CustomerAccountEntity customerAccountEntity = new CustomerAccountEntity();
+				customerAccountEntity.setUserid(customerEntity.getUserId());
+				customerAccountEntity.setCustomerName(customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName());
+				customerAccountEntity.setCustomerAccountNo(newAccNo.toString());
+				customerAccountEntity.setTotalAvailBalance(1000D);
+				customerAccountEntity.setCustomerEmail(customerEntity.getEmail());
+				
+				customerAccountEntities.add(customerAccountEntity);
 				
 			} // End of for loop
-			return "success";
+			return customerAccountEntities;
 		}  // End of if statement
-		else return "fails";
+		else return null;
 	}
 	
 
