@@ -12,7 +12,9 @@ import com.synergy.bank.util.PasswordGenerator;
 
 @Repository("BankJdbcDaoImpl")
 public class BankJdbcDaoImpl extends JdbcDaoSupport implements BankJdbcDao{
-	
+	 
+	 int passwordSize = 4;
+     private PasswordGenerator password = new PasswordGenerator( passwordSize );
 	
 	@Autowired
 	@Qualifier("bankDataSource")
@@ -38,8 +40,6 @@ public class BankJdbcDaoImpl extends JdbcDaoSupport implements BankJdbcDao{
 
 	@Override
 	public char[] generatePassword() {
-		  int passwordSize = 4;
-	      PasswordGenerator password = new PasswordGenerator( passwordSize );
 	      char[] gpassword=password.get();   
 	      System.out.println("gpassword  = "+gpassword);
 	      return gpassword;

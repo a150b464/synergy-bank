@@ -14,6 +14,11 @@ public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerL
 	protected BankCustomerLoginHibernateDaoImpl() {
         super(CustomerLoginDetailEntity.class);
     }
-
+	
+	//@Transactional(propagation=Propagation.REQUIRED) == annotation will not work 
+	//for super class method since it is applied 
+	public void save(CustomerLoginDetailEntity customerLoginDetailEntity){
+		super.saveOrUpdate(customerLoginDetailEntity);
+	}
 	
 }

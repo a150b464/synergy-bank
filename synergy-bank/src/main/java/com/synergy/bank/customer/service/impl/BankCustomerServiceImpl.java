@@ -61,8 +61,9 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		customerLoginDetailEntity.setModifiedDate(new Date());
 		customerLoginDetailEntity.setNumberOfAttempt(0);
 		customerLoginDetailEntity.setOldPassword(customerForm.getPassword());
+		customerLoginDetailEntity.setPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setRole("customer");
-		bankCustomerLoginHibernateDaoImpl.saveOrUpdate(customerLoginDetailEntity);
+		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
 		return bankCustomerDao.addCustomer(customerEntity);
 	}
 	
