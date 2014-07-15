@@ -18,6 +18,7 @@
    <import resource="common-service.xml"/>
    <import resource="spring-hibernate.xml"/>
    <import resource="email-service.xml"/>
+      <import resource="image-upload.xml"/>
    
    
 </beans>

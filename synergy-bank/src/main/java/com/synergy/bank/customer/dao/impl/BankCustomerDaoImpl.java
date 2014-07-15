@@ -15,6 +15,8 @@ import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
+import com.synergy.bank.common.dao.entity.LoginEntity;
+import com.synergy.bank.common.query.CommonQuery;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
@@ -61,12 +63,24 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.BLOB,
 				Types.DATE, Types.DATE, Types.VARCHAR};
-		
 		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER, data,dataArra);
+		addCustomerLoginDetails(entity);
 		System.out.println("____AHAHAHA____");
 		return "success";
 	}
 
+	@Override
+	public String addCustomerLoginDetails(CustomerEntity entity) {
+		System.out.println("at add cusdetails ");
+		Object[] data = new Object[] { entity.getUserId(), entity.getPassword(), entity.getRole(), "new  Customer" };
+
+		int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR,
+				Types.VARCHAR, Types.VARCHAR};
+		super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS, data,dataArra);
+		System.out.println("____AHAHAHA____INSERTED");
+		return "success";
+	}
+	
 	@Override
 	public String updateCustomer(CustomerEntity entity) {
 		return null;

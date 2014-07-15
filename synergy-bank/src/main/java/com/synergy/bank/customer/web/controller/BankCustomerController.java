@@ -36,6 +36,7 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
+	//private BankAuthService bankAuthService;
 	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
@@ -47,17 +48,23 @@ public class BankCustomerController {
 		CustomerForm customerForm=new CustomerForm();
 		
 		model.addAttribute("customerForm",customerForm);
-		 UUID idOne = UUID.randomUUID();
-		 System.out.println("Random Id: " +idOne);
+		
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
 	
 	
 	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
 	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
+		
+		//Hibernate 
 		bankCustomerService.addCustomer(customerForm);
+		//bankCustomerService.addCustomerDetails(customerForm);
+		 UUID userid = UUID.randomUUID();
+		 UUID pwd = UUID.randomUUID();
+		 System.out.println("New Generated User Id is: " +userid);
+		 System.out.println("New Generated Password is: " +pwd);
 		//here we are making this call asynchronous so we are creating  
-		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Hello Dear! Ahahahah", "Regarding Registration");
+		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Your user id is: "+ userid.toString() + "\nAnd password is: "+ pwd.toString(), "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
@@ -102,6 +109,7 @@ public class BankCustomerController {
 			outputStream.flush();
 		}
 	}
+	
 	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
 	public String showCustomerInformation(Model model) {
 		
@@ -110,12 +118,14 @@ public class BankCustomerController {
 		model.addAttribute("customerList",customerDetailList);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
+	
 	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
 	public String deleteCustomerbyId(@RequestParam("userId") String UserId)
 	{
 		bankCustomerService.deleteCustomerById(UserId);
 		return "bank/customerInformation";
 	}
+	
 	@RequestMapping(value="searchCustomerInformation",method=RequestMethod.GET) 
 	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
 			                                        @RequestParam("searchValue") String value,    
@@ -134,7 +144,7 @@ public class BankCustomerController {
 		binder.registerCustomEditor(byte[].class,
 				new ByteArrayMultipartFileEditor());
 		// now Spring knows how to handle multipart object and convert them
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/DD/YYYY");
         //Create a new CustomDateEditor
 		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
         //Register it as custom editor for the Date type
@@ -154,4 +164,7 @@ public class BankCustomerController {
 		//bankCustomerService.selectPayee(accno);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
 	}
+	
+
+
 }

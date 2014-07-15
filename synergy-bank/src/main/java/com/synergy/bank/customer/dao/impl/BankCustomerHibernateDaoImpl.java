@@ -24,6 +24,12 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 		 super.saveOrUpdate(entity);
 		 return "success";
 	}
+	
+	@Override
+	public String addCustomerLoginDetails(CustomerEntity entity) {
+		 super.saveOrUpdate(entity);
+		 return "success";
+	}
 
 	@Override
 	public String updateCustomer(CustomerEntity entity) {
@@ -62,4 +68,18 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	public byte[] findPhotoById(String userId) {
 		return super.findById(userId).getPhoto();
 	}
+	
+	/*@Override
+	public String addCustomerDetails(CustomerEntity entity) {
+		
+		System.out.println("at add cusdetails ");
+		Object[] data = new Object[] { entity.getUserId(), entity.getPassword(), entity.getRole(), "new  Customer" };
+
+		int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR,
+				Types.VARCHAR, Types.VARCHAR};
+		
+		super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_DETAILS, data,dataArra);
+		System.out.println("____AHAHAHA____INSERTED");
+		return "success";
+	}*/
 }

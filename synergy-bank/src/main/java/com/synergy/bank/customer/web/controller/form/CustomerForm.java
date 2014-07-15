@@ -251,7 +251,7 @@ public class CustomerForm {
 				+ education + ", grossAnualIncome=" + grossAnualIncome
 				+ ", sourceOfFunds=" + sourceOfFunds + ", userId=" + userId
 				+ ", password=" + password + ", role=" + role + ", doe=" + doe
-				+ ", dom=" + dom + ", description=" + description + "]";
+				+ ", dom=" + dom + ", description=" + description + ", photo=" + photo + "]";
 	}
 
 }

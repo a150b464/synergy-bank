@@ -53,14 +53,14 @@
 			<ff:form name="selectPayee" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" style= "background-color:#D9E8F7" > 
 				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
 					
-					<tr>
+					<tr><td>
 						<b>Register a new Payee:</b></br>
-						</br><input id = "button" type="button" value="Add Payee" size="20" /></br>
-												
+						</br><input id = "button" type="button" value="Add Payee" size="20" />
+						</td>>						
 					</tr>
 					<tr>
 						<b></b></br>
-						<input id = "button" type="button" value="Confirm Payee" size="20" /></br>
+						<td><input id = "button" type="button" value="Confirm Payee" size="20" /></td>
 												
 					</tr>
 					<tr>

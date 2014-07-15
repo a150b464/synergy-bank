@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.synergy.bank.common.service.BankAuthService;
+import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
 @Controller
 public class LoginController {
@@ -47,5 +50,14 @@ public class LoginController {
 		}
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_HOME_PAGE;
 	}
+	
+	//@RequestMapping(value="/customerLogin",method=RequestMethod.POST) 
+	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
+		bankAuthService.addCustomerDetails(customerForm);
+		
+		//here we are making this call asynchronous so we are creating  
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+	}
+	
 
 }

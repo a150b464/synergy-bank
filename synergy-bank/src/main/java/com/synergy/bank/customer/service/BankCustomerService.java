@@ -20,5 +20,6 @@ public interface BankCustomerService {
 	public List<CustomerForm> findCustomersByAttributeAndValue(String attribute,String value);
 	public byte[] findPhotoById(String userId);
 	public List<PayeeDetailsForm> showPayeeListByUserId(String userId);
+	//public String addCustomerDetails(CustomerForm customerForm);
 
 }

@@ -29,21 +29,19 @@
 			 <br/>
 			<h3>Customer Registration Page:</h3> 
 			<br/>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm"> 
+			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
 				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
+					
 					<tr>
-						<td>User Id:*</td>
-						<td><ff:input path="userId" id="userId" size="40" />
-						<span id="iderror"></span>
-						</td>
-						
+						<td><b>UserId:*</b></td>
+						<td><ff:input path="userId" size="40" /></td>
 					</tr>
+					
 					<tr>
-						<td><b>Password:*</b></td>
-						<td><ff:password path="password" id="password" size="40"/>
-						<span id="passerror"></span>
-						</td>
+						<td><b>Password:</b></td>
+						<td><ff:password path="password" size="40" /></td>
 					</tr>
+					
 					<tr>
 						<td><b>Salutation:</b></td>
 						<td><ff:input path="salutation" size="40" /></td>
@@ -62,11 +60,15 @@
 					</tr>
 					<tr>
 						<td><b>Gender:</b></td>
-						<td><ff:input path="gender" size="40" /></td>
+						<td><p><input type="radio" name="gender" value="Male"> Male</input>
+							<input type="radio" name="gender" value="Female"> Female</input></p>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Marital Status:</b></td>
-						<td><ff:input path="maritalStatus" size="40"/></td>
+						<td><p><input type="radio" name="maritalstatus" value="Single"> Single</input>
+							<input type="radio" name="maritalstatus" value="Married"> Married</input></p>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Date of Birth:</b></td>
@@ -126,7 +128,8 @@
 					
 					<tr>
 						<td><b>Photo:</b></td>
-						<td><ff:input path="photo" size="40" /></td>
+						<td><ff:input path="photo" type="file" value="Upload File"/>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Description:</b></td>

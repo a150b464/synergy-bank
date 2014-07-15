@@ -7,17 +7,17 @@ package com.synergy.bank.common.dao.entity;
  */
 public class LoginEntity {
 
-	private String userid;
+	private String userId;
 	private String password;
 	private String role;
 	private String description;
 
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -46,7 +46,7 @@ public class LoginEntity {
 
 	@Override
 	public String toString() {
-		return "LoginEntity [userid=" + userid + ", password=" + password
+		return "LoginEntity [userid=" + userId + ", password=" + password
 				+ ", role=" + role + ", description=" + description + "]";
 	}
 
