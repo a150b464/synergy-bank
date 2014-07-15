@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class PayeeDetailsEntity {
 	
-	
 	private int sno;
 	private String userid;
 	private String payeeAccountNo;
@@ -77,7 +76,6 @@ public class PayeeDetailsEntity {
 				+ mobile + ", doe=" + doe + ", email=" + email + ", status="
 				+ status + "]";
 	}
-	
 	
 	
 }

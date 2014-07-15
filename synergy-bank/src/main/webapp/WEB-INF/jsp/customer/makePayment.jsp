@@ -1,10 +1,17 @@
+
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <head>
 <title>${initParam.titlePage}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/fundTransfer.js"></script>
@@ -50,48 +57,42 @@
 			 <br/>
 			<h3>Fund Transfer - Add Payee :</h3> 
 			<br/>
-			<ff:form name="makePayments" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" style= "background-color:#D9E8F7" onsubmit= "return emailSent()" > 
+			<ff:form name="makePayments"  method="post"  commandName="customerTransactionCommand" style= "background-color:#D9E8F7" > 
 				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
 					<tr>
-						</br><b>From account: </b>
-						<select name = "acc" align="right"> 
-						<option value="Saving">Saving</option>
-						<option value="Checking">Checking</option>
-						<option value="Credit">Credit</option>
-						</select>
-					
+						<a>From account</a>
+						<ff:select path ="customerAccountType" align="right"> 
+						<ff:option value="Saving">Saving</ff:option>
+						<ff:option value="Checking">Checking</ff:option>
+						<ff:option value="Credit">Credit</ff:option>
+						</ff:select>			
 					</tr>
-					
+				
 					<tr>
-						</br></br><b>Select a Payee to Make Payment: </b>
-						<select name = "accno"> 
-						<option value="Swapnil">Swapnil</option>
-						<option value="Ashish">Ashish</option>
-						<option value="Nagendra">Nagendra</option>
-						<option value="Naim">Naim</option>
-						</select>
-					
+						<br/><b>Select a Payee to Make Payment: </b>
+						<ff:select path = "payeeAccountNumber">
+							<ff:options items="${payeeDetailsFormList}"/> 
+						</ff:select>				
 					</tr>
+					<tr>
+						</br></br><b>Transaction Amount(USD)</b>
+						<ff:input path="transactionAmount" size="60" width="40" align="right" /></br>
+					</tr>
+
 					<tr>
 						</br></br><b>Quick Comments </b>
-						<input text="comments" name="comments" size="60" width="40" align="right" /></br>
+						<ff:input path="transactionRemark" name="comments" size="60" width="40" align="right" /></br>
 					</tr>
 					
-					<tr>
-						
+					<tr>	
 						</br><input id = "button" type="submit" value="Make a Payment" size="20"/></br>
 						Payee Registration alert to be sent on mobile number
-						
 					</tr>
 					
 			</table>
 			
 	</ff:form> 
 			
-		<br/>
-		<br/>
-		<br/>
-		<br/>
 		<br/>
 		<br/>
 		<br/>
