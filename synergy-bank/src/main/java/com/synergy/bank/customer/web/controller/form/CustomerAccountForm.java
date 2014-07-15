@@ -13,6 +13,15 @@ public class CustomerAccountForm {
 	private String currency;
 	private Date doe;
 	private Date dom;
+	private String customerEmail;
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
 
 	/*
 	 * public int getId() { return id; }
