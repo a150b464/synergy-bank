@@ -119,8 +119,11 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<PayeeDetailsEntity> payeeList = super.getJdbcTemplate().query(CustomerQuery.SHOW_PAYEE_LIST+"'"+userId+"'",
+							new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+        return payeeList;
+		
 	}
 
 }

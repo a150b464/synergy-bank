@@ -71,7 +71,7 @@
 	<div id="content">
 			
 		<br/> <h2 align="center">PENDING APPROVAL CUSTOMER LIST:</h2>  <br/>
-		
+		<p align="center"><h3>${msg}</h3></p>		
 		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
 			<table align="center" id="tab1">
 				<thead>

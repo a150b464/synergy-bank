@@ -33,7 +33,9 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Qualifier("BankCustomerLoginHibernateDaoImpl")
 	private BankCustomerLoginHibernateDaoImpl bankCustomerLoginHibernateDaoImpl;
 	
-	
+	@Autowired
+	@Qualifier("BankCustomerDaoImpl")
+	private BankCustomerDao bankCustomerDaoSJdbc;
 	
 	@Autowired
 	@Qualifier("BankJdbcDaoImpl")
@@ -97,7 +99,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Override
 	public List<PayeeDetailsForm> showPayeeListByUserId(String userId) {				
 		
-		List<PayeeDetailsEntity> payeeList = bankCustomerDao.showPayeeListByUserId(userId);		
+		List<PayeeDetailsEntity> payeeList = bankCustomerDaoSJdbc.showPayeeListByUserId(userId);		
 		System.out.println(payeeList);
 		List<PayeeDetailsForm> payeeListForms = new ArrayList<PayeeDetailsForm>();
 		
