@@ -2,7 +2,6 @@ package com.synergy.bank.customer.dao;
 
 import java.util.List;
 
-import com.synergy.bank.common.dao.entity.LoginEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 
@@ -22,5 +21,7 @@ public interface BankCustomerDao {
 	public abstract String deleteCustomer(CustomerEntity entity);
 	public abstract byte[] findPhotoById(String userId);
 	public abstract String addCustomerLoginDetails(CustomerEntity entity);
+	List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,
+			int maximumRowNumbers);
 	
 }

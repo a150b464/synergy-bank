@@ -31,12 +31,15 @@ public class BankTransactionController {
 	public String makePayment(Model model) {
 		/*  Adding payee list to the model*/
 		List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.getPayeeListForUserId("1");
+		System.out.println(payeeDetailsFormList);
+		
+	
 		model.addAttribute("payeeDetailsFormList",payeeDetailsFormList);
 		/* adding blank transaction spring form to auto bind attributes*/		
-		CustomerTransactionForm form = new CustomerTransactionForm();
+		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
 /*		UUID transactionId = UUID.randomUUID();
 		form.setTransactionId(transactionId.toString());
-*/		model.addAttribute("customerTransactionCommand",form);
+*/		model.addAttribute("customerTransactionCommand",customerTransactionCommand);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
 	}
 

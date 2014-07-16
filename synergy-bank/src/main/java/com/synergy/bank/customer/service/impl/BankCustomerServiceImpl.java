@@ -94,6 +94,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	public CustomerForm findCustomerByUserId(String userid) {
 		CustomerForm customerForm=new CustomerForm(); 
 		BeanUtils.copyProperties(bankCustomerDao.findCustomerByUserId(userid), customerForm);
+		
 		return customerForm;
 	}
 
@@ -120,6 +121,21 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		return "success";
 	}
 
+	@Override
+	public List<CustomerForm> getCustomerListForRowNumbers(int initialRowNumber,int maximumRowNumbers)
+	{
+		List<CustomerEntity> customerEntityList = bankCustomerDao.getCustomerListForRowNumbers(initialRowNumber, maximumRowNumbers);
+		List<CustomerForm>   customerFormList   = new ArrayList<CustomerForm>(customerEntityList.size());
+
+		for(int i=0;i<customerEntityList.size();i++)
+		{
+			CustomerForm customerForm = new CustomerForm();	
+			BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
+			customerFormList.add(customerForm);
+		}
+		return customerFormList;
+	}
+	
 	@Override
 	public List<CustomerForm> findCustomersByAttributeAndValue(
 			String attribute, String value) {

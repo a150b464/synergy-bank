@@ -126,4 +126,11 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		
 	}
 
+	@Override
+	public List<CustomerEntity> getCustomerListForRowNumbers(
+			int initialRowNumber, int maximumRowNumbers) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

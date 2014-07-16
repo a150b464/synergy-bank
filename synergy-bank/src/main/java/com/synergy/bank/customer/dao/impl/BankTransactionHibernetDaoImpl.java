@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.base.dao.AbstractDaoImpl;
 import com.synergy.bank.customer.dao.BankTransactionDao;
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 
 @Repository("BankTransactionHibernateDaoImpl")
@@ -46,6 +47,13 @@ public class BankTransactionHibernetDaoImpl extends AbstractDaoImpl<CustomerTran
 	@Override
 	public CustomerTransactionEntity findCustomerTransactionByUserId(
 			String userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CustomerEntity> getCustomerListForRowNumbers(
+			int initialRowNumber, int maximumRowNumbers) {
 		// TODO Auto-generated method stub
 		return null;
 	}

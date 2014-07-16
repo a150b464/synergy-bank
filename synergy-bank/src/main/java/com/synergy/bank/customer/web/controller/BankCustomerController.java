@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -107,8 +106,7 @@ public class BankCustomerController {
 	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
 	public String showCustomerInformation(Model model) {
 		
-		List<CustomerForm> customerDetailList=bankCustomerService.findCustomers();
-		System.out.println(customerDetailList);
+		List<CustomerForm> customerDetailList=bankCustomerService.getCustomerListForRowNumbers(0, 4);
 		model.addAttribute("customerList",customerDetailList);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
@@ -120,6 +118,24 @@ public class BankCustomerController {
 		return "bank/customerInformation";
 	}
 	
+	@RequestMapping(value="loadNextPage",method=RequestMethod.GET) 
+	public String loadPaginatedCustomerList(@RequestParam("pageCount") int pageCount,
+											Model model)
+	{
+		List<CustomerForm> customerDetailList=bankCustomerService.getCustomerListForRowNumbers(pageCount*2, 2);
+		model.addAttribute("customerList",customerDetailList);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+	}
+	
+	
+/*	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
+	public String deleteCustomerbyId(@RequestParam("userId") String UserId)
+	{
+		bankCustomerService.deleteCustomerById(UserId);
+		return "bank/customerInformation";
+	}
+*/		
+	
 	@RequestMapping(value="searchCustomerInformation",method=RequestMethod.GET) 
 	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
 			                                        @RequestParam("searchValue") String value,    
@@ -130,7 +146,6 @@ public class BankCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
 	
-
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		// to actually be able to convert Multipart instance to byte[]
