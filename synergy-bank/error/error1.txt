@@ -1,5 +1,15 @@
+Error-1:	
 org.hibernate.HibernateException: No Session found for current thread
 at org.springframework.orm.hibernate4.SpringSessionContext.currentSession(SpringSessionContext.java:97)
 
 Solution : -
 Since spring transaction cannot be applied for super class method automatically.
+
+
+Error-2:
+java.lang.IllegalStateException: Argument [RedirectAttributes] is of type Model or Map but is not assignable from the actual model. 
+You may need to switch newer MVC infrastructure classes to use this argument.
+
+Solution :-
+I was redirecting to a page and add an attribute using redirectAttributes.addFlashAttribute("msg", msg) from the controller, 
+but did not add <mvc:annotation-driven /> tag in spring context XML file.
