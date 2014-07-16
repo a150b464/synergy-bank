@@ -14,9 +14,11 @@
 <body>
 	<%@include file="cheader.jsp"%>
 	
+	<h3>Mini Statement</h3><br>
 	<div id="content">
-		<h1>Accounts Details</h1><br>
-		<ff:form action="accountSummary" method="get" >
+		<br>
+		
+		<ff:form action="viewMiniStatement" method="get" >
 			<table align="center" width="60%" border="1" cellspacing="3" cellpadding="3">
 				<tr>
 					<td>Currency</td><td>Account Type</td><td>Total Available Balance</td>
@@ -30,21 +32,12 @@
 					</tr>	
 				</c:forEach>
 			</table>
-		<h1>Accounts Summary</h1><br>
-			<table align="center" width="80%" border="1" cellspacing="3" cellpadding="3">
-				<tr>
-					<td>Total Deposit</td><td>Total Liability</td><td>Total Asset</td><td>Status as of</td>
-				</tr>
-				<tr><td>${totalDeposit}</td><td>${totalLiability}</td><td>${totalAsset}</td><td>${statusOf}</td></tr>
-				
-			</table>
 			
-		<ul id="menu">
-			<li><a href="viewMiniStatement">View Mini Statement</a></li>
-		</ul>
+	</ff:form>
 		
-		
-		</ff:form>
+			<div class="metalinks">
+			<a href="#"><img src="${pageContext.request.contextPath}/images/pdf.jpg" alt="" width="30" height="30" /></a>
+			</div>
 		<br>
 		<br>
 		<br>

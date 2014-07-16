@@ -26,128 +26,142 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.customer.service.BankCustomerService;
+import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
-
 
 @Controller
 @Scope("request")
 public class BankCustomerController {
-	
+
 	@Autowired
 	@Qualifier("BankCustomerServiceImpl")
 	private BankCustomerService bankCustomerService;
-	
+
+	@Autowired
+	@Qualifier("CustomerAccountServiceImpl")
+	private CustomerAccountService customerAccountService;
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
-	
-	
-	@RequestMapping(value="customerRegistration",method=RequestMethod.GET) 
+
+	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
 	public String showCustomerRegistrationPage(Model model) {
-		CustomerForm customerForm=new CustomerForm();
-		
-		model.addAttribute("customerForm",customerForm);
-		 UUID idOne = UUID.randomUUID();
-		 System.out.println("Random Id: " +idOne);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+		CustomerForm customerForm = new CustomerForm();
+
+		model.addAttribute("customerForm", customerForm);
+		UUID idOne = UUID.randomUUID();
+		System.out.println("Random Id: " + idOne);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
-	
-	
-	@RequestMapping(value="/customerRegistration",method=RequestMethod.POST) 
-	public String showCustomerRegistrationSubmit(@ModelAttribute(value="customerForm") CustomerForm customerForm) {
+
+	@RequestMapping(value = "/customerRegistration", method = RequestMethod.POST)
+	public String showCustomerRegistrationSubmit(
+			@ModelAttribute(value = "customerForm") CustomerForm customerForm) {
 		bankCustomerService.addCustomer(customerForm);
-		//here we are making this call asynchronous so we are creating  
-		EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerForm.getEmail(), "Hello Dear! Ahahahah", "Regarding Registration");
+		// here we are making this call asynchronous so we are creating
+		EmailSenderThread emailSenderThread = new EmailSenderThread(
+				bankEmailService, customerForm.getEmail(),
+				"Hello Dear! Ahahahah", "Regarding Registration");
 		emailSenderThread.start();
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
-		
-	
-	@RequestMapping(value="showPayeeList",method=RequestMethod.GET) 
+
+	@RequestMapping(value = "showPayeeList", method = RequestMethod.GET)
 	public String showPayeeList(Model model) {
-		
+
 		String userId = "1";
-		List<PayeeDetailsForm> payeeList = bankCustomerService.showPayeeListByUserId(userId);
-		model.addAttribute("payeeDetailsList",payeeList);
+		List<PayeeDetailsForm> payeeList = bankCustomerService
+				.showPayeeListByUserId(userId);
+		model.addAttribute("payeeDetailsList", payeeList);
 		System.out.println(payeeList);
-		//return "customer/payeeList";
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
+		// return "customer/payeeList";
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	}
 
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
-	public String editRegistration(@RequestParam("userId") String userId,Model model) {
-		CustomerForm customerForm = bankCustomerService.findCustomerByUserId(userId);
+	public String editRegistration(@RequestParam("userId") String userId,
+			Model model) {
+		CustomerForm customerForm = bankCustomerService
+				.findCustomerByUserId(userId);
 		model.addAttribute("customerForm", customerForm);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
-	
-	
+
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.POST)
-	public String editRegistrationSubmit(@ModelAttribute("customerForm") CustomerForm customerForm) {
+	public String editRegistrationSubmit(
+			@ModelAttribute("customerForm") CustomerForm customerForm) {
 		System.out.println("Inside edit registration post");
 		bankCustomerService.updateCustomer(customerForm);
 		return "redirect:bank/customerInformation";
 	}
 
 	@RequestMapping(value = "/findPhotoById", method = RequestMethod.GET)
-	public void findPhotoById(@RequestParam("userId") String userId,HttpServletResponse response) throws IOException{
-	
+	public void findPhotoById(@RequestParam("userId") String userId,
+			HttpServletResponse response) throws IOException {
+
 		response.setContentType("image/jpg");
-		byte[] photo=bankCustomerService.findPhotoById(userId);
+		byte[] photo = bankCustomerService.findPhotoById(userId);
 		System.out.println("Inside find photo by id");
-		if(photo!=null){
+		if (photo != null) {
 			System.out.println("found photo");
-			ServletOutputStream outputStream=response.getOutputStream();
+			ServletOutputStream outputStream = response.getOutputStream();
 			outputStream.write(photo);
 			outputStream.flush();
 		}
 	}
-	
-	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
+
+	@RequestMapping(value = "customerInformation", method = RequestMethod.GET)
 	public String showCustomerInformation(Model model) {
-		List<CustomerForm> customerDetailList=bankCustomerService.getCustomerListForRowNumbers(0, 4);
-		model.addAttribute("customerList",customerDetailList);
-		model.addAttribute("current_page_number",0);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+		List<CustomerForm> customerDetailList = bankCustomerService
+				.getCustomerListForRowNumbers(0, 4);
+		model.addAttribute("customerList", customerDetailList);
+		model.addAttribute("current_page_number", 0);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_INFORMATION;
 	}
-	
-	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
-	public String deleteCustomerbyId(@RequestParam("userId") String UserId)
-	{
+
+	@RequestMapping(value = "deleteCustomer", method = RequestMethod.GET)
+	public String deleteCustomerbyId(@RequestParam("userId") String UserId) {
 		bankCustomerService.deleteCustomerById(UserId);
 		return "bank/customerInformation";
 	}
-	
-	@RequestMapping(value="loadNextPage",method=RequestMethod.GET) 
-	public String loadPaginatedCustomerList(@RequestParam("pageCount") int pageCount,
-											Model model)
-	{
-		List<CustomerForm> customerDetailList=bankCustomerService.getCustomerListForRowNumbers(pageCount*2, 2);
-		model.addAttribute("customerList",customerDetailList);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
+
+	@RequestMapping(value = "loadNextPage", method = RequestMethod.GET)
+	public String loadPaginatedCustomerList(
+			@RequestParam("pageCount") int pageCount, Model model) {
+		List<CustomerForm> customerDetailList = bankCustomerService
+				.getCustomerListForRowNumbers(pageCount * 2, 2);
+		model.addAttribute("customerList", customerDetailList);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_INFORMATION;
 	}
-	
-	
-/*	@RequestMapping(value="deleteCustomer",method=RequestMethod.GET) 
-	public String deleteCustomerbyId(@RequestParam("userId") String UserId)
-	{
-		bankCustomerService.deleteCustomerById(UserId);
-		return "bank/customerInformation";
+
+	/*
+	 * @RequestMapping(value="deleteCustomer",method=RequestMethod.GET) public
+	 * String deleteCustomerbyId(@RequestParam("userId") String UserId) {
+	 * bankCustomerService.deleteCustomerById(UserId); return
+	 * "bank/customerInformation"; }
+	 */
+
+	@RequestMapping(value = "searchCustomerInformation", method = RequestMethod.GET)
+	public String searchCustomerbyAttributeAndValue(
+			@RequestParam("searchAttr") String attribute,
+			@RequestParam("searchValue") String value, Model model) {
+
+		List<CustomerForm> customerDetailList = bankCustomerService
+				.findCustomersByAttributeAndValue(attribute, value);
+		model.addAttribute("customerList", customerDetailList);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_INFORMATION;
 	}
-*/		
-	
-	@RequestMapping(value="searchCustomerInformation",method=RequestMethod.GET) 
-	public String searchCustomerbyAttributeAndValue(@RequestParam("searchAttr")  String attribute,
-			                                        @RequestParam("searchValue") String value,    
-			                                        Model model){
-		
-		List<CustomerForm> customerDetailList = bankCustomerService.findCustomersByAttributeAndValue(attribute, value);
-		model.addAttribute("customerList",customerDetailList);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
-	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		// to actually be able to convert Multipart instance to byte[]
@@ -156,9 +170,71 @@ public class BankCustomerController {
 				new ByteArrayMultipartFileEditor());
 		// now Spring knows how to handle multipart object and convert them
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //Create a new CustomDateEditor
+		// Create a new CustomDateEditor
 		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-        //Register it as custom editor for the Date type
+		// Register it as custom editor for the Date type
 		binder.registerCustomEditor(Date.class, editor);
+	}
+
+	@RequestMapping(value = "accountSummary", method = RequestMethod.GET)
+	public String showAccountByUserId(Model model) {
+		String userId = "aaa111";
+		List<CustomerAccountForm> customerAccountForms = customerAccountService
+				.findCustomerAccountByUserId(userId);
+		model.addAttribute("customerAccountForms", customerAccountForms);
+
+		double totalDeposit = 0;
+		double totalLiability = 0;
+		Date latestModifyDate = new Date(1900, 1, 1);
+
+		for (int i = 0; i < customerAccountForms.size(); i++) {
+			double amt = customerAccountForms.get(i).getAvailBalance();
+			if (amt > 0)
+				totalDeposit += amt;
+			else
+				totalLiability += amt;
+
+			if (customerAccountForms.get(i).getDom().after(latestModifyDate))
+				latestModifyDate = customerAccountForms.get(i).getDom();
+		}
+
+		model.addAttribute("totalDeposit", totalDeposit);
+		model.addAttribute("totalLiability", totalLiability);
+		model.addAttribute("totalAsset", totalDeposit + totalLiability);
+		model.addAttribute("statusOf", latestModifyDate);
+
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
+	}
+
+	@RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
+	public String viewMiniStatement(Model model) {
+
+		String userId = "aaa111";
+		List<CustomerAccountForm> customerAccountForms = customerAccountService
+				.findCustomerAccountByUserId(userId);
+		model.addAttribute("customerAccountForms", customerAccountForms);
+
+		double totalDeposit = 0;
+		double totalLiability = 0;
+		Date latestModifyDate = new Date(1900, 1, 1);
+
+		for (int i = 0; i < customerAccountForms.size(); i++) {
+			double amt = customerAccountForms.get(i).getAvailBalance();
+			if (amt > 0)
+				totalDeposit += amt;
+			else
+				totalLiability += amt;
+
+			if (customerAccountForms.get(i).getDom().after(latestModifyDate))
+				latestModifyDate = customerAccountForms.get(i).getDom();
+		}
+
+		model.addAttribute("totalDeposit", totalDeposit);
+		model.addAttribute("totalLiability", totalLiability);
+		model.addAttribute("totalAsset", totalDeposit + totalLiability);
+		model.addAttribute("statusOf", latestModifyDate);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.VIEW_MINI_STATEMENT;
 	}
 }

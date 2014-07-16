@@ -22,4 +22,5 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_INFORMATION = "customerDetailsTableView";
 	final public static String USER_SESSION_DATA = "userSessionData";
 	final public static String CUSTOMER_ACCOUNT_SUMMARY = "accountSummary";
+	final public static String VIEW_MINI_STATEMENT = "viewMiniStatement";
 }
