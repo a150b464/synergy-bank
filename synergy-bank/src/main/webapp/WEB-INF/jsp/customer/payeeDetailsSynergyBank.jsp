@@ -17,7 +17,7 @@
 	
 	<div id="content">
 			<h1>Payee Details</h1> 
-			<br/>
+			<br/> <p style="color:red;">${message}</p>
 			<ff:form action="addpayee.do" method="post" commandName="addPayeeCommand">
 				<table align="center" width="80%" border="0" cellspacing="3" cellpadding="3">
 					<tr>
