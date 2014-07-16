@@ -27,13 +27,13 @@
 		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
 		<ul id="menu">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Employer</a></li>
-			<li><a href="#">Personal Bank</a></li>
-			<li><a href="#">Loan</a></li>
-			<li><a href="#">Credit Card</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Help</a></li>
+			<li><a href="#">Home			</a></li>
+			<li><a href="#">Employer		</a></li>
+			<li><a href="#">Personal Bank	</a></li>
+			<li><a href="#">Loan			</a></li>
+			<li><a href="#">Credit Card		</a></li>
+			<li><a href="#">About Us		</a></li>
+			<li><a href="#">Help			</a></li>
 			<li class="last"><a href="#">Register</a></li>
 		</ul>
 		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
@@ -79,10 +79,13 @@
 <input type="text" name="searchValue" align="middle"/>	
 		<input type="submit" value="Search"/>
 </form>
+
 <form action="customerInformation" method="get">						    
 	<input type="submit" value="Clear Search"/>
 </form> 
-
+<%
+	int current_page_numer=0;
+%>
 	<table align="left">
 	<thead>
 		<tr>
@@ -109,8 +112,8 @@
  --><!-- 			<td><b>role</b></td>
 			<td><b>doe</b></td>
 			<td><b>dom</b></td>
- -->			<td><b>Photo</b></td>
-			<td><b>Edit and Delete</b></td>
+ -->	<!-- 		<td><b>Photo</b></td>
+ -->			<td><b>Edit and Delete</b></td>
 		</tr>		
 	</thead>
 	<tbody>		
@@ -139,8 +142,8 @@
 <%-- 			<td>${item.role}</td>
 			<td>${item.doe}</td>
 			<td>${item.dom}</td>
- --%>			<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
-<%-- 			<td>${item.description}</td>
+ --%>		<%-- 	<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
+ --%><%-- 			<td>${item.description}</td>
  --%>   			<td>
 			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
@@ -149,6 +152,8 @@
 	</c:forEach>
 	</tbody>		
 </table>
+		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png"/></a>
+		<a href="${pageContext.request.contextPath}/bank/loadNextPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png"/></a>
 		<div id="blocks">																																																																																																																													
 			
 		</div>

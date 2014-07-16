@@ -11,6 +11,9 @@ import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 
+import org.hibernate.Criteria;
+
+
 @Repository("BankCustomerHibernateDaoImpl")
 @Transactional(propagation=Propagation.REQUIRED)
 public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity,String> implements BankCustomerDao {
@@ -67,6 +70,17 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	@Override
 	public byte[] findPhotoById(String userId) {
 		return super.findById(userId).getPhoto();
+	}
+	
+	@Override
+	public List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,int maximumRowNumbers)
+	{
+		Criteria criteria = super.getCurrentSession().createCriteria(CustomerEntity.class);
+		criteria.setFirstResult(initialRowNumber * maximumRowNumbers);
+		criteria.setMaxResults(maximumRowNumbers);
+		@SuppressWarnings("unchecked")
+		List<CustomerEntity> list = (List<CustomerEntity>)criteria.list();
+		return list;
 	}
 	
 	/*@Override

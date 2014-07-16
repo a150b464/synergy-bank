@@ -21,5 +21,7 @@ public interface BankCustomerService {
 	public byte[] findPhotoById(String userId);
 	public List<PayeeDetailsForm> showPayeeListByUserId(String userId);
 	//public String addCustomerDetails(CustomerForm customerForm);
+	List<CustomerForm> getCustomerListForRowNumbers(int initialRowNumber,
+			int maximumRowNumbers);
 
 }
