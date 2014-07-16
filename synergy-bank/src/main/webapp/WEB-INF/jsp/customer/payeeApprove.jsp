@@ -57,7 +57,8 @@
 			
 		
 		</tbody>
-		</table>	
+		</table>
+		<br>	
 				<h3 style="font-family: Palatino Linotype; font-size: 13px; color: grey">
 					Notes: <br>
 					1. As per Synergy Bank circular dated June 2014, transfer of funds through electronic mode will take 1 business days.<br>
@@ -69,9 +70,12 @@
 					
 					<table>
 					<tr>
-						<td><input type="submit" value="Approve" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
+						<td style="font-family: Palatino Linotype; font-size: 15px; color: red">Enter The Verification Code</td>
+						<td>&nbsp;</td>
+						<td><input type="text" name="verificationCode" size="16" style="background:#D0F5A9;font-family: Palatino Linotype"/></td>
+						<td>&nbsp;</td><td>&nbsp;</td>
+						<td colspan="3" align="right"><input type="submit" value="Approve" style="background: orange; font-family: Palatino Linotype; font-size: 17px;"/></td>
 						<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-						<td><input type="submit" value="Back" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
 					</tr>
 					</table>
 	
