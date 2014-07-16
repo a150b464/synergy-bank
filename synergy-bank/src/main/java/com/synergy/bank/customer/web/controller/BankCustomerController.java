@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,6 +32,7 @@ import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 
 @Controller
+@Scope("request")
 public class BankCustomerController {
 	
 	@Autowired
@@ -105,9 +107,9 @@ public class BankCustomerController {
 	
 	@RequestMapping(value="customerInformation",method=RequestMethod.GET) 
 	public String showCustomerInformation(Model model) {
-		
 		List<CustomerForm> customerDetailList=bankCustomerService.getCustomerListForRowNumbers(0, 4);
 		model.addAttribute("customerList",customerDetailList);
+		model.addAttribute("current_page_number",0);
 		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_INFORMATION;
 	}
 	
