@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.customer.dao.CustomerAccountDao;
 import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
@@ -17,6 +18,7 @@ import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("CustomerAccountDaoImpl")
 @Scope("singleton")
+@Transactional(value="jdbctransactionManager")
 public class CustomerAccountDaoImpl extends JdbcDaoSupport implements
 		CustomerAccountDao {
 

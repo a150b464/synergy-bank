@@ -11,7 +11,7 @@ import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
 
 @Repository("BankCustomerLoginHibernateDaoImpl")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRED,value="transactionManager")
 public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerLoginDetailEntity,String> {
 	
 	protected BankCustomerLoginHibernateDaoImpl() {

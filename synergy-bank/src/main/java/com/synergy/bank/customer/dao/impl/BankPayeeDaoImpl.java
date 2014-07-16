@@ -7,24 +7,28 @@ package com.synergy.bank.customer.dao.impl;
  */
 
 
-import java.util.Date;
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.synergy.bank.customer.dao.BankPayeeDao;
-import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("BankPayeeDaoImpl")
 @Scope("singleton")
-public class BankPayeeDaoImpl extends JdbcDaoSupport 
-implements BankPayeeDao{
+//giving name of transaction manager since we have more than once  
+//transaction managers
+@Transactional(value="jdbctransactionManager")
+public class BankPayeeDaoImpl extends JdbcDaoSupport implements BankPayeeDao{
 
 	
 	@Autowired
