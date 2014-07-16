@@ -37,35 +37,36 @@
 	<div id="content">
 			<h1>Approve Payee</h1> 
 			<br/>
-			<ff:form action="confirmpayee.do" method="post" commandName="addPayeeCommand">
+			<ff:form action="${pageContext.request.contextPath}/bank/confirmpayee.do" method="post" commandName="confirmPayeeCommand">
 				<table align="center" border="2" cellspacing="10" cellpadding="10" width="90%" style="color: green">
 		<thead>
 			<tr>
-				<td><b>User ID</b></td>	 <td><b>Payee Account No.</b></td>	<td><b>Payee Name</b></td>
+				<td>
+				<input type="hidden" name="payeeAccountNo" value="${payeeDetailsForm.payeeAccountNo}"/>
+				<b>User ID</b></td>	 <td><b>Payee Account No.</b></td>	<td><b>Payee Name</b></td>
 				<td><b>Status</b></td>
 			</tr>
 		</thead>
 		<tbody>
-			
-			<c:forEach items="${payeeDetailsFormList}" var="item" varStatus="myIndex">		
 				<tr>
-	    			<td>${item.userid}</td>
-	    			<td>${item.payeeAccountNo}</td>
-	    			<td>${item.payeeName}</td>
-	    			<td>${item.status}</td>
+	    			<td>${payeeDetailsForm.userid}</td>
+	    			<td>${payeeDetailsForm.payeeAccountNo}</td>
+	    			<td>${payeeDetailsForm.payeeName}</td>
+	    			<td>${payeeDetailsForm.status}</td>
 	    		</tr>
-			</c:forEach>
+			
 		
 		</tbody>
 		</table>	
 				<h3 style="font-family: Palatino Linotype; font-size: 13px; color: grey">
 					Notes: <br>
-					1. As per Synergy Bank circular dated June 2014, transfer of funds through electronic mode will take 1 bussiness days.<br>
+					1. As per Synergy Bank circular dated June 2014, transfer of funds through electronic mode will take 1 business days.<br>
 					2. Please make sure the account number is correct.<br>
 					3. Synergy Bank is not responsible for funds transferred to unintended recipient.<br>
 					4. Before you proceed make sure you have entered all the details correctly.<br>					
 					</h3>
 					<br>
+					
 					<table>
 					<tr>
 						<td><input type="submit" value="Approve" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
@@ -73,6 +74,7 @@
 						<td><input type="submit" value="Back" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;"/></td>
 					</tr>
 					</table>
+	
 			</ff:form>			
 		<br/>
 		<br/>
