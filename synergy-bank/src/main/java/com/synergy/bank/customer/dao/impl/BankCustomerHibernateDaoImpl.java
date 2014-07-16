@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.synergy.bank.base.dao.AbstractDaoImpl;
 import com.synergy.bank.customer.dao.BankCustomerDao;
@@ -15,7 +16,7 @@ import org.hibernate.Criteria;
 
 
 @Repository("BankCustomerHibernateDaoImpl")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRED,value="transactionManager")
 public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity,String> implements BankCustomerDao {
 	
 	protected BankCustomerHibernateDaoImpl() {
@@ -24,6 +25,12 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 
 	@Override
 	public String addCustomer(CustomerEntity entity) {
+		 boolean yes=TransactionSynchronizationManager.isActualTransactionActive();
+		 if(yes){
+			 System.out.println("woowowow spring transaction is working ...");
+		 }else{
+			 System.out.println("not woowowow since spring transaction is not working ...");
+		 }
 		 super.saveOrUpdate(entity);
 		 return "success";
 	}
