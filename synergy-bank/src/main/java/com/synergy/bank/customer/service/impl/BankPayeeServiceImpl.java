@@ -56,5 +56,11 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 		return bankPayeeDao.isPayeeExists(userId, payeeAccountNo); 
 		
 	}
+
+	@Override
+	public List<PayeeDetailsForm> getPayeeListForUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

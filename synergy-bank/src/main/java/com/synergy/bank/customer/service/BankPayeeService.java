@@ -15,7 +15,7 @@ import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 public interface BankPayeeService {
 	
 	public String addPayee(PayeeDetailsForm payeeDetailsForm);
-	public String confirmPayee(PayeeDetailsForm payeeDetailsForm);
+	public String confirmPayee(String payeeAccountNo, String userId);
 	public List<PayeeDetailsForm> getPayeeListForUserId(String userId);
 	public List<PayeeDetailsForm> findPayeeByUserId(String userid);
 	public boolean isPayeeExists(String userId, String payeeAccountNo);
