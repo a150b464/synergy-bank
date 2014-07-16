@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankPayeeServiceImpl")
@@ -24,38 +25,36 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 	@Override
 	public String addPayee(PayeeDetailsForm payeeDetailsForm) {
-		
+		System.out.println(payeeDetailsForm);
+		System.out.println("In service Layer");
 		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
 		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
 		return bankPayeeDao.addPayee(payeeDetailsEntity);
 	}
 
 	@Override
-	public String confirmPayee(PayeeDetailsForm payeeDetailsForm) {
-		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
-		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
-		return bankPayeeDao.confirmPayee(payeeDetailsEntity);
+	public String confirmPayee(String payeeAccountNo, String userId) {
+		
+		return bankPayeeDao.confirmPayee(payeeAccountNo,userId);
 	}
 
 	@Override
-	public List<PayeeDetailsForm> getPayeeListForUserId(String userId) {
-		List<PayeeDetailsEntity> payeeDetailsEntityList = bankPayeeDao.getPayeeListForUserId(userId);
-		List<PayeeDetailsForm>   payeeDetailsFormList   = new ArrayList<PayeeDetailsForm>(payeeDetailsEntityList.size());
-
-		for(int i=0;i<payeeDetailsEntityList.size();i++)
-		{
-			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();	
-			BeanUtils.copyProperties(payeeDetailsEntityList.get(i),payeeDetailsForm);
-			payeeDetailsFormList.add(payeeDetailsForm);
+	public List<PayeeDetailsForm> findPayeeByUserId(String userid) {
+		List<PayeeDetailsForm> payeeDetailsForms = new ArrayList<PayeeDetailsForm>();
+		List<PayeeDetailsEntity> payeeDetailsEntities = bankPayeeDao.findPayeeByUserId(userid); 
+		for (PayeeDetailsEntity payeeDetailsEntity : payeeDetailsEntities) {
+			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
+			payeeDetailsForms.add(payeeDetailsForm);
 		}
-		return payeeDetailsFormList;		
+		
+		return payeeDetailsForms;
 	}
 	
 	@Override
-	public PayeeDetailsForm findPayeeByUserId(String userid) {
-		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
-		BeanUtils.copyProperties(bankPayeeDao.findPayeeByUserId(userid), payeeDetailsForm);
-		return payeeDetailsForm;
+	public boolean isPayeeExists(String userId, String payeeAccountNo){
+		return bankPayeeDao.isPayeeExists(userId, payeeAccountNo); 
+		
 	}
-
+	
 }
