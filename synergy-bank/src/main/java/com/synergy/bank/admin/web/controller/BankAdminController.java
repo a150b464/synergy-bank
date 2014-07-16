@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.synergy.bank.admin.service.BankAdminService;
 import com.synergy.bank.admin.web.constant.NavigationConstantAdmin;
+import com.synergy.bank.admin.web.controller.form.ApprovedCustomerForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
@@ -52,8 +53,8 @@ public class BankAdminController {
 	@RequestMapping(value="approvePendingCustomers", method=RequestMethod.POST)
 	public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds, 
 			final RedirectAttributes redirectAttributes){
-		
-		String msg="";
+		//public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds){
+		String msg="Naim";
 		if(approvedIds.length>0){
 			List<CustomerAccountForm> customerAccountForms =  bankAdminService.approvePendingCustomers(approvedIds);
 			if(customerAccountForms==null){
@@ -72,12 +73,38 @@ public class BankAdminController {
 		else{
 			msg = "No customer was selected for approval.";
 		}
-		System.out.println(msg);
+		//System.out.println(msg);
 		redirectAttributes.addFlashAttribute("msg", msg);
 		return "redirect:showPendingApprovalCustomerList";
 	}
 	
+	@RequestMapping(value="blockCustomers", method=RequestMethod.GET)
+	public String showApprovedCustomerList(Model model){
+		
+		List<ApprovedCustomerForm> approvedCustomerList = bankAdminService.findApprovedCustomerList();
+		model.addAttribute("approvedCustomerList", approvedCustomerList);
+		
+		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.APPROVED_CUSTOMER_LIST_PAGE;
+	}
 	
+	@RequestMapping(value="blockCustomers", method=RequestMethod.POST)
+	public String blockCustomer(@RequestParam("blockCheckbox") String[] blockedIds){
+		String msg="";
+		if(blockedIds.length>0){
+			
+			if(!bankAdminService.blockCustomer(blockedIds)){
+				msg = "Failed to block customer.";
+			}
+			else{
+				msg = blockedIds.length+" customer(s) are blocked successfully.";
+			}
+		}
+		else{
+			msg = "No customer was selected to block.";
+		}
+		
+		return "redirect:blockCustomers";
+	}
 	
 	
 	@InitBinder

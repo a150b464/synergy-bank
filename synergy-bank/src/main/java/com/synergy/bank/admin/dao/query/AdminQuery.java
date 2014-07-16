@@ -16,4 +16,8 @@ public interface AdminQuery {
 	public static final String FIND_MOST_RECENT_ACC_NO="select accountNumber from customer_account_numbers_tbl  where id=  (select  MAX(id) from customer_account_numbers_tbl)";
 	public static final String UPDATE_CUSTOMER_DETAILS_APPROVE="update customer_details_tbl set approve='yes' where userId=?";
 	public static final String UPDATE_CUSTOMER_LOGIN_APPROVE="update customer_login_tbl set approve='yes' where loginId=?";
+	public static final String FIND_APPROVED_CUSTOMERLIST = "select cd.userId, cd.firstName,cd.middleName,cd.lastName,cd.email, ca.customerAccountNo,ca.accountType, " +
+								"ca.totalAvailBalance,ca.currency from customer_details_tbl cd join customer_account_info_tbl ca join customer_login_tbl cl " +
+								"where cd.userId=ca.userid and cd.userId = cl.userId and cd.approve = 'yes' and cl.active='yes' and cl.approve='yes'";
+	public static final String BLOCK_CUSTOMER_QUERY = "update customer_login_tbl set active='no' where userId=";
 }

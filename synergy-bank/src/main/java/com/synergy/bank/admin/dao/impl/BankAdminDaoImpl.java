@@ -16,9 +16,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.admin.dao.BankAdminDao;
+import com.synergy.bank.admin.dao.entity.ApprovedCustomerEntity;
 import com.synergy.bank.admin.dao.query.AdminQuery;
 import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.util.BankDaoUtil;
 
 /**
@@ -97,8 +99,8 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 				
 				Object[] data = new Object[] {
 						customerEntity.getUserId(), newAccNo.toString(),
-						"AccType", 1000D,
-						1000D, "Currency", 
+						"Savings", 1000D,
+						1000D, "USD", 
 						customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName(),
 						new Date(), new Date(),customerEntity.getEmail()
 					};																	
@@ -121,6 +123,33 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 		}  // End of if statement
 		else return null;
 	}
-	
 
+
+	@Override
+	public List<ApprovedCustomerEntity> findApprovedCustomerList() {
+		
+		List<ApprovedCustomerEntity> approvedCustomerEntities = super.getJdbcTemplate().query(AdminQuery.FIND_APPROVED_CUSTOMERLIST,
+				new BeanPropertyRowMapper<ApprovedCustomerEntity>(ApprovedCustomerEntity.class));
+		
+		return approvedCustomerEntities;
+	}
+	
+	@Override
+	public boolean blockCustomer(String[] cusomerUserNames) {
+	
+		try{
+			for (String cusomerUserName : cusomerUserNames) {
+				super.getJdbcTemplate().update(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+cusomerUserName+"'");
+				System.out.println(cusomerUserName);
+				System.out.println(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+cusomerUserName+"'");
+			}			
+		}
+		catch(Exception e){
+			
+			e.printStackTrace();
+			return false;
+		}
+		System.out.println("D Impl"+cusomerUserNames);
+		return true;
+	}
 }
