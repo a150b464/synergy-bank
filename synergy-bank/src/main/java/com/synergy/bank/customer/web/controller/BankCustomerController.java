@@ -43,6 +43,7 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("CustomerAccountServiceImpl")
 	private CustomerAccountService customerAccountService;
+	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
@@ -64,8 +65,10 @@ public class BankCustomerController {
 		bankCustomerService.addCustomer(customerForm);
 		// here we are making this call asynchronous so we are creating
 		EmailSenderThread emailSenderThread = new EmailSenderThread(
-				bankEmailService, customerForm.getEmail(),
-				"Hello Dear! Ahahahah", "Regarding Registration");
+											  bankEmailService,
+											  customerForm.getEmail(),
+											  "Hello Dear! Ahahahah", 
+											  "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;

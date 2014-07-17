@@ -24,5 +24,6 @@ public interface BankCustomerDao {
 	List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,
 			int maximumRowNumbers);
 	public abstract String updateCustomersnewLoginIdAndPassword(String userId, String password);
+	int getCount();
 	
 }
