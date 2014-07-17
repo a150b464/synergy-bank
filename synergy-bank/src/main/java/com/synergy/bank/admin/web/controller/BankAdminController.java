@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,6 +33,7 @@ import com.synergy.bank.customer.web.controller.form.CustomerForm;
  */
 
 @Controller
+@Scope("request")
 public class BankAdminController {
 	
 	@Autowired
@@ -54,7 +56,7 @@ public class BankAdminController {
 	public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds, 
 			final RedirectAttributes redirectAttributes){
 		//public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds){
-		String msg="Naim";
+		String msg="Message";
 		if(approvedIds.length>0){
 			List<CustomerAccountForm> customerAccountForms =  bankAdminService.approvePendingCustomers(approvedIds);
 			if(customerAccountForms==null){
@@ -73,7 +75,7 @@ public class BankAdminController {
 		else{
 			msg = "No customer was selected for approval.";
 		}
-		//System.out.println(msg);
+	
 		redirectAttributes.addFlashAttribute("msg", msg);
 		return "redirect:showPendingApprovalCustomerList";
 	}
@@ -84,12 +86,12 @@ public class BankAdminController {
 		List<ApprovedCustomerForm> approvedCustomerList = bankAdminService.findApprovedCustomerList();
 		model.addAttribute("approvedCustomerList", approvedCustomerList);
 		
-		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.APPROVED_CUSTOMER_LIST_PAGE;
+		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.BLOCK_CUSTOMER_LIST_PAGE;
 	}
 	
 	@RequestMapping(value="blockCustomers", method=RequestMethod.POST)
-	public String blockCustomer(@RequestParam("blockCheckbox") String[] blockedIds){
-		String msg="";
+	public String blockCustomer(@RequestParam("blockCheckbox") String[] blockedIds,final RedirectAttributes redirectAttributes){
+		String msg="Message";
 		if(blockedIds.length>0){
 			
 			if(!bankAdminService.blockCustomer(blockedIds)){
@@ -102,7 +104,7 @@ public class BankAdminController {
 		else{
 			msg = "No customer was selected to block.";
 		}
-		
+		redirectAttributes.addFlashAttribute("msg", msg);
 		return "redirect:blockCustomers";
 	}
 	

@@ -55,6 +55,17 @@ public class LoginController {
 		LoginForm loginForm=bankAuthService.authUser(login, password);
 		loginForm.setPassword(null);
 		if(loginForm.getUserId()!=null){
+			
+			if("no".equals(loginForm.getActive())){
+				model.addAttribute("applicationMessage", "Your are blocked, please contact bank authority.");
+				return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+			}
+			
+			if("no".equals(loginForm.getApprove())){
+				model.addAttribute("applicationMessage", "Your account is not approved yet, please contact bank authority.");
+				return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+			}
+			
 			session.setAttribute(NavigationConstant.USER_SESSION_DATA, loginForm);
 			if("customer".equals(loginForm.getRole())){
 				return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_HOME_PAGE;

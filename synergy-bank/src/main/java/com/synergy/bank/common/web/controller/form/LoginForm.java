@@ -11,8 +11,24 @@ public class LoginForm {
 	private String password;
 	private String role;
 	private String description;
+	private String active;
+	private String approve;
 
-	
+	public String getApprove() {
+		return approve;
+	}
+
+	public void setApprove(String approve) {
+		this.approve = approve;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -48,8 +64,9 @@ public class LoginForm {
 
 	@Override
 	public String toString() {
-		return "LoginForm [userid=" + userId + ", password=" + password
-				+ ", role=" + role + ", description=" + description + "]";
+		return "LoginForm [userId=" + userId + ", password=" + password
+				+ ", role=" + role + ", description=" + description
+				+ ", active=" + active + ", approve=" + approve + "]";
 	}
 
 }
