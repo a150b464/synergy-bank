@@ -1,0 +1,3 @@
+Hibernate and java.lang.NoSuchFieldError: TRACE
+http://coders-kitchen.com/2013/01/18/hibernate-and-java-lang-nosuchfielderror-trace/
+http://stackoverflow.com/questions/12032132/hibernate-libs-conflicts-with-jbossall-client-libs-in-the-logging-jar
