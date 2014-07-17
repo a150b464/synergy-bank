@@ -2,6 +2,8 @@ package com.synergy.bank.common.web.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,11 @@ import com.synergy.bank.customer.web.controller.form.CustomerForm;
 @Controller
 public class LoginController {
 	
+	/*
+    * Initiate Logger for this class
+    */
+   private static final Log logger = LogFactory.getLog(LoginController.class);
+	
 	@Autowired
 	@Qualifier("BankAuthServiceImpl")
 	private BankAuthService bankAuthService;
@@ -27,6 +34,9 @@ public class LoginController {
 	public String logout(HttpSession session,Model model) {
 		session.invalidate();
 		model.addAttribute("applicationMessage", "You have successfully logout from the application.");
+		if(logger.isDebugEnabled()){
+			logger.debug("You have successfully logout from the application.");
+		}
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
 	}
 
@@ -38,6 +48,10 @@ public class LoginController {
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public String auth(@RequestParam("login") String login,
 			@RequestParam("password") String password,HttpSession session,Model model) {
+	
+		 if(logger.isDebugEnabled()){
+			logger.debug("This is login form and userid entered is = "+login);
+		}
 		LoginForm loginForm=bankAuthService.authUser(login, password);
 		loginForm.setPassword(null);
 		if(loginForm.getUserId()!=null){
@@ -49,6 +63,11 @@ public class LoginController {
 			}
 			
 		}else{
+			
+			if(logger.isWarnEnabled()){
+				logger.warn("applicationMessage, User id and password are not valid.");
+			}
+			
 			model.addAttribute("applicationMessage", "User id and password are not valid.");
 			return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
 		}

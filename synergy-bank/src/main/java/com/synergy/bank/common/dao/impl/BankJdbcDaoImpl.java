@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.common.dao.BankJdbcDao;
 import com.synergy.bank.util.PasswordGenerator;
 
 @Repository("BankJdbcDaoImpl")
+@Transactional(value="jdbctransactionManager")
 public class BankJdbcDaoImpl extends JdbcDaoSupport implements BankJdbcDao{
 	 
 	 int passwordSize = 4;
