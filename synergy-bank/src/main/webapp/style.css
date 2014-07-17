@@ -86,10 +86,15 @@ text-decoration:none;
 }
 #menu a:visited{text-decoration:none}
 #menu a:hover{text-decoration:underline}
+
 #content{
-font-size:14px; 
-width:859px;
-margin:0 auto;
+font-size:12px;
+width:605px;
+height:938px;
+background-color:#d5e3e4;
+border:2px #000000 solid;
+margin:20px 0 0 35px;
+
 }
 .search{
 width:751px;
@@ -129,6 +134,26 @@ font-size:11px;
 color:#222222;
 text-decoration:none
 }
+
+/* #submitid{
+	
+	background-image:url(images/registerButton.jpg);
+	background-position:top left;
+	background-repeat:no-repeat;
+	line-height:20px;
+	padding:0 0 4px 0;
+	width:67px;
+	text-align:center;
+	display:block;
+	float:left;
+	margin:7px 0 0 8px;
+	font-size: 11px;
+	border: 0px ;
+	border-radius: 100px;
+	width: 100px;
+	height: 60px;
+} */
+
 .line{
 width:550px;
 float:left;
@@ -165,6 +190,14 @@ float:left;
 padding:23px 0 0 0;
 border-top:1px solid #fff;
 border-bottom:5px solid #fff
+}
+
+.title{
+font-size:16px;
+font-weight:bold;
+padding-left:5px;
+padding:25px 0 0 45px;
+color:#265171;
 }
 .block{
 width:215px;

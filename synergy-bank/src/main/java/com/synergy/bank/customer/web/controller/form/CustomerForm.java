@@ -11,6 +11,8 @@ public class CustomerForm {
 
 	private String userId;
 	private String password;
+	private String newUserId;
+	private String newPassword;
 	private String salutation;
 	private String gender;
 	private String firstName;
@@ -36,6 +38,22 @@ public class CustomerForm {
 	private String description;
 
 	
+
+	public String getNewUserId() {
+		return newUserId;
+	}
+
+	public void setNewUserId(String newUserId) {
+		this.newUserId = newUserId;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 
 	public byte[] getPhoto() {
 		return photo;
@@ -240,7 +258,7 @@ public class CustomerForm {
 	
 	@Override
 	public String toString() {
-		return "CustomerForm [salutation=" + salutation + ", gender="
+		return "CustomerForm [New UserId=" + newUserId + ",New Password=" + newPassword + ",salutation=" + salutation + ", gender="
 				+ gender + ", firstName=" + firstName + ", middleName="
 				+ middleName + ", lastName=" + lastName + ", maritalStatus="
 				+ maritalStatus + ", dob=" + dob + ", category=" + category
