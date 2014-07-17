@@ -11,6 +11,7 @@ import java.util.Date;
 public class CustomerTransactionForm {
 	
 	private int transactionId;
+	private int transactionPwd;
 	private String customerAccountNumber;
 	private String payeeAccountNumber;
 	private String customerAccountType;
@@ -24,6 +25,14 @@ public class CustomerTransactionForm {
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
+	
+	public int getTransactionPwd() {
+		return transactionPwd;
+	}
+	public void setTransactionPwd(int transactionPwd) {
+		this.transactionPwd = transactionPwd;
+	}
+	
 	public String getCustomerAccountNumber() {
 		return customerAccountNumber;
 	}
