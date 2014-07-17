@@ -7,8 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
+ -->    
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
@@ -76,75 +76,39 @@
 	<option value="photo">photo</option>
 	<option value="description">description</option>
 </select>					
-<input type="text" name="searchValue" align="middle"/>	
-		<input type="submit" value="Search"/>
-</form>
+	<input type="text" name="searchValue" align="middle"/>	
+			<input type="submit" value="Search"/>
+	</form>
+	<form action="customerInformation" method="get">						    
+		<input type="submit" value="Clear Search"/>
+	</form> 
 
-<form action="customerInformation" method="get">						    
-	<input type="submit" value="Clear Search"/>
-</form> 
-<%
-	int current_page_numer=0;
-%>
 	<table align="left">
 	<thead>
 		<tr>
 			<td><b>USERID</b></td>
-	<!-- 		<td><b>password</b></td>
-			<td><b>salutation</b></td>
-	 --><!-- 		<td><b>GENDER</b></td>
-		 -->	<td><b>Name</b></td>
-	<!-- 		<td><b>Middle Name</b></td>
-	 -->
-	 	<!-- 		<td><b>maritalStatus</b></td>
-	 --><!-- 		<td><b>DOB</b></td>
-		 -->	<td><b>Category</b></td>
-		<!-- 	<td><b>motderMaidenName</b></td>
-			<td><b>fatderName</b></td>
-		 -->	<td><b>Email</b></td>
+		 	<td><b>Name</b></td>
+		 	<td><b>Category</b></td>
+		 	<td><b>Email</b></td>
 			<td><b>Mobile</b></td>
-<!-- 			<td><b>SSN</b></td>
- -->			<td><b>Occupation</b></td>
-		<!-- 	<td><b>occupationType</b></td>
-		 -->	<td><b>Education</b></td>
+ 			<td><b>Occupation</b></td>
+		 	<td><b>Education</b></td>
 			<td><b>Gross Income</b></td>
-<!-- 			<td><b>Source</b></td>
- --><!-- 			<td><b>role</b></td>
-			<td><b>doe</b></td>
-			<td><b>dom</b></td>
- -->	<!-- 		<td><b>Photo</b></td>
- -->			<td><b>Edit and Delete</b></td>
+ 			<td><b>Edit and Delete</b></td>
 		</tr>		
 	</thead>
 	<tbody>		
 	<c:forEach items="${customerList}" var="item">		
 		<tr>
 			<td>${item.userId}</td>
-	<%-- 		<td>${item.password}</td>
-			<td>${item.salutation}</td>
-	 --%><%-- 		<td>${item.gender}</td>
-		 --%>	<td>${item.firstName} ${item.lastName}</td>
-<%-- 			<td>${item.middleName}</td>
- --%>
-		<%-- 	<td>${item.maritalStatus}</td>
-		 --%><%-- 	<td>${item.dob}</td>
-		 --%>	<td>${item.category}</td>
-<%-- 			<td>${item.motherMaidenName}</td>
-			<td>${item.fatherName}</td>
- --%>			<td>${item.email}</td>
+		 	<td>${item.firstName} ${item.lastName}</td>
+		 	<td>${item.category}</td>
+ 			<td>${item.email}</td>
 			<td>${item.mobile}</td>
-<%-- 			<td>${item.ssn}</td>
- --%>			<td>${item.occupation}</td>
-<%-- 			<td>${item.occupationType}</td>
- --%>			<td>${item.education}</td>
+ 			<td>${item.occupation}</td>
+ 			<td>${item.education}</td>
 			<td>${item.grossAnualIncome}</td>
-		<%-- 	<td>${item.sourceOfFunds}</td> --%>
-<%-- 			<td>${item.role}</td>
-			<td>${item.doe}</td>
-			<td>${item.dom}</td>
- --%>		<%-- 	<td><img src="findPhotoById?userId=${item.userId}" width="50" height="50"/></td>
- --%><%-- 			<td>${item.description}</td>
- --%>   			<td>
+   			<td>
 			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
 			</td>	 	
@@ -152,7 +116,8 @@
 	</c:forEach>
 	</tbody>		
 </table>
-		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png"/></a>
+		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/prev.png"/></a>
+			<input type="text" name="pageInformation" value="${pageInformation}" align="middle"/>			
 		<a href="${pageContext.request.contextPath}/bank/loadNextPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png"/></a>
 		<div id="blocks">																																																																																																																													
 			

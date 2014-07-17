@@ -119,12 +119,15 @@ public class BankCustomerController {
 
 	@RequestMapping(value = "customerInformation", method = RequestMethod.GET)
 	public String showCustomerInformation(Model model) {
-		List<CustomerForm> customerDetailList = bankCustomerService
-				.getCustomerListForRowNumbers(0, 4);
-		model.addAttribute("customerList", customerDetailList);
+		List<CustomerForm> customerDetailList = bankCustomerService.getCustomerListForRowNumbers(0,2);
+		
+		model.addAttribute("pageInformation","0/"+bankCustomerService.getCustomerEntriesCount()/2);
 		model.addAttribute("current_page_number", 0);
-		return NavigationConstant.CUSTOMER_PAGE
+		model.addAttribute("customerList", customerDetailList);
+		return NavigationConstant.ADMIN_PAGE
 				+ NavigationConstant.CUSTOMER_INFORMATION;
+	
+	
 	}
 
 	@RequestMapping(value = "deleteCustomer", method = RequestMethod.GET)
@@ -134,22 +137,44 @@ public class BankCustomerController {
 	}
 
 	@RequestMapping(value = "loadNextPage", method = RequestMethod.GET)
-	public String loadPaginatedCustomerList(
-			@RequestParam("pageCount") int pageCount, Model model) {
+	public String loadNextCustomerList(
+			@RequestParam("current_page_number") int currentPageNumber, Model model) {
+		
+		if(currentPageNumber<bankCustomerService.getCustomerEntriesCount())	currentPageNumber++;
+		else currentPageNumber=bankCustomerService.getCustomerEntriesCount();
+
 		List<CustomerForm> customerDetailList = bankCustomerService
-				.getCustomerListForRowNumbers(pageCount * 2, 2);
+				.getCustomerListForRowNumbers(currentPageNumber*2, 2);
+	
+		model.addAttribute("pageInformation",currentPageNumber+"/"+bankCustomerService.getCustomerEntriesCount()/2);
+		model.addAttribute("current_page_number", currentPageNumber);
 		model.addAttribute("customerList", customerDetailList);
-		return NavigationConstant.CUSTOMER_PAGE
+	
+		return NavigationConstant.ADMIN_PAGE
 				+ NavigationConstant.CUSTOMER_INFORMATION;
+
+	}
+	
+	@RequestMapping(value = "loadPreviousPage", method = RequestMethod.GET)
+	public String loadPreviousCustomerList(
+			@RequestParam("current_page_number") int currentPageNumber, 
+			Model model){	
+				if(currentPageNumber>0)	
+					currentPageNumber--;
+				else 
+					currentPageNumber = 0;
+		
+			List<CustomerForm> customerDetailList = bankCustomerService.getCustomerListForRowNumbers(currentPageNumber*2, 2);
+		
+			model.addAttribute("pageInformation",currentPageNumber+"/"+bankCustomerService.getCustomerEntriesCount()/2);
+			model.addAttribute("current_page_number", currentPageNumber);
+			model.addAttribute("customerList", customerDetailList);
+		
+			return NavigationConstant.ADMIN_PAGE
+					+ NavigationConstant.CUSTOMER_INFORMATION;
 	}
 
-	/*
-	 * @RequestMapping(value="deleteCustomer",method=RequestMethod.GET) public
-	 * String deleteCustomerbyId(@RequestParam("userId") String UserId) {
-	 * bankCustomerService.deleteCustomerById(UserId); return
-	 * "bank/customerInformation"; }
-	 */
-
+	
 	@RequestMapping(value = "searchCustomerInformation", method = RequestMethod.GET)
 	public String searchCustomerbyAttributeAndValue(
 			@RequestParam("searchAttr") String attribute,
@@ -158,7 +183,7 @@ public class BankCustomerController {
 		List<CustomerForm> customerDetailList = bankCustomerService
 				.findCustomersByAttributeAndValue(attribute, value);
 		model.addAttribute("customerList", customerDetailList);
-		return NavigationConstant.CUSTOMER_PAGE
+		return NavigationConstant.ADMIN_PAGE
 				+ NavigationConstant.CUSTOMER_INFORMATION;
 	}
 
@@ -176,6 +201,7 @@ public class BankCustomerController {
 		binder.registerCustomEditor(Date.class, editor);
 	}
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "accountSummary", method = RequestMethod.GET)
 	public String showAccountByUserId(Model model) {
 		String userId = "aaa111";
@@ -217,12 +243,14 @@ public class BankCustomerController {
 
 		double totalDeposit = 0;
 		double totalLiability = 0;
+		@SuppressWarnings("deprecation")
 		Date latestModifyDate = new Date(1900, 1, 1);
 
 		for (int i = 0; i < customerAccountForms.size(); i++) {
 			double amt = customerAccountForms.get(i).getAvailBalance();
+			
 			if (amt > 0)
-				totalDeposit += amt;
+				totalDeposit   += amt;
 			else
 				totalLiability += amt;
 

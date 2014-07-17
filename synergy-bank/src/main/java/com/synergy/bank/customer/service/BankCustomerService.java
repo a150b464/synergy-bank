@@ -24,4 +24,5 @@ public interface BankCustomerService {
 	List<CustomerForm> getCustomerListForRowNumbers(int initialRowNumber,
 			int maximumRowNumbers);
 
+	public int getCustomerEntriesCount();
 }

@@ -83,12 +83,18 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	public List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,int maximumRowNumbers)
 	{
 		Criteria criteria = super.getCurrentSession().createCriteria(CustomerEntity.class);
-		criteria.setFirstResult(initialRowNumber * maximumRowNumbers);
+		criteria.setFirstResult(initialRowNumber );
 		criteria.setMaxResults(maximumRowNumbers);
 		@SuppressWarnings("unchecked")
 		List<CustomerEntity> list = (List<CustomerEntity>)criteria.list();
 		return list;
 	}
+	
+	@Override
+	public int getCount() {
+		return super.getCount();
+	}
+
 	
 	/*@Override
 	public String addCustomerDetails(CustomerEntity entity) {
