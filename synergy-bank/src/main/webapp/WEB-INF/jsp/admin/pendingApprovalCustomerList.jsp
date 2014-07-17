@@ -45,12 +45,12 @@
 </head>
 <body>
 		<%@include file="aheader.jsp"%>
-		<img src="${pageContext.request.contextPath}/images/bigpicture.jpg" alt="" width="892" height="303" />
+		<img src="${pageContext.request.contextPath}/images/bigpicture.jpg" alt="" width="892" height="280" />
 	</div>
 	<div id="content">
 			
-		<br/> <h2 align="center">PENDING APPROVAL CUSTOMER LIST:</h2>  <br/>
-		<p align="center"><h3>${msg}</h3></p>		
+		<br/> <h3 align="center">PENDING APPROVAL CUSTOMER LIST:</h3>  <br/>
+		<p align="center"><h5>${msg}</h5></p>		
 		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
 			<table align="center" id="tab1">
 				<thead>

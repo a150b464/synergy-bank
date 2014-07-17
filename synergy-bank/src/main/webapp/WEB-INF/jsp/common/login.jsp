@@ -81,7 +81,7 @@ var ccontextPath="${pageContext.request.contextPath}";
 					   <img 	src="${pageContext.request.contextPath}/images/icon.jpg" alt=""
 					border="0" />
       <h1>Login to Synergy Bank</h1><img alt="" src="${pageContext.request.contextPath}/images/sign1.jpg"  width="100" height="100"/>
-        <p align="center" style="color: black">${applicationMessage}</p>
+        <p align="center" style="color: red;">${applicationMessage}</p>
       <form method="post" action="${pageContext.request.contextPath}/bank/auth">
         <p><input type="text" name="login"  id="loginId" value="" placeholder="Bank userid"></p>
         <p><input type="password" id="password" name="password" value="" placeholder="Password"></p>

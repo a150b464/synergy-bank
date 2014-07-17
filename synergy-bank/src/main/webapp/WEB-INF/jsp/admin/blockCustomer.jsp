@@ -49,8 +49,8 @@
 	</div>
 	<div id="content">
 			
-		<br/> <h2 align="center">ACTIVE CUSTOMER LIST:</h2>  <br/>
-		<p align="center"><h3>${msg}</h3></p>		
+		<br/> <h3 align="center">ACTIVE CUSTOMER LIST:</h3>  <br/>
+		<p align="center" style="color:red;"><h5>${msg}</h5></p>		
 		<ff:form  name="blockedCustomerListForm" method="post" action="blockCustomers" commandName="blockCustomerCommand" >
 			<table align="center" id="tab1">
 				<thead>

@@ -11,6 +11,24 @@ public class LoginEntity {
 	private String password;
 	private String role;
 	private String description;
+	private String active;
+	private String approve;
+
+	public String getApprove() {
+		return approve;
+	}
+
+	public void setApprove(String approve) {
+		this.approve = approve;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -46,8 +64,11 @@ public class LoginEntity {
 
 	@Override
 	public String toString() {
-		return "LoginEntity [userid=" + userId + ", password=" + password
-				+ ", role=" + role + ", description=" + description + "]";
+		return "LoginEntity [userId=" + userId + ", password=" + password
+				+ ", role=" + role + ", description=" + description
+				+ ", active=" + active + ", approve=" + approve + "]";
 	}
+
+	
 
 }
