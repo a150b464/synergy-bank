@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="customer_transaction_tbl")
 public class CustomerTransactionEntity {
-	
+	private int transactionPwd;
 	private int transactionId;
 	private String customerAccountNumber;
 	private String payeeAccountNumber;
@@ -33,6 +33,13 @@ public class CustomerTransactionEntity {
 	}
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
+	}
+	
+	public int getTransactionPwd() {
+		return transactionPwd;
+	}
+	public void setTransactionPwd(int transactionPwd) {
+		this.transactionPwd = transactionPwd;
 	}
 	public String getCustomerAccountNumber() {
 		return customerAccountNumber;
@@ -73,6 +80,7 @@ public class CustomerTransactionEntity {
 	@Override
 	public String toString() {
 		return "CustomerTransactionEntity [transactionId=" + transactionId
+				+ ",Password=" + transactionPwd 
 				+ ", customerAccountNumber=" + customerAccountNumber
 				+ ", payeeAccountNumber=" + payeeAccountNumber
 				+ ", customerAccountType=" + customerAccountType
