@@ -1,82 +1,58 @@
-
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
 <head>
 <title>${initParam.titlePage}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/fundTransfer.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/makePayment-validations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/updateLoginPwdvalidations.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script type = "text/javascript">
-   $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
-  
 
 </head>
 <body>
-	<div id="header">
-		<%@include file="cheader.jsp"%>
-		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
+	<%@include file="cheader.jsp"%>
+	<div>	<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
 	<div id="content">
+	<h3>This page is under construction:</h3> 
+	<br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
+			<form name="changePassword" action="${pageContext.request.contextPath}/bank/changePassword" method="post" > 
+				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
+			
+			 
 			
 			
-			<h3>Fund Transfer - Add Payee :</h3> 
-			<br/>
-			<ff:form name="makePayments" action="${pageContext.request.contextPath}/bank/makePayments" method="post"  commandName="customerTransactionCommand" style= "background-color:#D9E8F7" > 
-				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
 					<tr>
-						<tb><a>From account</a>
-						<ff:select path ="customerAccountType" align="right"> 
-						<ff:option value="Saving">Saving</ff:option>
-						<ff:option value="Checking">Checking</ff:option>
-						<ff:option value="Credit">Credit</ff:option>
-						</ff:select></tb>			
-					</tr>
-				
-					<tr>
-						<br/><b>Select a Payee to Make Payment: </b>
-						<ff:select path = "payeeAccountNumber">
-							<ff:options items="${payeeDetailsFormList}"/> 
-						</ff:select>
-					</tr>
-					<tr>
-						</br></br><b>Transaction Amount(USD)</b>
-						<ff:input path="transactionAmount" size="60" width="40" align="right" /></br> 
-					</tr>
-
-					<tr>
-						</br></br><b>Quick Comments </b>
-						<ff:input path="transactionRemark" name="comments" size="60" width="40" align="right" /></br>
+						<td>
+							<b>Current Password :</b>
+							<input name = "cPassword" type="text" size="20" readonly="readonly" />
+						</td>						
 					</tr>
 					
-					<tr>	
-						<tb><input id = "button" type="submit" value="Make a Payment" size="20" onclick="validateMakePaymentForm();"/></tb>
-						<b> Payee Registration alert to be sent on mobile number</b>
+					<tr>
+						<td>
+							<b>New Password :</b>
+							<input name = "nPassword" type="text" size="20" />
+						</td>						
 					</tr>
 					
-			</table>
+					<tr>
+						<td>
+							<b>Confirm Password :</b>
+							<input name = "confirmPassword" type="password" size="20" />
+						</td>						
+					</tr>
 			
-	</ff:form> 
+		</table>
 			
-		<br/>
-		<br/>
-		<br/>
+	</form> 
+	
 		<br/>
 		<br/>
 		<br/>
