@@ -23,7 +23,6 @@ public interface BankCustomerDao {
 	public abstract String addCustomerLoginDetails(CustomerEntity entity);
 	List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,
 			int maximumRowNumbers);
-	
-	public int getCount();
+	public abstract String updateCustomersnewLoginIdAndPassword(String userId, String password);
 	
 }
