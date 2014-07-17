@@ -19,112 +19,131 @@
 
 </head>
 <body>
-<%@include file="cheader.jsp"%>
+
 		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
-	</div>
+	<div id="left_section">
+				<div class="title"><b>Welcome to Customer Registration</b></div>
+				<div class="text_content">
+					<br /> <br /> 
+					<marquee>
+					<img
+						src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" />
+							<b>The Worlds Local Bank!</b>
+						</marquee>
+				</div> 
+	
 	<div id="content">
 			
-			 <br/>
-			<h3>Customer Registration Page:</h3> 
-			<br/>
+			 <h2 style="color: blue">${msg}</h2>
 			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
-				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" >
+				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
 					
-					<tr>
-						<td><b>UserId:*</b></td>
-						<td><ff:input path="userId" size="40" /></td>
-					</tr>
-					
-					<tr>
-						<td><b>Password:</b></td>
-						<td><ff:password path="password" size="40" /></td>
-					</tr>
-					
+									
 					<tr>
 						<td><b>Salutation:</b></td>
-						<td><ff:input path="salutation" size="40" /></td>
+						<td><select path="salutation" width="20" >
+							<option>Mr.</option>
+						    <option>Mrs.</option>
+						    <option>Miss.</option>
+						    <option>Mast.</option>
+						    </select>
+						
+						</td>
 					</tr>
 					<tr>
 						<td><b>First Name:</b></td>
-						<td><ff:input path="firstName" size="40" /></td>
+						<td><ff:input path="firstName" size="60"  /></td>
 					</tr>
 					<tr>
 						<td><b>Middle Name:</b></td>
-						<td><ff:input path="middleName" size="40" /></td>
+						<td><ff:input path="middleName" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Last Name:</b></td>
-						<td><ff:input path="lastName" size="40" /></td>
+						<td><ff:input path="lastName" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Gender:</b></td>
-						<td><p><input type="radio" name="gender" value="Male"> Male</input>
-							<input type="radio" name="gender" value="Female"> Female</input></p>
+						<td><p><select path="gender" width="20">
+								<option>Male</option>
+								<option>Female</option>
+								<option>Other</option>
+							</select></p>
 						</td>
 					</tr>
 					<tr>
 						<td><b>Marital Status:</b></td>
-						<td><p><input type="radio" name="maritalstatus" value="Single"> Single</input>
-							<input type="radio" name="maritalstatus" value="Married"> Married</input></p>
+						<td><p><select path="maritalstatus" width="20">
+								<option>Single</option>
+								<option>Married</option>
+								<option>Divorced</option>
+							</select></p>
 						</td>
 					</tr>
 					<tr>
 						<td><b>Date of Birth:</b></td>
-						<td><ff:input path="dob" id ="datepicker" size="40"/></td>
+						<td><ff:input path="dob" id ="datepicker" size="60"/></td>
 					</tr>
 					<tr>
 						<td><b>Category:</b></td>
-						<td><ff:input path="category" size="40" /></td>
+											    				
+						<td><select path="category" width="20">
+								<option>GEN</option>
+								<option>OBC</option>
+								<option>Others</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td><b>Mother's Maiden Name:</b></td>
-						<td><ff:input path="motherMaidenName" size="40" /></td>
+						<td><ff:input path="motherMaidenName" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Father's Name:</b></td>
-						<td><ff:input path="fatherName" size="40" /></td>
+						<td><ff:input path="fatherName" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Email:*</b></td>
-						<td><ff:input path="email" size="40" />
+						<td><ff:input path="email" size="60" />
 						<span id="emailerror"></span>
 						</td>
 					</tr>
 					<tr>
 						<td><b>Mobile:</b></td>
-						<td><ff:input path="mobile" size="40" />
+						<td><ff:input path="mobile" size="60" />
 						<span id="phoneerror"></span></td>
 					</tr>
 					<tr>
 						<td><b>SSN:</b></td>
-						<td><ff:input path="ssn" size="40"/></td>
+						<td><ff:input path="ssn" size="60"/></td>
 					</tr>
 					<tr>
 						<td><b>Occupation:</b></td>
-						<td><ff:input path="occupation" size="40" /></td>
+						<td><ff:input path="occupation" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Occupation Type:</b></td>
-						<td><ff:input path="occupationType" size="40" /></td>
+						<td><ff:input path="occupationType" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Education:</b></td>
-						<td><ff:input path="education" size="40" /></td>
+						<td><ff:input path="education" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Gross Anual Income:</b></td>
-						<td><ff:input path="grossAnualIncome" size="40" /></td>
+						<td><ff:input path="grossAnualIncome" size="60" /></td>
 					</tr>
 					<tr>
 						<td><b>Source of Funds:</b></td>
-						<td><ff:input path="sourceOfFunds" size="40" /></td>
+						<td><ff:input path="sourceOfFunds" size="60" /></td>
 					</tr>
-					<tr>
-						<td><b>Role:</b></td>
-						<td><ff:input path="role" size="40" /></td>
-					</tr>
+					
+					<%-- <tr>
+						<td><b>Account Type:</b></td>
+						<td><ff:input path="accountType" size="60" /></td>
+					</tr> --%>
 					
 					<tr>
 						<td><b>Photo:</b></td>
@@ -133,8 +152,8 @@
 					</tr>
 					<tr>
 						<td><b>Description:</b></td>
-						<td><ff:input path="description" size="40" /></td>
-						<td><input id = "submitid" type="button" value="Register Me" size="50" onclick="validateCustomerForm();"/></td>
+						<td><ff:input path="description" size="60" /></td>
+						<td><input id = "submitid" type="button" value = "Register Me" onclick="validateCustomerForm();"/></td>
 					</tr>
 			</table>
 			
@@ -156,6 +175,7 @@
 		<div id="blocks">																																																																																																																													
 			
 		</div>
+		
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
@@ -205,6 +225,7 @@
 					<li><a href="#">In tincidunt mauris</a></li>
 				</ul>
 			</div>
+		</div>
 		</div>
 	</div>
 	<%@ include file="../common/footer.jsp" %>
