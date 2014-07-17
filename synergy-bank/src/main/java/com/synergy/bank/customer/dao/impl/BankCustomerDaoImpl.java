@@ -133,4 +133,10 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		return null;
 	}
 
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

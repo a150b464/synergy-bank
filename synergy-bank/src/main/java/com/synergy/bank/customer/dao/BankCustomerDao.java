@@ -24,4 +24,6 @@ public interface BankCustomerDao {
 	List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,
 			int maximumRowNumbers);
 	
+	public int getCount();
+	
 }

@@ -74,7 +74,7 @@ $(function() {
 						<td>
 						</br></br><b>Select a Payee to Make Payment: </b>
 						<ff:select path = "payeeAccountNumber">
-							<ff:options items="${payeeDetailsFormList}"/> 
+							<ff:options items="${payeeDetailsFormList.payeeAccountNo}-${payeeDetailsFormList.payeeName}"/> 
 						</ff:select>						
 						</td>
 					</tr>

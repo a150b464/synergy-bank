@@ -136,6 +136,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		return customerFormList;
 	}
 	
+	
+	
 	@Override
 	public List<CustomerForm> findCustomersByAttributeAndValue(
 			String attribute, String value) {
@@ -154,6 +156,13 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Override
 	public byte[] findPhotoById(String userId) {
 		return bankCustomerDao.findPhotoById(userId);
+	}
+
+
+	@Override
+	public int getCustomerEntriesCount() {
+		
+		return bankCustomerDao.getCount();
 	}
 
 }

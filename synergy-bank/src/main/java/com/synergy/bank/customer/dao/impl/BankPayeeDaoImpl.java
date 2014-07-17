@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
@@ -25,10 +24,8 @@ import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("BankPayeeDaoImpl")
 @Scope("singleton")
-//giving name of transaction manager since we have more than once  
-//transaction managers
-@Transactional(value="jdbctransactionManager")
-public class BankPayeeDaoImpl extends JdbcDaoSupport implements BankPayeeDao{
+public class BankPayeeDaoImpl extends JdbcDaoSupport 
+implements BankPayeeDao{
 
 	
 	@Autowired
@@ -39,9 +36,8 @@ public class BankPayeeDaoImpl extends JdbcDaoSupport implements BankPayeeDao{
 	
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
-		Object[] data = new Object[]{entity.getSno(),entity.getUserid(),entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),entity.getMobile(),entity.getDoe(),
-				entity.getEmail(),entity.getStatus()};
-		System.out.println(data);
+		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
 		System.out.println("____AHAHAHA____");
 		return "success";
@@ -49,27 +45,30 @@ public class BankPayeeDaoImpl extends JdbcDaoSupport implements BankPayeeDao{
 
 
 	@Override
-	public String confirmPayee(String payeeAccountNo, String userId) {
-		
-		String sql = CustomerQuery.APPROVE_PAYEE_STATUS+"userid='"+userId+"' and payeeAccountNo='"+payeeAccountNo+"'";
-		System.out.println(sql);
-		super.getJdbcTemplate().update(sql);
-		
+	public String confirmPayee(PayeeDetailsEntity entity) {
+		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS,data);
+		System.out.println("____updated____");
 		return "success";
 	}
 
 	@Override
-	public List<PayeeDetailsEntity> findPayeeByUserId(String userid) {
-		List<PayeeDetailsEntity> payeeDetailsEntity= super.getJdbcTemplate().query(CustomerQuery.CHECK_PAYEE_ACC_DETAILS + "'"+ 
-	userid +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
-		System.out.println("In DAOIMPL");
-		//System.out.println(payeeDetailsEntity.getPayeeAccountNo());
-		return payeeDetailsEntity;
+	public List<PayeeDetailsEntity> getPayeeListForUserId(String userId) {
+		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_PAYEE+" '"+userId+"' ",
+				new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntityList;
 	}
 	
+	@Override
+	public PayeeDetailsEntity findPayeeByUserId(String userid) {
+		PayeeDetailsEntity payeeDetailsEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.SHOW_PART_PAYEELIST + "'"+ 
+	userid +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntity;
+	}
+
 	public boolean isPayeeExists(String userId, String payeeAccountNo){
-		
-		
+	
 		String sql = CustomerQuery.VALIDATE_PAYEE + " userid='"
 				+ userId + "' and payeeAccountNo='"
 				+ payeeAccountNo + "'";
@@ -89,8 +88,13 @@ public class BankPayeeDaoImpl extends JdbcDaoSupport implements BankPayeeDao{
 		}
 		else{
 			return false;
-		}
-		
+		}		
 	}
+
+@Override
+public String confirmPayee(String payeeAccountNo, String userId) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

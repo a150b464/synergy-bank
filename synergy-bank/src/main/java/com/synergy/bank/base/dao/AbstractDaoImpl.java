@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -62,6 +63,13 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     public List<E> findAll() {
     	return getCurrentSession().createQuery("from "+entityClass.getName()).list();
     }
+
+	@Override
+    public int getCount() {
+		Number rowCount= (Number)getCurrentSession().createCriteria(entityClass.getName()).setProjection(Projections.rowCount()).uniqueResult();
+		return rowCount.intValue();
+	}
+
     
     @Override    
     public List<E> findByAttributeAndValue(I attribute,I value){
