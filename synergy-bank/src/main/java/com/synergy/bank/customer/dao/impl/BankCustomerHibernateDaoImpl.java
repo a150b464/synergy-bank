@@ -95,6 +95,13 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 		return super.getCount();
 	}
 
+	@Override
+	public String updateCustomersnewLoginIdAndPassword(String userId,
+			String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	/*@Override
 	public String addCustomerDetails(CustomerEntity entity) {

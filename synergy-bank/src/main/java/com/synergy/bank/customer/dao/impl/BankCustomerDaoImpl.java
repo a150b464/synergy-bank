@@ -139,4 +139,11 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		return 0;
 	}
 
+	@Override
+	public String updateCustomersnewLoginIdAndPassword(String userId,
+			String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
