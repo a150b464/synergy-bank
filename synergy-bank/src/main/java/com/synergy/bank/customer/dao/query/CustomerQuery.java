@@ -1,6 +1,5 @@
 package com.synergy.bank.customer.dao.query;
 
-
 /**
  * 
  * @author nagendra.yadav
@@ -18,4 +17,5 @@ public interface CustomerQuery {
 	public static final String VALIDATE_PAYEE 				= "select * from payee_information_tbl where ";
 	public static final String FIND_PAYEE					= "select * from payee_information_tbl where userid like ";
 	public static final String SHOW_PART_PAYEELIST 			= null;
+	public static final String FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER = "select * from customer_transaction_tbl where customerAccountNumber =";
 }
