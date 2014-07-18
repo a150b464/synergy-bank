@@ -27,7 +27,7 @@ public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerL
 	@Override
 	public List<CustomerEntity> getCustomerListForRowNumbers(
 			int initialRowNumber, int maximumRowNumbers) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

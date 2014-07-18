@@ -25,4 +25,5 @@ public interface BankCustomerService {
 			int maximumRowNumbers);
 
 	public int getCustomerEntriesCount();
+	public void updateCustomersnewLoginIdAndPassword(String userId,	String password);
 }
