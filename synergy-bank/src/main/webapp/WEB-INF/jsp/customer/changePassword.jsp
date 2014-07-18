@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/updateLoginPwdvalidations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/newPassword-Validations.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
@@ -22,8 +22,9 @@
 	<div id="content">
 	<h3>This page is under construction:</h3> 
 	<br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
-			<form name="changePassword" action="${pageContext.request.contextPath}/bank/changePassword" method="post" > 
-				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
+			
+			<form action="changePassword" method="get" > 
+				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
 			
 			 
 			
@@ -31,14 +32,14 @@
 					<tr>
 						<td>
 							<b>Current Password :</b>
-							<input name = "cPassword" type="text" size="20" readonly="readonly" />
+							<input name = "cPassword" type="text" size="20"  />
 						</td>						
 					</tr>
 					
 					<tr>
 						<td>
 							<b>New Password :</b>
-							<input name = "nPassword" type="text" size="20" />
+							<input name = "nPassword" type="password" size="20" />
 						</td>						
 					</tr>
 					
@@ -46,19 +47,15 @@
 						<td>
 							<b>Confirm Password :</b>
 							<input name = "confirmPassword" type="password" size="20" />
+									<input type="submit" value="Reset Password" onclick="validateMakePaymentForm();"/>
+							
+							<!-- <input id = "submit" type="button" value = "Reset Password"  /> -->
 						</td>						
 					</tr>
-			
 		</table>
 			
 	</form> 
 	
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		
 		<div id="blocks">																																																																																																																													
 			
 		</div>

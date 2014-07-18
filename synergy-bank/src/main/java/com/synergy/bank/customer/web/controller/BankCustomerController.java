@@ -43,7 +43,6 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("CustomerAccountServiceImpl")
 	private CustomerAccountService customerAccountService;
-	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
@@ -65,10 +64,8 @@ public class BankCustomerController {
 		bankCustomerService.addCustomer(customerForm);
 		// here we are making this call asynchronous so we are creating
 		EmailSenderThread emailSenderThread = new EmailSenderThread(
-											  bankEmailService,
-											  customerForm.getEmail(),
-											  "Hello Dear! Ahahahah", 
-											  "Regarding Registration");
+				bankEmailService, customerForm.getEmail(),
+				"Hello Dear! Ahahahah", "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
@@ -105,6 +102,26 @@ public class BankCustomerController {
 		return "redirect:bank/customerInformation";
 	}
 
+	
+	@RequestMapping(value = "customerHome", method = RequestMethod.GET)
+	public String updateCustomersnewLoginIDAndPWD(Model model) {
+		String userId="Please change your User Id ";
+		String password="Please change your Password ";
+		
+		System.out.println("Inside edit registration post");
+		model.addAttribute("userId", userId);
+		model.addAttribute("password", password);
+		//bankCustomerService.updateCustomersnewLoginIdAndPassword();
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_HOME_PAGE;
+	}
+	
+	@RequestMapping(value = "customerHome", method = RequestMethod.POST)
+	public String updateCustomersnewLoginIDAndPWD(@RequestParam("userId") String userId, @RequestParam("password") String password ) {
+		System.out.println("Inside edit registration post");
+		bankCustomerService.updateCustomersnewLoginIdAndPassword(userId, password);
+		return NavigationConstant.COMMON_PAGE+NavigationConstant.LOGIN_PAGE;
+	}
+	
 	@RequestMapping(value = "/findPhotoById", method = RequestMethod.GET)
 	public void findPhotoById(@RequestParam("userId") String userId,
 			HttpServletResponse response) throws IOException {

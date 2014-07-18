@@ -44,7 +44,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public String addCustomer(CustomerForm customerForm) {
-		
+		System.out.println("inside add cus+"+customerForm);
 		char[] password=bankJdbcDao.generatePassword();
 		String userid=bankJdbcDao.nextUserID();
 		customerForm.setUserId(userid);
@@ -70,11 +70,42 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		return userid+"-"+new String(password);
 	}
 	
-	
-	@Override
 	public String updateCustomer(CustomerForm customerForm) {
-		return null;
+		System.out.println("inside add cus+"+customerForm);
+	/*	char[] password=bankJdbcDao.generatePassword();
+		String userid=bankJdbcDao.nextUserID();
+		customerForm.getUserId()(userid);
+		customerForm.setPassword(new String(password));
+		*/
+		CustomerEntity customerEntity=new CustomerEntity();
+		//attribute and datatype should be match
+		BeanUtils.copyProperties(customerForm, customerEntity);
+		CustomerLoginDetailEntity customerLoginDetailEntity=new CustomerLoginDetailEntity();
+		customerLoginDetailEntity.setUserId(customerForm.getUserId());
+		customerLoginDetailEntity.setActive("no");
+		customerLoginDetailEntity.setApprove("no");
+		customerLoginDetailEntity.setCreatedDate(new Date());
+		customerLoginDetailEntity.setDescription("password Changed");
+		customerLoginDetailEntity.setLoginCount(1);
+		customerLoginDetailEntity.setLoginId(customerForm.getUserId());
+		customerLoginDetailEntity.setModifiedDate(new Date());
+		customerLoginDetailEntity.setNumberOfAttempt(0);
+		customerLoginDetailEntity.setOldPassword(customerForm.getPassword());
+		customerLoginDetailEntity.setPassword(customerForm.getPassword());
+		customerLoginDetailEntity.setRole("customer");
+		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
+		bankCustomerDao.addCustomer(customerEntity);
+		return "success";
 	}
+	
+	
+/*	@Override
+	public String updateCustomer(CustomerForm customerForm) {
+		CustomerEntity entity=new CustomerEntity(); 
+		BeanUtils.copyProperties(customerForm,entity);
+		bankCustomerDao.updateCustomer(entity);
+		return null;
+	}*/
 
 	@Override
 	public List<CustomerForm> findCustomers() {
@@ -163,6 +194,14 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	public int getCustomerEntriesCount() {
 		
 		return bankCustomerDao.getCount();
+	}
+
+
+	@Override
+	public void updateCustomersnewLoginIdAndPassword(String userId,
+			String password) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
