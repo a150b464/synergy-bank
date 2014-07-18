@@ -66,6 +66,18 @@ public class LoginController {
 		
 		if(loginForm.getUserId()!=null){
 			
+			if("no".equals(loginForm.getActive())){
+			
+				model.addAttribute("applicationMessage", "You are blocked, please contact bank authority.");
+				return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+			}
+			
+			if("no".equals(loginForm.getApprove())){
+				
+				model.addAttribute("applicationMessage", "You are not approved, please contact bank authority.");
+				return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+			}
+			
 			session.setAttribute(NavigationConstant.USER_SESSION_DATA, loginForm);//Storing session information
 			
 			
