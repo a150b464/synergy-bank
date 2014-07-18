@@ -13,28 +13,28 @@
 
 <body>
 	<%@include file="cheader.jsp"%>
+	<br><br>
 	
-	<h3>Mini Statement</h3><br>
 	<div id="content">
 		<br>
-		
+	<br><h3>Mini Statement</h3><br>	
 		<ff:form action="viewMiniStatement" method="get" >
 			<table align="center" width="60%" border="1" cellspacing="3" cellpadding="3">
 				<tr>
-					<td>Currency</td><td>Account Type</td><td>Total Available Balance</td>
+					<td>Payee Account Number</td><td>Transaction Amount</td><td>Transaction Date</td>
 				</tr>
 				
-				<c:forEach items="${customerAccountForms}" var="item">
+				<c:forEach items="${customerTransactionForms}" var="item">
 					<tr>
-						<td>${item.currency}</td>
-						<td>${item.accountType}</td>
-						<td>${item.totalAvailBalance}</td>
+						<td>${item.payeeAccountNumber}</td>
+						<td>${item.transactionAmount}</td>
+						<td>${item.transactionDate}</td>
 					</tr>	
 				</c:forEach>
 			</table>
 			
 	</ff:form>
-		
+			<br><input id="button" type="submit" value="email notice" size = "20"/><br>
 			<div class="metalinks">
 			<a href="#"><img src="${pageContext.request.contextPath}/images/pdf.jpg" alt="" width="30" height="30" /></a>
 			</div>
