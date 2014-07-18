@@ -30,6 +30,31 @@
  	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	 <!-- 
+	   it will read sun-jaxws.xml 
+	   file  and publish all the web service inside web service container
+	  -->
+	<listener>
+          <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+     </listener>
+	
+     <!-- The servlet definition and it’s mapping is used to intercept the url-pattern 
+          that should be considered as web service request. The class(com.sun.xml.ws.transport.http.servlet.WSServlet) 
+          acts as a dispatching servlet that routes the request to appropriate implementation 
+          class through the delegate received from the servlet context created by the 
+          listener as stated above. -->
+     <servlet>
+          <servlet-name>common</servlet-name>
+          <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+          <load-on-startup>1</load-on-startup>
+     </servlet>
+
+     <servlet-mapping>
+          <servlet-name>common</servlet-name>
+          <url-pattern>/bankSoapService</url-pattern>
+     </servlet-mapping>
+
 
   
   <!-- Here as per spring mvc front controller 
