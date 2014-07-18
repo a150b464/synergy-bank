@@ -43,6 +43,7 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("CustomerAccountServiceImpl")
 	private CustomerAccountService customerAccountService;
+	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
@@ -64,8 +65,10 @@ public class BankCustomerController {
 		bankCustomerService.addCustomer(customerForm);
 		// here we are making this call asynchronous so we are creating
 		EmailSenderThread emailSenderThread = new EmailSenderThread(
-				bankEmailService, customerForm.getEmail(),
-				"Hello Dear! Ahahahah", "Regarding Registration");
+											  bankEmailService,
+											  customerForm.getEmail(),
+											  "Hello Dear! Ahahahah", 
+											  "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
@@ -102,26 +105,6 @@ public class BankCustomerController {
 		return "redirect:bank/customerInformation";
 	}
 
-	
-	@RequestMapping(value = "customerHome", method = RequestMethod.GET)
-	public String updateCustomersnewLoginIDAndPWD(Model model) {
-		String userId="Please change your User Id ";
-		String password="Please change your Password ";
-		
-		System.out.println("Inside edit registration post");
-		model.addAttribute("userId", userId);
-		model.addAttribute("password", password);
-		//bankCustomerService.updateCustomersnewLoginIdAndPassword();
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CUSTOMER_HOME_PAGE;
-	}
-	
-	@RequestMapping(value = "customerHome", method = RequestMethod.POST)
-	public String updateCustomersnewLoginIDAndPWD(@RequestParam("userId") String userId, @RequestParam("password") String password ) {
-		System.out.println("Inside edit registration post");
-		bankCustomerService.updateCustomersnewLoginIdAndPassword(userId, password);
-		return NavigationConstant.COMMON_PAGE+NavigationConstant.LOGIN_PAGE;
-	}
-	
 	@RequestMapping(value = "/findPhotoById", method = RequestMethod.GET)
 	public void findPhotoById(@RequestParam("userId") String userId,
 			HttpServletResponse response) throws IOException {
@@ -139,9 +122,9 @@ public class BankCustomerController {
 
 	@RequestMapping(value = "customerInformation", method = RequestMethod.GET)
 	public String showCustomerInformation(Model model) {
-		List<CustomerForm> customerDetailList = bankCustomerService.getCustomerListForRowNumbers(0,2);
+		List<CustomerForm> customerDetailList = bankCustomerService.getCustomerListForRowNumbers(0,5);
 		
-		model.addAttribute("pageInformation","0/"+bankCustomerService.getCustomerEntriesCount()/2);
+		model.addAttribute("pageInformation","0/"+bankCustomerService.getCustomerEntriesCount()/5);
 		model.addAttribute("current_page_number", 0);
 		model.addAttribute("customerList", customerDetailList);
 		return NavigationConstant.ADMIN_PAGE
@@ -160,13 +143,13 @@ public class BankCustomerController {
 	public String loadNextCustomerList(
 			@RequestParam("current_page_number") int currentPageNumber, Model model) {
 		
-		if(currentPageNumber<bankCustomerService.getCustomerEntriesCount())	currentPageNumber++;
+		if(currentPageNumber<bankCustomerService.getCustomerEntriesCount()/5)	currentPageNumber++;
 		else currentPageNumber=bankCustomerService.getCustomerEntriesCount();
 
 		List<CustomerForm> customerDetailList = bankCustomerService
-				.getCustomerListForRowNumbers(currentPageNumber*2, 2);
+				.getCustomerListForRowNumbers(currentPageNumber*5, 5);
 	
-		model.addAttribute("pageInformation",currentPageNumber+"/"+bankCustomerService.getCustomerEntriesCount()/2);
+		model.addAttribute("pageInformation",currentPageNumber+"/"+bankCustomerService.getCustomerEntriesCount()/5);
 		model.addAttribute("current_page_number", currentPageNumber);
 		model.addAttribute("customerList", customerDetailList);
 	
@@ -235,8 +218,9 @@ public class BankCustomerController {
 
 		for (int i = 0; i < customerAccountForms.size(); i++) {
 			double amt = customerAccountForms.get(i).getAvailBalance();
+			
 			if (amt > 0)
-				totalDeposit += amt;
+				totalDeposit   += amt;
 			else
 				totalLiability += amt;
 
@@ -244,10 +228,10 @@ public class BankCustomerController {
 				latestModifyDate = customerAccountForms.get(i).getDom();
 		}
 
-		model.addAttribute("totalDeposit", totalDeposit);
+		model.addAttribute("totalDeposit"  , totalDeposit);
 		model.addAttribute("totalLiability", totalLiability);
-		model.addAttribute("totalAsset", totalDeposit + totalLiability);
-		model.addAttribute("statusOf", latestModifyDate);
+		model.addAttribute("totalAsset"    , totalDeposit + totalLiability);
+		model.addAttribute("statusOf"      , latestModifyDate);
 
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
@@ -278,10 +262,10 @@ public class BankCustomerController {
 				latestModifyDate = customerAccountForms.get(i).getDom();
 		}
 
-		model.addAttribute("totalDeposit", totalDeposit);
+		model.addAttribute("totalDeposit"  , totalDeposit);
 		model.addAttribute("totalLiability", totalLiability);
-		model.addAttribute("totalAsset", totalDeposit + totalLiability);
-		model.addAttribute("statusOf", latestModifyDate);
+		model.addAttribute("totalAsset"    , totalDeposit + totalLiability);
+		model.addAttribute("statusOf"      , latestModifyDate);
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.VIEW_MINI_STATEMENT;
 	}

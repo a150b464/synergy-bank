@@ -1,6 +1,5 @@
 package com.synergy.bank.customer.web.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,12 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.synergy.bank.customer.service.BankPayeeService;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
-import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Controller
 public class BankTransactionController {
@@ -28,25 +27,20 @@ public class BankTransactionController {
 
 	
 	@RequestMapping(value="makePayments",method=RequestMethod.GET) 
-	public String makePayment(Model model) {
-		/*  Adding payee list to the model*/
-		List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.getPayeeListForUserId("1");
-		System.out.println(payeeDetailsFormList);
-		
-	
-		model.addAttribute("payeeDetailsFormList",payeeDetailsFormList);
-		/* adding blank transaction spring form to auto bind attributes*/		
+	public String makePayment(Model model,
+							  @RequestParam("payeeAccountNumber") String  payeeAccountNumber ) {
+				
+		System.out.println("payeeAcntNumber =" + payeeAccountNumber);
+		model.addAttribute("payeeAccountNumber",payeeAccountNumber);
 		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
-/*		UUID transactionId = UUID.randomUUID();
-		form.setTransactionId(transactionId.toString());
-*/		model.addAttribute("customerTransactionCommand",customerTransactionCommand);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
+		model.addAttribute("customerTransactionCommand",customerTransactionCommand);
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
 	}
 
 	@RequestMapping(value="makePayments",method=RequestMethod.POST) 
 	public String showCustomerRegistrationPage(@ModelAttribute(value="customerTransactionCommand") CustomerTransactionForm customerTransactionForm) {
 		bankTrasactionService.addCustomerTransaction(customerTransactionForm);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.MAKE_PAYMENT_PAGE;
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
 	}
 	
 }

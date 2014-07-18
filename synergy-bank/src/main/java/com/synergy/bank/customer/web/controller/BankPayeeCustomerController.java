@@ -25,9 +25,9 @@ public class BankPayeeCustomerController {
 	@Qualifier("BankPayeeServiceImpl")
 	private BankPayeeService bankPayeeService;
 
-	// Add Payee Methods
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.GET)
 	public String addpayee(Model model) {
+		
 		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 		model.addAttribute("addPayeeCommand", payeeDetailsForm);
 		System.out.println("in controller");
@@ -36,19 +36,22 @@ public class BankPayeeCustomerController {
 	}
 
 	
-	@RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
+	@RequestMapping (value = "addpayee.do", method = RequestMethod.POST)
 	public String addpayee(
-			@ModelAttribute("addPayeeCommand") PayeeDetailsForm payeeDetailsForm,
-			Model model) {
+	
+		@ModelAttribute("addPayeeCommand") PayeeDetailsForm payeeDetailsForm,
+		Model model) {
 
 		String userId = "admin";
 		if (bankPayeeService.isPayeeExists(userId,
 				payeeDetailsForm.getPayeeAccountNo())) {
+			
 			String message = "This payee already exists.";
 			model.addAttribute("message", message);
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.ADD_PAYEE_PAGE;
-		} else {
+		} 
+		else {
 			String stst = "pending";
 			payeeDetailsForm.setDoe(new Date());
 			payeeDetailsForm.setUserid(userId);
@@ -58,12 +61,12 @@ public class BankPayeeCustomerController {
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CONFIRM_PAYEE_PAGE;
 		}
-
 	}
 
 	@RequestMapping(value = "confirmpayee.do", method = RequestMethod.POST)
 	public String confirmpayee(
 			@ModelAttribute("confirmPayeeCommand") PayeeDetailsForm payeeDetailsForm) {
+		
 		String userId = "admin";
 		bankPayeeService.confirmPayee(payeeDetailsForm.getPayeeAccountNo(),
 				userId);
@@ -87,15 +90,16 @@ public class BankPayeeCustomerController {
 		
 		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
 		model.addAttribute("customerTransactionCommand",customerTransactionCommand);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
+		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.SELECT_PAYEE;
 	}
 	
-	@ModelAttribute("payeeDetailsFormList")
+	@ModelAttribute(value="payeeDetailsFormList")
 	public Map<String,String> findPayeeListCustomer(){
-		List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.getPayeeListForUserId("1");
+		List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.findPayeeByUserId("1");
+		System.out.println("payeedetails form list = "+ payeeDetailsFormList);
 		LinkedHashMap<String,String> payeeList=new LinkedHashMap<String, String>();
 		for(PayeeDetailsForm detailsForm:payeeDetailsFormList){
-			payeeList.put(detailsForm.getUserid(), detailsForm.getPayeeName() +" - "+detailsForm.getUserid());
+			payeeList.put(detailsForm.getPayeeAccountNo(), detailsForm.getPayeeName() +" - "+detailsForm.getPayeeAccountNo());
 		}
 		return payeeList;		
 	}

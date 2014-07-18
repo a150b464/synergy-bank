@@ -13,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 </head>
-<body>
-	<div class="meta">
+<body >
+	<div class="meta" align="center">
 		<div class="metalinks">
 			<a href="#"><img src="${pageContext.request.contextPath}/images/meta1.gif" alt="" width="15" height="14" /></a>
 			<a href="#"><img src="${pageContext.request.contextPath}/images/meta2.gif" alt="" width="17" height="14" /></a>
@@ -23,7 +23,7 @@
 		</div>
 		<p>Recruiters: <a href="#">Log in</a> or <a href="#">Find out more</a></p>																																															
 	</div>
-	<div id="header">
+	<div id="header" align="center">
 		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
 		<ul id="menu">
@@ -40,7 +40,7 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
-	<div id="content">
+	<div id="content" align="center">
 
  <h3> Current Customers </h3>			    
 </br>
@@ -78,12 +78,13 @@
 </select>					
 	<input type="text" name="searchValue" align="middle"/>	
 			<input type="submit" value="Search"/>
+			<input type="button" action="customerInformation" value="Clear Search"/>
 	</form>
-	<form action="customerInformation" method="get">						    
-		<input type="submit" value="Clear Search"/>
-	</form> 
-
-	<table align="left">
+<!-- 	<form action="customerInformation" method="get">						    
+ -->		
+	<!-- </form> 
+ -->
+	<table align="center">
 	<thead>
 		<tr>
 			<td><b>USERID</b></td>
@@ -116,14 +117,15 @@
 	</c:forEach>
 	</tbody>		
 </table>
+</div>
 		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/prev.png"/></a>
 			<input type="text" name="pageInformation" value="${pageInformation}" align="middle"/>			
 		<a href="${pageContext.request.contextPath}/bank/loadNextPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png"/></a>
 		<div id="blocks">																																																																																																																													
 			
 		</div>
-		<div id="info">
-			<div>
+		<div id="info" align="center">
+			<div align="center">
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
 				<ul>
 					<li><a href="#">Maecenas hendrerit</a></li>
@@ -135,7 +137,7 @@
 					<li><a href="#">In tincidunt mauris</a></li>
 				</ul>
 			</div>
-			<div>
+			<div align="center">
 				<img src="${pageContext.request.contextPath}/images/title6.gif" alt="" width="160" height="26" />
 				<ul>
 					<li><a href="#">Maecenas hendrerit</a></li>
@@ -147,7 +149,7 @@
 					<li><a href="#">In tincidunt mauris</a></li>
 				</ul>
 			</div>
-			<div>
+			<div align="center">
 				<img src="${pageContext.request.contextPath}/images/title7.gif" alt="" width="160" height="26" />
 				<ul>
 					<li><a href="#">Maecenas hendrerit</a></li>
@@ -159,7 +161,7 @@
 					<li><a href="#">In tincidunt mauris</a></li>
 				</ul>
 			</div>
-			<div>
+			<div align="center">
 				<img src="${pageContext.request.contextPath}/images/title8.gif" alt="" width="160" height="26" />
 				<ul>
 					<li><a href="#">Maecenas hendrerit</a></li>
