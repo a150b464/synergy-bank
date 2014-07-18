@@ -1,5 +1,8 @@
 package com.synergy.bank.customer.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,21 +16,47 @@ import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 
 @Service("BankTransactionServiceImpl")
 @Scope("singleton")
-public class BankTransactionServiceImpl implements BankTransactionService{
+public class BankTransactionServiceImpl implements BankTransactionService {
+
+	@Autowired
+	@Qualifier("BankTransactionDaoImpl")
+	private BankTransactionDao bankTransactionDao;
 
 	@Autowired
 	@Qualifier("BankTransactionHibernateDaoImpl")
-	private BankTransactionDao bankTransactionDao;
-
+	private BankTransactionDao bankTransactionHibernetDao;
 
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
-		
+
 		CustomerTransactionEntity entity = new CustomerTransactionEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
-		System.out.println("Entity at beanUtils"+entity);
+		System.out.println("Entity at beanUtils" + entity);
 		bankTransactionDao.addCustomerTransaction(entity);
 		return "success";
+	}
+
+	@Override
+	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
+			String accountNumber) {
+		List<CustomerTransactionEntity> customerTransactionEntityList = bankTransactionDao
+				.findCustomerTransactionByAccountNumber(accountNumber);
+		List<CustomerTransactionForm> customerTransactionFormList = new ArrayList<CustomerTransactionForm>(
+				customerTransactionEntityList.size());
+		for (int i = 0; i < customerTransactionEntityList.size(); i++) {
+			CustomerTransactionForm customerTransactionForm = new CustomerTransactionForm();
+			BeanUtils.copyProperties(customerTransactionEntityList.get(i),
+					customerTransactionForm);
+			customerTransactionFormList.add(customerTransactionForm);
+		}
+		return customerTransactionFormList;
+	}
+
+	@Override
+	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
+			String customerAccountNumber, String accountNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

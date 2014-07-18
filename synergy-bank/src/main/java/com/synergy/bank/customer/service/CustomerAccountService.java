@@ -7,4 +7,5 @@ import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 public interface CustomerAccountService {
 
 	public List<CustomerAccountForm> findCustomerAccountByUserId(String userId);
+
 }
