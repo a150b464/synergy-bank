@@ -41,7 +41,7 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	@Override
 	public List<PayeeDetailsForm> findPayeeByUserId(String userid) {
 		List<PayeeDetailsForm> payeeDetailsForms = new ArrayList<PayeeDetailsForm>();
-		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao.findPayeeByUserId(userid); 
+		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao.getPayeeListForUserId(userid); 
 		for (PayeeDetailsEntity payeeDetailsEntity : payeeDetailsEntities) {
 			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
@@ -59,7 +59,6 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 	@Override
 	public List<PayeeDetailsForm> getPayeeListForUserId(String userId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

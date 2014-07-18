@@ -16,6 +16,6 @@ public interface CustomerQuery {
 	public static final String APPROVE_PAYEE_STATUS 		= "update payee_information_tbl set status='approved' where ";
 	public static final String FIND_CUSTOMER_ACCOUNT_BY_ID  = "select * from customer_account_info_tbl where userid=";
 	public static final String VALIDATE_PAYEE 				= "select * from payee_information_tbl where ";
-	public static final String FIND_PAYEE					= "select * from payee_information_tbl where userid lile ";
+	public static final String FIND_PAYEE					= "select * from payee_information_tbl where userid like ";
 	public static final String SHOW_PART_PAYEELIST 			= null;
 }

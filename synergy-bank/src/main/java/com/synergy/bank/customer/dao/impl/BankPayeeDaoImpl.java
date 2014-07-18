@@ -39,7 +39,6 @@ implements BankPayeeDao{
 		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
 				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
-		System.out.println("____AHAHAHA____");
 		return "success";
 	}
 
@@ -49,7 +48,6 @@ implements BankPayeeDao{
 		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
 				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
 		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS,data);
-		System.out.println("____updated____");
 		return "success";
 	}
 
@@ -62,7 +60,7 @@ implements BankPayeeDao{
 	
 	@Override
 	public PayeeDetailsEntity findPayeeByUserId(String userid) {
-		PayeeDetailsEntity payeeDetailsEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.SHOW_PART_PAYEELIST + "'"+ 
+		PayeeDetailsEntity payeeDetailsEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_PAYEE + "'"+ 
 	userid +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
 		return payeeDetailsEntity;
 	}
