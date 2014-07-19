@@ -26,10 +26,12 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.customer.service.BankCustomerService;
+import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Controller
@@ -47,6 +49,10 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
+
+	@Autowired
+	@Qualifier("BankTransactionServiceImpl")
+	private BankTransactionService bankTransactionService;
 
 	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
 	public String showCustomerRegistrationPage(Model model) {
@@ -241,4 +247,20 @@ public class BankCustomerController {
 				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
 	}
 
+	@RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
+	public String viewMiniStatement(Model model) {
+
+		String customerAccountNumber = "AAA001";
+		List<CustomerTransactionForm> transactionForms = bankTransactionService
+				.findCustomerTransactionByAccountNumber(customerAccountNumber);
+
+		model.addAttribute("customerTransactionForms", transactionForms);
+
+		EmailSenderThread emailSenderThread = new EmailSenderThread(
+				bankEmailService, "jeffcng@gmail.com", "Hello", "transaction");
+		emailSenderThread.run();
+
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_MINI_STATEMENT;
+	}
 }
