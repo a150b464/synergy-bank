@@ -37,7 +37,7 @@ implements BankPayeeDao{
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
 		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
-				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe(),entity.getStatus(),entity.getUserid()};
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
 		return "success";
 	}
@@ -46,7 +46,7 @@ implements BankPayeeDao{
 	@Override
 	public String confirmPayee(PayeeDetailsEntity entity) {
 		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
-				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe()};
+				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe(),entity.getStatus(),entity.getUserid()};
 		super.getJdbcTemplate().update(CustomerQuery.APPROVE_PAYEE_STATUS,data);
 		return "success";
 	}
