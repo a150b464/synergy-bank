@@ -78,8 +78,15 @@
 						<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 					</tr>
 					</table>
-	
-			</ff:form>			
+		<table>
+		<tr>
+		<td style="font-family: Palatino Linotype; font-size: 20px; color: red">
+		${errormessage}
+		</td>
+		</tr>
+		</table>
+		
+		</ff:form>			
 		<br/>
 		<br/>
 		<br/>
