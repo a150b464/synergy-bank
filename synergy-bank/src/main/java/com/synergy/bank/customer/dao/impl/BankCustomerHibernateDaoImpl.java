@@ -55,6 +55,7 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	
 	@Override
 	public List<CustomerEntity> findCustomers() {
+		System.out.println("---------Entered in FindCustomers() method of customerHibernateDaoImpl--------");
 		return super.findAll();
 	}
 
