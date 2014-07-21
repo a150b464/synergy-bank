@@ -88,8 +88,10 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public List<CustomerEntity> findCustomers() {
+		System.out.println("---------Entered in FindCustomers() method of customerDaoImpl--------");
 		List<CustomerEntity> customerList = super.getJdbcTemplate().query(CustomerQuery.FIND_CUTOMER,
 				new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
+		System.out.println("Printing from customerDaoImpl " +customerList );
 		return customerList;
 	}
 
