@@ -36,18 +36,20 @@
 			<li><a href="#">About Us		</a></li>
 			<li><a href="#">Help			</a></li>
 			<li class="last"><a href="#">Register</a></li>
+			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
 		</ul>
 <%-- 		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
  --%>		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
+	
 	<div id="content">
 
  <h3> Current Customers </h3>			    
-</br>
 
 
-<form action="searchCustomerInformation" method="get">	
+
+<form action="searchCustomerInformation" method="get" id = "detailsTable">	
 				    				    
 	    Search by
 <select name="searchAttr">
@@ -80,11 +82,13 @@
 	<input type="text" name="searchValue" align="middle"/>	
 			<input type="submit" value="Search"/>
 	</form>
-	<form action="customerInformation" method="get">						    
+	
+	
+	<form action="customerInformation" method="get">				    
 		<input type="submit" value="Clear Search"/>
 	</form> 
 
-	<table align="left">
+	<table align="center" width="100%" border="0" cellspacing="20" cellpadding="20">
 	<thead>
 		<tr>
 			<td><b>USERID</b></td>
@@ -112,13 +116,15 @@
    			<td>
 			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
+		
 			</td>	 	
 	 	</tr>
 	</c:forEach>
+	
 	</tbody>		
 </table>
 		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/prev.png" /></a>
-			<input type="text" name="pageInformation" value="${pageInformation}" align="middle"/>			
+			<input type="text" name="pageInformation" value="${pageInformation}" align="right"/>			
 		<a href="${pageContext.request.contextPath}/bank/loadNextPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png" /></a>
 		<div id="blocks">																																																																																																																													
 			
@@ -173,7 +179,7 @@
 				</ul>
 			</div>
 		</div>
-
+</div>
 	<%@ include file="../common/footer.jsp" %>		
 </body>
 </html>

@@ -322,3 +322,16 @@ font-size:11px
     top:1px;
     box-shadow: 0 5px #70A016;
 }
+
+#detailsTable {
+	width:859px;
+	float:left;
+	margin-left:70px;
+	display:inline;
+	background-position:top left;
+	background-repeat:no-repeat;
+	padding:20px 0;
+	text-align:center;
+    
+}
+

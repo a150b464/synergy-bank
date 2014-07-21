@@ -87,8 +87,9 @@ text-decoration:none;
 #menu a:visited{text-decoration:none}
 #menu a:hover{text-decoration:underline}
 #content{
-width:859px;
+width:959px;
 margin:0 auto;
+
 }
 .search{
 width:751px;

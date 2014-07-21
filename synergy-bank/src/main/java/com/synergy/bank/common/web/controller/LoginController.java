@@ -60,8 +60,8 @@ public class LoginController {
 	public String auth(@RequestParam("login") String login,
 			@RequestParam("password") String password,HttpSession session,Model model) {
 		LoginForm loginForm=bankAuthService.authUser(login, password);
-		CustomerLoginDetailEntity customerLoginDetailEntity = new CustomerLoginDetailEntity();
 		
+		System.out.println("login form is ="+loginForm);
 		loginForm.setPassword(null);
 		
 		if(loginForm.getUserId()!=null){
@@ -83,7 +83,8 @@ public class LoginController {
 			
 			//write the login count logic here
 			if("customer".equals(loginForm.getRole())){
-				if(customerLoginDetailEntity.getLoginCount()==0)
+				
+				if(loginForm.getLoginCount()!=0)
 				{
 					return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.CHANGE_PASSWORD_PAGE;//fw it to new jsp for changing password
 				}

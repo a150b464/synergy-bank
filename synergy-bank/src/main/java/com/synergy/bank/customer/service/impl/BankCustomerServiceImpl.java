@@ -109,6 +109,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public List<CustomerForm> findCustomers() {
+		
+		System.out.println("---------Entered in FindCustomers() method of customerServiceImpl--------");
 		List<CustomerEntity> customerEntityList = bankCustomerDao.findCustomers();
 		List<CustomerForm>   customerFormList   = new ArrayList<CustomerForm>(customerEntityList.size());
 
@@ -118,6 +120,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 			BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
 			customerFormList.add(customerForm);
 		}
+		System.out.println("Printing from customerServiceImpl " +customerFormList );
 		return customerFormList;
 	}
 
@@ -155,6 +158,9 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Override
 	public List<CustomerForm> getCustomerListForRowNumbers(int initialRowNumber,int maximumRowNumbers)
 	{
+		
+		System.out.println("---------Entered in ListFor RowNumbers methods------");
+		
 		List<CustomerEntity> customerEntityList = bankCustomerDao.getCustomerListForRowNumbers(initialRowNumber, maximumRowNumbers);
 		List<CustomerForm>   customerFormList   = new ArrayList<CustomerForm>(customerEntityList.size());
 
