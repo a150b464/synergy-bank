@@ -35,9 +35,9 @@
 	   it will read sun-jaxws.xml 
 	   file  and publish all the web service inside web service container
 	  -->
-	<listener>
+	<!-- <listener>
           <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-     </listener>
+     </listener> -->
 	
      <!-- The servlet definition and it’s mapping is used to intercept the url-pattern 
           that should be considered as web service request. The class(com.sun.xml.ws.transport.http.servlet.WSServlet) 
@@ -46,7 +46,7 @@
           listener as stated above. -->
      <servlet>
           <servlet-name>common</servlet-name>
-          <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+          <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
           <load-on-startup>1</load-on-startup>
      </servlet>
 

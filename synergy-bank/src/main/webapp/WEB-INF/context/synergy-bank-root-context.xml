@@ -19,6 +19,8 @@
    <import resource="spring-hibernate.xml"/>
    <import resource="email-service.xml"/>
       <import resource="image-upload.xml"/>
+      <import resource="sprng-metro-soap.xml"/>
+      
    
    
 </beans>

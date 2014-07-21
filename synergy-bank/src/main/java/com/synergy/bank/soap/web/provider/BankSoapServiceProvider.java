@@ -2,6 +2,13 @@ package com.synergy.bank.soap.web.provider;
 
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import com.synergy.bank.common.service.BankAuthService;
+import com.synergy.bank.common.web.controller.form.LoginForm;
+
 
 /**
  * 
@@ -10,14 +17,26 @@ import javax.jws.WebService;
  *
  */
 @WebService
+@Component("BankSoap") //what is BankSoap? is id for this instance 
 public class BankSoapServiceProvider {
+	
+
+	@Autowired
+	@Qualifier("BankAuthServiceImpl")
+	private BankAuthService bankAuthService;
+	
 	public String validateLogin(String login,String password){
 		System.out.println("________________________________________");
-		if("swapnil".equals(login) && "test".equals(password)){
-			return "valid";	
+		LoginForm loginForm=bankAuthService.authUser(login, password);
+		if(loginForm.getUserId()!=null){
+			return "valid";
 		}
-		System.out.println("login = "+login+" and password = "+password);
+		/*if("swapnil".equals(login) && "test".equals(password)){
+				
+		}*/
+		System.out.println("login = and password = "+loginForm);
 		System.out.println("________________________________________");
 		return "invalid";
+		
 	}
 }
