@@ -33,13 +33,14 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
+	</br></br></br></br></br>
 	<div id="content">
 			
 			
 			<h3>Fund Transfer - Add Payee :</h3> 
 			<br/>
 			<ff:form name="makePayments" action="${pageContext.request.contextPath}/bank/makePayments" method="post"  commandName="customerTransactionCommand" style= "background-color:#D9E8F7" > 
-				<table align=center width="60%" border="0" cellspacing="10" cellpadding="10" >
+				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" >
 					<tr>
 						<td><b>Select account</b>
 						<ff:select path ="customerAccountType" align="right"> 

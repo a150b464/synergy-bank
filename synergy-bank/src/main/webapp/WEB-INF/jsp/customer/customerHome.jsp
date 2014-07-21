@@ -24,7 +24,7 @@
 				</br><table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
 			
 			 <br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
-			<h3>This page is under construction:</h3> 
+			<h3>Welcome to the Synergy-Bank!</h3> 
 			
 		</table>
 			

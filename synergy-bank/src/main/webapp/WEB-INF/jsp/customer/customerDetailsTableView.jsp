@@ -40,7 +40,7 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
-	<div id="content" align="center">
+	<div id="content" align="right">
 
  <h3> Current Customers </h3>			    
 </br>
@@ -73,7 +73,6 @@
 	<option value="role">role</option>
 	<option value="doe">doe</option>
 	<option value="dom">dom</option>
-	<option value="photo">photo</option>
 	<option value="description">description</option>
 </select>					
 	<input type="text" name="searchValue" align="middle"/>	
@@ -84,7 +83,7 @@
  -->		
 	<!-- </form> 
  -->
-	<table align="center">
+	<table align="right" width="60%" border="0" cellspacing="40" cellpadding="40">
 	<thead>
 		<tr>
 			<td><b>USERID</b></td>
