@@ -55,7 +55,7 @@ public class BankPayeeCustomerController {
 			@ModelAttribute("addPayeeCommand") PayeeDetailsForm payeeDetailsForm,
 			Model model, HttpSession session) {
 
-		String userId = "admin";
+		String userId = "customer";
 		if (bankPayeeService.isPayeeExists(userId,
 				payeeDetailsForm.getPayeeAccountNo())) {
 			String message = "This payee already exists.";
@@ -96,7 +96,7 @@ public class BankPayeeCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_HOME_PAGE;
 			}
-			String errorMessage= "Verification Pin Not Valid. Please Contact the Customer Service to generate a new Verification Pin.";
+			String errorMessage= "Verification Pin Not Valid. Please Contact the Customer Service to generate a new Verification Pin!!!";
 			model.addAttribute("errormessage", errorMessage);
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CONFIRM_PAYEE_PAGE;
