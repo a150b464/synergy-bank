@@ -247,12 +247,32 @@ public class BankCustomerController {
 				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
 	}
 
+	/*
+	 * @RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
+	 * public String viewMiniStatement(Model model) {
+	 * 
+	 * String customerAccountNumber = "AAA001"; List<CustomerTransactionForm>
+	 * transactionForms = bankTransactionService
+	 * .findCustomerTransactionByAccountNumber(customerAccountNumber);
+	 * 
+	 * model.addAttribute("customerTransactionForms", transactionForms);
+	 * 
+	 * EmailSenderThread emailSenderThread = new EmailSenderThread(
+	 * bankEmailService, "jeffcng@gmail.com", "Hello", "transaction");
+	 * emailSenderThread.run();
+	 * 
+	 * return NavigationConstant.CUSTOMER_PAGE +
+	 * NavigationConstant.CUSTOMER_MINI_STATEMENT; }
+	 */
+
 	@RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
 	public String viewMiniStatement(Model model) {
 
-		String customerAccountNumber = "AAA001";
+		String customerAccountNumber = "customerAccountNumber";
+		String accountNumber = "AAA001";
 		List<CustomerTransactionForm> transactionForms = bankTransactionService
-				.findCustomerTransactionByAccountNumber(customerAccountNumber);
+				.findCustomerTransactionByAccountNumber(customerAccountNumber,
+						accountNumber);
 
 		model.addAttribute("customerTransactionForms", transactionForms);
 
