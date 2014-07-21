@@ -117,11 +117,21 @@ public class BankPayeeCustomerController {
 	}
 	
 	@RequestMapping(value="selectPayee",method=RequestMethod.GET) 
-	public String selectPayee(/*@RequestParam("userId") String userId,*/Model model) {
-		
-		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
-		model.addAttribute("customerTransactionCommand",customerTransactionCommand);
-		return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.FUND_TRANSFER_PAGE;
-	}
-	
+    public String selectPayee(/*@RequestParam("userId") String userId,*/Model model) {
+            
+            CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
+            model.addAttribute("customerTransactionCommand",customerTransactionCommand);
+            return NavigationConstant.CUSTOMER_PAGE+NavigationConstant.SELECT_PAYEE;
+    }
+    
+    @ModelAttribute(value="payeeDetailsFormList")
+    public Map<String,String> findPayeeListCustomer(){
+            List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.findPayeeByUserId("1");
+            System.out.println("payeedetails form list = "+ payeeDetailsFormList);
+            LinkedHashMap<String,String> payeeList=new LinkedHashMap<String, String>();
+            for(PayeeDetailsForm detailsForm:payeeDetailsFormList){
+                    payeeList.put(detailsForm.getPayeeAccountNo(), detailsForm.getPayeeName() +" - "+detailsForm.getPayeeAccountNo());
+            }
+            return payeeList;                
+    }	
 }
