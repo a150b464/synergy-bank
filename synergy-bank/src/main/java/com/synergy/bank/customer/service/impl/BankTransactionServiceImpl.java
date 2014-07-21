@@ -55,8 +55,18 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
 			String customerAccountNumber, String accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerTransactionEntity> customerTransactionEntities = bankTransactionHibernetDao
+				.findCustomerTransactionByAccountNumber(customerAccountNumber,
+						accountNumber);
+		List<CustomerTransactionForm> customerTransactionForms = new ArrayList<CustomerTransactionForm>(
+				customerTransactionEntities.size());
+		for (int i = 0; i < customerTransactionEntities.size(); i++) {
+			CustomerTransactionForm customerTransactionForm = new CustomerTransactionForm();
+			BeanUtils.copyProperties(customerTransactionEntities.get(i),
+					customerTransactionForm);
+			customerTransactionForms.add(customerTransactionForm);
+		}
+		return customerTransactionForms;
 	}
 
 }
