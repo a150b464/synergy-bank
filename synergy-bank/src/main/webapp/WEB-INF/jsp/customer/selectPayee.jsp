@@ -13,10 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/selectPayeeSubmitButton.js"></script>	
+<script src="${pageContext.request.contextPath}/js/selectPayeeSubmitButton.js"></script>	
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type="text/javascript">
