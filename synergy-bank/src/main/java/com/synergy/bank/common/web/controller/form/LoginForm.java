@@ -13,6 +13,15 @@ public class LoginForm {
 	private String description;
 	private String active;
 	private String approve;
+	private int loginCount;
+
+	public int getLoginCount() {
+		return loginCount;
+	}
+
+	public void setLoginCount(int loginCount) {
+		this.loginCount = loginCount;
+	}
 
 	public String getApprove() {
 		return approve;
@@ -66,7 +75,9 @@ public class LoginForm {
 	public String toString() {
 		return "LoginForm [userId=" + userId + ", password=" + password
 				+ ", role=" + role + ", description=" + description
-				+ ", active=" + active + ", approve=" + approve + "]";
+				+ ", active=" + active + ", approve=" + approve
+				+ ", loginCount=" + loginCount + "]";
 	}
+
 
 }

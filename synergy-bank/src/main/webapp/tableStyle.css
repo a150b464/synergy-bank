@@ -1,7 +1,8 @@
 table {
 	width:100%;
     border-collapse: collapse;
-    text-align: center;
+    text-align: right;
+    margin-left:70px;
 }
 
 table, th, td {

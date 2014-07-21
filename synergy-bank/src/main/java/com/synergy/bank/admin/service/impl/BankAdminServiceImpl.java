@@ -20,7 +20,7 @@ import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
 
 @Service("BankAdminServiceImpl")
-@Scope("singleton")
+@Scope("request")
 public class BankAdminServiceImpl implements BankAdminService{
 
 	@Autowired
