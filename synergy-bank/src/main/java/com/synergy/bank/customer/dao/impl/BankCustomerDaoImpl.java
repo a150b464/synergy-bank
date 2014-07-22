@@ -15,7 +15,6 @@ import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
-import com.synergy.bank.common.dao.entity.LoginEntity;
 import com.synergy.bank.common.query.CommonQuery;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
@@ -34,7 +33,6 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Autowired
 	@Qualifier("bankDataSource")
-	// here we are injecting bankDataSource inside JdbcDaoSupport super class
 	public void setDataSourceInBank(DataSource dataSource) {
 		super.setDataSource(dataSource);
 	}

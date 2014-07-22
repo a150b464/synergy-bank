@@ -1,16 +1,21 @@
 package com.synergy.bank.customer.dao.entity;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name="customer_details_tbl")
-public class CustomerEntity {
+public class CustomerEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5144983715692295555L;
 	private String userId;
 	private String password;
 	private String salutation;
@@ -37,10 +42,24 @@ public class CustomerEntity {
 	private byte[] photo;
 	private String description;
 
+	private Set<CustomerRegistrationQuestionsEntity> questionList = new HashSet<CustomerRegistrationQuestionsEntity>();
 
 	@Column(name="photo",columnDefinition="longblob")
 	public byte[] getPhoto() {
 		return photo;
+	}
+
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="customer_and_registration_questions_tbl", 
+                joinColumns={@JoinColumn(name="customerId")}, 
+                inverseJoinColumns={@JoinColumn(name="questionId")})
+	public Set<CustomerRegistrationQuestionsEntity> getQuestionList() {
+		return questionList;
+	}
+
+	public void setQuestionList(
+			Set<CustomerRegistrationQuestionsEntity> questionList) {
+		this.questionList = questionList;
 	}
 
 	public void setPhoto(byte[] photo) {
@@ -239,22 +258,22 @@ public class CustomerEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "CustomerEntity [salutation=" + salutation + ", gender="
-				+ gender + ", firstName=" + firstName + ", middleName="
-				+ middleName + ", lastName=" + lastName + ", maritalStatus="
-				+ maritalStatus + ", dob=" + dob + ", category=" + category
+		return "CustomerEntity [userId=" + userId + ", password=" + password
+				+ ", salutation=" + salutation + ", gender=" + gender
+				+ ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", maritalStatus=" + maritalStatus
+				+ ", dob=" + dob + ", category=" + category
 				+ ", motherMaidenName=" + motherMaidenName + ", fatherName="
 				+ fatherName + ", email=" + email + ", mobile=" + mobile
 				+ ", ssn=" + ssn + ", occupation=" + occupation
 				+ ", occupationType=" + occupationType + ", education="
 				+ education + ", grossAnualIncome=" + grossAnualIncome
-				+ ", sourceOfFunds=" + sourceOfFunds + ", userId=" + userId
-				+ ", password=" + password + ", role=" + role + ", doe=" + doe
-				+ ", dom=" + dom + ", description=" + description + "]";
+				+ ", sourceOfFunds=" + sourceOfFunds + ", role=" + role
+				+ ", doe=" + doe + ", dom=" + dom + ", photo="
+				+ Arrays.toString(photo) + ", description=" + description
+				+ ", meetings=" + questionList + "]";
 	}
-
 }
