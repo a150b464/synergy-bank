@@ -75,5 +75,4 @@ public class ApprovedCustomerForm {
 				+ ", totalAvailBalance=" + totalAvailBalance + ", currency="
 				+ currency + "]";
 	}
-
 }
