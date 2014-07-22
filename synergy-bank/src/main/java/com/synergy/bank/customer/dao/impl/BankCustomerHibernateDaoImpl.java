@@ -55,7 +55,6 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	
 	@Override
 	public List<CustomerEntity> findCustomers() {
-		System.out.println("---------Entered in FindCustomers() method of customerHibernateDaoImpl--------");
 		return super.findAll();
 	}
 
@@ -84,7 +83,7 @@ public class BankCustomerHibernateDaoImpl extends AbstractDaoImpl<CustomerEntity
 	public List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,int maximumRowNumbers)
 	{
 		Criteria criteria = super.getCurrentSession().createCriteria(CustomerEntity.class);
-		criteria.setFirstResult(initialRowNumber );
+		criteria.setFirstResult(initialRowNumber );   
 		criteria.setMaxResults(maximumRowNumbers);
 		@SuppressWarnings("unchecked")
 		List<CustomerEntity> list = (List<CustomerEntity>)criteria.list();
