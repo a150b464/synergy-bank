@@ -20,3 +20,4 @@
 			<li class="last"><a href="#">Profile</a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
 		</ul>
+	</div>
