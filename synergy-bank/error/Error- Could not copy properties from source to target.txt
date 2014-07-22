@@ -1,0 +1,13 @@
+SEVERE: Exception sending context initialized event to listener instance of class com.synergy.bank.util.BankServletContextListener
+org.springframework.beans.FatalBeanException: Could not copy properties from source to target; nested exception is java.lang.IllegalArgumentException: argument type mismatch
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:621)
+	at org.springframework.beans.BeanUtils.copyProperties(BeanUtils.java:531)
+	at com.synergy.bank.common.service.impl.SecurityQuestionServiceImpl.saveSecurityQuestions(SecurityQuestionServiceImpl.java:34)
+
+
+
+Solution:
+---------
+	In the SecurityQuestionEntity and SecurityQuestionForm pojo, there were some field that are not of same type. Thats why when I was
+	using BeanUtils.copyProperties(securityQuestionForm, securityQuestionEntity);it caused problem.
+	All the fields in this two pojo must be same.

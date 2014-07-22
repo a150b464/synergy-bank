@@ -1,0 +1,29 @@
+
+SEVERE: Exception sending context initialized event to listener instance of class com.synergy.bank.util.BankServletContextListener
+org.hibernate.MappingException: Unknown entity: com.synergy.bank.common.dao.entity.SecurityQuestionEntity
+	at org.hibernate.internal.SessionFactoryImpl.getEntityPersister(SessionFactoryImpl.java:1141)
+	at org.hibernate.internal.SessionImpl.getEntityPersister(SessionImpl.java:1433)
+	at org.hibernate.engine.internal.ForeignKeys.isTransient(ForeignKeys.java:208)
+	at org.hibernate.event.internal.AbstractSaveEventListener.getEntityState(AbstractSaveEventListener.java:497)
+	at org.hibernate.event.internal.DefaultSaveOrUpdateEventListener.performSaveOrUpdate(DefaultSaveOrUpdateEventListener.java:100)
+	at org.hibernate.event.internal.DefaultSaveOrUpdateEventListener.onSaveOrUpdate(DefaultSaveOrUpdateEventListener.java:90)
+	at org.hibernate.internal.SessionImpl.fireSaveOrUpdate(SessionImpl.java:735)
+	at org.hibernate.internal.SessionImpl.saveOrUpdate(SessionImpl.java:727)
+	at org.hibernate.internal.SessionImpl.saveOrUpdate(SessionImpl.java:723)
+	at com.synergy.bank.base.dao.AbstractDaoImpl.saveOrUpdate(AbstractDaoImpl.java:45)
+	at com.synergy.bank.common.dao.impl.SecurityQuestionDaoImpl.saveSecurityQuestions(SecurityQuestionDaoImpl.java:27)
+	at com.synergy.bank.common.dao.impl.SecurityQuestionDaoImpl$$FastClassByCGLIB$$81251f3f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+
+
+Solution:
+------------
+	I did not scan the "com.synergy.bank.common.dao.entity" package inside SessionFactory bean of configuration file. To resolve this issue
+	add the following:
+
+		<property name="packagesToScan">
+			<list>
+				<value>com.synergy.bank.customer.dao.entity</value>
+				<value>com.synergy.bank.common.dao.entity</value>
+			</list>
+		</property>
