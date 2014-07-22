@@ -1,14 +1,23 @@
 package com.synergy.bank.customer.web.controller.form;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
 
 /**
  * 
  * @author nagendra.yadav
  *
  */
-public class CustomerForm {
+public class CustomerForm implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8059319722067625064L;
 	private String userId;
 	private String password;
 	private String newUserId;
@@ -19,7 +28,7 @@ public class CustomerForm {
 	private String middleName;
 	private String lastName;
 	private String maritalStatus;
-	private Date dob;
+	private Date   dob;
 	private String category;
 	private String motherMaidenName;
 	private String fatherName;
@@ -32,12 +41,24 @@ public class CustomerForm {
 	private String grossAnualIncome;
 	private String sourceOfFunds;
 	private String role;
-	private Date doe;
-	private Date dom;
+	private Date   doe;
+	private Date   dom;
 	private byte[] photo;
 	private String description;
+	private Set<CustomerRegistrationQuestionsEntity> questionList = new HashSet<CustomerRegistrationQuestionsEntity>();
 
 	
+	
+	
+
+	public Set<CustomerRegistrationQuestionsEntity> getQuestionList() {
+		return questionList;
+	}
+
+	public void setQuestionList(
+			Set<CustomerRegistrationQuestionsEntity> questionList) {
+		this.questionList = questionList;
+	}
 
 	public String getNewUserId() {
 		return newUserId;
@@ -254,22 +275,26 @@ public class CustomerForm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "CustomerForm [New UserId=" + newUserId + ",New Password=" + newPassword + ",salutation=" + salutation + ", gender="
-				+ gender + ", firstName=" + firstName + ", middleName="
-				+ middleName + ", lastName=" + lastName + ", maritalStatus="
-				+ maritalStatus + ", dob=" + dob + ", category=" + category
+		return "CustomerForm [userId=" + userId + ", password=" + password
+				+ ", newUserId=" + newUserId + ", newPassword=" + newPassword
+				+ ", salutation=" + salutation + ", gender=" + gender
+				+ ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", maritalStatus=" + maritalStatus
+				+ ", dob=" + dob + ", category=" + category
 				+ ", motherMaidenName=" + motherMaidenName + ", fatherName="
 				+ fatherName + ", email=" + email + ", mobile=" + mobile
 				+ ", ssn=" + ssn + ", occupation=" + occupation
 				+ ", occupationType=" + occupationType + ", education="
 				+ education + ", grossAnualIncome=" + grossAnualIncome
-				+ ", sourceOfFunds=" + sourceOfFunds + ", userId=" + userId
-				+ ", password=" + password + ", role=" + role + ", doe=" + doe
-				+ ", dom=" + dom + ", description=" + description + ", photo=" + photo + "]";
+				+ ", sourceOfFunds=" + sourceOfFunds + ", role=" + role
+				+ ", doe=" + doe + ", dom=" + dom + ", photo="
+				+ Arrays.toString(photo) + ", description=" + description
+				+ ", questionList=" + questionList + "]";
 	}
+	
+	
 
 }
