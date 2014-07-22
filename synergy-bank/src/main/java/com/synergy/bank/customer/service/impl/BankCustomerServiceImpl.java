@@ -48,7 +48,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		char[] password=bankJdbcDao.generatePassword();
 		String userid=bankJdbcDao.nextUserID();
 		customerForm.setUserId(userid);
-		customerForm.setPassword(new String(password));
+		//customerForm.setPassword(String.valueOf(password));
+		customerForm.setPassword("1");
 		CustomerEntity customerEntity=new CustomerEntity();
 		//attribute and datatype should be match
 		BeanUtils.copyProperties(customerForm, customerEntity);
