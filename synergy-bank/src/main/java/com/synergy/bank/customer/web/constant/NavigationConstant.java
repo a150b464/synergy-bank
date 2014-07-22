@@ -25,4 +25,6 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_ACCOUNT_SUMMARY = "accountSummary";
 	final public static String CHANGE_PASSWORD_PAGE = "changePassword";
 	final public static String CUSTOMER_MINI_STATEMENT = "viewMiniStatement";
+	final public static String CUSTOMER_SECURITY_QUESTIONS = "securityQuestions";
+	final public static String CUSTOMER_SECURITY_QUESTIONS_PHASE_TWO = "securityQuestionPTwo";
 }

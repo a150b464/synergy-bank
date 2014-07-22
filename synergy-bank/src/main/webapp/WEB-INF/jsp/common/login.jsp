@@ -13,6 +13,19 @@
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+		function myfunc(){
+			alert("Hello");
+			var value = '<%=session.getAttribute("conditionCheck")%>';
+			if(value.equals("check")){ 
+				$("#changePassword").show();
+				$("#changeQuestion").hide();
+			}else{
+				$("#changeQuestion").show();
+				$("#changePassword").hide();
+			}
+		}
+	</script>
 <script>
 var ccontextPath="${pageContext.request.contextPath}";
 	$(function() {
@@ -68,7 +81,11 @@ var ccontextPath="${pageContext.request.contextPath}";
 		     });
 	});
 </script>
+
 </head>
+
+
+
 <body>
   <section class="container">
     <div class="login">
@@ -95,9 +112,9 @@ var ccontextPath="${pageContext.request.contextPath}";
         </p>
       </form>
     </div>
-<a href="tlogin.jsp"><b>Click here to reset it</b></a>.
-    <div class="login-help">
-      Forgot your password? <a href="tlogin.jsp"><b>Click here to reset it</b></a>.
+    <div class="login-help" style="color: black">
+      Forgot your password? <a href="${pageContext.request.contextPath}/bank/forgotPassword" ><b>Click here to reset it</b></a>.<br>
+      If account is locked, <a href="${pageContext.request.contextPath}/bank/securityQuestions"><b>Click here </b></a> to activate it.
     </div>
   </section>
 
