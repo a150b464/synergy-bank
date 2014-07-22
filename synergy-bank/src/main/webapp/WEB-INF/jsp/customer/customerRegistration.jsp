@@ -16,13 +16,10 @@
   });
   </script>
   
-
 </head>
 <body>
-
-		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
-		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
-		
+	<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
+	<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />		
 	<div id="left_section">
 				<div class="title"><b>Welcome to Customer Registration</b></div>
 				<div class="text_content">
