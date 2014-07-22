@@ -6,8 +6,8 @@
 <title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script>
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script> --%>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type = "text/javascript">
@@ -37,19 +37,18 @@
 	<div id="content">
 			
 			 <h2 style="color: blue">${msg}</h2>
-			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration.jsp" method="post"  commandName="customerForm" enctype="multipart/form-data" > 
+			<ff:form name="customerRegistration" action="${pageContext.request.contextPath}/bank/customerRegistration" method="post"  commandName="customerForm"  > 
 				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
 					
 									
 					<tr>
 						<td><b>Salutation:</b></td>
-						<td><select path="salutation" width="20" >
-							<option>Mr.</option>
-						    <option>Mrs.</option>
-						    <option>Miss.</option>
-						    <option>Mast.</option>
-						    </select>
-						
+						<td><ff:select path="salutation" width="20" >
+							<ff:option value="Mr">Mr.</ff:option>
+						    <ff:option value="Mrs" >Mrs.</ff:option>
+						    <ff:option value="Miss">Miss.</ff:option>
+						    <ff:option value="Mast">Mast.</ff:option>
+						    </ff:select>
 						</td>
 					</tr>
 					<tr>
@@ -66,34 +65,34 @@
 					</tr>
 					<tr>
 						<td><b>Gender:</b></td>
-						<td><p><select path="gender" width="20">
-								<option>Male</option>
-								<option>Female</option>
-								<option>Other</option>
-							</select></p>
+						<td><p><ff:select path="gender" width="20">
+								<ff:option value="Male">Male</ff:option>
+								<ff:option value="Female">Female</ff:option>
+								<ff:option value="Event">Event</ff:option>
+							</ff:select></p>
 						</td>
 					</tr>
 					<tr>
 						<td><b>Marital Status:</b></td>
-						<td><p><select path="maritalstatus" width="20">
-								<option>Single</option>
-								<option>Married</option>
-								<option>Divorced</option>
-							</select></p>
+						<td><p><ff:select path="maritalStatus" width="20">
+								<ff:option value="Single">Single</ff:option>
+								<ff:option value="Married">Married</ff:option>
+								<ff:option value="Divorced">Divorced</ff:option>
+							</ff:select></p>
 						</td>
 					</tr>
 					<tr>
 						<td><b>Date of Birth:</b></td>
-						<td><ff:input path="dob" id ="datepicker" size="60"/></td>
-					</tr>
+<%-- 						<td><ff:input path="dob" id ="datepicker" size="60"/></td>
+ --%>					</tr>
 					<tr>
 						<td><b>Category:</b></td>
 											    				
-						<td><select path="category" width="20">
-								<option>GEN</option>
-								<option>OBC</option>
-								<option>Others</option>
-							</select>
+						<td><ff:select path="category" width="20">
+								<ff:option value="GEN">GEN</ff:option>
+								<ff:option value="OBC">OBC</ff:option>
+								<ff:option value="Others">Others</ff:option>
+							</ff:select>
 						</td>
 					</tr>
 					<tr>
@@ -140,21 +139,22 @@
 						<td><ff:input path="sourceOfFunds" size="60" /></td>
 					</tr>
 					
-					<%-- <tr>
+<%-- 					<tr>
 						<td><b>Account Type:</b></td>
 						<td><ff:input path="accountType" size="60" /></td>
-					</tr> --%>
-					
+					</tr>
+ --%>					
 					<tr>
 						<td><b>Photo:</b></td>
-						<td><ff:input path="photo" type="file" value="Upload File"/>
-						</td>
+		 				<td><ff:input path="photo" type="file" value="Upload File"/>
+		 				</td>
 					</tr>
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="60" /></td>
-						<td><input id = "submitid" type="button" value = "Register Me" onclick="validateCustomerForm();"/></td>
-					</tr>
+						<td><input type="submit" value="Search"/></td>
+			<!-- 			<td><input id = "submitid" type="button" value = "Register " onclick="validateCustomerForm();"/></td>
+			 -->		</tr>
 			</table>
 			
 	</ff:form> 
