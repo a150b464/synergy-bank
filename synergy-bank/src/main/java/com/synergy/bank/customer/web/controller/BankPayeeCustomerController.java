@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
@@ -37,6 +39,15 @@ public class BankPayeeCustomerController {
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
+	
+	
+	// Add Payee Methods
+	@RequestMapping(value = "checkPayeeAccountNo.do", method = RequestMethod.GET)
+	public @ResponseBody String checkPayeeAccountNo(@RequestParam("ppayeeAccountNumber") String payeeAccountNumber) {
+	String result=bankPayeeService.checkPayeeAccountNumber(payeeAccountNumber);
+	  //@ResponseBody =>>by pass view resolver and write this data directly into the response body 
+      return result;		
+	} 
 
 	// Add Payee Methods
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.GET)

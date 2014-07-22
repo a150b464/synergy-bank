@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -93,6 +94,18 @@ implements BankPayeeDao{
 public String confirmPayee(String payeeAccountNo, String userId) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public String checkPayeeAccountNumber(String payeeAcoountNumber) {
+	//
+	String sql="select accountNumber from customer_account_numbers_tbl where accountNumber='"+payeeAcoountNumber+"'";
+	try {
+		super.getJdbcTemplate().queryForObject(sql,String.class);
+	}catch(EmptyResultDataAccessException dataAccessException){
+		return "invalid";
+	}
+	return "valid";
 }
 
 }
