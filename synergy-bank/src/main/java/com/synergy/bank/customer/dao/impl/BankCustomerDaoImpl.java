@@ -97,7 +97,6 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public CustomerEntity findCustomerByUserId(String userid) {
-		
 		return null;
 	}
 	@Override
