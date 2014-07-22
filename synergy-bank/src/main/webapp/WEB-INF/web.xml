@@ -54,6 +54,11 @@
           <servlet-name>common</servlet-name>
           <url-pattern>/bankSoapService</url-pattern>
      </servlet-mapping>
+     
+      <servlet-mapping>
+          <servlet-name>common</servlet-name>
+          <url-pattern>/bankSoapServiceForCustomerDetails</url-pattern>
+     </servlet-mapping>
 
 
   

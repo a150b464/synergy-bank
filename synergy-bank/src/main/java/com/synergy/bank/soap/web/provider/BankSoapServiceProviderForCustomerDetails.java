@@ -11,11 +11,13 @@ import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
 @WebService
+@Component("BankSoapCustomerDetails")
 public class BankSoapServiceProviderForCustomerDetails {
 
 /*	@Autowired
@@ -28,9 +30,9 @@ public class BankSoapServiceProviderForCustomerDetails {
 */
 	
 	
-	/*@Autowired
+	@Autowired
 	@Qualifier("BankCustomerServiceImpl")
-	private BankCustomerService bankCustomerService;*/
+	private BankCustomerService bankCustomerService;
 	
 	
 	//public List<CustomerForm> cDetails;
@@ -38,32 +40,9 @@ public class BankSoapServiceProviderForCustomerDetails {
 	public List<CustomerForm> displayCustomers() {
 
 		System.out.println("-------Entered in the webService class------");
-		
-		
-
-/*		List<CustomerForm> customerEntityList = bankCustomerService.findCustomers();
-*/
-		
-	//    BankCustomerService bankCustomerService=new BankCustomerService();
-
-		//List<CustomerForm> customerDetailList = bankCustomerService.getCustomerListForRowNumbers(0,5);
-
-		
-		/*
-		 * List<CustomerForm> customerFormList = new
-		 * ArrayList<CustomerForm>(customerEntityList.size());
-		 * 
-		 * CustomerForm customerForm = new CustomerForm(); for(int
-		 * i=0;i<customerEntityList.size();i++) {
-		 * 
-		 * BeanUtils.copyProperties(customerEntityList.get(i),customerForm);
-		 * customerFormList.add(customerForm);
-		 * 
-		 * }
-		 */
-
-	/*	System.out.println("Printing from WebService Class "
-				+ customerDetailList);
-	*/	return null;
+		List<CustomerForm> customerEntityList = bankCustomerService.findCustomers();
+		System.out.println("Printing from WebService Class "
+				+ customerEntityList);
+		return customerEntityList;
 	}
 }

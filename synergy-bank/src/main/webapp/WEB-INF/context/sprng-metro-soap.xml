@@ -21,6 +21,15 @@
             </ws:service>
         </wss:service>
     </wss:binding>
+    
+    <wss:binding url="/bankSoapServiceForCustomerDetails">
+        <wss:service>
+            <ws:service bean="#BankSoapCustomerDetails">
+            </ws:service>
+        </wss:service>
+    </wss:binding>
+    
+    
        
 </beans>       
 
