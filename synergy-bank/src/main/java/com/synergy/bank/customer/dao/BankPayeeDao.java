@@ -18,4 +18,5 @@ public interface BankPayeeDao {
 	public abstract PayeeDetailsEntity findPayeeByUserId(String userid);
 	public boolean isPayeeExists(String userId, String payeeAccountNo);
 	public String confirmPayee(String payeeAccountNo, String userId);
+	public String checkPayeeAccountNumber(String payeeAcoountNumber);
 }

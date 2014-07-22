@@ -61,5 +61,10 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	public List<PayeeDetailsForm> getPayeeListForUserId(String userId) {
 		return null;
 	}
+
+	@Override
+	public String checkPayeeAccountNumber(String payeeAcoountNumber) {
+		return bankPayeeDao.checkPayeeAccountNumber(payeeAcoountNumber);
+	}
 	
 }
