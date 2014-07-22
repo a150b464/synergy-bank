@@ -13,3 +13,12 @@ You may need to switch newer MVC infrastructure classes to use this argument.
 Solution :-
 I was redirecting to a page and add an attribute using redirectAttributes.addFlashAttribute("msg", msg) from the controller, 
 but did not add <mvc:annotation-driven /> tag in spring context XML file.
+
+
+Error-3:
+bad request syntax error 400 at client side
+
+Solution :-
+-It is caused by date field. Format of the date field did not match with default java format.
+
+ 
