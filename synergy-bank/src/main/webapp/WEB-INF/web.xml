@@ -1,89 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
- 
- 
-  <session-config>
-    <session-timeout>10</session-timeout>
-  </session-config> 
- 
-  <context-param>
-  	<param-name>pageTitle</param-name>
-    <param-value>Synergy Bank</param-value> 		
-  </context-param>
- 
-  <welcome-file-list>
-  	<welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
 
-  	<context-param>
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+
+
+	<context-param>
+		<param-name>pageTitle</param-name>
+		<param-value>Synergy Bank</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<filter>
+		<filter-name>bankAuthFilter</filter-name>
+		<filter-class>com.synergy.bank.base.filter.BankAuthFilter</filter-class>
+		<init-param>
+			<param-name>allowAccess</param-name>
+			<param-value>.css,.jpg,.JPG,.js,.png,.PNG,/bank/auth,/bank/customerRegistration</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>bankAuthFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/context/synergy-bank-root-context.xml</param-value>
-	</context-param> 
-  
-  	<!-- Responsible for instantiating spring root web application context container 
-		ApplicationContext context=new ClassPathXmlApplicationContext("arm-strong-service-dao.xml");
-		/WEB-INF/applicationContext.xml
-		who gives this listener = spring web module
-	-->
-	
- 	<listener>
+	</context-param>
+
+	<!-- Responsible for instantiating spring root web application context container 
+		ApplicationContext context=new ClassPathXmlApplicationContext("arm-strong-service-dao.xml"); 
+		/WEB-INF/applicationContext.xml who gives this listener = spring web module -->
+
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
-	
+
+
 	<listener>
 		<listener-class>com.synergy.bank.util.BankServletContextListener</listener-class>
 	</listener>
-	
-	 <!-- 
-	   it will read sun-jaxws.xml 
-	   file  and publish all the web service inside web service container
-	  -->
-	<!-- <listener>
-          <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-     </listener> -->
-	
-     <!-- The servlet definition and it’s mapping is used to intercept the url-pattern 
-          that should be considered as web service request. The class(com.sun.xml.ws.transport.http.servlet.WSServlet) 
-          acts as a dispatching servlet that routes the request to appropriate implementation 
-          class through the delegate received from the servlet context created by the 
-          listener as stated above. -->
-     <servlet>
-          <servlet-name>common</servlet-name>
-          <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
-          <load-on-startup>1</load-on-startup>
-     </servlet>
 
-     <servlet-mapping>
-          <servlet-name>common</servlet-name>
-          <url-pattern>/bankSoapService</url-pattern>
-     </servlet-mapping>
-     
-      <servlet-mapping>
-          <servlet-name>common</servlet-name>
-          <url-pattern>/bankSoapServiceForCustomerDetails</url-pattern>
-     </servlet-mapping>
+	<!-- it will read sun-jaxws.xml file and publish all the web service inside 
+		web service container -->
+	<!-- <listener> <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class> 
+		</listener> -->
+
+	<!-- The servlet definition and it’s mapping is used to intercept the url-pattern 
+		that should be considered as web service request. The class(com.sun.xml.ws.transport.http.servlet.WSServlet) 
+		acts as a dispatching servlet that routes the request to appropriate implementation 
+		class through the delegate received from the servlet context created by the 
+		listener as stated above. -->
+	<servlet>
+		<servlet-name>common</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>common</servlet-name>
+		<url-pattern>/bankSoapService</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>common</servlet-name>
+		<url-pattern>/bankSoapServiceForCustomerDetails</url-pattern>
+	</servlet-mapping>
 
 
-  
-  <!-- Here as per spring mvc front controller 
-  who gives this DispatcherServlet = spring mvc module
-  
-  -->
-  <servlet>
-    <servlet-name>synergy-bank</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <!-- 
-  	extension mapping *.do
-  	below  is 	path prefix mapping
-   -->
-  <servlet-mapping>
-    <servlet-name>synergy-bank</servlet-name>
-    <url-pattern>/bank/*</url-pattern>
-  </servlet-mapping>
+
+	<!-- Here as per spring mvc front controller who gives this DispatcherServlet 
+		= spring mvc module -->
+	<servlet>
+		<servlet-name>synergy-bank</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- extension mapping *.do below is path prefix mapping -->
+	<servlet-mapping>
+		<servlet-name>synergy-bank</servlet-name>
+		<url-pattern>/bank/*</url-pattern>
+	</servlet-mapping>
 
 </web-app>
