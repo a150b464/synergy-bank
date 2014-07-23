@@ -41,13 +41,23 @@ public class BankPayeeCustomerController {
 	private BankEmailService bankEmailService;
 	
 	
-	// Add Payee Methods
+	// Add PayeeAccountNumber Methods for Ajax Validation
 	@RequestMapping(value = "checkPayeeAccountNo.do", method = RequestMethod.GET)
 	public @ResponseBody String checkPayeeAccountNo(@RequestParam("ppayeeAccountNumber") String payeeAccountNumber) {
 	String result=bankPayeeService.checkPayeeAccountNumber(payeeAccountNumber);
 	  //@ResponseBody =>>by pass view resolver and write this data directly into the response body 
       return result;		
 	} 
+	//Add PayeeName Method
+	@RequestMapping(value = "checkPayeeName.do", method = RequestMethod.GET)
+	public @ResponseBody String checkPayeeName(@RequestParam("ppayeeName") String payeeName) {
+	String result=bankPayeeService.checkPayeeName(payeeName);
+	  //@ResponseBody =>>by pass view resolver and write this data directly into the response body 
+      return result;		
+	} 
+	
+	
+	
 
 	// Add Payee Methods
 	@RequestMapping(value = "addpayee.do", method = RequestMethod.GET)
