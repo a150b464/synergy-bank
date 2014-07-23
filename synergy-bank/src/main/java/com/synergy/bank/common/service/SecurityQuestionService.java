@@ -6,5 +6,5 @@ import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 
 public interface SecurityQuestionService {
 	public String saveSecurityQuestions(List<SecurityQuestionForm> securityQuestionForms);
-
+	public List<SecurityQuestionForm> getRandomQuestions(int count);
 }

@@ -16,13 +16,12 @@ import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 
 @Service("SecurityQuestionServiceImpl")
 @Scope("singleton")
-public class SecurityQuestionServiceImpl implements SecurityQuestionService{
-	
+public class SecurityQuestionServiceImpl implements SecurityQuestionService {
+
 	@Autowired
 	@Qualifier("SecurityQuestionDaoImpl")
 	private SecurityQuestionDao securityQuestionDao;
-	
-	
+
 	@Override
 	public String saveSecurityQuestions(
 			List<SecurityQuestionForm> securityQuestionForms) {
@@ -31,14 +30,30 @@ public class SecurityQuestionServiceImpl implements SecurityQuestionService{
 
 		for (SecurityQuestionForm securityQuestionForm : securityQuestionForms) {
 			SecurityQuestionEntity securityQuestionEntity = new SecurityQuestionEntity();
-			BeanUtils.copyProperties(securityQuestionForm, securityQuestionEntity);
+			BeanUtils.copyProperties(securityQuestionForm,
+					securityQuestionEntity);
 			securityQuestionEntities.add(securityQuestionEntity);
 		}
 		System.out.println("Servicessssss");
-		String result = securityQuestionDao.saveSecurityQuestions(securityQuestionEntities);
+		String result = securityQuestionDao
+				.saveSecurityQuestions(securityQuestionEntities);
 		return result;
 	}
-	
-	
+
+	@Override
+	public List<SecurityQuestionForm> getRandomQuestions(int count) {
+		List<SecurityQuestionEntity> securityQuestion =	securityQuestionDao.getRandomSecurityQuestions(count);
+		System.out.println(securityQuestion);
+		List<SecurityQuestionForm> securityQuestionForms = new ArrayList<SecurityQuestionForm>();
+		
+		for (SecurityQuestionEntity pde : securityQuestion) 
+		{
+			SecurityQuestionForm pdf = new SecurityQuestionForm();
+			BeanUtils.copyProperties(pde, pdf);
+			securityQuestionForms.add(pdf);
+		}
+		
+		return securityQuestionForms;
+	}
 
 }

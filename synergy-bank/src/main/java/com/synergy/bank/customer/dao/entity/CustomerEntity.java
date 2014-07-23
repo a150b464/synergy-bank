@@ -1,15 +1,14 @@
 package com.synergy.bank.customer.dao.entity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name="customer_details_tbl")
+@Table(name = "customer_details_tbl")
 public class CustomerEntity implements java.io.Serializable {
 
 	/**
@@ -42,23 +41,25 @@ public class CustomerEntity implements java.io.Serializable {
 	private byte[] photo;
 	private String description;
 
-	private Set<CustomerRegistrationQuestionsEntity> questionList = new HashSet<CustomerRegistrationQuestionsEntity>();
+	private List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
-	@Column(name="photo",columnDefinition="longblob")
+
+
+
+
+	@Column(name = "photo", columnDefinition = "longblob")
 	public byte[] getPhoto() {
 		return photo;
 	}
 
-	@ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="customer_and_registration_questions_tbl", 
-                joinColumns={@JoinColumn(name="customerId")}, 
-                inverseJoinColumns={@JoinColumn(name="questionId")})
-	public Set<CustomerRegistrationQuestionsEntity> getQuestionList() {
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "customer_and_registration_questions_tbl", joinColumns = { @JoinColumn(name = "customerId") }, inverseJoinColumns = { @JoinColumn(name = "serialNumber") })
+	public List<CustomerRegistrationQuestionsEntity> getQuestionList() {
 		return questionList;
 	}
-
+	
 	public void setQuestionList(
-			Set<CustomerRegistrationQuestionsEntity> questionList) {
+			List<CustomerRegistrationQuestionsEntity> questionList) {
 		this.questionList = questionList;
 	}
 

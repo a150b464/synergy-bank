@@ -1,9 +1,9 @@
 package com.synergy.bank.customer.web.controller.form;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
 
@@ -28,7 +28,7 @@ public class CustomerForm implements java.io.Serializable {
 	private String middleName;
 	private String lastName;
 	private String maritalStatus;
-	private Date   dob;
+	private Date dob;
 	private String category;
 	private String motherMaidenName;
 	private String fatherName;
@@ -41,22 +41,18 @@ public class CustomerForm implements java.io.Serializable {
 	private String grossAnualIncome;
 	private String sourceOfFunds;
 	private String role;
-	private Date   doe;
-	private Date   dom;
+	private Date doe;
+	private Date dom;
 	private byte[] photo;
 	private String description;
-	private Set<CustomerRegistrationQuestionsEntity> questionList = new HashSet<CustomerRegistrationQuestionsEntity>();
+	private List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
-	
-	
-	
-
-	public Set<CustomerRegistrationQuestionsEntity> getQuestionList() {
+	public List<CustomerRegistrationQuestionsEntity> getQuestionList() {
 		return questionList;
 	}
 
 	public void setQuestionList(
-			Set<CustomerRegistrationQuestionsEntity> questionList) {
+			List<CustomerRegistrationQuestionsEntity> questionList) {
 		this.questionList = questionList;
 	}
 
@@ -294,7 +290,5 @@ public class CustomerForm implements java.io.Serializable {
 				+ Arrays.toString(photo) + ", description=" + description
 				+ ", questionList=" + questionList + "]";
 	}
-	
-	
 
 }
