@@ -22,5 +22,6 @@ public interface AbstractDao<E, I extends Serializable> {
     public List<E> findByAttributeAndValue(I attribute,I value);
 	List<CustomerEntity> getCustomerListForRowNumbers(int initialRowNumber,
 			int maximumRowNumbers);
-	int getCount();	
+	int getCount();
+	List<E> findTopNRandomRows(int count);	
 }

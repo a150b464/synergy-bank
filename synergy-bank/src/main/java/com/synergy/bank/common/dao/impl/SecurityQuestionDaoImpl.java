@@ -36,6 +36,11 @@ public class SecurityQuestionDaoImpl extends AbstractDaoImpl<SecurityQuestionEnt
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<SecurityQuestionEntity> getRandomSecurityQuestions(int count) {
+		return super.findTopNRandomRows(count);
+	}
 	
 
 }

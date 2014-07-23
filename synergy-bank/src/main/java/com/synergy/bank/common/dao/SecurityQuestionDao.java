@@ -7,5 +7,5 @@ import com.synergy.bank.common.dao.entity.SecurityQuestionEntity;
 public interface SecurityQuestionDao {
 	
 	public String saveSecurityQuestions(List<SecurityQuestionEntity> securityQuestionEntities);
-
+	public List<SecurityQuestionEntity> getRandomSecurityQuestions(int count);
 }

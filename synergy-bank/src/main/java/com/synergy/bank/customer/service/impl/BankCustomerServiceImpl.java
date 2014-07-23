@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.synergy.bank.common.dao.BankJdbcDao;
+import com.synergy.bank.common.dao.SecurityQuestionDao;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
@@ -41,11 +42,15 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Qualifier("BankJdbcDaoImpl")
 	private BankJdbcDao bankJdbcDao;
 	
+	@Autowired
+	@Qualifier("SecurityQuestionDaoImpl")
+	private SecurityQuestionDao securityQuestionDao;
+
 
 	@Override
 	public String addCustomer(CustomerForm customerForm) {
 		System.out.println("inside add cus+"+customerForm);
-		char[] password=bankJdbcDao.generatePassword();
+	//	char[] password=bankJdbcDao.generatePassword();
 		String userid=bankJdbcDao.nextUserID();
 		customerForm.setUserId(userid);
 		//customerForm.setPassword(String.valueOf(password));
@@ -66,9 +71,23 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		customerLoginDetailEntity.setOldPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setRole("customer");
+		
+/*		List<SecurityQuestionEntity> securityQuestionList = securityQuestionDao.getRandomSecurityQuestions(3);
+	    Set<CustomerRegistrationQuestionsEntity> questionSet = new HashSet<CustomerRegistrationQuestionsEntity>();
+
+		for(SecurityQuestionEntity securityQuestion:securityQuestionList)
+		{
+			CustomerRegistrationQuestionsEntity customerRegistrationEntity = new CustomerRegistrationQuestionsEntity();
+			customerRegistrationEntity.setQuestionId(securityQuestion.getId());
+			customerRegistrationEntity.setDescription(securityQuestion.getDescription());
+			customerRegistrationEntity.setCustomerId(customerForm.getUserId());
+			questionSet.add(customerRegistrationEntity);
+		}
+*/		
 		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
+		
 		bankCustomerDao.addCustomer(customerEntity);
-		return userid+"-"+new String(password);
+		return "success";
 	}
 	
 	public String updateCustomer(CustomerForm customerForm) {

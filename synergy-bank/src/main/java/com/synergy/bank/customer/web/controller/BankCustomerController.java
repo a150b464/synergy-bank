@@ -2,6 +2,7 @@ package com.synergy.bank.customer.web.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.common.service.BankEmailService;
+import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
+import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.service.CustomerAccountService;
@@ -53,11 +57,32 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankTransactionServiceImpl")
 	private BankTransactionService bankTransactionService;
+	
+	@Autowired
+	@Qualifier("SecurityQuestionServiceImpl")
+	private SecurityQuestionService securityQuestionServiceImpl;
+
 
 	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm = new CustomerForm();
+		
+		List<SecurityQuestionForm> securityQuestionList = securityQuestionServiceImpl.getRandomQuestions(3);
+	    List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
+		for(SecurityQuestionForm securityQuestion:securityQuestionList)
+		{
+			CustomerRegistrationQuestionsEntity customerRegistrationEntity = new CustomerRegistrationQuestionsEntity();
+			customerRegistrationEntity.setQuestionId(securityQuestion.getId());
+			customerRegistrationEntity.setDescription(securityQuestion.getDescription());
+			customerRegistrationEntity.setCustomerId(customerForm.getUserId());
+			questionList.add(customerRegistrationEntity);
+		}
+		
+		System.out.println("woah iside question list"+questionList);
+		
+		customerForm.setQuestionList(questionList);
+		
 		model.addAttribute("customerForm", customerForm);
 		UUID idOne = UUID.randomUUID();
 		System.out.println("Random Id: " + idOne);
@@ -94,6 +119,7 @@ public class BankCustomerController {
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
 	public String editRegistration(@RequestParam("userId") String userId,
 			Model model) {
+		
 		CustomerForm customerForm = bankCustomerService
 				.findCustomerByUserId(userId);
 		model.addAttribute("customerForm", customerForm);
