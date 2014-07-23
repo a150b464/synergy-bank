@@ -19,16 +19,19 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
-	<div id="content">
-	<h3>This page is under construction:</h3> 
+	<div id="passwordChange">
+	<h3>Password Recovery Wizard</h3> 
 	<br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
 			
 			<form action="changePassword" method="get" > 
 				<table align=center width="30%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
-			
-			 
-			
-			
+
+					<tr>
+						<td>
+							<b>User Id :</b>
+							<input name = "userId" type="text" size="20"  />
+						</td>						
+					</tr>
 					<tr>
 						<td>
 							<b>Current Password :</b>

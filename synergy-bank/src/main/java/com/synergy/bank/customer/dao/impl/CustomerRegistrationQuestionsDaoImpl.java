@@ -38,13 +38,12 @@ public class CustomerRegistrationQuestionsDaoImpl extends AbstractDaoImpl<Custom
 		List<CustomerRegistrationQuestionsEntity> customerRegistrationQuestionsEntities = super.findByAttributeAndValue("customerId", customerId);
 		return customerRegistrationQuestionsEntities;
 	}
+
 	@Override
 	public List<CustomerEntity> getCustomerListForRowNumbers(
 			int initialRowNumber, int maximumRowNumbers) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 	
 }

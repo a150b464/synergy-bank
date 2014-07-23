@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.synergy.bank.common.service.BankAuthService;
 import com.synergy.bank.common.service.BankEmailService;
+import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.CustomerAccountService;
+import com.synergy.bank.customer.service.CustomerRegistrationQuestionsService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
 
@@ -45,6 +48,10 @@ public class LoginController {
 	@Qualifier("BankAuthServiceImpl")
 	private BankAuthService bankAuthService;
 
+	@Autowired
+	@Qualifier("CustomerRegistrationQuestionsServiceImpl")
+	private CustomerRegistrationQuestionsService customerRegistrationQuestionsService;
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
@@ -167,13 +174,19 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/changeQuestion", method = RequestMethod.POST)
-	public String changeQuestion(Model model,
-			@RequestParam("userId")String user) {
-		String useridTemp = "11";
-		if(user.equals(useridTemp))
-			model.addAttribute("userid", useridTemp);
-		return NavigationConstant.CUSTOMER_PAGE
-				+ NavigationConstant.CUSTOMER_SECURITY_QUESTIONS_PHASE_TWO;
+	public String changeQuestion(Model model, @RequestParam("userId")String userID, CustomerRegistrationQuestionsForm customerRegistrationQuestionsForm) {
+		if(bankCustomerService.findCustomerByUserId(userID).equals(userID)){
+			String msg = ("UserId Is invalid..!!!");
+			model.addAttribute("message", msg);	
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_SECURITY_QUESTIONS;
+		}
+		else{
+			
+			model.addAttribute("userid", userID);
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_SECURITY_QUESTIONS_PHASE_TWO;
+		}	
 	}
 	
 	@RequestMapping(value = "/newQuestions", method = RequestMethod.GET)
