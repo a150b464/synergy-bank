@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.BankTransactionDao;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 import com.synergy.bank.customer.service.BankTransactionService;
@@ -18,6 +19,10 @@ import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 @Scope("singleton")
 public class BankTransactionServiceImpl implements BankTransactionService {
 
+	@Autowired
+	@Qualifier("BankPayeeDaoImpl")
+	private BankPayeeDao bankPayeeDao;
+	
 	@Autowired
 	@Qualifier("BankTransactionDaoImpl")
 	private BankTransactionDao bankTransactionDao;
@@ -67,6 +72,14 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 			customerTransactionForms.add(customerTransactionForm);
 		}
 		return customerTransactionForms;
+	}
+
+	@Override
+	public String checkTransactionAmountNumber(String transactionAmount) {
+
+			return bankPayeeDao.checkTransactionAmountNumber(transactionAmount);
+			
+	
 	}
 
 }
