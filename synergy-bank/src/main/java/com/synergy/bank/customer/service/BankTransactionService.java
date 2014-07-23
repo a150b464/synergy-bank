@@ -13,4 +13,6 @@ public interface BankTransactionService {
 
 	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
 			String customerAccountNumber, String accountNumber);
+	
+	public String checkTransactionAmountNumber(String transactionAmount);
 }

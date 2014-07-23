@@ -20,4 +20,6 @@ public interface BankPayeeService {
 	public List<PayeeDetailsForm> findPayeeByUserId(String userid);
 	public boolean isPayeeExists(String userId, String payeeAccountNo);
 	public String checkPayeeAccountNumber(String payeeAcoountNumber) ;
+	String checkPayeeName(String payeeName);
+	
 }
