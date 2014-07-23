@@ -17,15 +17,16 @@
 <body>
 	<%@include file="cheader.jsp"%>
 	<div>	<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
-		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="860" height="280" />
+		<img src="${pageContext.request.contextPath}/images/security2.jpg" alt="" width="860" height="180" />
 		
 	</div>
+	<br>
 	<div align="left">
-	<h3>Password Recovery Wizard</h3> 
+	<h3>Setup New Security Questionnaire Wizard</h3> 
 	<br/><br/>	 
 			
 			<ff:form action="changeQuestion" method="post" > 
-				<table align=left width="400" height="230" border="0" cellspacing="30" cellpadding="30" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
+				<table align=left width="400" height="130" border="0" cellspacing="30" cellpadding="30" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
 
 					<tr>
 						<td>
@@ -44,6 +45,7 @@
 		<div id="blocks">																																																																																																																													
 			
 		</div>
+		<br><br><br>
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />

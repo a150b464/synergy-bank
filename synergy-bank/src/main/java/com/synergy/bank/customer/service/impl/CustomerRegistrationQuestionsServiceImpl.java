@@ -7,21 +7,31 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
+import com.synergy.bank.common.dao.entity.SecurityQuestionEntity;
+import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
+import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.CustomerRegistrationQuestionsDao;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
+import com.synergy.bank.customer.dao.query.CustomerQuery;
 import com.synergy.bank.customer.service.CustomerRegistrationQuestionsService;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 
 @Service("CustomerRegistrationQuestionsServiceImpl")
 @Scope("singleton")
 public class CustomerRegistrationQuestionsServiceImpl implements CustomerRegistrationQuestionsService {
-
 	
 	@Autowired
 	@Qualifier("CustomerRegistrationQuestionsDaoImpl")
 	private CustomerRegistrationQuestionsDao customerRegistrationQuestionsDao;
+	
+	@Autowired
+	@Qualifier("BankCustomerDaoImpl")
+	private BankCustomerDao bankCustomerDao;
+	
 	
 	@Override
 	public String addCustomerQuestionsAndAnswerByCustomerId(
@@ -33,7 +43,6 @@ public class CustomerRegistrationQuestionsServiceImpl implements CustomerRegistr
 		
 		return "success";
 	}
-
 	@Override
 	public List<CustomerRegistrationQuestionsForm> findCustomerQuestionsAndAnswerByCustomerId(
 			String customerId) {

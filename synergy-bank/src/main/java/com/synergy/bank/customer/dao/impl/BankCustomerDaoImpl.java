@@ -95,7 +95,9 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public CustomerEntity findCustomerByUserId(String userid) {
-		return null;
+		CustomerEntity customerEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_CUTOMER_USER_ID + "'"+ 
+				userid +"'",new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
+					return customerEntity;
 	}
 	@Override
 	public String deleteCustomer(CustomerEntity entity) {
