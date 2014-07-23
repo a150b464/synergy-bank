@@ -42,12 +42,12 @@ public class BankServletContextListener implements ServletContextListener{
 		
 		List<SecurityQuestionForm> secQuestionLists = findSecurityQuestions(sce.getServletContext());
 		if(logger.isDebugEnabled()){
-			logger.debug(secQuestionLists);
+			//logger.debug(secQuestionLists);
 		}
 		
 		String res = securityQuestionService.saveSecurityQuestions(secQuestionLists);
 		if(logger.isDebugEnabled()){
-			logger.debug(res);
+			//logger.debug(res);
 		}
 		
 	}

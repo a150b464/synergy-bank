@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="security_questions_tbl")
-public class SecurityQuestionEntity {
+public class SecurityQuestionEntity implements Comparable<SecurityQuestionEntity>{
 	
 	@Id
 	private String id;
@@ -37,7 +37,31 @@ public class SecurityQuestionEntity {
 		return "SecurityQuestionEntity [id=" + id + ", description="
 				+ description + "]";
 	}
+		
+	@Override
+	public int hashCode() {
+		
+		return description.hashCode();
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
 	
-
+		SecurityQuestionEntity e = (SecurityQuestionEntity)obj;
+		if(this.description.equals(e.description))
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public int compareTo(SecurityQuestionEntity o) {
+		
+		if(o.getDescription().equals(this.getDescription())){
+			return 0;
+		}
+		else{
+			return -1;
+		}	
+	}
 }
