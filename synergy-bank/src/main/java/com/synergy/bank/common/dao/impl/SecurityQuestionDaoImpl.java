@@ -1,5 +1,8 @@
 package com.synergy.bank.common.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -23,7 +26,20 @@ public class SecurityQuestionDaoImpl extends AbstractDaoImpl<SecurityQuestionEnt
 	public String saveSecurityQuestions(
 			List<SecurityQuestionEntity> securityQuestionEntities) {
 		
-		for (SecurityQuestionEntity securityQuestionEntity : securityQuestionEntities) {
+		List<SecurityQuestionEntity> questionListInDB = super.findAll();
+		
+		Collection<SecurityQuestionEntity> questionSetInDB = new HashSet<SecurityQuestionEntity>(questionListInDB);
+		Collection<SecurityQuestionEntity> newQuestionSet = new HashSet<SecurityQuestionEntity>();
+		
+		newQuestionSet.addAll(securityQuestionEntities);
+		//newQuestionList.addAll(questionListInDB);
+		//similar.retainAll(currQuestionList);
+		newQuestionSet.removeAll(questionSetInDB);
+		List<SecurityQuestionEntity> newQuestionList = new ArrayList<SecurityQuestionEntity>(newQuestionSet);
+		/*
+		 * Save new questions from excel file that are not in database.
+		 */
+		for (SecurityQuestionEntity securityQuestionEntity : newQuestionList) {
 			super.saveOrUpdate(securityQuestionEntity);
 		}
 		
