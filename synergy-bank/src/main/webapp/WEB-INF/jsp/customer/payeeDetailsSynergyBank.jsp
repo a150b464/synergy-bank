@@ -16,7 +16,9 @@
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type="text/javascript">
+	
 	var ccontextPath="${pageContext.request.contextPath}";
+	
 	$(function(){
 		$("#payeeAccountNo").keyup(
 		 function() {
@@ -41,47 +43,71 @@
 		  			  }
 			   });   
 			 
-			 ///////////
+			
 			 
 		 }); 		
 	});
+	
+	 $(function(){
+		$("#payeeName").blur(
+		 function() {
+			 var payeeName=$("#payeeName").val();
+			// alert("payeeAccount = "+payeeAccount);
+			 if(payeeName.length==0){
+				 alert("Payee AccountNo cannot be blank.")
+				 $("#payeeName").focus();
+				 return;
+			 }
+			 //making ajax call
+			 $.ajax({url:ccontextPath+"/bank/checkPayeeName.do",data:{ppayeeName:payeeName},success:function(data) {
+						    if(data=='invalid') {
+								// alert(payeeAccount+ " is not valid account number.");
+								 $("#nameError").html(payeeName+ " is not a valid Name.");
+								 //$("input[type='text'][id='tosender']").focus();
+								 return;
+						    }else{
+						    	 $("#nameError").html("");
+						    	 return;
+						    }
+		  			  }
+			   });   
+			 
+			
+			 
+		 }); 		
+	}); 
 </script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/addPayeeForm-validations.js"></script> --%>
 </head>
 
 <body onload="javascript:breadcrumbs()">
 	<%@include file="cheader.jsp"%>
 	<img src="${pageContext.request.contextPath}/images/cash3.jpg"
 		width="892" height="260" />
-	</div>
 
-	<div id="content" style="padding-left: 30px">
+	<div id="content" style="padding-left: 30px" >
 		<h2>
-			<u>Payee Details</u>
+			<u>To Add Payee Please enter the Payee Details </u>
 		</h2>
 		<br />
 		<p style="color: red;">${message}</p>
-		<ff:form action="addpayee.do" method="post"
-			commandName="addPayeeCommand">
-			<p align="center" style="font-size:12;"><font color="red"><span id="accountError"></span></font></p>
-			<table align="center" width="90%" border="0" cellspacing="3"
-				cellpadding="3">
+		<ff:form action="addpayee.do" method="post" commandName="addPayeeCommand">
+			
+			<table align="center" width="100%" border="0" cellspacing="4" cellpadding="4">
 				<tr>
 					<td><ff:hidden path="" /> <b>Payee Account Number</b></td>
-					<td><ff:input path="payeeAccountNo" size="40"
-							style="background:#D0F5A9; font-family: Palatino Linotype" /></td>
-					<td width="40">
-					</td>
+					<td><ff:input path="payeeAccountNo" size="40" style="background:#D0F5A9; font-family: Palatino Linotype" /></td>
+					<td  id="accountError" style="font-size:10;color: red;"></td>
 				</tr>
 				<tr>
 					<td><b>Payee Name</b></td>
-					<td><ff:input path="payeeName" size="40"
-							style="background:#D0F5A9;font-family: Palatino Linotype" /></td>
-					<td>&nbsp;</td>		
+					<td><ff:input path="payeeName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/>
+					<td id="nameError" style="font-size:10; color: red; "></td>
+					
 				</tr>
 				<tr>
 					<td><b>Payee Nick Name</b></td>
-					<td><ff:input path="payeeNickName" size="40"
-							style="background:#D0F5A9;font-family: Palatino Linotype" /></td>
+					<td><ff:input path="payeeNickName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype" readonly="true"/></td>
 							<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -92,8 +118,7 @@
 				</tr>
 				<tr>
 					<td><b>Payee Registration alert to be sent on email.</b></td>
-					<td><ff:input path="email" size="40"
-							style="background:#D0F5A9;font-family: Palatino Linotype" /></td>
+					<td><ff:input path="email" size="40" style="background:#D0F5A9;font-family: Palatino Linotype" readonly="true"/></td>
 				</tr>
 
 			</table>
