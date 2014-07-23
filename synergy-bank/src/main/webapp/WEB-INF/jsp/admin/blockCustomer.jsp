@@ -46,11 +46,11 @@
 <body>
 		<%@include file="aheader.jsp"%>
 		<img src="${pageContext.request.contextPath}/images/bigpicture.jpg" alt="" width="892" height="280" />
-	</div>
+
 	<div id="content">
 			
 		<br/> <h3 align="center">ACTIVE CUSTOMER LIST:</h3>  <br/>
-		<p align="center" style="color:red;"><h5>${msg}</h5></p>		
+		<p align="center" style="color:red;"><h5>${msg}</h5> </p>		
 		<ff:form  name="blockedCustomerListForm" method="post" action="blockCustomers" commandName="blockCustomerCommand" >
 			<table align="center" id="tab1">
 				<thead>
