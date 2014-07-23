@@ -108,4 +108,10 @@ public String checkPayeeAccountNumber(String payeeAcoountNumber) {
 	return "valid";
 }
 
+@Override
+public String checkTransactionAmountNumber(String transactionAmount) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }
