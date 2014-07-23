@@ -31,7 +31,7 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
-	<div id="content">
+	<div id="content" style="padding-left: 30px" >
 
 		<br />
 		<br />
@@ -44,24 +44,25 @@
 						
 		<ff:form name="selectPayee" method="get" action="${pageContext.request.contextPath}/bank/makePayments"
 			commandName="customerTransactionCommand">
-			<table align="right" width="60%" border="0" cellspacing="20"
-				cellpadding="20" style="background-color:#D9E8F7">
+			<table align="center" width="100%" border="0" cellspacing="6" cellpadding="6" background="${pageContext.request.contextPath}/images/table-background.jpg">
 
 					<tr>
-					<td><b>Register a new Payee:</b> <br />
-					<input id="button" type="button" value="Add Payee" size="20" onclick="onSelectPayeeSubmit('addPayeeAction');"/><br />
-					</td></tr>
+						<td><b>Register a new Payee:</b></td>
+						<td><input id="button" type="button" value="Add Payee" size="20" onclick="onSelectPayeeSubmit('addPayeeAction');"/></td>
+					</tr>
+					
 					<tr>
-					<td><b>Select a Payee to Make Payment: </b> <ff:select
-							path="payeeAccountNumber">
-							<ff:options items="${payeeDetailsFormList}" />
-						</ff:select> <br/></td>
+					<td><b>Select a Payee to Make Payment:</b></td>
+					<td><ff:select path="payeeAccountNumber" width="2">
+					<ff:options items="${payeeDetailsFormList}" />
+					</ff:select></td>
 				</tr>
 
 				<tr>
-					<td><input type="button" value="Make Payment" size="20" onclick="onSelectPayeeSubmit('makePaymentAction');"/> 
-					<b>Payee Registration alert to be sent on mobile number</b> <br/></td>
+					<td><input type="button" value="Make Payment" size="20" onclick="onSelectPayeeSubmit('makePaymentAction');"/></td>
 				</tr>
+				
+				<tr><td><b>Payee Registration alert to be sent on mobile number</b> <br/></td></tr>
 			</table>
 
 		</ff:form>
