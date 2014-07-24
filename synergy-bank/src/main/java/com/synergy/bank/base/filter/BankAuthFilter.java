@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 
 /**
