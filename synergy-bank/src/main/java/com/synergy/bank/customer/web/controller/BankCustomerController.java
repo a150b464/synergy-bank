@@ -100,7 +100,7 @@ public class BankCustomerController {
 				"Hello Dear! Ahahahah", "Regarding Registration");
 		emailSenderThread.start();
 		return NavigationConstant.CUSTOMER_PAGE
-				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
+				+ NavigationConstant.CUSTOMER_HOME_PAGE;
 	}
 
 	@RequestMapping(value = "showPayeeList", method = RequestMethod.GET)
