@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-
+   
 	<session-config>
 		<session-timeout>10</session-timeout>
 	</session-config>
@@ -31,7 +31,7 @@
 
 	<filter-mapping>
 		<filter-name>bankAuthFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/bank/*</url-pattern>
 	</filter-mapping>
 
 
@@ -76,7 +76,7 @@
 
 	<servlet-mapping>
 		<servlet-name>common</servlet-name>
-		<url-pattern>/bankSoapServiceForCustomerDetails</url-pattern>
+		<url-pattern>/bankCustomerSoapService</url-pattern>
 	</servlet-mapping>
 
 
