@@ -150,10 +150,10 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public CustomerForm findCustomerByUserId(String userid) {
-		CustomerForm customerForm = new CustomerForm();
-		BeanUtils.copyProperties(bankCustomerDao.findCustomerByUserId(userid),
-				customerForm);
-
+		CustomerForm customerForm=new CustomerForm(); 
+		CustomerEntity customerEntity=bankCustomerDao.findCustomerByUserId(userid);
+		if(customerEntity!=null)
+		BeanUtils.copyProperties(bankCustomerDao.findCustomerByUserId(userid), customerForm);
 		return customerForm;
 	}
 
