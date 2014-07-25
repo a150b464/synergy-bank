@@ -1,6 +1,7 @@
 package com.synergy.bank.soap.web.provider;
 
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.soap.web.provider.fault.CustomerNotFoundException;
 import com.synergy.bank.soap.web.provider.wrapper.CustomerDetails;
 
 /**
@@ -9,6 +10,6 @@ import com.synergy.bank.soap.web.provider.wrapper.CustomerDetails;
  *
  */
 public interface BankCustomerSoapService {
-   public CustomerDetails findBankCustomers();
-   public CustomerForm findBankCustomerByUserId(String customerUserId);
+   public CustomerDetails findBankCustomers() throws CustomerNotFoundException;
+   public CustomerForm findBankCustomerByUserId(String customerUserId) throws CustomerNotFoundException;
 }
