@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
 import com.synergy.bank.customer.service.BankCustomerService;
@@ -35,6 +37,7 @@ import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
@@ -57,32 +60,32 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("BankTransactionServiceImpl")
 	private BankTransactionService bankTransactionService;
-	
+
 	@Autowired
 	@Qualifier("SecurityQuestionServiceImpl")
 	private SecurityQuestionService securityQuestionServiceImpl;
 
-
 	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
 	public String showCustomerRegistrationPage(Model model) {
 		CustomerForm customerForm = new CustomerForm();
-		
-		List<SecurityQuestionForm> securityQuestionList = securityQuestionServiceImpl.getRandomQuestions(3);
-	    List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
-		for(SecurityQuestionForm securityQuestion:securityQuestionList)
-		{
+		List<SecurityQuestionForm> securityQuestionList = securityQuestionServiceImpl
+				.getRandomQuestions(3);
+		List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
+
+		for (SecurityQuestionForm securityQuestion : securityQuestionList) {
 			CustomerRegistrationQuestionsEntity customerRegistrationEntity = new CustomerRegistrationQuestionsEntity();
 			customerRegistrationEntity.setQuestionId(securityQuestion.getId());
-			customerRegistrationEntity.setDescription(securityQuestion.getDescription());
+			customerRegistrationEntity.setDescription(securityQuestion
+					.getDescription());
 			customerRegistrationEntity.setCustomerId(customerForm.getUserId());
 			questionList.add(customerRegistrationEntity);
 		}
-		
-		System.out.println("woah iside question list"+questionList);
-		
+
+		System.out.println("woah iside question list" + questionList);
+
 		customerForm.setQuestionList(questionList);
-		
+
 		model.addAttribute("customerForm", customerForm);
 		UUID idOne = UUID.randomUUID();
 		System.out.println("Random Id: " + idOne);
@@ -119,7 +122,7 @@ public class BankCustomerController {
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
 	public String editRegistration(@RequestParam("userId") String userId,
 			Model model) {
-		
+
 		CustomerForm customerForm = bankCustomerService
 				.findCustomerByUserId(userId);
 		model.addAttribute("customerForm", customerForm);
@@ -309,4 +312,41 @@ public class BankCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_MINI_STATEMENT;
 	}
+
+	@RequestMapping(value = "resetPasswordInit", method = RequestMethod.GET)
+	public String resetPasswordInit(Model model, HttpSession session) {
+		LoginForm loginForm = (LoginForm) session
+				.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		List<CustomerRegistrationQuestionsForm> secretQuestions = bankCustomerService
+				.findCustomerSecQuestions(loginForm.getUserId());
+		model.addAttribute("secretQuestions", secretQuestions);
+
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_RESET_PASSWORD_INIT;
+
+	}
+
+	@RequestMapping(value = "resetPasswordInit", method = RequestMethod.POST)
+	public String resetPassword(
+			@ModelAttribute("resetPasswordCommand") CustomerRegistrationQuestionsForm customerRegistrationQuestionsForm,
+			@RequestParam("email") String email, HttpSession session) {
+		LoginForm loginForm = (LoginForm) session
+				.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		String userId = loginForm.getUserId();
+		CustomerForm customerForm = bankCustomerService
+				.findCustomerByUserId(userId);
+		String userEmail = customerForm.getEmail();
+
+		if (email.equals(userEmail))
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_RESET_PASSWORD;
+		else if (email.length() == 0 && loginForm.getLoginCount() <= 3) {
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_RESET_PASSWORD;
+		} else
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_ACCOUNT_LOCKED;
+
+	}
+
 }
