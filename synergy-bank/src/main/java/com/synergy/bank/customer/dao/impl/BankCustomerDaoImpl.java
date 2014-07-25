@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.synergy.bank.common.query.CommonQuery;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
@@ -60,8 +61,9 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.BLOB,
-				Types.DATE, Types.DATE, Types.VARCHAR};
-		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER, data,dataArra);
+				Types.DATE, Types.DATE, Types.VARCHAR };
+		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER, data,
+				dataArra);
 		addCustomerLoginDetails(entity);
 		System.out.println("____AHAHAHA____");
 		return "success";
@@ -70,15 +72,17 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 	@Override
 	public String addCustomerLoginDetails(CustomerEntity entity) {
 		System.out.println("at add cusdetails ");
-		Object[] data = new Object[] { entity.getUserId(), entity.getPassword(), entity.getRole(), "new  Customer" };
+		Object[] data = new Object[] { entity.getUserId(),
+				entity.getPassword(), entity.getRole(), "new  Customer" };
 
 		int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR,
-				Types.VARCHAR, Types.VARCHAR};
-		super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS, data,dataArra);
+				Types.VARCHAR, Types.VARCHAR };
+		super.getJdbcTemplate().update(
+				CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS, data, dataArra);
 		System.out.println("____AHAHAHA____INSERTED");
 		return "success";
 	}
-	
+
 	@Override
 	public String updateCustomer(CustomerEntity entity) {
 		return null;
@@ -86,19 +90,27 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public List<CustomerEntity> findCustomers() {
-		System.out.println("---------Entered in FindCustomers() method of customerDaoImpl--------");
-		List<CustomerEntity> customerList = super.getJdbcTemplate().query(CustomerQuery.FIND_CUTOMER,
-				new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
-		System.out.println("Printing from customerDaoImpl " +customerList );
+		System.out
+				.println("---------Entered in FindCustomers() method of customerDaoImpl--------");
+		List<CustomerEntity> customerList = super.getJdbcTemplate()
+				.query(CustomerQuery.FIND_CUTOMER,
+						new BeanPropertyRowMapper<CustomerEntity>(
+								CustomerEntity.class));
+		System.out.println("Printing from customerDaoImpl " + customerList);
 		return customerList;
 	}
 
 	@Override
 	public CustomerEntity findCustomerByUserId(String userid) {
-		CustomerEntity customerEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_CUTOMER_USER_ID + "'"+ 
-				userid +"'",new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
-					return customerEntity;
+		CustomerEntity customerEntity = super
+				.getJdbcTemplate()
+				.queryForObject(
+						CustomerQuery.FIND_CUTOMER_USER_ID + "'" + userid + "'",
+						new BeanPropertyRowMapper<CustomerEntity>(
+								CustomerEntity.class));
+		return customerEntity;
 	}
+
 	@Override
 	public String deleteCustomer(CustomerEntity entity) {
 		// TODO Auto-generated method stub
@@ -120,11 +132,13 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId) {
-		
-		List<PayeeDetailsEntity> payeeList = super.getJdbcTemplate().query(CustomerQuery.SHOW_PAYEE_LIST+"'"+userId+"'",
-							new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
-        return payeeList;
-		
+
+		List<PayeeDetailsEntity> payeeList = super.getJdbcTemplate().query(
+				CustomerQuery.SHOW_PAYEE_LIST + "'" + userId + "'",
+				new BeanPropertyRowMapper<PayeeDetailsEntity>(
+						PayeeDetailsEntity.class));
+		return payeeList;
+
 	}
 
 	@Override
@@ -145,6 +159,23 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 			String password) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CustomerRegistrationQuestionsEntity> findCustomerSecQuestions(
+			String userid) {
+		String sql = "select * from customer_registration_questions_tbl where customerId='"
+				+ userid + "'";
+
+		List<CustomerRegistrationQuestionsEntity> customerRegistrationQuestionsEntities = super
+				.getJdbcTemplate()
+				.query(sql,
+						new BeanPropertyRowMapper<CustomerRegistrationQuestionsEntity>(
+								CustomerRegistrationQuestionsEntity.class));
+		System.out.println("DAO : " + customerRegistrationQuestionsEntities);
+
+		return customerRegistrationQuestionsEntities;
+
 	}
 
 }
