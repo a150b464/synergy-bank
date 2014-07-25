@@ -27,4 +27,8 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_MINI_STATEMENT = "viewMiniStatement";
 	final public static String CUSTOMER_SECURITY_QUESTIONS = "securityQuestions";
 	final public static String CUSTOMER_SECURITY_QUESTIONS_PHASE_TWO = "securityQuestionPTwo";
+	final public static String CUSTOMER_RESET_PASSWORD = "resetPassword";
+	final public static String CUSTOMER_RESET_PASSWORD_INIT = "resetPasswordInit";
+	final public static String CUSTOMER_ACCOUNT_LOCKED = "accountLocked";
+
 }
