@@ -28,7 +28,7 @@ public class EmailSenderThread extends Thread {
 	
 	public void run() {
 		try {
-			////System.out.println("Sending EMAIL");
+			
 			bankEmailService.sendMail("nagen@gmail.com",toEMail,subject,message);
 		}catch (Exception e) {
 			e.printStackTrace();

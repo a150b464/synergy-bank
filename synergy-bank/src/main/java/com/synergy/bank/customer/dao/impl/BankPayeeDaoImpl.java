@@ -71,7 +71,7 @@ implements BankPayeeDao{
 		String sql = CustomerQuery.VALIDATE_PAYEE + " userid='"
 				+ userId + "' and payeeAccountNo='"
 				+ payeeAccountNo + "'";
-		System.out.println(sql);
+	/*	System.out.println(sql);*/
 		PayeeDetailsEntity payeeDetailsEntity = null;
 		try{
 			payeeDetailsEntity = super.getJdbcTemplate()
