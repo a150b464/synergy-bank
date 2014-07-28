@@ -32,6 +32,7 @@ public class BankCustomerHibernateDaoImpl extends
 		} else {
 			/*System.out.println("not woowowow since spring transaction is not working ...");*/
 		}
+		entity.setApprove("no");
 		super.saveOrUpdate(entity);
 		return "success";
 	}
