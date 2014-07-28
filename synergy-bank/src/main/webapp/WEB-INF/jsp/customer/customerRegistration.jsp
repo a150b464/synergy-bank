@@ -40,14 +40,13 @@
 			<b>The Worlds Local Bank!</b> </marquee>
 		</div>
 
-		<div id="content">
+		<div id="content" style="padding-left: 0px">
 
 			<h2 style="color: blue">${msg}</h2>
 			<ff:form name="customerRegistration"
 				action="${pageContext.request.contextPath}/bank/customerRegistration"
-				method="post" commandName="customerForm">
-				<table align=center width="60%" border="0" cellspacing="20"
-					cellpadding="20"
+				method="post" commandName="customerForm" >
+				<table align="center" width="147%" border="0" cellspacing="8" cellpadding="8"
 					background="${pageContext.request.contextPath}/images/table-background.jpg">
 
 
@@ -166,10 +165,12 @@
 							<td><b>${questionEnity.description}</b></td>
 							<td><ff:input type="input"
 									name="customerForm.questionList[${i.index}].answer"
-									path="questionList[${i.index}].answer" size="60" /> <ff:input
+									path="questionList[${i.index}].answer" size="60" /> 
+								<ff:input
 									type="hidden"
 									name="customerForm.questionList[${i.index}].questionId"
-									path="questionList[${i.index}].questionId" size="60" /> <ff:input
+									path="questionList[${i.index}].questionId" size="60" /> 
+								<ff:input
 									type="hidden"
 									name="customerForm.questionList[${i.index}].description"
 									path="questionList[${i.index}].description" size="60" /> 
@@ -180,9 +181,7 @@
 					<tr>
 						<td><b>Description:</b></td>
 						<td><ff:input path="description" size="60" /></td>
-						<!-- 		<td><input id="submitid" type="button" value="Register "
-							onclick="validateCustomerForm();" /></td>
- -->
+	
 					</tr>
 					<tr>
 						<td><input type="submit" value="register" /></td>
