@@ -10,28 +10,38 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link href="${pageContext.request.contextPath}/css/breadcrumb.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/r-validations.js"></script>
 <style type="text/css"></style>
 </head>
 
 <body>
 	<%@include file="cheader.jsp"%>
 	
-	<div id="reset_password_form">
+	<div id="reset_password_form" style="padding-left:0px">
 		<h1>Reset Password Init</h1><br>
 		<ff:form action="resetPasswordInit" method="post"  commandname="resetPasswordCommand">
-			<table align="center" border="1" cellspacing="3" cellpadding="3">
-				<tr>
-					<td>Enter your Email:<input type="text" name="email"/></td>
-				</tr>
-			</table>
-			<ul>
-				
-				<c:forEach items="${secretQuestions}" var="item">
-					<li>${item.description}<input type="text" id="answer" /></li>
+			<table align="center" width="96.3%" border="0" cellspacing="6" cellpadding="6" background = "${pageContext.request.contextPath}/images/table-background.jpg">
+                               <tr>
+                                       <td>
+                                       <b>Enter your Email:</b>
+                                       <input type="text" name="email" size="40"/><br/><br/>
+                                       </td>
+                               </tr>
+             
+        <tr>     
+			<td><font size="3">Answer the questions below:</font></td>
+		</tr>	
+		<tr><td><b>
+				<c:forEach items="${secretQuestions}" var="item"><br/>
+					<li>${item.description}<br/><input type="text" value="answer" size="40" align="right"/></li>
 				</c:forEach>
-
-			</ul>
-			<input type="submit" name="submit" class="button" id="submit_btn" value="resetPassword"/>
+		</b></td></tr>
+		<tr><td><b>
+			<input type="submit" name="submit" id="submit_btn" size = "20" value="resetPassword"/>
+		</b></td></tr>
+		
+		</table>
+		
 		</ff:form>
 	</div>
 
@@ -41,7 +51,7 @@
 <script type="text/javascript">
 	var ccontextPath="${pageContext.request.contextPath}";
 	$(function(){
-		$("#answer").keyup(
+		$("#answer").blur(
 		 function() {
 			 var answer=$("#answer").val();
 			 //alert("your answer = "+answer);
@@ -64,25 +74,10 @@
 		  			  }
 			   });   
 			 
-			 ///////////
 			 
 		 }); 		
 	});
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div id="blocks">																																																																																																																													

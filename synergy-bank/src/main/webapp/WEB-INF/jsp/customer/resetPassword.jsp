@@ -31,7 +31,7 @@
 		
 			
 		<ul id="menu">
-			<li><a href="viewMiniStatement">View Mini Statement</a></li>
+			<li><a href="resetPassword">Reset Password</a></li>
 		</ul>
 		
 		
