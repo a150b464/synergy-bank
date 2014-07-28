@@ -19,7 +19,7 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="860" height="280" />
 		
 	</div>
-	<div align="left">
+	<div align="center">
 	<h3>Answer your previously selected Questions to create new Security Questions.</h3> 
 	<br/><br/>	 
 			
