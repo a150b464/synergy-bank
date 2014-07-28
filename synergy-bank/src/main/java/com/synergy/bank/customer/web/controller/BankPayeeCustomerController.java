@@ -64,7 +64,7 @@ public class BankPayeeCustomerController {
 	public String addpayee(Model model) {
 		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 		model.addAttribute("addPayeeCommand", payeeDetailsForm);
-		System.out.println("in controller");
+		/*System.out.println("in controller");*/
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.ADD_PAYEE_PAGE;
 	}
@@ -148,7 +148,7 @@ public class BankPayeeCustomerController {
     @ModelAttribute(value="payeeDetailsFormList")
     public Map<String,String> findPayeeListCustomer(){
             List<PayeeDetailsForm>payeeDetailsFormList = bankPayeeService.findPayeeByUserId("1");
-            System.out.println("payeedetails form list = "+ payeeDetailsFormList);
+            /*System.out.println("payeedetails form list = "+ payeeDetailsFormList);*/
             LinkedHashMap<String,String> payeeList=new LinkedHashMap<String, String>();
             for(PayeeDetailsForm detailsForm:payeeDetailsFormList){
                     payeeList.put(detailsForm.getPayeeAccountNo(), detailsForm.getPayeeName() +" - "+detailsForm.getPayeeAccountNo());

@@ -25,8 +25,8 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 	@Override
 	public String addPayee(PayeeDetailsForm payeeDetailsForm) {
-		System.out.println(payeeDetailsForm);
-		System.out.println("In service Layer");
+		/*System.out.println(payeeDetailsForm);
+		System.out.println("In service Layer");*/
 		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
 		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
 		return bankPayeeDao.addPayee(payeeDetailsEntity);

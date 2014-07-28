@@ -63,7 +63,7 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 					+ new BankDaoUtil()
 							.stringArrayToCommaSeperatedString(cusomerUserNames)
 					+ ") and approve='no'";
-			System.out.println(findPendingCustomerDetailsSql);
+		/*	System.out.println(findPendingCustomerDetailsSql);*/
 			
 			List<CustomerEntity> customerDetailsList = super.getJdbcTemplate().query(findPendingCustomerDetailsSql,
 					new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));			
@@ -139,8 +139,8 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 		try{
 			for (String cusomerUserName : cusomerUserNames) {
 				super.getJdbcTemplate().update(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+cusomerUserName+"'");
-				System.out.println(cusomerUserName);
-				System.out.println(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+cusomerUserName+"'");
+				/*System.out.println(cusomerUserName);
+				System.out.println(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+cusomerUserName+"'");*/
 			}			
 		}
 		catch(Exception e){
@@ -148,7 +148,7 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println("D Impl"+cusomerUserNames);
-		return true;
+/*		System.out.println("D Impl"+cusomerUserNames);
+*/		return true;
 	}
 }

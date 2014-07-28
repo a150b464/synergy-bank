@@ -51,7 +51,7 @@ public class DateUtils {
 	public static void main(String[] args) {
 		String str="04/15/2014";
 		String tokens[]=str.split("/");
-		//System.out.println(tokens);
+	
 	}
 
 	/**

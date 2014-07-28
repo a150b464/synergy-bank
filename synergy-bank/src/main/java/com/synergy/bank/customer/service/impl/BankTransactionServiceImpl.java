@@ -36,7 +36,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 
 		CustomerTransactionEntity entity = new CustomerTransactionEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
-		System.out.println("Entity at beanUtils" + entity);
+		/*System.out.println("Entity at beanUtils" + entity);*/
 		bankTransactionDao.addCustomerTransaction(entity);
 		return "success";
 	}

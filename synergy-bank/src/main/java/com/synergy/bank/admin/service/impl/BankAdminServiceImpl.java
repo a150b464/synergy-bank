@@ -72,7 +72,7 @@ public class BankAdminServiceImpl implements BankAdminService{
 	
 	@Override
 	public boolean blockCustomer(String[] cusomerUserNames) {
-		System.out.println("S Impl"+cusomerUserNames);
+		/*System.out.println("S Impl"+cusomerUserNames);*/
 		return bankAdminDao.blockCustomer(cusomerUserNames);
 	}
 	

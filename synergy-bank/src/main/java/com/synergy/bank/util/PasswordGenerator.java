@@ -97,7 +97,7 @@ public final class PasswordGenerator {
     public static void main(String[] args) {
       int passwordSize = 4;
       PasswordGenerator password = new PasswordGenerator( passwordSize );
-      System.out.println( password.get() );   
+      /*System.out.println( password.get() );*/   
     }
 
 }

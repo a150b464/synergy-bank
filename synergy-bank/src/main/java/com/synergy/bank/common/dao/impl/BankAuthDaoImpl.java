@@ -45,7 +45,7 @@ public class BankAuthDaoImpl extends JdbcDaoSupport implements BankAuthDao {
 		int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR};
 		super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS,data,dataArra);
-		System.out.println("____AHAHAHA____INSERTED");
+		/*System.out.println("____AHAHAHA____INSERTED");*/
 		return "success";
 	}
 

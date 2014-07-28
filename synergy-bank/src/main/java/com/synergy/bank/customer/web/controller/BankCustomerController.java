@@ -82,13 +82,13 @@ public class BankCustomerController {
 			questionList.add(customerRegistrationEntity);
 		}
 
-		System.out.println("woah iside question list" + questionList);
+		/*System.out.println("woah iside question list" + questionList);*/
 
 		customerForm.setQuestionList(questionList);
 
 		model.addAttribute("customerForm", customerForm);
 		UUID idOne = UUID.randomUUID();
-		System.out.println("Random Id: " + idOne);
+		/*System.out.println("Random Id: " + idOne);*/
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_REGISTRATION_PAGE;
 	}
@@ -113,7 +113,7 @@ public class BankCustomerController {
 		List<PayeeDetailsForm> payeeList = bankCustomerService
 				.showPayeeListByUserId(userId);
 		model.addAttribute("payeeDetailsList", payeeList);
-		System.out.println(payeeList);
+		/*System.out.println(payeeList);*/
 		// return "customer/payeeList";
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
@@ -133,7 +133,7 @@ public class BankCustomerController {
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.POST)
 	public String editRegistrationSubmit(
 			@ModelAttribute("customerForm") CustomerForm customerForm) {
-		System.out.println("Inside edit registration post");
+		/*System.out.println("Inside edit registration post");*/
 		bankCustomerService.updateCustomer(customerForm);
 		return "redirect:bank/customerInformation";
 	}
@@ -144,7 +144,7 @@ public class BankCustomerController {
 
 		response.setContentType("image/jpg");
 		byte[] photo = bankCustomerService.findPhotoById(userId);
-		System.out.println("Inside find photo by id");
+		/*System.out.println("Inside find photo by id");*/
 		if (photo != null) {
 			System.out.println("found photo");
 			ServletOutputStream outputStream = response.getOutputStream();

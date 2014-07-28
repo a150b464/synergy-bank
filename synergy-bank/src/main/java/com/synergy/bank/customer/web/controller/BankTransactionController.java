@@ -39,7 +39,7 @@ public class BankTransactionController {
 	public String makePayment(Model model,
 							  @RequestParam("payeeAccountNumber") String  payeeAccountNumber ) {
 				
-		System.out.println("payeeAcntNumber =" + payeeAccountNumber);
+		/*System.out.println("payeeAcntNumber =" + payeeAccountNumber);*/
 		model.addAttribute("payeeAccountNumber",payeeAccountNumber);
 		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
 		model.addAttribute("customerTransactionCommand",customerTransactionCommand);

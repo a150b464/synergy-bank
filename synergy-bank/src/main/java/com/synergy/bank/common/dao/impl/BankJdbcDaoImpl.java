@@ -43,7 +43,7 @@ public class BankJdbcDaoImpl extends JdbcDaoSupport implements BankJdbcDao{
 	@Override
 	public char[] generatePassword() {
 	      char[] gpassword=password.get();   
-	      System.out.println("gpassword  = "+gpassword);
+	     /* System.out.println("gpassword  = "+gpassword);*/
 	      return gpassword;
 	}
 

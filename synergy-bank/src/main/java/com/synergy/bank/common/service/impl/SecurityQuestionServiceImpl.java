@@ -34,8 +34,8 @@ public class SecurityQuestionServiceImpl implements SecurityQuestionService {
 					securityQuestionEntity);
 			securityQuestionEntities.add(securityQuestionEntity);
 		}
-		System.out.println("Servicessssss");
-		String result = securityQuestionDao
+/*		System.out.println("Servicessssss");
+*/		String result = securityQuestionDao
 				.saveSecurityQuestions(securityQuestionEntities);
 		return result;
 	}
@@ -43,7 +43,7 @@ public class SecurityQuestionServiceImpl implements SecurityQuestionService {
 	@Override
 	public List<SecurityQuestionForm> getRandomQuestions(int count) {
 		List<SecurityQuestionEntity> securityQuestion =	securityQuestionDao.getRandomSecurityQuestions(count);
-		System.out.println(securityQuestion);
+/*		System.out.println(securityQuestion);*/
 		List<SecurityQuestionForm> securityQuestionForms = new ArrayList<SecurityQuestionForm>();
 		
 		for (SecurityQuestionEntity pde : securityQuestion) 

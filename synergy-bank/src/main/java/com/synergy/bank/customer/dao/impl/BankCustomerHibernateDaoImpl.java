@@ -28,10 +28,9 @@ public class BankCustomerHibernateDaoImpl extends
 		boolean yes = TransactionSynchronizationManager
 				.isActualTransactionActive();
 		if (yes) {
-			System.out.println("woowowow spring transaction is working ...");
+			/*System.out.println("woowowow spring transaction is working ...");*/
 		} else {
-			System.out
-					.println("not woowowow since spring transaction is not working ...");
+			/*System.out.println("not woowowow since spring transaction is not working ...");*/
 		}
 		super.saveOrUpdate(entity);
 		return "success";
@@ -112,18 +111,5 @@ public class BankCustomerHibernateDaoImpl extends
 		return null;
 	}
 
-	/*
-	 * @Override public String addCustomerDetails(CustomerEntity entity) {
-	 * 
-	 * System.out.println("at add cusdetails "); Object[] data = new Object[] {
-	 * entity.getUserId(), entity.getPassword(), entity.getRole(),
-	 * "new  Customer" };
-	 * 
-	 * int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
-	 * Types.VARCHAR};
-	 * 
-	 * super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_DETAILS,
-	 * data,dataArra); System.out.println("____AHAHAHA____INSERTED"); return
-	 * "success"; }
-	 */
+	
 }

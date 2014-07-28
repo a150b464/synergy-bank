@@ -26,7 +26,7 @@ public class BankSoapServiceProvider {
 	private BankAuthService bankAuthService;
 	
 	public String validateLogin(String login,String password){
-		System.out.println("________________________________________");
+		/*System.out.println("________________________________________");*/
 		LoginForm loginForm=bankAuthService.authUser(login, password);
 		if(loginForm.getUserId()!=null){
 			return "valid";
@@ -34,9 +34,9 @@ public class BankSoapServiceProvider {
 		/*if("swapnil".equals(login) && "test".equals(password)){
 				
 		}*/
-		System.out.println("login = and password = "+loginForm);
+/*		System.out.println("login = and password = "+loginForm);
 		System.out.println("________________________________________");
-		return "invalid";
+*/		return "invalid";
 		
 	}
 }

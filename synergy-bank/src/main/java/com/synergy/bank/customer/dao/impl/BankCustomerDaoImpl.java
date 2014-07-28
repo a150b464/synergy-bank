@@ -65,7 +65,7 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER, data,
 				dataArra);
 		addCustomerLoginDetails(entity);
-		System.out.println("____AHAHAHA____");
+		/*System.out.println("____AHAHAHA____");*/
 		return "success";
 	}
 
@@ -79,7 +79,7 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				Types.VARCHAR, Types.VARCHAR };
 		super.getJdbcTemplate().update(
 				CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS, data, dataArra);
-		System.out.println("____AHAHAHA____INSERTED");
+		/*System.out.println("____AHAHAHA____INSERTED");*/
 		return "success";
 	}
 
@@ -96,7 +96,7 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				.query(CustomerQuery.FIND_CUTOMER,
 						new BeanPropertyRowMapper<CustomerEntity>(
 								CustomerEntity.class));
-		System.out.println("Printing from customerDaoImpl " + customerList);
+		/*System.out.println("Printing from customerDaoImpl " + customerList);*/
 		return customerList;
 	}
 
@@ -172,7 +172,7 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				.query(sql,
 						new BeanPropertyRowMapper<CustomerRegistrationQuestionsEntity>(
 								CustomerRegistrationQuestionsEntity.class));
-		System.out.println("DAO : " + customerRegistrationQuestionsEntities);
+		/*System.out.println("DAO : " + customerRegistrationQuestionsEntities);*/
 
 		return customerRegistrationQuestionsEntities;
 

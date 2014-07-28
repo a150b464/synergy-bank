@@ -72,7 +72,7 @@ public class LoginController {
 			Model model) {
 		LoginForm loginForm = bankAuthService.authUser(login, password);
 
-		System.out.println("login form is =" + loginForm);
+		/*System.out.println("login form is =" + loginForm);*/
 		loginForm.setPassword(null);
 
 		if (loginForm.getUserId() != null) {
@@ -129,14 +129,14 @@ public class LoginController {
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
 	public String changePassword(@RequestParam("nPassword") String nPassword,
 			HttpSession session, Model model) {
-		//System.out.println("inside change password");
+		
 		LoginForm loginForm = (LoginForm) session
 				.getAttribute(NavigationConstant.USER_SESSION_DATA);
 		CustomerForm customerForm = bankCustomerService
 				.findCustomerByUserId(loginForm.getUserId());
 
 		customerForm.setPassword(nPassword);
-		System.out.println(customerForm);
+		/*System.out.println(customerForm);*/
 
 		bankCustomerService.updateCustomer(customerForm);
 		return NavigationConstant.CUSTOMER_PAGE
