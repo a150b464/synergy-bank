@@ -45,6 +45,7 @@ public class CustomerForm implements java.io.Serializable {
 	private Date dom;
 	private byte[] photo;
 	private String description;
+	private String approve;
 	private List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
 	public List<CustomerRegistrationQuestionsEntity> getQuestionList() {
@@ -289,6 +290,14 @@ public class CustomerForm implements java.io.Serializable {
 				+ ", doe=" + doe + ", dom=" + dom + ", photo="
 				+ Arrays.toString(photo) + ", description=" + description
 				+ ", questionList=" + questionList + "]";
+	}
+
+	public String getApprove() {
+		return approve;
+	}
+
+	public void setApprove(String approve) {
+		this.approve = approve;
 	}
 
 }
