@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import com.sun.java.swing.plaf.motif.resources.motif;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
@@ -323,10 +324,9 @@ public class BankCustomerController {
 		for (CustomerRegistrationQuestionsForm questionForm : secretQuestions) {
 			System.out.println(questionForm.getAnswer());
 		}
-
-		String answers = "";
+		/*String answers = "";
 		List<String> answerList = new ArrayList<String>(3);
-		model.addAttribute("answers", answers);
+		model.addAttribute("answers", answers);*/
 		model.addAttribute("secretQuestions", secretQuestions);
 
 		return NavigationConstant.CUSTOMER_PAGE
@@ -335,25 +335,38 @@ public class BankCustomerController {
 	}
 
 	@RequestMapping(value = "resetPasswordInit", method = RequestMethod.POST)
-	public String resetPassword(
-			@ModelAttribute("resetPasswordCommand") CustomerRegistrationQuestionsForm customerRegistrationQuestionsForm,
-			@RequestParam("email") String email,
-			@ModelAttribute("answerList") List<String> answerList,
-			@ModelAttribute("answers") String answers, HttpSession session) {
+	public String resetPassword(@RequestParam("email") String email,@RequestParam("displayedQuestions") String[] displayedQuestions,@RequestParam("answersByCustomers") String[] answersByCustomers,HttpSession session,Model model) {
 		LoginForm loginForm = (LoginForm) session
 				.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		List<CustomerRegistrationQuestionsForm> secretQuestions = bankCustomerService
+				.findCustomerSecQuestions(loginForm.getUserId());
+		
+		List<String> errorMessage=new ArrayList<String>();
+		for(CustomerRegistrationQuestionsForm questionsForm:secretQuestions){
+			 for(int p=0;p<displayedQuestions.length;p++){
+				 if(displayedQuestions[p].equals(questionsForm.getQuestionId())){
+					  if(!questionsForm.getAnswer().equals(answersByCustomers[p])){
+						  errorMessage.add(questionsForm.getDescription()+" ,answer = "+
+					  answersByCustomers[p]+" is not correct");
+					  }
+					  break;
+				 }
+			 }
+		}
 		String userId = loginForm.getUserId();
 		CustomerForm customerForm = bankCustomerService
 				.findCustomerByUserId(userId);
 		String userEmail = customerForm.getEmail();
-
-		System.out.println("The answer is " + answers);
-
-		System.out.println("the answer List is =" + answerList);
-
-		if (email.equals(userEmail))
+		if (errorMessage.size()==0) {
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CUSTOMER_RESET_PASSWORD;
+		}else if(errorMessage.size()>0){
+			model.addAttribute("errorMessage", errorMessage);
+			//List<CustomerRegistrationQuestionsForm> dsecretQuestions = bankCustomerService.findCustomerSecQuestions(loginForm.getUserId());
+			model.addAttribute("secretQuestions", secretQuestions);
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_RESET_PASSWORD_INIT;
+		}
 		else if (email.length() == 0 && loginForm.getLoginCount() <= 3) {
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CUSTOMER_RESET_PASSWORD;

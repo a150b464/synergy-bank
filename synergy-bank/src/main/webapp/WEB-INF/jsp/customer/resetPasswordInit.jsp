@@ -23,7 +23,7 @@
 	
 	<div id="reset_password_form" style="padding-left:0px">
 		<h1>Reset Password Init</h1><br>
-		<ff:form action="resetPasswordInit" method="post"  commandname="resetPasswordCommand">
+		<ff:form action="resetPasswordInit" method="post">
 			<table align="center" width="96.3%" border="0" cellspacing="6" cellpadding="6" background = "${pageContext.request.contextPath}/images/table-background.jpg">
                                <tr>
                                        <td>
@@ -34,13 +34,33 @@
              
         <tr>     
 			<td><font size="3">Answer the questions below:</font></td>
-		</tr>	
-		<tr><td><b>
+		</tr>
+		
+		
+		<tr>     
+			<td><font size="3">
+				<c:forEach items="${errorMessage}" var="eitem" varStatus="i"><br/>
+					<li>
+							${eitem}
+					<br/>
+					</li>
+				</c:forEach>
+			
+			</font></td>
+		</tr>
+			
+		<tr>
+		
+		<td><b>
+		
+				
 		
 				<c:forEach items="${secretQuestions}" var="item" varStatus="i"><br/>
-					
-					<li>${item.description}<br/>
-									<input type="text" name="$[answerList.get($[i.index])"></li>
+					<li>
+					${item.description}<br/>
+					 <input type="hidden" name="displayedQuestions" value="${item.questionId}">
+					<input type="text" name="answersByCustomers">
+					</li>
 				</c:forEach>
 		</b></td></tr>
 		<tr><td><b>
