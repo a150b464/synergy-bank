@@ -29,10 +29,10 @@
 		</init-param>
 	</filter>
 
-	<filter-mapping>
+<!--	<filter-mapping>
 		<filter-name>bankAuthFilter</filter-name>
 		<url-pattern>/bank</url-pattern>
-	</filter-mapping>
+	</filter-mapping>   -->
 
 
 	<context-param>
