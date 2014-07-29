@@ -319,6 +319,14 @@ public class BankCustomerController {
 				.getAttribute(NavigationConstant.USER_SESSION_DATA);
 		List<CustomerRegistrationQuestionsForm> secretQuestions = bankCustomerService
 				.findCustomerSecQuestions(loginForm.getUserId());
+
+		for (CustomerRegistrationQuestionsForm questionForm : secretQuestions) {
+			System.out.println(questionForm.getAnswer());
+		}
+
+		String answers = "";
+		List<String> answerList = new ArrayList<String>(3);
+		model.addAttribute("answers", answers);
 		model.addAttribute("secretQuestions", secretQuestions);
 
 		return NavigationConstant.CUSTOMER_PAGE
@@ -329,13 +337,19 @@ public class BankCustomerController {
 	@RequestMapping(value = "resetPasswordInit", method = RequestMethod.POST)
 	public String resetPassword(
 			@ModelAttribute("resetPasswordCommand") CustomerRegistrationQuestionsForm customerRegistrationQuestionsForm,
-			@RequestParam("email") String email, HttpSession session) {
+			@RequestParam("email") String email,
+			@ModelAttribute("answerList") List<String> answerList,
+			@ModelAttribute("answers") String answers, HttpSession session) {
 		LoginForm loginForm = (LoginForm) session
 				.getAttribute(NavigationConstant.USER_SESSION_DATA);
 		String userId = loginForm.getUserId();
 		CustomerForm customerForm = bankCustomerService
 				.findCustomerByUserId(userId);
 		String userEmail = customerForm.getEmail();
+
+		System.out.println("The answer is " + answers);
+
+		System.out.println("the answer List is =" + answerList);
 
 		if (email.equals(userEmail))
 			return NavigationConstant.CUSTOMER_PAGE
@@ -346,7 +360,5 @@ public class BankCustomerController {
 		} else
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CUSTOMER_ACCOUNT_LOCKED;
-
 	}
-
 }
