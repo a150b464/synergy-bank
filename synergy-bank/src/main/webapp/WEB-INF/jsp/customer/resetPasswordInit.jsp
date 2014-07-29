@@ -1,6 +1,10 @@
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link href="${pageContext.request.contextPath}/css/breadcrumb.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/r-validations.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/resetPassword-validations.js"></script>
 <style type="text/css"></style>
 </head>
 
@@ -32,8 +36,11 @@
 			<td><font size="3">Answer the questions below:</font></td>
 		</tr>	
 		<tr><td><b>
-				<c:forEach items="${secretQuestions}" var="item"><br/>
-					<li>${item.description}<br/><input type="text" value="answer" size="40" align="right"/></li>
+		
+				<c:forEach items="${secretQuestions}" var="item" varStatus="i"><br/>
+					
+					<li>${item.description}<br/>
+									<input type="text" name="$[answerList.get($[i.index])"></li>
 				</c:forEach>
 		</b></td></tr>
 		<tr><td><b>
