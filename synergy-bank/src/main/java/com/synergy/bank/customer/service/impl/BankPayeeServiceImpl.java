@@ -12,21 +12,22 @@ import org.springframework.stereotype.Service;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
-import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankPayeeServiceImpl")
 @Scope("singleton")
 public class BankPayeeServiceImpl implements BankPayeeService {
-	
+
 	@Autowired
 	@Qualifier("BankPayeeDaoImpl")
 	private BankPayeeDao bankPayeeDao;
 
 	@Override
 	public String addPayee(PayeeDetailsForm payeeDetailsForm) {
-		/*System.out.println(payeeDetailsForm);
-		System.out.println("In service Layer");*/
+		/*
+		 * System.out.println(payeeDetailsForm);
+		 * System.out.println("In service Layer");
+		 */
 		PayeeDetailsEntity payeeDetailsEntity = new PayeeDetailsEntity();
 		BeanUtils.copyProperties(payeeDetailsForm, payeeDetailsEntity);
 		return bankPayeeDao.addPayee(payeeDetailsEntity);
@@ -34,27 +35,28 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 	@Override
 	public String confirmPayee(String payeeAccountNo, String userId) {
-		
-		return bankPayeeDao.confirmPayee(payeeAccountNo,userId);
+
+		return bankPayeeDao.confirmPayee(payeeAccountNo, userId);
 	}
 
 	@Override
 	public List<PayeeDetailsForm> findPayeeByUserId(String userid) {
 		List<PayeeDetailsForm> payeeDetailsForms = new ArrayList<PayeeDetailsForm>();
-		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao.getPayeeListForUserId(userid); 
+		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao
+				.getPayeeListForUserId(userid);
 		for (PayeeDetailsEntity payeeDetailsEntity : payeeDetailsEntities) {
 			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
 			payeeDetailsForms.add(payeeDetailsForm);
 		}
-		
+
 		return payeeDetailsForms;
 	}
-	
+
 	@Override
-	public boolean isPayeeExists(String userId, String payeeAccountNo){
-		return bankPayeeDao.isPayeeExists(userId, payeeAccountNo); 
-		
+	public boolean isPayeeExists(String userId, String payeeAccountNo) {
+		return bankPayeeDao.isPayeeExists(userId, payeeAccountNo);
+
 	}
 
 	@Override
@@ -66,10 +68,10 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	public String checkPayeeAccountNumber(String payeeAcoountNumber) {
 		return bankPayeeDao.checkPayeeAccountNumber(payeeAcoountNumber);
 	}
+
 	@Override
 	public String checkPayeeName(String payeeName) {
 		return bankPayeeDao.checkPayeeAccountNumber(payeeName);
 	}
 
-	
 }
