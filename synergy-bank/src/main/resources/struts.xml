@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- this should be enable for development mode -->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="user" namespace="/loan" extends="struts-default">
+		<action name="Login">
+			<result>pages/login.jsp</result>
+		</action>
+		<!-- 
+			this is action is directly integrated with Spring container managed 
+			bean 
+		@RequestMapping	
+		//This is bean id = CarLoanAction instead of fully 
+		// qualified class name
+		-->
+		<action name="carLoan" class="CarLoanAction"
+			method="execute">
+			<result name="carLoan">/loan/carLoan.jsp</result>
+		</action>
+	</package>
+</struts>
