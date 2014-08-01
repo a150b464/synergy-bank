@@ -52,7 +52,7 @@ public class CustomerEntity implements java.io.Serializable {
 		return photo;
 	}
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
 	@JoinTable(name = "customer_and_registration_questions_tbl", joinColumns = { @JoinColumn(name = "customerId") }, inverseJoinColumns = { @JoinColumn(name = "serialNumber") })
 	public List<CustomerRegistrationQuestionsEntity> getQuestionList() {
 		return questionList;
