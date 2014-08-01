@@ -58,25 +58,7 @@ var ccontextPath="${pageContext.request.contextPath}";
 					return;
 				}
 				
-				/* $.ajax({url:ccontextPath+"/attendance/checLoginAndPassword",data:{plogin:login,ppassword:password},success:function(data) {
-					gfound=data;
-				    if(data=='found') {
-						 document.forms[0].submit();
-				    }else{
-				    	 $("#errormessage").html("<h2>Login and password are not valid! , please try once again.</h2>");
-				    	 $("input[type='password'][name='login']").focus();
-				    	 event.preventDefault();
-				    	 return;
-				    }
-  			  }
-	  			 });    */
-				 
-				/* //preventing default click on image button
-				 if(gfound!='found') {
-				   	 	event.preventDefault();
-			    		 return;
-				    } */
-				    
+								    
 				 document.forms[0].submit();
 		     });
 	});
