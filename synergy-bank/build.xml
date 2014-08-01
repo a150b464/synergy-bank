@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="synergyBankSoapClient" default="all" basedir=".">
+	<property file="build.properties" />
+	<target name="init">
+		<property name="dirs.base" value="${basedir}"/>
+		<property name="p.lib" value="${basedir}/lib"/>
+		<property name="target.location" value="${basedir}/target"/>
+		<property name="jdk.path" value="C:/Program Files/Java/jdk1.7.0/bin"/>
+		<property name="maven.path" value="D:/apache-maven-2.2.1/bin"/>
+		<property name="jarFile" value="${jar.name}-${jar.version}.jar"/>
+		<!-- Create Web-inf and classes directories -->
+		<property name="src-gen" value="${dirs.base}/webservice"/>
+		<mkdir dir="${src-gen}"/>
+		<mkdir dir="${target.location}"/>
+		<!-- Classpath definition -->
+			    <path id="runtime-classpath" >
+			    	<pathelement location="${dirs.base}" />
+			        <fileset dir="${p.lib}">
+			            <include name="*.jar"/>
+			        </fileset>
+			    	 <pathelement path="${classpath}"/>
+			    </path>
+		<!-- Taskdefs definitions -->
+	 <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport" classpathref="runtime-classpath" />
+	 </target>
+
+	<!-- Main target  -->
+	<target name="all" depends="init,createClientStub,buildJar,installJar,clean"/>
+
+	<!-- Create the jar archive File -->
+	<target name="buildJar">
+        <jar jarfile="${dirs.base}/webservice/${jarFile}" basedir="${src-gen}" />
+		 <copy todir="${target.location}">
+		   		<fileset dir="${src-gen}/" includes="${jarFile}"/>
+		</copy>
+	</target>
+	
+	<target name="installJar" description="Builds the individual project">
+	    <exec dir="D:\wsimport" executable="cmd">
+	        <arg value="/c"/>
+	        <arg value="${maven.path}\mvn.bat"/>
+	        <arg line="install:install-file -Dfile=D:\wsimport\target\${jarFile} -DgroupId=com.email  -DartifactId=${jar.name} -Dversion=${jar.version} -Dpackaging=jar" />
+	    </exec>
+	</target>
+	
+	 <target name="createClientStub" depends="init">
+	        <wsimport
+	            wsdl="http://localhost:8090/gmail-provider/emailServiceProvider?wsdl"
+	            destdir="${src-gen}"
+	            sourcedestdir="${target.location}"
+	           verbose="true">
+	        </wsimport>
+	    </target>
+	
+	 <target name="clean">
+	        <delete dir="${src-gen}"/>
+	 		<delete dir="${target.location}"/>
+	  </target>
+		
+
+</project>
+

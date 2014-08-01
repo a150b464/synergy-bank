@@ -94,5 +94,24 @@
 		<servlet-name>synergy-bank</servlet-name>
 		<url-pattern>/bank/*</url-pattern>
 	</servlet-mapping>
+	
+	
+	 <!-- configuring controller for struts -->
+    <filter>
+        <filter-name>filterDispatcher</filter-name>
+        <filter-class>
+            org.apache.struts2.dispatcher.FilterDispatcher
+        </filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>filterDispatcher</filter-name>
+        <url-pattern>/loan/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- If we are using some other mvc framework with spring add below listener -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
 
 </web-app>
