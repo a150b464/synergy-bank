@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.synergy.bank.common.service.BankAuthService;
 import com.synergy.bank.common.service.BankEmailService;
@@ -51,6 +52,16 @@ public class LoginController {
 	@Autowired
 	@Qualifier("CustomerRegistrationQuestionsServiceImpl")
 	private CustomerRegistrationQuestionsService customerRegistrationQuestionsService;
+	
+	
+	@RequestMapping(value = "passwordReset.do", method = RequestMethod.GET)
+	public @ResponseBody String checkPassword(@RequestParam("ooldPassword") String oldPassword) {
+		
+		System.out.println("--------Inside passwordRest.do--------");
+		String result=bankAuthService.checkPassword(oldPassword);
+
+      return result;		
+	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) {

@@ -60,8 +60,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		BeanUtils.copyProperties(customerForm, customerEntity);
 		CustomerLoginDetailEntity customerLoginDetailEntity = new CustomerLoginDetailEntity();
 		customerLoginDetailEntity.setUserId(customerForm.getUserId());
-		customerLoginDetailEntity.setActive("no");
-		customerLoginDetailEntity.setApprove("no");
+		customerLoginDetailEntity.setActive("yes");
+		customerLoginDetailEntity.setApprove("yes");
 		customerLoginDetailEntity.setCreatedDate(new Date());
 		customerLoginDetailEntity.setDescription("new user");
 		customerLoginDetailEntity.setLoginCount(0);
@@ -71,22 +71,6 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		customerLoginDetailEntity.setOldPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setRole("customer");
-
-		/*
-		 * List<SecurityQuestionEntity> securityQuestionList =
-		 * securityQuestionDao.getRandomSecurityQuestions(3);
-		 * Set<CustomerRegistrationQuestionsEntity> questionSet = new
-		 * HashSet<CustomerRegistrationQuestionsEntity>();
-		 * 
-		 * for(SecurityQuestionEntity securityQuestion:securityQuestionList) {
-		 * CustomerRegistrationQuestionsEntity customerRegistrationEntity = new
-		 * CustomerRegistrationQuestionsEntity();
-		 * customerRegistrationEntity.setQuestionId(securityQuestion.getId());
-		 * customerRegistrationEntity
-		 * .setDescription(securityQuestion.getDescription());
-		 * customerRegistrationEntity.setCustomerId(customerForm.getUserId());
-		 * questionSet.add(customerRegistrationEntity); }
-		 */
 		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
 
 		bankCustomerDao.addCustomer(customerEntity);
@@ -94,14 +78,9 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	}
 
 	public String updateCustomer(CustomerForm customerForm) {
-		System.out.println("inside add cus+" + customerForm);
-		/*
-		 * char[] password=bankJdbcDao.generatePassword(); String
-		 * userid=bankJdbcDao.nextUserID(); customerForm.getUserId()(userid);
-		 * customerForm.setPassword(new String(password));
-		 */
+		//System.out.println("inside add cus+" + customerForm);
 		CustomerEntity customerEntity = new CustomerEntity();
-		// attribute and datatype should be match
+		
 		BeanUtils.copyProperties(customerForm, customerEntity);
 		CustomerLoginDetailEntity customerLoginDetailEntity = new CustomerLoginDetailEntity();
 		customerLoginDetailEntity.setUserId(customerForm.getUserId());
@@ -121,19 +100,11 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		return "success";
 	}
 
-	/*
-	 * @Override public String updateCustomer(CustomerForm customerForm) {
-	 * CustomerEntity entity=new CustomerEntity();
-	 * BeanUtils.copyProperties(customerForm,entity);
-	 * bankCustomerDao.updateCustomer(entity); return null; }
-	 */
-
 	@Override
 	public List<CustomerForm> findCustomers() {
 
-		System.out
-				.println("---------Entered in FindCustomers() method of customerServiceImpl--------");
-		List<CustomerEntity> customerEntityList = bankCustomerDao
+/*		System.out.println("---------Entered in FindCustomers() method of customerServiceImpl--------");
+*/		List<CustomerEntity> customerEntityList = bankCustomerDao
 				.findCustomers();
 		List<CustomerForm> customerFormList = new ArrayList<CustomerForm>(
 				customerEntityList.size());
@@ -143,9 +114,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 			BeanUtils.copyProperties(customerEntityList.get(i), customerForm);
 			customerFormList.add(customerForm);
 		}
-		System.out.println("Printing from customerServiceImpl "
-				+ customerFormList);
-		return customerFormList;
+/*		System.out.println("Printing from customerServiceImpl " + customerFormList);
+*/		return customerFormList;
 	}
 
 	@Override
@@ -185,9 +155,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	public List<CustomerForm> getCustomerListForRowNumbers(
 			int initialRowNumber, int maximumRowNumbers) {
 
-		System.out
-				.println("---------Entered in ListFor RowNumbers methods------");
-
+/*		System.out.println("---------Entered in ListFor RowNumbers methods------");
+*/
 		List<CustomerEntity> customerEntityList = bankCustomerDao
 				.getCustomerListForRowNumbers(initialRowNumber,
 						maximumRowNumbers);
@@ -205,8 +174,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Override
 	public List<CustomerForm> findCustomersByAttributeAndValue(
 			String attribute, String value) {
-		List<CustomerEntity> customerEntityList = bankCustomerDao
-				.findCustomerByColumnNameAndValue(attribute, value);
+		List<CustomerEntity> customerEntityList = bankCustomerDao.findCustomerByColumnNameAndValue(attribute, value);
 		List<CustomerForm> customerFormList = new ArrayList<CustomerForm>(
 				customerEntityList.size());
 
@@ -245,10 +213,8 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 		for (CustomerRegistrationQuestionsEntity customerRegistrationQuestionsEntity : customerRegistrationQuestionsEntities) {
 			CustomerRegistrationQuestionsForm customerRegistrationQuestionsForm = new CustomerRegistrationQuestionsForm();
-			BeanUtils.copyProperties(customerRegistrationQuestionsEntity,
-					customerRegistrationQuestionsForm);
-			customerRegistrationQuestionsForms
-					.add(customerRegistrationQuestionsForm);
+			BeanUtils.copyProperties(customerRegistrationQuestionsEntity,customerRegistrationQuestionsForm);
+			customerRegistrationQuestionsForms.add(customerRegistrationQuestionsForm);
 		}
 		System.out.println("Service: " + customerRegistrationQuestionsForms);
 		return customerRegistrationQuestionsForms;
