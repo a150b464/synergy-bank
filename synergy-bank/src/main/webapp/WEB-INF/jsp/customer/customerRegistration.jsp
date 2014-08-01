@@ -35,8 +35,7 @@
 		</div>
 		<div class="text_content">
 			<br /> <br />
-			<marquee> <img
-				src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" />
+			<marquee> <img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" />
 			<b>The Worlds Local Bank!</b> </marquee>
 		</div>
 
@@ -148,11 +147,6 @@
 						<td><ff:input path="sourceOfFunds" size="60" /></td>
 					</tr>
 
-					<%-- 					<tr>
-						<td><b>Account Type:</b></td>
-						<td><ff:input path="accountType" size="60" /></td>
-					</tr>
- --%>
 					<tr>
 						<td><b>Photo:</b></td>
 						<td><ff:input path="photo" type="file" value="Upload File" />
@@ -190,7 +184,6 @@
 
 			</ff:form>
 
-			<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 			<br /> <br /> <br />
 
 			<div id="blocks"></div>
