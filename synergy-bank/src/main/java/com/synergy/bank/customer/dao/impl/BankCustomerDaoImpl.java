@@ -172,8 +172,6 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 				.query(sql,
 						new BeanPropertyRowMapper<CustomerRegistrationQuestionsEntity>(
 								CustomerRegistrationQuestionsEntity.class));
-		/*System.out.println("DAO : " + customerRegistrationQuestionsEntities);*/
-
 		return customerRegistrationQuestionsEntities;
 
 	}
