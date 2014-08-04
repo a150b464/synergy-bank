@@ -7,6 +7,6 @@ public interface BankAuthService {
 
 	 public LoginForm authUser(String userid,String password);
 	 public String addCustomerDetails(CustomerForm customerForm);
-	 public String checkPassword(String pwd);
+	// public String checkPassword(String pwd);
 
 }
