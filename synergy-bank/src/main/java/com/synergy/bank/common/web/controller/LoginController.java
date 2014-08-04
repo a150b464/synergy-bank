@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.synergy.bank.common.service.BankAuthService;
 import com.synergy.bank.common.service.BankEmailService;
-import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.web.controller.form.LoginForm;
+import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.service.CustomerRegistrationQuestionsService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
-import com.synergy.bank.customer.dao.BankCustomerDao;
-import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
 
 ;
 
@@ -58,9 +56,9 @@ public class LoginController {
 	public @ResponseBody String checkPassword(@RequestParam("ooldPassword") String oldPassword) {
 		
 		System.out.println("--------Inside passwordRest.do--------");
-		String result=bankAuthService.checkPassword(oldPassword);
+		//String result=bankAuthService.checkPassword(oldPassword);
 
-      return result;		
+      return "eee";		
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

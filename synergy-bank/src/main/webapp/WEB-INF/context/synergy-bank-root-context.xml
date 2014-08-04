@@ -21,7 +21,7 @@
 	<import resource="image-upload.xml" />
 	<import resource="sprng-metro-soap.xml" />
 	<import resource="synergy-loan.xml" />
-
+	<!-- <import resource="loan-jms.xml" /> -->
 
 </beans>
 	
