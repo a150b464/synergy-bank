@@ -95,6 +95,14 @@
 		<url-pattern>/bank/*</url-pattern>
 	</servlet-mapping>
 	
+	<!--
+	This mapping we will be using for restful web service
+ -->
+	<servlet-mapping>
+		<servlet-name>synergy-bank</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
 	
 	 <!-- configuring controller for struts -->
     <filter>
