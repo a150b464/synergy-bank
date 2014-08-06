@@ -8,6 +8,9 @@ package com.synergy.bank.customer.web.controller.form;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CustomerTransactionForm {
 	
 	private int transactionId;

@@ -297,7 +297,6 @@ public class BankCustomerController {
 
 	@RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
 	public String viewMiniStatement(Model model) {
-
 		String customerAccountNumber = "customerAccountNumber";
 		String accountNumber = "AAA001";
 		List<CustomerTransactionForm> transactionForms = bankTransactionService

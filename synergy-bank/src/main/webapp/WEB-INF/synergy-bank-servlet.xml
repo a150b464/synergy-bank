@@ -8,29 +8,28 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-        
- <!-- This is scanning the package where your controller resides -->       
- <context:component-scan base-package="com.synergy.bank.customer.web.controller"/>
- <context:component-scan base-package="com.synergy.bank.admin.web.controller"/>
- <context:component-scan base-package="com.synergy.bank.common.web.controller"/>
- <!-- <context:component-scan base-package="com.synergy.bank.util"/> -->
 
- <mvc:annotation-driven />
- 
- <!-- 
- welcome =>>
- /welcome.jsp
-  -->
- <bean id="viewResolver"
-	   class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
-              <property name="prefix">
-                 <value>/</value>
-              </property>
-              <property name="suffix">
-                 <value>.jsp</value>
-              </property>
-  </bean>
-     
-     
-     
+	<!-- This is scanning the package where your controller resides -->
+	<context:component-scan base-package="com.synergy.bank.customer.web.controller" />
+	<context:component-scan base-package="com.synergy.bank.admin.web.controller" />
+	<context:component-scan base-package="com.synergy.bank.common.web.controller" />
+	<context:component-scan base-package="com.synergy.bank.rest.web.provider" />
+
+	<!-- <context:component-scan base-package="com.synergy.bank.util"/> -->
+
+	<mvc:annotation-driven />
+
+	<!-- welcome =>> /welcome.jsp -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+
+
 </beans>      
