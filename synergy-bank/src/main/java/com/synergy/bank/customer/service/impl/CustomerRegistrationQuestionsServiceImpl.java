@@ -7,17 +7,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
-import com.synergy.bank.common.dao.entity.SecurityQuestionEntity;
-import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.CustomerRegistrationQuestionsDao;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
-import com.synergy.bank.customer.dao.query.CustomerQuery;
 import com.synergy.bank.customer.service.CustomerRegistrationQuestionsService;
-import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 
 @Service("CustomerRegistrationQuestionsServiceImpl")
@@ -33,6 +28,13 @@ public class CustomerRegistrationQuestionsServiceImpl implements CustomerRegistr
 	private BankCustomerDao bankCustomerDao;
 	
 	
+	public void setCustomerRegistrationQuestionsDao(
+			CustomerRegistrationQuestionsDao customerRegistrationQuestionsDao) {
+		this.customerRegistrationQuestionsDao = customerRegistrationQuestionsDao;
+	}
+	public void setBankCustomerDao(BankCustomerDao bankCustomerDao) {
+		this.bankCustomerDao = bankCustomerDao;
+	}
 	@Override
 	public String addCustomerQuestionsAndAnswerByCustomerId(
 			CustomerRegistrationQuestionsForm questionForm) {
