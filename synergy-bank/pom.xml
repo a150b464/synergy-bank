@@ -13,16 +13,16 @@
 	</properties>
 
 	<dependencies>
-	
-	
-          <!-- Dependency for mockito tool -->        
-                   <dependency>
-                             <groupId>org.mockito</groupId>
-                             <artifactId>mockito-all</artifactId>
-                             <version>1.9.0</version>
-                             <scope>test</scope>
-                   </dependency>
-	
+
+
+		<!-- Dependency for mockito tool -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<scope>test</scope>
+		</dependency>
+
 
 		<!-- jar need for struts 2.0 -->
 		<dependency>
@@ -307,6 +307,15 @@
 					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
+
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>
