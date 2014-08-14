@@ -42,25 +42,24 @@ var ccontextPath="${pageContext.request.contextPath}";
 		$("#signid").click(
 		     function(event) {
 		    	 var gfound="nfound";
-		    	 var login=$("input[type='text'][name='loginId']").val();
+		    	 var login=$("input[type='text'][name='j_username']").val();
 				if(login.length==0) {
 					alert("Login id cannot be blank.");
-					$("input[type='text'][name='loginId']").focus();
+					$("input[type='text'][name='j_username']").focus();
 					event.preventDefault();
 					return;
 				}
 				
-				var password=$("input[type='password'][name='password']").val();
+				var password=$("input[type='password'][name='j_password']").val();
 				if(password==0) {
 					alert("Password cannot be blank.");
-					$("input[type='password'][name='password']").focus();
+					$("input[type='password'][name='j_password']").focus();
 					event.preventDefault();
 					return;
-				}
-				
-								    
+				} 
+				// alert("__________Spring security_____");				    
 				 document.forms[0].submit();
-		     });
+		     }); 
 	});
 </script>
 
@@ -81,10 +80,10 @@ var ccontextPath="${pageContext.request.contextPath}";
 					border="0" />
       <h1>Login to Synergy Bank</h1><img alt="" src="${pageContext.request.contextPath}/images/sign1.jpg"  width="100" height="100"/>
         <p align="center" style="color: red;">${applicationMessage}</p>
-        
-      <form method="post" action="${pageContext.request.contextPath}/bank/auth">
-        <p><input type="text" name="login"  id="loginId" value="" placeholder="Bank userid"></p>
-        <p><input type="password" id="password" name="password" value="" placeholder="Password"></p>
+        						  
+      <form method="post" action="../j_spring_security_check">
+        <p><input type="text" name="j_username"  id="loginId" value="" placeholder="Bank userid"></p>
+        <p><input type="password" id="password" name="j_password" value="" placeholder="Password"></p>
         <p class="submit">
 
      <!--   <input type="button" name="commit" style="background: url(images/logs.jpg); width:100px; height:35px;" />         -->
