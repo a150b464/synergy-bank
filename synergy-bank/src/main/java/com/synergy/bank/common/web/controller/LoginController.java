@@ -1,9 +1,17 @@
 package com.synergy.bank.common.web.controller;
 
+import java.util.Collection;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.synergy.bank.common.service.BankAuthService;
 import com.synergy.bank.common.service.BankEmailService;
@@ -73,6 +82,51 @@ public class LoginController {
 	public String auth(Model model) {
 
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+	}
+	
+	
+	@RequestMapping(value="homescreen.htm",method = RequestMethod.GET)
+	public String handleRequestInternal(HttpServletRequest request,
+			HttpServletResponse response,Model model) throws Exception {
+		System.out.print("Yes we care");
+		String nextPage="guest";
+		// Retrieve user details
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //retrieving the role of the logged in user.
+        Collection<? extends GrantedAuthority> grantedList=authentication.getAuthorities();
+        //Here we are assuming last role present inside the list will be actual role of
+        //logged in user.
+        if(grantedList!=null && grantedList.size()>0){
+        	Iterator<? extends GrantedAuthority> iterator=grantedList.iterator();
+        	if(iterator.hasNext()){
+        		GrantedAuthority ga=iterator.next();
+        	    nextPage=ga.getAuthority(); //admin,user
+        	}
+        }
+        
+        LoginForm loginForm=new LoginForm();
+        loginForm.setUserId(authentication.getName());
+        loginForm.setRole(nextPage);
+        loginForm.setActive("yes");
+        loginForm.setApprove("yes");
+        
+        HttpSession session=request.getSession();
+    	session.setAttribute(NavigationConstant.USER_SESSION_DATA,
+				loginForm);// Storing session information
+    	
+        //Setting the logged user information into the session 
+        //Customer luser=customerService.findCustomerByUserName(authentication.getName());
+		//request.getSession().setAttribute("USER_SESSION",luser);
+		if(nextPage.equals("user")){
+			nextPage="customerHome";
+			return NavigationConstant.CUSTOMER_PAGE
+					+ NavigationConstant.CUSTOMER_HOME_PAGE;
+		}else{
+			nextPage="admin";	
+			return NavigationConstant.ADMIN_PAGE
+					+ NavigationConstant.ADMIN_HOME_PAGE;
+		}
+		
 	}
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)

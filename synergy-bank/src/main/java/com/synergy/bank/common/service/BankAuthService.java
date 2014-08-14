@@ -6,6 +6,9 @@ import com.synergy.bank.customer.web.controller.form.CustomerForm;
 public interface BankAuthService {
 
 	 public LoginForm authUser(String userid,String password);
+	 
+	 public LoginForm findLoginDetailByUserName(String userid);
+	 
 	 public String addCustomerDetails(CustomerForm customerForm);
 	// public String checkPassword(String pwd);
 
