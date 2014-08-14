@@ -26,6 +26,8 @@ public class BankAuthDaoImpl extends JdbcDaoSupport implements BankAuthDao {
 	public void setBankDataSource(DataSource dataSource){
 		super.setDataSource(dataSource);
 	}
+	
+	
 
 	@Override
 	public LoginEntity authUser(String userid, String password) {
@@ -47,6 +49,19 @@ public class BankAuthDaoImpl extends JdbcDaoSupport implements BankAuthDao {
 		super.getJdbcTemplate().update(CommonQuery.INSERT_CUSTOMER_LOGIN_DETAILS,data,dataArra);
 		/*System.out.println("____AHAHAHA____INSERTED");*/
 		return "success";
+	}
+
+
+
+	@Override
+	public LoginEntity findLoginDetailByUserName(String userid) {
+		LoginEntity loginEntity=null;
+		try {
+		   loginEntity=super.getJdbcTemplate().queryForObject(CommonQuery.AUTH_DETAIL_BANK_USER,new Object[]{userid},new BeanPropertyRowMapper<LoginEntity>(LoginEntity.class));
+		}catch(Exception ex){
+			loginEntity=new LoginEntity();
+		}
+		return loginEntity;
 	}
 
 	
