@@ -78,6 +78,24 @@
 		<servlet-name>common</servlet-name>
 		<url-pattern>/bankCustomerSoapService</url-pattern>
 	</servlet-mapping>
+	
+	
+	 <!-- 
+    Enabling Spring Security
+    This module is in progress.................................
+    ..........................................................
+          .............................................
+      -->
+    <filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 
 
 

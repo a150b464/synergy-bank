@@ -12,5 +12,7 @@
     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
    <context:component-scan base-package="com.synergy.bank.common.service.impl"/>
+   <context:component-scan base-package="com.synergy.bank.common.service.security"/>
+   
    
 </beans>
