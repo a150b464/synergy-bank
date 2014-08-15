@@ -168,6 +168,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 			BeanUtils.copyProperties(customerEntityList.get(i), customerForm);
 			customerFormList.add(customerForm);
 		}
+		System.out.println("customerEntityList="+customerEntityList);
 		return customerFormList;
 	}
 

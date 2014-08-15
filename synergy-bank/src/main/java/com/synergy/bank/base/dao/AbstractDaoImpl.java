@@ -30,6 +30,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements
 	@Qualifier("synegySessionFactory")
 	private SessionFactory psessionFactory;
 
+	
 	public Session getCurrentSession() {
 		return psessionFactory.getCurrentSession();
 	}
@@ -64,6 +65,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements
 	@Override
 	public List<E> findByCriteria(Criterion criterion) {
 		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+
 		criteria.add(criterion);
 		return criteria.list();
 	}

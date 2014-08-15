@@ -1,0 +1,18 @@
+<securityQuestions>
+	<securityQuestion>
+		<id>2022</id>
+		<description>Mothers Maiden Name?</description>
+	</securityQuestion>
+	<securityQuestion>
+		<id>1000</id>
+		<description>Fathers middle name?</description>
+	</securityQuestion>
+	<securityQuestion>
+		<id>2000</id>
+		<description>First cars registration numbers?</description>
+	</securityQuestion>
+	<securityQuestion>
+		<id>3000</id>
+		<description>Favorite childhood hero?</description>
+	</securityQuestion>
+</securityQuestions>
