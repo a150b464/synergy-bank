@@ -10,8 +10,15 @@
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
  -->    
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
+<script src="<%=request.getContextPath() %>/js/controller.js">
+</script>
+<script type="text/javascript">
+  var ccontextPath="${pageContext.request.contextPath}";
+</script>
+
 </head>
 <body>
 	<div class="meta">
@@ -78,7 +85,8 @@
 	<option value="dom">dom</option>
 	<option value="photo">photo</option>
 	<option value="description">description</option>
-</select>					
+	</select>					
+	
 	<input type="text" name="searchValue" align="middle"/>	
 			<input type="submit" value="Search"/>
 	</form>
@@ -87,6 +95,9 @@
 	<form action="customerInformation" method="get">				    
 		<input type="submit" value="Clear Search"/>
 	</form> 
+
+	<div ng-app="customerDeleteApp">
+  	<div ng-controller="customerDeleteController">
 
 	<table align="center" width="100%" border="0" cellspacing="20" cellpadding="20">
 	<thead>
@@ -105,7 +116,7 @@
 	<tbody>		
 	<c:forEach items="${customerList}" var="item">		
 		<tr>
-			<td>${item.userId}</td>
+			<td id="currentUserId">${item.userId}</td>
 		 	<td>${item.firstName} ${item.lastName}</td>
 		 	<td>${item.category}</td>
  			<td>${item.email}</td>
@@ -114,8 +125,10 @@
  			<td>${item.education}</td>
 			<td>${item.grossAnualIncome}</td>
    			<td>
-			<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
-			<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
+   			<button ng-click="deleteCustomerRecord()"><img src="${pageContext.request.contextPath}/images/delete.png"/></button>
+	<%-- 		<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
+	 --%>		
+	 		<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>
 		
 			</td>	 	
 	 	</tr>
@@ -123,6 +136,8 @@
 	
 	</tbody>		
 </table>
+</div>
+</div>
 		<a href="${pageContext.request.contextPath}/bank/loadPreviousPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/prev.png" /></a>
 			<input type="text" name="pageInformation" value="${pageInformation}" align="right"/>			
 		<a href="${pageContext.request.contextPath}/bank/loadNextPage?current_page_number=${current_page_number}"><img src="${pageContext.request.contextPath}/images/next.png" /></a>

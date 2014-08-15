@@ -86,10 +86,13 @@ public class BankCustomerHibernateDaoImpl extends
 			int initialRowNumber, int maximumRowNumbers) {
 		Criteria criteria = super.getCurrentSession().createCriteria(
 				CustomerEntity.class);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.setFirstResult(initialRowNumber);
-		criteria.setMaxResults(maximumRowNumbers);
+		criteria.setMaxResults(maximumRowNumbers*3);
+
 		@SuppressWarnings("unchecked")
 		List<CustomerEntity> list = (List<CustomerEntity>) criteria.list();
+		System.out.println("list inside criteria="+list);
 		return list;
 	}
 

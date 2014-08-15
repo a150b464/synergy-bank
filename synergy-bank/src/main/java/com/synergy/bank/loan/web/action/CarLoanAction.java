@@ -11,6 +11,7 @@ import com.synergy.bank.loan.service.CarLoanService;
 import com.synergy.bank.loan.web.action.form.CarForm;
 
 
+@SuppressWarnings("serial")
 @Component("CarLoanAction")
 @Scope("request")
 public class CarLoanAction extends ActionSupport implements ModelDriven<CarForm> {

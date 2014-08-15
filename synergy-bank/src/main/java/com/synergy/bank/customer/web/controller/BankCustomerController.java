@@ -185,7 +185,7 @@ public class BankCustomerController {
 			currentPageNumber = bankCustomerService.getCustomerEntriesCount();
 
 		List<CustomerForm> customerDetailList = bankCustomerService
-				.getCustomerListForRowNumbers(currentPageNumber * 5, 5);
+				.getCustomerListForRowNumbers(currentPageNumber * 15, 5);
 
 		model.addAttribute("pageInformation", currentPageNumber + "/"
 				+ bankCustomerService.getCustomerEntriesCount() / 5);
@@ -207,10 +207,10 @@ public class BankCustomerController {
 			currentPageNumber = 0;
 
 		List<CustomerForm> customerDetailList = bankCustomerService
-				.getCustomerListForRowNumbers(currentPageNumber * 2, 2);
+				.getCustomerListForRowNumbers(currentPageNumber * 15, 5);
 
 		model.addAttribute("pageInformation", currentPageNumber + "/"
-				+ bankCustomerService.getCustomerEntriesCount() / 2);
+				+ bankCustomerService.getCustomerEntriesCount() / 5);
 		model.addAttribute("current_page_number", currentPageNumber);
 		model.addAttribute("customerList", customerDetailList);
 

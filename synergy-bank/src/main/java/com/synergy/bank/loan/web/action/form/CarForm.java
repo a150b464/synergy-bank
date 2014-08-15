@@ -1,6 +1,5 @@
 package com.synergy.bank.loan.web.action.form;
 
-
 /**
  * 
  * @author nagendra

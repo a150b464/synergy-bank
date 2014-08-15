@@ -28,8 +28,6 @@
             </ws:service>
         </wss:service>
     </wss:binding>
-    
-    
        
 </beans>       
 
