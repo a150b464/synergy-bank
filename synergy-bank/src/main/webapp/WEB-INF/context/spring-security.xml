@@ -7,18 +7,23 @@
 			 http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	<!-- This is where we configure Spring-Security  -->
-	<security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied" >
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/bank/auth/denied" >
+		<security:intercept-url pattern="/bank/customerRegistration" access="permitAll"/>
 		<security:intercept-url pattern="/bank/auth" access="permitAll"/>
 		<security:intercept-url pattern="/bank/logout" access="permitAll"/>
 		<security:intercept-url pattern="/auth/register.htm" access="permitAll"/>
-		<security:intercept-url pattern="/bank/**" access="hasRole('admin')"/>
-		<security:intercept-url pattern="/bank/**" access="hasRole('user')"/>
-		<security:intercept-url pattern="/customer/**" access="hasRole('user')"/>
+		<!-- <security:intercept-url pattern="/bank/**" access="hasRole('admin')"/> -->
+		<!-- <security:intercept-url pattern="/bank/**" access="hasRole('customer')"/> -->
+		<security:intercept-url pattern="/bank/**" access="hasAnyRole('admin','customer')"/>
+		
+		<!-- Below three are not in use so far -->
+		<security:intercept-url pattern="/customer/**" access="hasRole('customer')"/>
+		<security:intercept-url pattern="/customer/**" access="hasRole('admin')"/>
 		<security:intercept-url pattern="/common/**" access="hasAnyRole('admin','user')"/>
 
 		<security:form-login
 				login-page="/bank/auth" 
-				authentication-failure-url="/bank/nagendra" 
+				authentication-failure-url="/bank/invalidLogin" 
 				default-target-url="/bank/homescreen.htm"/>
 			
 		<security:logout 

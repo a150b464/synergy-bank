@@ -44,7 +44,7 @@
 			<h2 style="color: blue">${msg}</h2>
 			<ff:form name="customerRegistration"
 				action="${pageContext.request.contextPath}/bank/customerRegistration"
-				method="post" commandName="customerForm" >
+				method="post" commandName="customerForm"  enctype="multipart/form-data">
 				<table align="center" width="147%" border="0" cellspacing="8" cellpadding="8"
 					background="${pageContext.request.contextPath}/images/table-background.jpg">
 

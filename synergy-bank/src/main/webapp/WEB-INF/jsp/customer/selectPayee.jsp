@@ -48,7 +48,8 @@
 
 					<tr>
 						<td><b>Register a new Payee:</b></td>
-						<td><input id="button" type="button" value="Add Payee" size="20" onclick="onSelectPayeeSubmit('addPayeeAction');"/></td>
+						<td><input id="button" type="button" value="Add Payee" size="20" 
+						onclick="onSelectPayeeSubmit('addPayeeAction');"/></td>
 					</tr>
 					
 					<tr>
