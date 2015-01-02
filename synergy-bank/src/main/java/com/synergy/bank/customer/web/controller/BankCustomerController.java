@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
-import com.sun.java.swing.plaf.motif.resources.motif;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.common.service.impl.GallaryService;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
@@ -65,6 +65,12 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("SecurityQuestionServiceImpl")
 	private SecurityQuestionService securityQuestionServiceImpl;
+	
+	
+	@Autowired
+	@Qualifier("GallaryServiceImpl")
+	private GallaryService gallaryService;
+	
 
 	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
 	public String showCustomerRegistrationPage(Model model) {
@@ -72,6 +78,8 @@ public class BankCustomerController {
 
 		List<SecurityQuestionForm> securityQuestionList = securityQuestionServiceImpl
 				.getRandomQuestions(3);
+		
+		//Entity we should not use in the controller 
 		List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
 		for (SecurityQuestionForm securityQuestion : securityQuestionList) {
@@ -96,15 +104,17 @@ public class BankCustomerController {
 
 	@RequestMapping(value = "/customerRegistration", method = RequestMethod.POST)
 	public String showCustomerRegistrationSubmit(
-			@ModelAttribute(value = "customerForm") CustomerForm customerForm) {
-		bankCustomerService.addCustomer(customerForm);
+			@ModelAttribute(value = "customerForm") CustomerForm customerForm,Model model) {
+		String userIdAndPassword=bankCustomerService.addCustomer(customerForm);
 		// here we are making this call asynchronous so we are creating
 		EmailSenderThread emailSenderThread = new EmailSenderThread(
 				bankEmailService, customerForm.getEmail(),
-				"Hello Dear! Ahahahah", "Regarding Registration");
+				"Dear Sir! Welcome to Synergy Bank. You have successfully registered into out application!<br/>"+userIdAndPassword, "Regarding Registration");
 		emailSenderThread.start();
-		return NavigationConstant.CUSTOMER_PAGE
-				+ NavigationConstant.CUSTOMER_HOME_PAGE;
+		model.addAttribute("applicationMessage","Thanks , You have successfully registered into out application!");
+		return NavigationConstant.COMMON_PAGE
+				+ NavigationConstant.LOGIN_PAGE;
+		
 	}
 
 	@RequestMapping(value = "showPayeeList", method = RequestMethod.GET)
@@ -142,9 +152,22 @@ public class BankCustomerController {
 	@RequestMapping(value = "/findPhotoById", method = RequestMethod.GET)
 	public void findPhotoById(@RequestParam("userId") String userId,
 			HttpServletResponse response) throws IOException {
-
 		response.setContentType("image/jpg");
 		byte[] photo = bankCustomerService.findPhotoById(userId);
+		/*System.out.println("Inside find photo by id");*/
+		if (photo != null) {
+			System.out.println("found photo");
+			ServletOutputStream outputStream = response.getOutputStream();
+			outputStream.write(photo);
+			outputStream.flush();
+		}
+	}
+	
+	@RequestMapping(value = "/findPhotoFromGallaryById", method = RequestMethod.GET)
+	public void findPhotoFromGallaryById(@RequestParam("imageid") int imageid,
+			HttpServletResponse response) throws IOException {
+		response.setContentType("image/jpg");
+		byte[] photo = gallaryService.findImageById(imageid);
 		/*System.out.println("Inside find photo by id");*/
 		if (photo != null) {
 			System.out.println("found photo");
