@@ -20,6 +20,30 @@
 	var ccontextPath="${pageContext.request.contextPath}";
 	
 	$(function(){
+		
+		$("#nextButton").click(
+				 function() {
+			       alert("Hahahah");		 
+			       var payeeAccount=$("#payeeAccountNo").val();
+					// alert("payeeAccount = "+payeeAccount);
+					 if(payeeAccountNo.length==0){
+						 alert("Payee AccountNo cannot be blank.")
+						 $("#payeeAccountNo").focus();
+						 return;
+					 }
+					 
+					 var payeeName=$("#payeeName").val();
+					// alert("payeeAccount = "+payeeAccount);
+					 if(payeeName.length==0){
+						 alert("Payee AccountNo cannot be blank.")
+						 $("#payeeName").focus();
+						 return;
+					 }
+					 
+			       $("#addPayeeForm").submit();
+			       
+		 });		 
+		
 		$("#payeeAccountNo").keyup(
 		 function() {
 			 var payeeAccount=$("#payeeAccountNo").val();
@@ -52,6 +76,7 @@
 		$("#payeeName").blur(
 		 function() {
 			 var payeeName=$("#payeeName").val();
+			 var payeeAccount=$("#payeeAccountNo").val();
 			// alert("payeeAccount = "+payeeAccount);
 			 if(payeeName.length==0){
 				 alert("Payee AccountNo cannot be blank.")
@@ -59,7 +84,7 @@
 				 return;
 			 }
 			 //making ajax call
-			 $.ajax({url:ccontextPath+"/bank/checkPayeeName.do",data:{ppayeeName:payeeName},success:function(data) {
+			 $.ajax({url:ccontextPath+"/bank/checkPayeeName.do",data:{ppayeeName:payeeName,ppayeeAccount:payeeAccount},success:function(data) {
 						    if(data=='invalid') {
 								// alert(payeeAccount+ " is not valid account number.");
 								 $("#nameError").html(payeeName+ " is not a valid Name.");
@@ -91,7 +116,7 @@
 		</h2>
 		<br />
 		<p style="color: red;">${message}</p>
-		<ff:form action="addpayee.do" method="post" commandName="addPayeeCommand">
+		<ff:form id="addPayeeForm" action="addpayee.do" method="post" commandName="addPayeeCommand">
 			
 			<table align="center" width="100%" border="0" cellspacing="4" cellpadding="4">
 				<tr>
@@ -99,6 +124,7 @@
 					<td><ff:input path="payeeAccountNo" size="40" style="background:#D0F5A9; font-family: Palatino Linotype" /></td>
 					<td  id="accountError" style="font-size:10;color: red;"></td>
 				</tr>
+				
 				<tr>
 					<td><b>Payee Name</b></td>
 					<td><ff:input path="payeeName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype"/>
@@ -107,13 +133,13 @@
 				</tr>
 				<tr>
 					<td><b>Payee Nick Name</b></td>
-					<td><ff:input path="payeeNickName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype" readonly="true"/></td>
+					<td><ff:input path="payeeNickName" size="40" style="background:#D0F5A9;font-family: Palatino Linotype" readonly="false"/></td>
 							<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td><b>Mobile Number</b></td>
 					<td><ff:input path="mobile" size="40"
-							style="background:#D0F5A9;font-family: Palatino Linotype" /></td>
+							style="background:#D0F5A9;font-family: Palatino Linotype" readonly="true"/></td>
 							<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -135,8 +161,12 @@
 			<br>
 			<table>
 				<tr>
-					<td><input type="button" value="Next" id="nextButton"
-						style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;" /></td>
+					<td>
+					
+					<input type="button" value="Next" id="nextButton"
+						style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;" />
+						
+						</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>

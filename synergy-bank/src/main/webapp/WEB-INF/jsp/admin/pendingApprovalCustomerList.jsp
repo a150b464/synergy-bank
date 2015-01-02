@@ -51,13 +51,19 @@
 			
 		<br/> <h3 align="center">PENDING APPROVAL CUSTOMER LIST:</h3>  <br/>
 		<p align="center"><h5>${msg}</h5></p>		
-		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers" commandName="approvePendingCustomerCommand" >
+		<ff:form name="pendingApprovalForm" method="post" action="approvePendingCustomers">
 			<table align="center" id="tab1">
 				<thead>
 					<tr>
 						<td><b>SNO</b></td>	
-						<td><b>Customer Name</b></td>	 <td><b>Email ID</b></td>	<td><b>Mobile No.</b></td>
-						<td><b>Photo</b></td>	<td><b>Approve</b> &nbsp; <input type="checkbox" onchange="checkAll()" id="checkAll" value="All"/>(All) </td>
+						<td><b>Customer Name</b></td>	
+						 <td><b>Email ID</b></td>	
+						 <td><b>Mobile No.</b></td>
+						<td><b>Photo</b></td>	
+						<td><b>Approve</b> &nbsp; 
+						<input type="checkbox" 
+						onchange="checkAll()" id="checkAll" value="All"/>(All)
+						 </td>
 					</tr>
 				</thead>
 				<tbody>		
@@ -68,7 +74,10 @@
 			    			<td>${item.email}</td>
 			    			<td>${item.mobile}</td>
 			    			<td>${photo}</td>
-			    			<td><input type="checkbox" name="approveCheckbox" class="chkbox" value="${item.userId}"/>  </td>
+			    			<td>
+			    			<input type="checkbox" name="approveCheckbox" class="chkbox" 
+			    			value="${item.userId}"/>  
+			    			</td>
 			    		</tr>
 					</c:forEach>	
 				</tbody>

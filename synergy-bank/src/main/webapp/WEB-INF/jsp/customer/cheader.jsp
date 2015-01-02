@@ -12,13 +12,17 @@
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
 		<ul id="menu">
 			<li><a href="${pageContext.request.contextPath}/bank/customerHome">Home</a></li>
+			    <c:if test="${sessionScope.userSessionData.approve!='no'}">
 			<li><a href="${pageContext.request.contextPath}/bank/addpayee.do">Add Payee</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/selectPayee">Fund Transfer</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/accountSummary">Account Summary</a></li>
-			<li><a href="${pageContext.request.contextPath}/bank/resetPasswordInit">Reset Password</a></li>
 			<li><a href="#">Accounts</a></li>
 			<li><a href="#">Credit Card</a></li>
-			<li class="last"><a href="${pageContext.request.contextPath}/bank/customerRegistration">Register</a></li>
+			</c:if>
+			
+			<li><a href="${pageContext.request.contextPath}/bank/resetPasswordInit">Reset Password</a></li>
+			
+			<li class="last"><a href="${pageContext.request.contextPath}/bank/customerRegistration">Profile</a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
 		</ul>
 	

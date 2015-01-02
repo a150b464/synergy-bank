@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,6 +13,15 @@
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tinycarousel.css" type="text/css" media="screen"/>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tinycarousel.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#slider1').tinycarousel();
+		});
+	</script>
+
 </head>
 <body>
 	<%@include file="cheader.jsp"%>
@@ -19,76 +29,62 @@
 		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
 	</div>
-	<div id="content">
+	<div id="content" style="width: 100%">
 			<form name="customerHome" action="${pageContext.request.contextPath}/bank/auth" method="post" > 
-				</br><table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
-			
-			 <br/>	 <br/>	 <br/>	 <br/>	 <br/>	 
-			<h3>Welcome to the Synergy-Bank!</h3> 
-			
+				<table align=center width="60%" border="0" cellspacing="20" cellpadding="20" background = "${pageContext.request.contextPath}/images/table-background.jpg" >
+			 	 <br/>	
+			<h3>Welcome to the Synergy-Bank!</h3>
+			 
+				<h3 style="color: blue">${applicationMessage}</h3>
 		</table>
 			
 	</form> 
 		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
 		
+		<div id="slider1">
+		<a class="buttons prev" href="#">&#60;</a>
+		<div class="viewport">
+			<ul class="overview">
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=1" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=2" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=3" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=4" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=5" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=6" /></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=7" /></li>
+			</ul>
+		</div>
+		<a class="buttons next" href="#">&#62;</a>
+	</div>
+		<br/><br/>
 		<div id="blocks">																																																																																																																													
 			
 		</div>
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
+				<img src="${pageContext.request.contextPath}/images/jobseekers.jpg" alt="" width="160" height="160"/>
 			</div>
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title6.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
+					<img src="${pageContext.request.contextPath}/images/careerbuilder.jpg" alt="" width="160" height="160"/>
+				
 			</div>
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title7.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
+				<img src="${pageContext.request.contextPath}/images/marketyour.jpg" alt="" width="160" height="160"/>
+				
 			</div>
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title8.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
+				<img src="${pageContext.request.contextPath}/images/partner-site.jpg" alt="" width="160" height="160"/>
+				
 			</div>
+			<br/>
+			<%@ include file="../common/footer.jsp" %>
 		</div>
+		
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+
 </body>
 </html>
