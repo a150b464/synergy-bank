@@ -44,58 +44,40 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 	
 	@Override
 	public List<CustomerEntity> findPendingCustomerList(){
-		
 		List<CustomerEntity> customerList = super.getJdbcTemplate().query(AdminQuery.FIND_PENDING_CUSTOMER_LIST,
 				new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));
-		
 		return customerList;
 		
 	}
 
 
 	@Override
-	public List<CustomerAccountEntity> approvePendingCustomers(String[] cusomerUserNames) {
+	public List<CustomerAccountEntity> approvePendingCustomers(String[] selectedCustomerUserIds) {
 		
-		if(cusomerUserNames.length>0){
-			
+		List<CustomerAccountEntity> customerAccountEntities = new ArrayList<CustomerAccountEntity>();
+		if(selectedCustomerUserIds.length>0){
 			String findPendingCustomerDetailsSql = AdminQuery.FIND_PENDING_CUSTOMER_DETAILS
 					+ "("
 					+ new BankDaoUtil()
-							.stringArrayToCommaSeperatedString(cusomerUserNames)
+							.stringArrayToCommaSeperatedString(selectedCustomerUserIds)
 					+ ") and approve='no'";
-		/*	System.out.println(findPendingCustomerDetailsSql);*/
-			
+		
 			List<CustomerEntity> customerDetailsList = super.getJdbcTemplate().query(findPendingCustomerDetailsSql,
 					new BeanPropertyRowMapper<CustomerEntity>(CustomerEntity.class));			
 			
-			List<CustomerAccountEntity> customerAccountEntities = new ArrayList<CustomerAccountEntity>();
+			String recentAccountNo = null;
+			try{
+				recentAccountNo = super.getJdbcTemplate().queryForObject(AdminQuery.FIND_MOST_RECENT_ACC_NO, String.class);
+			}
+			catch(Exception e){
+			}
+			Long newAccNo=0L;		
+			if(recentAccountNo==null || recentAccountNo.equals("0")){
+				newAccNo=1000000001L;
+			}
 			
 			for (CustomerEntity customerEntity : customerDetailsList) {
-								
-				String recentAccountNo = null;
-				try{
-					recentAccountNo = super.getJdbcTemplate().queryForObject(AdminQuery.FIND_MOST_RECENT_ACC_NO, String.class);
-				}
-				catch(Exception e){
-					recentAccountNo = "empty";					
-				}
-								
-				Long recentAccoNo,newAccNo;		
-				if(recentAccountNo==null || "empty".equals(recentAccountNo)){
-					recentAccoNo = 999999999L;
-					newAccNo=1000000000L;
-				}
-				else{
-					recentAccoNo = Long.parseLong(recentAccountNo);
-					newAccNo = recentAccoNo+1;
-				}
-				
-				Object[] accNumbersData = new Object[]{
-						customerEntity.getUserId(), customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName(),
-						newAccNo.toString()
-				};				
-				super.getJdbcTemplate().update(AdminQuery.ADD_NEW_ACCOUNT_NUMBER, accNumbersData);
-				
+				newAccNo=newAccNo+1;
 				Object[] data = new Object[] {
 						customerEntity.getUserId(), newAccNo.toString(),
 						"Savings", 1000D,
@@ -104,23 +86,28 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 						new Date(), new Date(),customerEntity.getEmail()
 					};																	
 
-				super.getJdbcTemplate().update(AdminQuery.APPROVE_PENDING_CUSTOMER, data);	
-				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_DETAILS_APPROVE,customerEntity.getUserId());
-				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_LOGIN_APPROVE,customerEntity.getUserId());
+				//inserting new into customer_account_info_tbl
+				super.getJdbcTemplate().update(AdminQuery.APPROVE_PENDING_CUSTOMER, data);
 				
+				//changing flag in customer_details_tbl which is approved now
+				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_DETAILS_APPROVE,customerEntity.getUserId());
+				
+				//changing flag in customer_login_tbl which is approved now
+				super.getJdbcTemplate().update(AdminQuery.UPDATE_CUSTOMER_LOGIN_APPROVE,customerEntity.getUserId());
 				CustomerAccountEntity customerAccountEntity = new CustomerAccountEntity();
 				customerAccountEntity.setUserid(customerEntity.getUserId());
 				customerAccountEntity.setCustomerName(customerEntity.getFirstName()+" "+customerEntity.getMiddleName()+" "+customerEntity.getLastName());
 				customerAccountEntity.setCustomerAccountNo(newAccNo.toString());
 				customerAccountEntity.setTotalAvailBalance(1000D);
 				customerAccountEntity.setCustomerEmail(customerEntity.getEmail());
-				
 				customerAccountEntities.add(customerAccountEntity);
 				
 			} // End of for loop
 			return customerAccountEntities;
 		}  // End of if statement
-		else return null;
+		else{ 
+			return customerAccountEntities;
+		}	
 	}
 
 

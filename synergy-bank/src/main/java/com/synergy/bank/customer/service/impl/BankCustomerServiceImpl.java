@@ -22,6 +22,8 @@ import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
+import com.synergy.bank.util.BankPasswordGenUtil;
+import com.synergy.bank.util.PasswordGenerator;
 
 @Service("BankCustomerServiceImpl")
 @Scope("singleton")
@@ -49,19 +51,35 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 
 	@Override
 	public String addCustomer(CustomerForm customerForm) {
+		String userIdAndPassword="";
 		System.out.println("inside add cus+" + customerForm);
 		// char[] password=bankJdbcDao.generatePassword();
 		String userid = bankJdbcDao.nextUserID();
 		customerForm.setUserId(userid);
+		userIdAndPassword="Bank userid ="+userid;
 		// customerForm.setPassword(String.valueOf(password));
-		customerForm.setPassword("1");
+		
+		//Generating the password for four characters
+		 int passwordSize = 4;
+	    // PasswordGenerator password = new PasswordGenerator( passwordSize );
+	     //String genpass=new String(password.get());
+		 BankPasswordGenUtil msr = new BankPasswordGenUtil();
+	     String genpass=msr.generateRandomString();
+	     System.out.println("****************************************************");
+	     System.out.println("generated password is- ("+genpass+")____________");
+	     System.out.println("****************************************************");
+		customerForm.setPassword(genpass);
+		userIdAndPassword=userIdAndPassword+" , password = "+genpass;
+		
 		CustomerEntity customerEntity = new CustomerEntity();
 		// attribute and datatype should be match
 		BeanUtils.copyProperties(customerForm, customerEntity);
+		customerEntity.setApprove("no");
+		
 		CustomerLoginDetailEntity customerLoginDetailEntity = new CustomerLoginDetailEntity();
 		customerLoginDetailEntity.setUserId(customerForm.getUserId());
 		customerLoginDetailEntity.setActive("yes");
-		customerLoginDetailEntity.setApprove("yes");
+		customerLoginDetailEntity.setApprove("no");
 		customerLoginDetailEntity.setCreatedDate(new Date());
 		customerLoginDetailEntity.setDescription("new user");
 		customerLoginDetailEntity.setLoginCount(0);
@@ -71,10 +89,14 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		customerLoginDetailEntity.setOldPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setPassword(customerForm.getPassword());
 		customerLoginDetailEntity.setRole("customer");
+		
+		//This code is not running running within a single transaction
+		//This code we have to change so that both  query can run as part of
+		//single transaction.............
 		bankCustomerLoginHibernateDaoImpl.save(customerLoginDetailEntity);
-
 		bankCustomerDao.addCustomer(customerEntity);
-		return "success";
+		
+		return userIdAndPassword;
 	}
 
 	public String updateCustomer(CustomerForm customerForm) {

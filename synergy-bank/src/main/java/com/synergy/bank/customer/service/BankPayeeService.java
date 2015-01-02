@@ -21,5 +21,6 @@ public interface BankPayeeService {
 	public boolean isPayeeExists(String userId, String payeeAccountNo);
 	public String checkPayeeAccountNumber(String payeeAcoountNumber) ;
 	String checkPayeeName(String payeeName);
+	public String checkPayeeName(String payeeName, String payeeAcoountNumber);
 	
 }

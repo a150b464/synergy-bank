@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
+import com.synergy.bank.customer.web.constant.ApplicationStatus;
 
 @Repository("BankPayeeDaoImpl")
 @Scope("singleton")
@@ -35,10 +36,17 @@ implements BankPayeeDao{
 		super.setDataSource(dataSource);
 	}
 	
+	private int findNextNum() {
+		int num = getJdbcTemplate().queryForInt(
+				"select max(sno) from payee_information_tbl");
+		num = num + 1;
+		return num;
+	}
+	
 	@Override
 	public String addPayee(PayeeDetailsEntity entity){
-		Object[] data = new Object[]{entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
-				entity.getEmail(),entity.getMobile(),entity.getSno(),entity.getDoe(),entity.getStatus(),entity.getUserid()};
+		Object[] data = new Object[]{findNextNum(),entity.getUserid(),entity.getPayeeAccountNo(),entity.getPayeeName(),entity.getPayeeNickName(),
+				entity.getMobile(),entity.getDoe(),entity.getEmail(),entity.getStatus()};
 		super.getJdbcTemplate().update(CustomerQuery.ADD_PAYEE,data);
 		return "success";
 	}
@@ -54,7 +62,7 @@ implements BankPayeeDao{
 
 	@Override
 	public List<PayeeDetailsEntity> getPayeeListForUserId(String userId) {
-		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_PAYEE+" '"+userId+"' ",
+		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_APPROVED_PAYEE_BY_USERID,new Object[]{userId,ApplicationStatus.APPROVED.value()},
 				new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
 		return payeeDetailsEntityList;
 	}
@@ -92,14 +100,15 @@ implements BankPayeeDao{
 
 @Override
 public String confirmPayee(String payeeAccountNo, String userId) {
-	// TODO Auto-generated method stub
-	return null;
+	String confirmPayeeQuery="update payee_information_tbl set status='approved' where userid=? and payeeAccountNo=?";
+	super.getJdbcTemplate().update(confirmPayeeQuery,new Object[]{userId,payeeAccountNo});
+	return "success";
 }
 
 @Override
 public String checkPayeeAccountNumber(String payeeAcoountNumber) {
 	//
-	String sql="select accountNumber from customer_account_numbers_tbl where accountNumber='"+payeeAcoountNumber+"'";
+	String sql="select customerAccountNo from customer_account_info_tbl where customerAccountNo='"+payeeAcoountNumber+"'";
 	try {
 		super.getJdbcTemplate().queryForObject(sql,String.class);
 	}catch(EmptyResultDataAccessException dataAccessException){
@@ -112,6 +121,18 @@ public String checkPayeeAccountNumber(String payeeAcoountNumber) {
 public String checkTransactionAmountNumber(String transactionAmount) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public String checkPayeeName(String payeeName, String payeeAcoountNumber) {
+	//
+	String sql="select customerAccountNo from customer_account_info_tbl where customerAccountNo='"+payeeAcoountNumber+"' and customerName='"+payeeName+"'";
+	try {
+		super.getJdbcTemplate().queryForObject(sql,String.class);
+	}catch(EmptyResultDataAccessException dataAccessException){
+		return "invalid";
+	}
+	return "valid";
 }
 
 }
