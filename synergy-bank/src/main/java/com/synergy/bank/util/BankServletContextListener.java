@@ -28,14 +28,17 @@ import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
  */
 public class BankServletContextListener implements ServletContextListener{
 
-	   /*
-	    * Initiate Logger for this class
-	    */
+   /*
+    * Initiate Logger for this class.
+    * 
+    *  
+    */
 	private static final Log logger = LogFactory.getLog(BankServletContextListener.class);
 	
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		sce.getServletContext();
 		
 		ApplicationContext applicationContext=ContextLoader.getCurrentWebApplicationContext();
 	    SecurityQuestionService securityQuestionService=(SecurityQuestionService)applicationContext.getBean("SecurityQuestionServiceImpl");

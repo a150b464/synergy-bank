@@ -46,6 +46,7 @@ public class CustomerForm implements java.io.Serializable {
 	private byte[] photo;
 	private String description;
 	private String approve;
+	
 	private List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
 	public List<CustomerRegistrationQuestionsEntity> getQuestionList() {

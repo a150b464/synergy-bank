@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.common.web.controller.form.LoginForm;
+import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.BankPayeeService;
+import com.synergy.bank.customer.web.constant.ApplicationMessageConstant;
+import com.synergy.bank.customer.web.constant.ApplicationStatus;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
@@ -32,6 +37,10 @@ public class BankPayeeCustomerController {
 	@Autowired
 	@Qualifier("BankPayeeServiceImpl")
 	private BankPayeeService bankPayeeService;
+	
+	@Autowired
+	@Qualifier("BankCustomerServiceImpl")
+	private BankCustomerService bankCustomerService;
 
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
@@ -55,52 +64,74 @@ public class BankPayeeCustomerController {
 	 */
 	@RequestMapping(value = "checkPayeeName.do", method = RequestMethod.GET)
 	public @ResponseBody String checkPayeeName(
-			@RequestParam("ppayeeName") String payeeName) {
-		String result = bankPayeeService.checkPayeeName(payeeName);
+			@RequestParam("ppayeeName") String payeeName,@RequestParam("ppayeeAccount") String ppayeeAccount,HttpSession session) {
+		/*LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		String userid=loginForm.getUserId();*/
+		String result = bankPayeeService.checkPayeeName(payeeName, ppayeeAccount);
 		// @ResponseBody =>>by pass view resolver and write this data directly
 		// into the response body
 		return result;
 	}
 
 	// Add Payee Methods
-	@RequestMapping(value = "addpayee.do", method = RequestMethod.GET)
-	public String addpayee(Model model) {
-		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
-		model.addAttribute("addPayeeCommand", payeeDetailsForm);
-		/* System.out.println("in controller"); */
-		return NavigationConstant.CUSTOMER_PAGE
-				+ NavigationConstant.ADD_PAYEE_PAGE;
-	}
+	 @RequestMapping(value = "addpayee.do", method = RequestMethod.GET)
+	public String addpayee(Model model,HttpSession session) {
+        LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+        String userid=loginForm.getUserId();
+        CustomerForm customerForm=bankCustomerService.findCustomerByUserId(userid);
+  
+        PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+        payeeDetailsForm.setEmail(customerForm.getEmail());
+        String mobile=customerForm.getMobile();
+        session.setAttribute("smobile", mobile);
+        if(mobile!=null && mobile.length()>2){
+            //988777
+            mobile=mobile.substring(mobile.length()-2);
+        }else{
+            mobile="xxx";
+        }
+        payeeDetailsForm.setMobile("********"+mobile);
+        model.addAttribute("addPayeeCommand", payeeDetailsForm);
+        /* System.out.println("in controller"); */
+        return NavigationConstant.CUSTOMER_PAGE
+                 + NavigationConstant.ADD_PAYEE_PAGE;
+   }
 
-	@RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
-	public String addpayee(
-			@ModelAttribute("addPayeeCommand") PayeeDetailsForm payeeDetailsForm,
-			Model model, HttpSession session) {
-
-		String userId = "customer";
-		if (bankPayeeService.isPayeeExists(userId,
-				payeeDetailsForm.getPayeeAccountNo())) {
-			String message = "This payee already exists.";
-			model.addAttribute("message", message);
-			return NavigationConstant.CUSTOMER_PAGE
-					+ NavigationConstant.ADD_PAYEE_PAGE;
-		} else {
-			String stst = "pending";
+   @RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
+   public String addpayee(
+            @ModelAttribute("addPayeeCommand") PayeeDetailsForm payeeDetailsForm,
+            Model model, HttpSession session) {
+        String mobile=(String)session.getAttribute("smobile");
+        payeeDetailsForm.setMobile(mobile);
+        session.removeAttribute("smobile");
+       
+        //String userId = "customer";
+        LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+        String userid=loginForm.getUserId();
+        if (bankPayeeService.isPayeeExists(userid,
+                 payeeDetailsForm.getPayeeAccountNo())) {
+            model.addAttribute("message", ApplicationMessageConstant.THIS_PAYEE_ALREADY_EXISTS);
+            return NavigationConstant.CUSTOMER_PAGE
+                      + NavigationConstant.ADD_PAYEE_PAGE;
+        } else {
 			payeeDetailsForm.setDoe(new Date());
-			payeeDetailsForm.setUserid(userId);
-			payeeDetailsForm.setStatus(stst);
+			payeeDetailsForm.setUserid(userid);
+			payeeDetailsForm.setStatus(ApplicationStatus.PENDING.value());
 			bankPayeeService.addPayee(payeeDetailsForm);
 			model.addAttribute("payeeDetailsForm", payeeDetailsForm);
 			// Random Number Generator
 			Random generator = new Random();
 			int genPin = generator.nextInt(999999);
+			
 			session.setAttribute("verificationPin", genPin);
+			System.out.println("____GENEREDTED PIN IS  ==="+genPin);
 			EmailSenderThread emailSenderThread = new EmailSenderThread(
 					bankEmailService, payeeDetailsForm.getEmail(), "Hello "
 							+ payeeDetailsForm.getPayeeName()
 							+ "! Your Registration Verification Pin is:   "
 							+ genPin, "Verification Pin Number");
 			emailSenderThread.start();
+			
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CONFIRM_PAYEE_PAGE;
 		}
@@ -112,11 +143,17 @@ public class BankPayeeCustomerController {
 			@ModelAttribute("confirmPayeeCommand") PayeeDetailsForm payeeDetailsForm,
 			HttpServletRequest request, HttpSession sess, Model model) {
 		int genPin = Integer.parseInt(request.getParameter("verificationCode"));
-		String userId = "admin";
+		//String userId = "admin";
+		 LoginForm loginForm=(LoginForm)sess.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	      String userid=loginForm.getUserId();
+	        
 		int enteredPin = (Integer) sess.getAttribute("verificationPin");
 		if (genPin == enteredPin) {
-			bankPayeeService.confirmPayee(payeeDetailsForm.getPayeeAccountNo(),
-					userId);
+			String errorMessage = payeeDetailsForm.getPayeeName()+" has been approved now, you can transefer money to him.";
+			model.addAttribute("errormessage", errorMessage);
+			String status=bankPayeeService.confirmPayee(payeeDetailsForm.getPayeeAccountNo(),
+					userid);
+			System.out.println("____status____=>>"+status);
 			sess.removeAttribute("verificationPin");
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CUSTOMER_HOME_PAGE;
@@ -142,20 +179,14 @@ public class BankPayeeCustomerController {
 	}
 
 	@RequestMapping(value = "selectPayee", method = RequestMethod.GET)
-	public String selectPayee(Model model) {
-
+	public String selectPayee(HttpSession session,Model model) {
 		CustomerTransactionForm customerTransactionCommand = new CustomerTransactionForm();
-		model.addAttribute("customerTransactionCommand",
-				customerTransactionCommand);
-		return NavigationConstant.CUSTOMER_PAGE
-				+ NavigationConstant.SELECT_PAYEE;
-	}
-
-	@ModelAttribute(value = "payeeDetailsFormList")
-	public Map<String, String> findPayeeListCustomer() {
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+		String userid=loginForm.getUserId();
+		
 		List<PayeeDetailsForm> payeeDetailsFormList = bankPayeeService
-				.findPayeeByUserId("1");
-
+				.findPayeeByUserId(userid);
+		
 		Map<String, String> payeeList = new LinkedHashMap<String, String>();
 		for (PayeeDetailsForm detailsForm : payeeDetailsFormList) {
 			payeeList.put(
@@ -163,6 +194,11 @@ public class BankPayeeCustomerController {
 					detailsForm.getPayeeName() + " - "
 							+ detailsForm.getPayeeAccountNo());
 		}
-		return payeeList;
+		model.addAttribute("payeeDetailsFormList",payeeList);
+
+		model.addAttribute("customerTransactionCommand",
+				customerTransactionCommand);
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.SELECT_PAYEE;
 	}
 }

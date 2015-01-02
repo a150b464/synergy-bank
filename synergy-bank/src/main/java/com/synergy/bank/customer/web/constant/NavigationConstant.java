@@ -14,6 +14,10 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_PAYEE_LIST_PAGE = "payeeList";
 	final public static String ADD_PAYEE_PAGE = "payeeDetailsSynergyBank";
 	final public static String LOGIN_PAGE = "login";
+	final public static String INVALID_LOGIN_PAGE = "invalidLogin";
+	
+	final public static String ACCESS_DENIED_PAGE = "accessDeniedPage";
+	
 	final public static String CONFIRM_PAYEE_PAGE = "payeeApprove";
 	final public static String CHANGE_SECURITY_QUESTIONS ="changeSecurityQuestions";
 	final public static String CHANGE_SECURITY_QUESTIONS_PTWO ="changeSecurityQuestionsPTwo";
