@@ -29,6 +29,7 @@ import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.service.CustomerRegistrationQuestionsService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.constant.RoleContant;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 
@@ -70,6 +71,18 @@ public class LoginController {
       return "eee";		
 	}
 	
+	
+	
+	
+	@RequestMapping(value = "auth/denied", method = RequestMethod.GET)
+	public String accessDenied(HttpSession session, Model model) {
+		session.invalidate();
+		model.addAttribute("applicationMessage",
+				"Sorry , you do not have sufficient previlages to access the page, please contact to system admin");
+		return NavigationConstant.COMMON_PAGE + NavigationConstant.ACCESS_DENIED_PAGE;
+	}
+	
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
@@ -80,8 +93,16 @@ public class LoginController {
 
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public String auth(Model model) {
-
+		model.addAttribute("applicationMessage",
+				"You have successfully logout from the application.");
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
+	}
+	
+	@RequestMapping(value = "/invalidLogin", method = RequestMethod.GET)
+	public String invalidLogin(Model model) {
+		model.addAttribute("applicationMessage",
+				"Your userid and password are not correct,Please check it.");
+		return NavigationConstant.COMMON_PAGE + NavigationConstant.INVALID_LOGIN_PAGE;
 	}
 	
 	
@@ -104,11 +125,29 @@ public class LoginController {
         	}
         }
         
+        //This I fetch  from database
+        LoginForm dLoginForm=bankAuthService.findLoginDetailByUserName(authentication.getName());
         LoginForm loginForm=new LoginForm();
         loginForm.setUserId(authentication.getName());
         loginForm.setRole(nextPage);
-        loginForm.setActive("yes");
-        loginForm.setApprove("yes");
+        loginForm.setActive(dLoginForm.getActive());
+        loginForm.setApprove(dLoginForm.getApprove());
+        
+        if ("no".equals(loginForm.getActive())) {
+
+			model.addAttribute("applicationMessage",
+					"You are blocked, please contact bank authority.");
+			return NavigationConstant.COMMON_PAGE
+					+ NavigationConstant.LOGIN_PAGE;
+		}
+
+		if ("no".equals(loginForm.getApprove())) {
+
+			model.addAttribute("applicationMessage",
+					"You are not approved, please contact bank authority.");
+			/*return NavigationConstant.COMMON_PAGE
+					+ NavigationConstant.LOGIN_PAGE;*/
+		}
         
         HttpSession session=request.getSession();
     	session.setAttribute(NavigationConstant.USER_SESSION_DATA,
@@ -117,12 +156,12 @@ public class LoginController {
         //Setting the logged user information into the session 
         //Customer luser=customerService.findCustomerByUserName(authentication.getName());
 		//request.getSession().setAttribute("USER_SESSION",luser);
-		if(nextPage.equals("user")){
+		if(nextPage.equals(RoleContant.CUSTOMER.getValue())){
 			nextPage="customerHome";
 			return NavigationConstant.CUSTOMER_PAGE
 					+ NavigationConstant.CUSTOMER_HOME_PAGE;
 		}else{
-			nextPage="admin";	
+			nextPage=RoleContant.ADMIN.getValue();	
 			return NavigationConstant.ADMIN_PAGE
 					+ NavigationConstant.ADMIN_HOME_PAGE;
 		}

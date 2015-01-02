@@ -17,6 +17,8 @@ public interface CustomerQuery {
 	public static final String FIND_CUSTOMER_ACCOUNT_BY_ID  = "select * from customer_account_info_tbl where userid=";
 	public static final String VALIDATE_PAYEE 				= "select * from payee_information_tbl where ";
 	public static final String FIND_PAYEE					= "select * from payee_information_tbl where userid like ";
+	public static final String FIND_APPROVED_PAYEE_BY_USERID= "select * from payee_information_tbl where userid=? and status=?";
 	public static final String SHOW_PART_PAYEELIST 			= null;
 	public static final String FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER = "select * from customer_transaction_tbl where customerAccountNumber =";
+	public static final String FIND_IMAGE_FROM_GALARY_BY_ID 		= "select * from image_galary_tbl where imageid=";
 }

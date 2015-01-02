@@ -46,19 +46,18 @@ public class BankAdminController {
 	
 	@RequestMapping(value="showPendingApprovalCustomerList", method=RequestMethod.GET)
 	public String findPendingApprovalCustomerList(Model model){
-		
 		List<CustomerForm> pendingCustomerList = bankAdminService.findPendingCustomerList();
 		model.addAttribute("pendingCustomerList",pendingCustomerList);
 		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.PENDING_APPROVAL_CUSTOMER_LIST_PAGE ;
 	}
 	
 	@RequestMapping(value="approvePendingCustomers", method=RequestMethod.POST)
-	public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds, 
+	public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] selectedCustomerUserIds, 
 			final RedirectAttributes redirectAttributes){
 		//public String approvePendingCustomers(@RequestParam("approveCheckbox") String[] approvedIds){
 		String msg="Message";
-		if(approvedIds.length>0){
-			List<CustomerAccountForm> customerAccountForms =  bankAdminService.approvePendingCustomers(approvedIds);
+		if(selectedCustomerUserIds!=null && selectedCustomerUserIds.length>0){
+			List<CustomerAccountForm> customerAccountForms =  bankAdminService.approvePendingCustomers(selectedCustomerUserIds);
 			if(customerAccountForms==null){
 				msg = "Failed to approve customer.";
 			}
@@ -69,7 +68,7 @@ public class BankAdminController {
 					EmailSenderThread emailSenderThread=new EmailSenderThread(bankEmailService, customerAccountForm.getCustomerEmail(), body, "Account creation notification !");
 					emailSenderThread.start();
 				}
-				msg = approvedIds.length+" new customer(s) are approved successfully.";
+				msg = selectedCustomerUserIds.length+" new customer(s) are approved successfully.";
 			}
 		}
 		else{

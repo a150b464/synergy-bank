@@ -74,4 +74,10 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 		return bankPayeeDao.checkPayeeAccountNumber(payeeName);
 	}
 
+	@Override
+	public String checkPayeeName(String payeeName, String payeeAcoountNumber) {
+		// TODO Auto-generated method stub
+		return bankPayeeDao.checkPayeeName(payeeName, payeeAcoountNumber);
+	}
+
 }
