@@ -11,13 +11,37 @@
  -->    
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery1.9.1.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <script src="<%=request.getContextPath() %>/js/controller.js">
 </script>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript">
   var ccontextPath="${pageContext.request.contextPath}";
-</script>
+  function deleteCustomerByAjax(uid){
+	   alert("uid = "+uid);
+		$.ajax({
+			url:"${pageContext.request.contextPath}/bank/ajaxDeleteCustomer",
+			data:{UserID:uid},
+			success:function(data) {
+		    if(data=='done') {
+				 var cid="#"+uid;
+				 $(cid).remove();
+				 removeToken("count"+rownum);
+				 for(var row=1;row<=len;row++){
+					 $("#"+idTokens[row-1]).html("<b>"+row+"</b>");
+				 }
+		    }else{
+		    	 
+		    }
+		  }
+		});
+	}
+  
+  
+  
+  
+  </script>
 
 </head>
 <body>
@@ -115,7 +139,7 @@
 	</thead>
 	<tbody>		
 	<c:forEach items="${customerList}" var="item">		
-		<tr>
+		<tr id="${item.userId}">
 			<td id="currentUserId">${item.userId}</td>
 		 	<td>${item.firstName} ${item.lastName}</td>
 		 	<td>${item.category}</td>
@@ -125,7 +149,8 @@
  			<td>${item.education}</td>
 			<td>${item.grossAnualIncome}</td>
    			<td>
-   			<button ng-click="deleteCustomerRecord()"><img src="${pageContext.request.contextPath}/images/delete.png"/></button>
+   			<%-- <button ng-click="deleteCustomerRecord()"><img src="${pageContext.request.contextPath}/images/delete.png"/></button> --%>
+   			<a href="javascript:deleteCustomerByAjax(${item.userId});"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 	<%-- 		<a href="deleteCustomer?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/delete.png"/></a>
 	 --%>		
 	 		<a href="editRegistration?userId=${item.userId}"><img src="${pageContext.request.contextPath}/images/edit.png"/></a>

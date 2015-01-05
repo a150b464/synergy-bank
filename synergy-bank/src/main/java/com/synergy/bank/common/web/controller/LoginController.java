@@ -2,6 +2,7 @@ package com.synergy.bank.common.web.controller;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -162,6 +163,8 @@ public class LoginController {
 					+ NavigationConstant.CUSTOMER_HOME_PAGE;
 		}else{
 			nextPage=RoleContant.ADMIN.getValue();	
+			List<String> imagePathList = bankAuthService.imageAdminSliderList();
+			model.addAttribute("imageList", imagePathList);
 			return NavigationConstant.ADMIN_PAGE
 					+ NavigationConstant.ADMIN_HOME_PAGE;
 		}

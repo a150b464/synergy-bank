@@ -41,4 +41,6 @@ public interface BankCustomerDao {
 
 	public List<CustomerRegistrationQuestionsEntity> findCustomerSecQuestions(
 			String userid);
+
+	
 }
