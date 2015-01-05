@@ -2,7 +2,9 @@ package com.synergy.bank.common.dao.impl;
 
 import java.io.IOException;
 import java.sql.Types;
+import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.synergy.bank.common.dao.BankAuthDao;
 import com.synergy.bank.common.dao.entity.LoginEntity;
@@ -62,6 +67,13 @@ public class BankAuthDaoImpl extends JdbcDaoSupport implements BankAuthDao {
 			loginEntity=new LoginEntity();
 		}
 		return loginEntity;
+	}
+	
+	@Override
+	public List<String> imageAdminSliderList(){
+		String query = "Select path from image_galary_tbl";
+		List<String> imageList = super.getJdbcTemplate().queryForList(query, String.class);
+		return imageList;
 	}
 
 	

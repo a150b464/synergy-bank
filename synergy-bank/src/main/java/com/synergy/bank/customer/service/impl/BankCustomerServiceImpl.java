@@ -213,6 +213,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	public byte[] findPhotoById(String userId) {
 		return bankCustomerDao.findPhotoById(userId);
 	}
+	
 
 	@Override
 	public int getCustomerEntriesCount() {

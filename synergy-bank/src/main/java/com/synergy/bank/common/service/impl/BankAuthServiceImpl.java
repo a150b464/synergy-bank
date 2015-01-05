@@ -1,5 +1,7 @@
 package com.synergy.bank.common.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,5 +46,13 @@ public class BankAuthServiceImpl implements BankAuthService{
 		LoginForm loginForm=new LoginForm();
 		BeanUtils.copyProperties(loginEntity, loginForm);
 		return loginForm;
+	}
+
+
+
+	@Override
+	public List<String> imageAdminSliderList() {
+		// TODO Auto-generated method stub
+		return bankAuthDao.imageAdminSliderList();
 	}	
 }

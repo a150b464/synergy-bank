@@ -113,8 +113,11 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 
 	@Override
 	public String deleteCustomer(CustomerEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		int a = super.getJdbcTemplate().update(CustomerQuery.DELETE_FROM_CUSTOMER_DETAILS_TBL+"'"+entity.getUserId()+"'");
+		String message = "Not Deleted";
+		if(a>0)
+			message = "Deleted";
+		return message;
 	}
 
 	@Override
@@ -129,7 +132,7 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId) {
 

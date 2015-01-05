@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,12 +42,9 @@
 		<a class="buttons prev" href="#">&#60;</a>
 		<div class="viewport">
 			<ul class="overview">
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=6"/></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=5"/></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=4"/></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=3"/></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=2"/></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallaryById?imageid=1"/></li>
+				<c:forEach var="item" items="${imageList}">
+				<li><img src="${pageContext.request.contextPath}/${item}"/></li>
+				</c:forEach>
 			</ul>
 		</div>
 		<a class="buttons next" href="#">&#62;</a>

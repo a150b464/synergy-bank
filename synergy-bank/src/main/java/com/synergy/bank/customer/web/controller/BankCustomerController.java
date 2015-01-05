@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.common.service.BankEmailService;
@@ -176,7 +177,7 @@ public class BankCustomerController {
 			outputStream.flush();
 		}
 	}
-
+	
 	@RequestMapping(value = "customerInformation", method = RequestMethod.GET)
 	public String showCustomerInformation(Model model) {
 		List<CustomerForm> customerDetailList = bankCustomerService
@@ -189,6 +190,12 @@ public class BankCustomerController {
 		return NavigationConstant.ADMIN_PAGE
 				+ NavigationConstant.CUSTOMER_INFORMATION;
 
+	}
+	
+	@RequestMapping( value = "ajaxDeleteCustomer", method = RequestMethod.GET)
+	public @ResponseBody String deleteAjaxStudentById(@RequestParam("userId") String UserId){
+		String message = bankCustomerService.deleteCustomerById(UserId);
+		return "done";
 	}
 
 	@RequestMapping(value = "deleteCustomer", method = RequestMethod.GET)
