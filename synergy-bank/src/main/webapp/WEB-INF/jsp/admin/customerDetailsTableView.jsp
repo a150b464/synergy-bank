@@ -22,7 +22,7 @@
 	   alert("uid = "+uid);
 		$.ajax({
 			url:"${pageContext.request.contextPath}/bank/ajaxDeleteCustomer",
-			data:{UserID:uid},
+			data:{userId:uid},
 			success:function(data) {
 		    if(data=='done') {
 				 var cid="#"+uid;
