@@ -23,6 +23,8 @@
 	<import resource="synergy-loan.xml" />
 	<import resource="synergy-logger.xml"/>
 	<import resource="spring-security.xml"/>
+	<import resource="synergy-bank-scheduler.xml"/>
+	
 	
 	
 	<!-- <import resource="loan-jms.xml" /> -->
