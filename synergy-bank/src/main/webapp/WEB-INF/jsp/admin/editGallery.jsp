@@ -15,10 +15,10 @@
 
 
 <r:form action="${pageContext.request.contextPath}/bank/updateGallery" method = "post" commandName="EditForm" enctype="multipart/form-data">
-
+<%-- <input type = "hidden" value = "${EditForm.imageid}" name = "imageid"> --%>
 Image ID: <input type = "text" value = "${EditForm.imageid}" name = "imageid" readonly="readonly"><br>
 Image: <input type = "file" name = "image"><br>
-Path: <input type = "text" value = "${EditForm.path}" name = "name"><br>
+Path: <input type = "text" value = "${EditForm.path}" name = "path"><br>
 
 
 <input type = "submit" name = "Update">
