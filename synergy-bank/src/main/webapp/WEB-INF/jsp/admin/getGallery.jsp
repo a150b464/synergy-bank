@@ -58,14 +58,14 @@ function deleteRow(imageid){
   		yOffset = 0;		
   		
       $("a.preview").hover(function(e){
+    	 //	 alert("e.pageY = "+e.pageY);
           this.t = this.title;
           this.title = "";	
   	     var c = (this.t != "") ? "<br/>" + this.t : "";
-           $("body").append("<p id='preview'><img src='"+ this.href +"' alt='Image preview' />"+ c +"</p>");								 
+           $(this).append("<p id='preview'><img src='"+ this.href +"' alt='Image preview' />"+ c +"</p>");								 
            $("#preview")
-              .css("top",(e.pageY - xOffset) + "px")
-              .css("left",(e.pageX + yOffset) + "px")
-              .fadeIn("slow");
+              .css("top",(e.pageY - xOffset-400) + "px")
+              .css("left",(e.pageX + yOffset) + "px").fadeIn("slow");
       },
   	
       function(){
@@ -74,11 +74,12 @@ function deleteRow(imageid){
 
       });	
   	
-      $("a.preview").mousemove(function(e){
+     /*  $("a.preview").mousemove(function(e){
+    	 // alert("e.pageY = "+e.pageY);
           $("#preview")
-              .css("top",(e.pageY - xOffset) + "px")
+              .css("top","100px")
               .css("left",(e.pageX + yOffset) + "px");
-      });			
+      });	 */		
   };
   
   
@@ -124,7 +125,7 @@ select * from image_galary_tbl
 
 
 <!-- <a href = "AddUser.jsp">Add User</a> -->
-<table align="center" width="100%" border="0" cellspacing="20" cellpadding="20">
+<table align="center" width="100%" border="0" cellspacing="20" cellpadding="20" id="galleryTable">
 	<thead>
 	<tr>
 		<td>Image ID</td>
@@ -154,6 +155,8 @@ select * from image_galary_tbl
 	</tbody>
 
 </table>
+<div id="showImage">
+</div>
 <div id="blocks">																																																																																																																													
 			
 </div>
