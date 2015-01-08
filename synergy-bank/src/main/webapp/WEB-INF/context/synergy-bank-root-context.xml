@@ -19,7 +19,7 @@
 	<import resource="spring-hibernate.xml" />
 	<import resource="email-service.xml" />
 	<import resource="image-upload.xml" />
-	<import resource="sprng-metro-soap.xml" />
+<!-- 	<import resource="sprng-metro-soap.xml" /> -->
 	<import resource="synergy-loan.xml" />
 	<import resource="synergy-logger.xml"/>
 	<import resource="spring-security.xml"/>
