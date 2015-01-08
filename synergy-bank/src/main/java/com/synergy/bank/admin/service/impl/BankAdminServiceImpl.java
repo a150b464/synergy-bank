@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.synergy.bank.admin.dao.BankAdminDao;
@@ -29,6 +30,8 @@ public class BankAdminServiceImpl implements BankAdminService{
 
 	@Override
 	public List<CustomerForm> findPendingCustomerList() {
+		
+		/*new ClassPathXmlApplicationContext()*/
 		
 		List<CustomerEntity> pendingCustomerEntityList = bankAdminDao.findPendingCustomerList();  
 		List<CustomerForm> pendingApprovalCustomerList= new ArrayList<CustomerForm>();

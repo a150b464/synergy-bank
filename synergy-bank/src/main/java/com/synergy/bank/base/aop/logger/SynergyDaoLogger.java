@@ -3,16 +3,11 @@ package com.synergy.bank.base.aop.logger;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
-import org.apache.naming.factory.BeanFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.context.event.ContextStartedEvent;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.accept.ServletPathExtensionContentNegotiationStrategy;
 
 @Component
 @Aspect
