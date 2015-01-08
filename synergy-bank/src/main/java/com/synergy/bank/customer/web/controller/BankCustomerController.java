@@ -1,5 +1,8 @@
 package com.synergy.bank.customer.web.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.synergy.bank.common.dao.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
@@ -178,6 +184,32 @@ public class BankCustomerController {
 		}
 	}
 	
+	@RequestMapping(value = "/findImageFilePathById", method = RequestMethod.GET)
+	public void findImageFilePathById(@RequestParam("imageid") int imageid,
+			HttpServletResponse response) throws IOException {
+		response.setContentType("image/jpg");
+		//byte[] photo = gallaryService.findImageById(imageid);
+        String imagePath=gallaryService.findImageFilePathById(imageid);
+        BufferedImage originalImage = ImageIO.read(new File(imagePath));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write( originalImage, "jpg", baos );
+        baos.flush();
+        byte[] imageInByte = baos.toByteArray();
+		/*System.out.println("Inside find photo by id");*/
+		if (imageInByte != null) {
+			System.out.println("found photo");
+			ServletOutputStream outputStream = response.getOutputStream();
+			outputStream.write(imageInByte);
+			outputStream.flush();
+		}
+	}
+	
+	@RequestMapping( value = "ajaxDeleteImage", method = RequestMethod.GET)
+	public @ResponseBody String ajaxDeleteImageById(@RequestParam("imageid") int imageid){
+		String message = gallaryService.deleteImageById(imageid);
+		return "done";
+	}
+	
 	@RequestMapping(value = "customerInformation", method = RequestMethod.GET)
 	public String showCustomerInformation(Model model) {
 		List<CustomerForm> customerDetailList = bankCustomerService
@@ -196,6 +228,24 @@ public class BankCustomerController {
 	public @ResponseBody String deleteAjaxStudentById(@RequestParam("userId") String UserId){
 		String message = bankCustomerService.deleteCustomerById(UserId);
 		return "done";
+	}
+	
+	@RequestMapping( value = "selectGalleryById", method = RequestMethod.GET)
+	public String selectGalleryById(){
+		return NavigationConstant.ADMIN_PAGE + NavigationConstant.GALLERY_PAGE;
+	}
+	
+	@RequestMapping(value="editGalleryById",method=RequestMethod.GET)
+	public String editGalleryById(@RequestParam("imageid") int imageid, Model model){
+		model.addAttribute("EditForm", gallaryService.findGalleryById(imageid));
+		return NavigationConstant.ADMIN_PAGE + NavigationConstant.EDIT_GALLERY_PAGE;
+		
+	}
+	
+	@RequestMapping(value="updateGallery",method=RequestMethod.POST)
+	public String updateImageGallery(@ModelAttribute("EditForm") GallaryPhotoForm editGallery,final RedirectAttributes redirectAttributes){
+		gallaryService.updateGallery(editGallery);
+		return "redirect:bank/selectGalleryById";
 	}
 
 	@RequestMapping(value = "deleteCustomer", method = RequestMethod.GET)
@@ -264,14 +314,13 @@ public class BankCustomerController {
 	public void initBinder(WebDataBinder binder) {
 		// to actually be able to convert Multipart instance to byte[]
 		// we have to register a custom editor
-		binder.registerCustomEditor(byte[].class,
-				new ByteArrayMultipartFileEditor());
-		// now Spring knows how to handle multipart object and convert them
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		// Create a new CustomDateEditor
-		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-		// Register it as custom editor for the Date type
-		binder.registerCustomEditor(Date.class, editor);
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+       // now Spring knows how to handle multipart object and convert them
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+       // Create a new CustomDateEditor
+       CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+       // Register it as custom editor for the Date type
+       binder.registerCustomEditor(Date.class, editor);
 	}
 
 	@SuppressWarnings("deprecation")

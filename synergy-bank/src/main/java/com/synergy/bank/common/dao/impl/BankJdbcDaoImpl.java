@@ -1,14 +1,19 @@
 package com.synergy.bank.common.dao.impl;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.common.dao.BankJdbcDao;
+import com.synergy.bank.common.query.CommonQuery;
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.util.PasswordGenerator;
 
 @Repository("BankJdbcDaoImpl")
@@ -34,6 +39,13 @@ public class BankJdbcDaoImpl extends JdbcDaoSupport implements BankJdbcDao{
 		return userid+"";
 	}
 
+	@Override
+	public List<CustomerEntity> findCustomersByBirthDay() {
+		String sql=CommonQuery.FIND_BIRTHDAY_BASH;
+		List<CustomerEntity> customerEntities=super.getJdbcTemplate().query(sql,new BeanPropertyRowMapper(CustomerEntity.class));
+		return customerEntities;
+	}
+	
 	@Override
 	public String nextTransactionId() {
 		// TODO Auto-generated method stub

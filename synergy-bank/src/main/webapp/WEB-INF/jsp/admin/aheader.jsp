@@ -142,8 +142,9 @@
     </li>
  
     <li><a href="${pageContext.request.contextPath}/bank/customerInformation">Bank Customer</a></li>
-    			<li><a href="${pageContext.request.contextPath}/bank/showPendingApprovalCustomerList">Approve Customer(s)</a></li>
+    		<li><a href="${pageContext.request.contextPath}/bank/showPendingApprovalCustomerList">Approve Customer(s)</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/blockCustomers">Block Customer(S)</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/selectGalleryById">Gallery</a></li>
 			<li><a href="#">Reset Password(s)</a></li>
 			<li><a href="#">Reports</a></li>
 			<li class="last"><a href="#">Profile</a></li>
