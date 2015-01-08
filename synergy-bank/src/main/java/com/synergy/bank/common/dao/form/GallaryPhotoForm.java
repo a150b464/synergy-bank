@@ -1,4 +1,4 @@
-package com.synergy.bank.admin.web.controller.form;
+package com.synergy.bank.common.dao.form;
 
 import java.util.Arrays;
 

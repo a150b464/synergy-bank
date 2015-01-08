@@ -36,5 +36,7 @@ public interface NavigationConstant {
 	final public static String CUSTOMER_RESET_PASSWORD = "resetPassword";
 	final public static String CUSTOMER_RESET_PASSWORD_INIT = "resetPasswordInit";
 	final public static String CUSTOMER_ACCOUNT_LOCKED = "accountLocked";
+	final public static String GALLERY_PAGE = "getGallery";
+	final public static String EDIT_GALLERY_PAGE = "editGallery";
 
 }

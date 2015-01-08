@@ -20,14 +20,14 @@
 	</welcome-file-list>
 
 
-	<filter>
+	<!-- <filter>
 		<filter-name>bankAuthFilter</filter-name>
 		<filter-class>com.synergy.bank.base.filter.BankAuthFilter</filter-class>
 		<init-param>
 			<param-name>allowAccess</param-name>
 			<param-value>.css,.jpg,.JPG,.js,.png,.PNG,/bank/auth,/bank/customerRegistration, /bank/resetPassword</param-value>
 		</init-param>
-	</filter>
+	</filter> -->
 
 <!--	<filter-mapping>
 		<filter-name>bankAuthFilter</filter-name>
@@ -106,6 +106,13 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Delete</display-name>
+		<servlet-name>Delete</servlet-name>
+		<servlet-class>com.servletpackage.Delete</servlet-class>
+	</servlet>
 
 	<!-- extension mapping *.do below is path prefix mapping -->
 	<servlet-mapping>
@@ -119,6 +126,10 @@
 	<servlet-mapping>
 		<servlet-name>synergy-bank</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Delete</servlet-name>
+		<url-pattern>/Delete</url-pattern>
 	</servlet-mapping>
 	
 	

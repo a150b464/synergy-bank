@@ -12,15 +12,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/style.css" />
+<link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/BeatPicker.css" type="text/css" media="all"/>
+<link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/jquery-ui.css" />
+<%-- <link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/jquery.ui.theme.css" /> --%>
+     <link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/datePickerStyle.css" type="text/css" media="all"/>	
+	
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script> --%>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script> --%>
+<script type="text/javascript"
+     src="${pageContext.request.contextPath}/js/BeatPicker.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#datepicker").datepicker();
-	});
-</script>
+ $(document).ready(function() {
+	 $("#dob").datepicker({
+         dateFormat: 'yy-mm-dd',
+         showOn: 'button',
+         buttonImage: "${pageContext.request.contextPath}/images/datePickerPopup.gif",
+         buttonImageOnly: true,
+         showOtherMonths : true,
+         selectOtherMonths : true,
+         changeYear:true,
+         yearRange: "c-50:c+0",
+         showWeek: false
+    }).next('button').text('').button({
+       text: true
+    });
+ });	 
+</script>	 
 
 </head>
 <body>
@@ -92,8 +116,8 @@
 					</tr>
 					<tr>
 						<td><b>Date of Birth:</b></td>
-						<%-- 						<td><ff:input path="dob" id ="datepicker" size="60"/></td>
- --%>
+						<td><ff:input path="dob" id ="dob" size="8"/></td>
+ 
 					</tr>
 					<tr>
 						<td><b>Category:</b></td>

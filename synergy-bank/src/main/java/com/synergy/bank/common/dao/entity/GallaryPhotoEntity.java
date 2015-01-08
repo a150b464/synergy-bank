@@ -6,11 +6,13 @@ public class GallaryPhotoEntity {
    
 	private int imageid;
     private byte[] image;
+    private String path;
     
+	
 	@Override
 	public String toString() {
 		return "GallaryPhotoEntity [imageid=" + imageid + ", image="
-				+ Arrays.toString(image) + "]";
+				+ Arrays.toString(image) + ", path=" + path + "]";
 	}
 	public int getImageid() {
 		return imageid;
@@ -23,6 +25,12 @@ public class GallaryPhotoEntity {
 	}
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
     
     
