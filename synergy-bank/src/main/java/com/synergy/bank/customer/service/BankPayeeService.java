@@ -22,7 +22,7 @@ public interface BankPayeeService {
 	public String checkPayeeAccountNumber(String payeeAcoountNumber) ;
 	public String checkPayeeName(String payeeName);
 	public String checkPayeeName(String payeeName, String payeeAcoountNumber);
-	public List<PayeeDetailsForm> findAllPayees();
+	public List<PayeeDetailsForm> findAllPayees(String userid);
 	public String deletePayeeRowById(String userid);
 	
 }

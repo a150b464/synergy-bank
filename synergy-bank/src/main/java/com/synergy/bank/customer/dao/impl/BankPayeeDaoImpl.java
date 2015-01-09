@@ -75,8 +75,8 @@ implements BankPayeeDao{
 	}
 	
 	@Override
-	public List<PayeeDetailsEntity> findAllPayees() {
-		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES  
+	public List<PayeeDetailsEntity> findAllPayees(String userid) {
+		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES+"'"+userid+"'"  
 								,new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
 		return payeeDetailsEntityList;
 	}

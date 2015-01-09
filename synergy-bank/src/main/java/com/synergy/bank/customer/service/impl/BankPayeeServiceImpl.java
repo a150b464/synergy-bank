@@ -54,10 +54,10 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	}
 	
 	@Override
-	public List<PayeeDetailsForm> findAllPayees() {
+	public List<PayeeDetailsForm> findAllPayees(String userid) {
 		List<PayeeDetailsForm> payeeDetailsForms = new ArrayList<PayeeDetailsForm>();
 		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao
-				.findAllPayees();
+				.findAllPayees(userid);
 		for (PayeeDetailsEntity payeeDetailsEntity : payeeDetailsEntities) {
 			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
 			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
