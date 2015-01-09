@@ -99,7 +99,9 @@ public class BankPayeeCustomerController {
 	 
 	 @RequestMapping(value = "showPayeeList.do", method = RequestMethod.GET)
 		public String findAllPayees(Model model,HttpSession session) {
-		 List<PayeeDetailsForm> payeeDetailsFormList = bankPayeeService.findAllPayees();
+		 LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	        String userid=loginForm.getUserId();
+		 List<PayeeDetailsForm> payeeDetailsFormList = bankPayeeService.findAllPayees(userid);
 		 model.addAttribute("showPayeeList", payeeDetailsFormList);
 		 return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	 }
