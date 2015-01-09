@@ -22,6 +22,7 @@ public interface CustomerQuery {
 	public static final String SHOW_PART_PAYEELIST 			= null;
 	public static final String FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER = "select * from customer_transaction_tbl where customerAccountNumber =";
 	public static final String FIND_IMAGE_FROM_GALARY_BY_ID 		= "select * from image_galary_tbl where imageid=";
+	public static final String SELECT_FROM_IMAGE_GALARY_LIST = "select imageid,file_path as path from image_galary_tbl";
 	public static final String DELETE_FROM_CUSTOMER_DETAILS_TBL = "delete from customer_details_tbl where userid=";
 	public static final String FIND_IMAGE_FROM_PROJECT_FOLDER = "select path from image_galary_tbl where imageid=";
 	public static final String SELECT_FROM_IMAGE_GALARY = "select * from image_galary_tbl where imageid=";
