@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+  xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+  version="2.0">
+  <!-- Here we are registering web service 
+  our web service can be accessed by below url-pattern
+
+  we are registering here our soap web service......................
+  ..............................................................
+   -->
+  <endpoint
+      name="bankGallerySoapWebService"
+      implementation="com.synergy.bank.soap.web.provider.BankGallerySoapWebService"
+      url-pattern="/bankGallerySoapWebService"/>
+      
+</endpoints>
