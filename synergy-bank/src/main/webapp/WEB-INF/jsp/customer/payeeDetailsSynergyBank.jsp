@@ -150,6 +150,9 @@
 			</table>
 			<br>
 			<br>
+			<a href="${pageContext.request.contextPath}/bank/showPayeeList.do"><b>Show Payee List</b></a>
+			<br>
+			<br>
 			<h3
 				style="font-family: Palatino Linotype; font-size: 13px; color: grey">
 				Notes: <br> 1. To add/update your email id, please contact the
