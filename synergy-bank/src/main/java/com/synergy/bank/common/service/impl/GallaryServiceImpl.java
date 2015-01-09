@@ -1,11 +1,14 @@
 package com.synergy.bank.common.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.synergy.bank.common.dao.form.GallaryPhotoForm;
+import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.dao.GallaryDao;
 import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
 
@@ -45,6 +48,18 @@ public class GallaryServiceImpl implements GallaryService{
 	@Override
 	public String deleteImageById(int imageid) {
 		return gallaryDao.deleteImageById(imageid);
+	}
+
+	@Override
+	public List<GallaryPhotoForm> findGalleryList() {
+		List<GallaryPhotoEntity> gallaryPhotoEntitiesList=gallaryDao.findGalleryList();
+		List<GallaryPhotoForm> gallaryPhotoList=new ArrayList<GallaryPhotoForm>();
+		for(GallaryPhotoEntity entity:gallaryPhotoEntitiesList){
+			GallaryPhotoForm gallaryPhotoForm=new GallaryPhotoForm();
+			BeanUtils.copyProperties(entity, gallaryPhotoForm);
+			gallaryPhotoList.add(gallaryPhotoForm);
+		}
+		return gallaryPhotoList;
 	}
 	
 
