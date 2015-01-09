@@ -52,6 +52,25 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 
 		return payeeDetailsForms;
 	}
+	
+	@Override
+	public List<PayeeDetailsForm> findAllPayees() {
+		List<PayeeDetailsForm> payeeDetailsForms = new ArrayList<PayeeDetailsForm>();
+		List<PayeeDetailsEntity> payeeDetailsEntities = (List<PayeeDetailsEntity>) bankPayeeDao
+				.findAllPayees();
+		for (PayeeDetailsEntity payeeDetailsEntity : payeeDetailsEntities) {
+			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
+			payeeDetailsForms.add(payeeDetailsForm);
+		}
+
+		return payeeDetailsForms;
+	}
+	
+	@Override
+	public String deletePayeeRowById(String userid) {
+		return bankPayeeDao.deletePayeeRowById(userid);
+	}
 
 	@Override
 	public boolean isPayeeExists(String userId, String payeeAccountNo) {

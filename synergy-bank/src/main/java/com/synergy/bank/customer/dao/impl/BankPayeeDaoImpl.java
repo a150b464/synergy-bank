@@ -73,6 +73,23 @@ implements BankPayeeDao{
 	userid +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
 		return payeeDetailsEntity;
 	}
+	
+	@Override
+	public List<PayeeDetailsEntity> findAllPayees() {
+		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES  
+								,new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntityList;
+	}
+	
+	@Override
+	public String deletePayeeRowById(String userid){
+		int a = super.getJdbcTemplate().update(CustomerQuery.DELETE_FROM_PAYEE_INFO_TBL+"'"+userid+"'");
+		String message = "Not Deleted";
+		if(a > 0)
+			message = "Deleted";
+		return message;
+	}
+	
 
 	public boolean isPayeeExists(String userId, String payeeAccountNo){
 	

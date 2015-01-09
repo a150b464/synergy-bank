@@ -7,8 +7,32 @@
 <head>
 <title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery1.9.1.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
+<script type="text/javascript" language="javascript">
+  var ccontextPath="${pageContext.request.contextPath}";
+  function deleteRowByAjax(uid){
+	   //alert("uid = "+uid);
+		$.ajax({
+			url:"${pageContext.request.contextPath}/bank/ajaxDeleteRow",
+			data:{userid:uid},
+			success:function(data) {
+		    if(data=='done') {
+				 var cid="#"+uid;
+				 $(cid).remove();
+				 removeToken("count"+rownum);
+				 for(var row=1;row<=len;row++){
+					 $("#"+idTokens[row-1]).html("<b>"+row+"</b>");
+				 }
+		    }else{
+		    	 
+		    }
+		  }
+		});
+	}
+  </script>
 </head>
 <body>
 	<%@include file="cheader.jsp"%>
@@ -16,17 +40,26 @@
 	</div>
 	<div id="content">
 			
-		<br/> <h2 align="center">PAYEE DETAILS LIST:</h2>  <br/>
+		<br/> <h2 align="center">PAYEE DETAILS LIST:</h2>  <br/><br><br>
 		<table align="center">
 		<thead>
 			<tr>
-				<td><b>SNO</b></td>	<td><b>User ID</b></td>	 <td><b>Payee Account No.</b></td>	<td><b>Payee Name</b></td>
-				<td><b>Payee Nick Name</b></td>		<td><b>Payee Mobile No.</b></td>  <td><b>Date of Entry</b></td>
+				<td><b>SNO</b></td>	
+				<td><b>User ID</b></td>	 
+				<td><b>Payee Account No.</b></td>	
+				<td><b>Payee Name</b></td>
+				<td><b>Payee Nick Name</b></td>		
+				<td><b>Payee Mobile No.</b></td>  
+				<td><b>Date of Entry</b></td>
+				<td><b>Email</b></td>
+				<td><b>Status</b></td>
+				<td><b>Edit</b></td>
+				<td><b>Delete</b></td>
 			</tr>
 		</thead>
 		<tbody>
 			
-			<c:forEach items="${payeeDetailsList}" var="item" varStatus="myIndex">		
+			<c:forEach items="${showPayeeList}" var="item" varStatus="myIndex">		
 				<tr>
 	    			<td>${myIndex.count}</td>
 	    			<td>${item.userid}</td>
@@ -35,6 +68,10 @@
 	    			<td>${item.payeeNickName}</td>
 	    			<td>${item.mobile}</td>
 	    			<td>${item.doe}</td>
+	    			<td>${item.email}</td>
+	    			<td>${item.status}</td>
+	    			<td><img src="${pageContext.request.contextPath}/images/edit.png" alt="" width="15" height="15" /></td>
+	    			<td><a href="javascript:deleteRowByAjax(${item.userid});"><img src="${pageContext.request.contextPath}/images/delete.png" alt="" width="15" height="15" /></a></td>
 	    		</tr>
 			</c:forEach>
 		

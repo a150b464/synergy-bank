@@ -96,6 +96,20 @@ public class BankPayeeCustomerController {
         return NavigationConstant.CUSTOMER_PAGE
                  + NavigationConstant.ADD_PAYEE_PAGE;
    }
+	 
+	 @RequestMapping(value = "showPayeeList.do", method = RequestMethod.GET)
+		public String findAllPayees(Model model,HttpSession session) {
+		 List<PayeeDetailsForm> payeeDetailsFormList = bankPayeeService.findAllPayees();
+		 model.addAttribute("showPayeeList", payeeDetailsFormList);
+		 return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
+	 }
+	 
+	 @RequestMapping( value = "ajaxDeleteRow", method = RequestMethod.GET)
+		public @ResponseBody String ajaxDeleteRowByUserId(@RequestParam("userid") String userid){
+			String message = bankPayeeService.deletePayeeRowById(userid);
+			return "done";
+		}
+	 
 
    @RequestMapping(value = "addpayee.do", method = RequestMethod.POST)
    public String addpayee(
