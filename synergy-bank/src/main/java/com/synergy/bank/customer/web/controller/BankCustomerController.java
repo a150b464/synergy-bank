@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.synergy.bank.common.dao.form.GallaryPhotoForm;
+import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;

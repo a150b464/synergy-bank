@@ -1,5 +1,7 @@
 package com.synergy.bank.common.dao;
 
+import java.util.List;
+
 import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
 
 
@@ -12,5 +14,7 @@ public interface GallaryDao {
 
 	public String findImageFilePathById(int imageid);
 
-	public String deleteImageById(int imageid);	
+	public String deleteImageById(int imageid);
+
+	public List<GallaryPhotoEntity> findGalleryList();	
 }

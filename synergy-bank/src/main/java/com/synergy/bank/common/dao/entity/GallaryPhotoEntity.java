@@ -7,7 +7,7 @@ public class GallaryPhotoEntity {
 	private int imageid;
     private byte[] image;
     private String path;
-    
+        
 	
 	@Override
 	public String toString() {

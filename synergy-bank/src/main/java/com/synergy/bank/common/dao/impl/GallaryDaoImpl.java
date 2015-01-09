@@ -1,6 +1,7 @@
 package com.synergy.bank.common.dao.impl;
 
 import java.sql.Types;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -65,6 +66,14 @@ public class GallaryDaoImpl extends JdbcDaoSupport implements GallaryDao {
 				CustomerQuery.SELECT_FROM_IMAGE_GALARY +imageid, new BeanPropertyRowMapper<GallaryPhotoEntity>(
 						GallaryPhotoEntity.class));
 		return gallaryPhotoEntity;
+	}
+	
+	@Override
+	public List<GallaryPhotoEntity> findGalleryList() {
+		List<GallaryPhotoEntity> gallaryPhotoEntityList = super.getJdbcTemplate().query(
+				CustomerQuery.SELECT_FROM_IMAGE_GALARY_LIST, new BeanPropertyRowMapper<GallaryPhotoEntity>(
+						GallaryPhotoEntity.class));
+		return gallaryPhotoEntityList;
 	}
 	
 	@Override
