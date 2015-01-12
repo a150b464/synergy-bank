@@ -48,7 +48,7 @@ public class BankServletContextListener implements ServletContextListener{
 			//logger.debug(secQuestionLists);
 		}
 		
-		String res = securityQuestionService.saveSecurityQuestions(secQuestionLists);
+//		String res = securityQuestionService.saveSecurityQuestions(secQuestionLists);
 		if(logger.isDebugEnabled()){
 			//logger.debug(res);
 		}

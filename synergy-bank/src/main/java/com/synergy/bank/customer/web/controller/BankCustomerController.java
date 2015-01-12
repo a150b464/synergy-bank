@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
@@ -124,18 +125,31 @@ public class BankCustomerController {
 		
 	}
 
-	@RequestMapping(value = "showPayeeList", method = RequestMethod.GET)
-	public String showPayeeList(Model model) {
-
-		String userId = "1";
-		List<PayeeDetailsForm> payeeList = bankCustomerService
-				.showPayeeListByUserId(userId);
-		model.addAttribute("payeeDetailsList", payeeList);
-		/*System.out.println(payeeList);*/
-		// return "customer/payeeList";
+	@RequestMapping(value = "showPayees", method = RequestMethod.GET)
+	public String showPayeeList(HttpSession session,Model model) {	
+		 LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	        String userid=loginForm.getUserId();
+		List<PayeeDetailsForm> payeeList = bankCustomerService .showPayeeListByUserId(userid);
+		model.addAttribute("payeeList", payeeList);
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	}
+
+	
+
+	 /**
+    * Handle request to download an Excel document
+    */
+   @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+   public ModelAndView downloadExcel(HttpSession session,Model model) {
+	   LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+       String userid=loginForm.getUserId();
+	List<PayeeDetailsForm> listPayee = bankCustomerService .showPayeeListByUserId(userid);
+	model.addAttribute("payeeList", listPayee);                  
+       // return a view which will be resolved by an excel view resolver
+       return new ModelAndView("excelView", "listPayee", listPayee);
+   }
+   
 
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
 	public String editRegistration(@RequestParam("userId") String userId,

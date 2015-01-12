@@ -36,40 +36,38 @@
 </head>
 <body>
 	<%@include file="cheader.jsp"%>
-		<img src="${pageContext.request.contextPath}/images/bigpicture.jpg" alt="" width="892" height="303" />
-	</div>
+		<img src="${pageContext.request.contextPath}/images/5.jpg" alt="" width="900" height="250" />
+	
 	<div id="content">
+	
+		<br/> <h2 align="center">PAYEES LIST</h2>  <br/>
+		<table align="center" width="60%" border="1" id="tab1">
+				<thead>
+					<tr>
+						<td><b>SNO</b></td>	
+						<!-- <td><b>User ID</b></td>	 -->
+						 <td><b>Account Number</b></td>	
+						 <td><b>Name</b></td>
+						<td><b>Nickname</b></td>	
+						<td><b>Mobile</b></td>
+						<td><b>DOE</b></td>
+						<td><b>Email</b></td>
+						<td><b>Status</b></td>
+					</tr>
+				</thead>
+				<tbody>
 			
-		<br/> <h2 align="center">PAYEE DETAILS LIST:</h2>  <br/><br><br>
-		<table align="center">
-		<thead>
-			<tr>
-				<td><b>SNO</b></td>	
-				<td><b>User ID</b></td>	 
-				<td><b>Payee Account No.</b></td>	
-				<td><b>Payee Name</b></td>
-				<td><b>Payee Nick Name</b></td>		
-				<td><b>Payee Mobile No.</b></td>  
-				<td><b>Date of Entry</b></td>
-				<td><b>Email</b></td>
-				<td><b>Status</b></td>
-				<td><b>Edit</b></td>
-				<td><b>Delete</b></td>
-			</tr>
-		</thead>
-		<tbody>
-			
-			<c:forEach items="${showPayeeList}" var="item" varStatus="myIndex">		
-				<tr>
-	    			<td>${myIndex.count}</td>
-	    			<td>${item.userid}</td>
-	    			<td>${item.payeeAccountNo}</td>
-	    			<td>${item.payeeName}</td>
-	    			<td>${item.payeeNickName}</td>
-	    			<td>${item.mobile}</td>
-	    			<td>${item.doe}</td>
-	    			<td>${item.email}</td>
-	    			<td>${item.status}</td>
+				<c:forEach items="${payeeList}" var="item" varStatus="myIndex">		
+						<tr>
+			    			<td>${myIndex.count}</td>
+			    			<%-- <td>${item.userid}</td> --%>
+			    			<td>${item.payeeAccountNo}</td>
+			    			<td>${item.payeeName}</td>			    		
+			    			<td>${item.payeeNickName}</td>
+			    			<td>${item.mobile}</td>
+			    			<td>${item.doe}</td>
+			    			<td>${item.email}</td>
+			    			<td>${item.status}</td>
 	    			<td><img src="${pageContext.request.contextPath}/images/edit.png" alt="" width="15" height="15" /></td>
 	    			<td><a href="javascript:deleteRowByAjax(${item.userid});"><img src="${pageContext.request.contextPath}/images/delete.png" alt="" width="15" height="15" /></a></td>
 	    		</tr>
@@ -78,7 +76,10 @@
 		</tbody>
 		
 		</table>	
-			
+		
+			<div align="center">			
+			<h3><a href="/downloadExcel">Download Excel Document</a></h3>
+  		    </div>
 			
 			
 			
