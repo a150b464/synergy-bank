@@ -78,7 +78,7 @@
 		</table>	
 		
 			<div align="center">			
-			<h3><a href="/downloadExcel">Download Excel Document</a></h3>
+			<h3><a href="${pageContext.request.contextPath}/bank/downloadExcel">Download Excel Document</a></h3>
   		    </div>
 			
 			
