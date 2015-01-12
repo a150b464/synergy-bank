@@ -144,8 +144,8 @@ public class BankCustomerController {
    public ModelAndView downloadExcel(HttpSession session,Model model) {
 	   LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
        String userid=loginForm.getUserId();
-	List<PayeeDetailsForm> listPayee = bankCustomerService .showPayeeListByUserId(userid);
-	model.addAttribute("payeeList", listPayee);                  
+	   List<PayeeDetailsForm> listPayee = bankCustomerService .showPayeeListByUserId(userid);
+	   //model.addAttribute("payeeList", listPayee);                  
        // return a view which will be resolved by an excel view resolver
        return new ModelAndView("excelView", "listPayee", listPayee);
    }
