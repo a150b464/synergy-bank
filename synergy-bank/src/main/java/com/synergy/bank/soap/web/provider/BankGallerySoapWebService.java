@@ -21,11 +21,17 @@ import com.synergy.bank.soap.web.provider.model.GallaryImageList;
 @WebService
 //Here Spring container is not managing the web service
 public class BankGallerySoapWebService {
-	
+
+	//This below autowire can be done only when the class is managed by spring container
 	/*@Autowired
 	@Qualifier("GallaryServiceImpl")
 	private GallaryService gallaryService;*/
+	/*We can make the class as managed by spring container by using @Service after @WebService by adding another jar
+	 * But here we are not using spring container and uses Metro container and hence we cant use @Service */
 	
+	/* To use the spring code inside metro container, first call the spring container inside metro container */
+	
+
 	public GallaryImageList findGalleryImages() {
 		//fetching spring root web container........
 		ApplicationContext applicationContext=ContextLoader.getCurrentWebApplicationContext();
@@ -47,7 +53,7 @@ public class BankGallerySoapWebService {
 			}
 		}
 		
-		//we should not return interface type in web service
+		//we should not return List type (gallaryPhotosForms)in web service hence push the list in a wrapper class
 		GallaryImageList gallaryImageList=new GallaryImageList();
 		gallaryImageList.setGallaryPhotoForms(gallaryPhotoForms);
 		

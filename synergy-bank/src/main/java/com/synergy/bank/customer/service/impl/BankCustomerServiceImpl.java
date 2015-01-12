@@ -152,18 +152,17 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	@Override
 	public List<PayeeDetailsForm> showPayeeListByUserId(String userId) {
 
-		List<PayeeDetailsEntity> payeeList = bankCustomerDaoSJdbc
-				.showPayeeListByUserId(userId);
-		System.out.println(payeeList);
-		List<PayeeDetailsForm> payeeListForms = new ArrayList<PayeeDetailsForm>();
+		List<PayeeDetailsEntity> payeesEntityList = bankCustomerDaoSJdbc.showPayeeListByUserId(userId);
+		System.out.println(payeesEntityList);
+		List<PayeeDetailsForm> payeesFormList = new ArrayList<PayeeDetailsForm>();
 
-		for (PayeeDetailsEntity pde : payeeList) {
-			PayeeDetailsForm pdf = new PayeeDetailsForm();
-			BeanUtils.copyProperties(pde, pdf);
-			payeeListForms.add(pdf);
-		}
+		for(PayeeDetailsEntity entity:payeesEntityList){
+			PayeeDetailsForm form = new PayeeDetailsForm();
+			BeanUtils.copyProperties(entity, form);
+			payeesFormList.add(form);
+		}	
 
-		return payeeListForms;
+		return payeesFormList;
 	}
 
 	@Override
