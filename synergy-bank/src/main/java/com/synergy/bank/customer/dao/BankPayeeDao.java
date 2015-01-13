@@ -24,5 +24,6 @@ public interface BankPayeeDao {
 	public String checkTransactionAmountNumber(String transactionAmount);
 	public List<PayeeDetailsEntity> findAllPayees(String userid);
 	public String deletePayeeRowById(String userid);
+	public List<PayeeDetailsEntity> findPayees();
 	
 }

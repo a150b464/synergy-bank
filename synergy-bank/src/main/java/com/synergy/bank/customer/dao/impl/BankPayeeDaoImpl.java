@@ -82,6 +82,12 @@ implements BankPayeeDao{
 	}
 	
 	@Override
+	public List<PayeeDetailsEntity> findPayees() {
+		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES_LIST, new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntityList;
+	}
+	
+	@Override
 	public String deletePayeeRowById(String userid){
 		int a = super.getJdbcTemplate().update(CustomerQuery.DELETE_FROM_PAYEE_INFO_TBL+"'"+userid+"'");
 		String message = "Not Deleted";

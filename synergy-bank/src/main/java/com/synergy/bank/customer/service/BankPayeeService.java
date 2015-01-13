@@ -24,5 +24,6 @@ public interface BankPayeeService {
 	public String checkPayeeName(String payeeName, String payeeAcoountNumber);
 	public List<PayeeDetailsForm> findAllPayees(String userid);
 	public String deletePayeeRowById(String userid);
+	public List<PayeeDetailsForm> findPayees();
 	
 }

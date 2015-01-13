@@ -119,11 +119,31 @@ public class BankPayeeCustomerController {
 	       // return a view which will be resolved by an excel view resolver
 	       return new ModelAndView("excelView", "listPayee", listPayee);
 	   }
+	   
+	   /**
+	    * Handle request to download an Excel document
+	    */
+	   @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
+	   public ModelAndView downloadPDF(HttpSession session,Model model) {
+		   LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	       String userid=loginForm.getUserId();
+		   List<PayeeDetailsForm> listPayee = bankPayeeService.findAllPayees(userid);
+		   //model.addAttribute("payeeList", listPayee);                  
+	       // return a view which will be resolved by an excel view resolver
+	       return new ModelAndView("pdfView", "listPayee", listPayee);
+	   }
 	 
 	 @RequestMapping( value = "ajaxDeleteRow", method = RequestMethod.GET)
 		public @ResponseBody String ajaxDeleteRowByUserId(@RequestParam("userid") String userid){
 			String message = bankPayeeService.deletePayeeRowById(userid);
 			return "done";
+		}
+	 
+	 @RequestMapping(value="editPayeeById",method=RequestMethod.GET)
+		public String editPayeeById(@RequestParam("userid") String userid, Model model){
+			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayees(userid));
+			return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;
+			
 		}
 	 
 
