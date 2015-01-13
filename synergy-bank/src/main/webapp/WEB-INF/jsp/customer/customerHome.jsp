@@ -45,13 +45,17 @@
 		<a class="buttons prev" href="#">&#60;</a>
 		<div class="viewport">
 			<ul class="overview">
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=1" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=2" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=3" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=4" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=5" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=6" /></li>
-				<li><img src="${pageContext.request.contextPath}/bank/findPhotoFromGallery?imageid=7" /></li>
+				<%-- <c:forEach var="item" items="${imageList}">
+				<li><img src="${pageContext.request.contextPath}/${item}"/></li>
+				</c:forEach> --%>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=8" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=2" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=3" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=4" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=5" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=6" width = "100" height = "100"></li>
+				<li><img src="${pageContext.request.contextPath}/bank/findImageFilePathById?imageid=7" width = "100" height = "100"></li>
+				
 			</ul>
 		</div>
 		<a class="buttons next" href="#">&#62;</a>

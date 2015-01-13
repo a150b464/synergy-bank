@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
@@ -105,6 +106,19 @@ public class BankPayeeCustomerController {
 		 model.addAttribute("showPayeeList", payeeDetailsFormList);
 		 return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	 }
+	 
+	 /**
+	    * Handle request to download an Excel document
+	    */
+	   @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+	   public ModelAndView downloadExcel(HttpSession session,Model model) {
+		   LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	       String userid=loginForm.getUserId();
+		   List<PayeeDetailsForm> listPayee = bankPayeeService.findAllPayees(userid);
+		   //model.addAttribute("payeeList", listPayee);                  
+	       // return a view which will be resolved by an excel view resolver
+	       return new ModelAndView("excelView", "listPayee", listPayee);
+	   }
 	 
 	 @RequestMapping( value = "ajaxDeleteRow", method = RequestMethod.GET)
 		public @ResponseBody String ajaxDeleteRowByUserId(@RequestParam("userid") String userid){
