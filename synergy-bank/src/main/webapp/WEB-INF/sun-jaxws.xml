@@ -13,4 +13,9 @@
       implementation="com.synergy.bank.soap.web.provider.BankGallerySoapWebService"
       url-pattern="/bankGallerySoapWebService"/>
       
+  <endpoint
+      name="bankPayeeSoapWebService"
+      implementation="com.synergy.bank.soap.web.provider.BankPayeeSoapWebService"
+      url-pattern="/bankPayeeSoapWebService"/>
+      
 </endpoints>
