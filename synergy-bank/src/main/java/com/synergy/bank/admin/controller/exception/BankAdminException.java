@@ -8,6 +8,9 @@ package com.synergy.bank.admin.controller.exception;
  * This is exception class which wraps other exception
  * which comes at admin controllers. 
  */
+
+//hahhahahahhahhahhahahaha
+
 public class BankAdminException extends Exception {
 	
 	public BankAdminException(){
