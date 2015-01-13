@@ -23,8 +23,6 @@ public interface BankCustomerDao {
 
 	public abstract CustomerEntity findCustomerByUserId(String userid);
 
-	public abstract List<PayeeDetailsEntity> showPayeeListByUserId(String userId);
-
 	public abstract String deleteCustomer(CustomerEntity entity);
 
 	public abstract byte[] findPhotoById(String userId);

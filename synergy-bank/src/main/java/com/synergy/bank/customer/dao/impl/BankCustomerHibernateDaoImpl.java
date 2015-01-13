@@ -65,10 +65,10 @@ public class BankCustomerHibernateDaoImpl extends
 		return super.findById(userid);
 	}
 
-	@Override
+	/*@Override
 	public List<PayeeDetailsEntity> showPayeeListByUserId(String userId) {
 		return null;
-	}
+	}*/
 
 	@Override
 	public List<CustomerEntity> findCustomerByColumnNameAndValue(
