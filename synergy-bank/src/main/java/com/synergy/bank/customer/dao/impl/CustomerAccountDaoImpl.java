@@ -30,10 +30,8 @@ public class CustomerAccountDaoImpl extends JdbcDaoSupport implements
 
 	public List<CustomerAccountEntity> findCustomerAccountByUserId(String userId) {
 		List<CustomerAccountEntity> accountList = super.getJdbcTemplate()
-				.query(CustomerQuery.FIND_CUSTOMER_ACCOUNT_BY_ID + "'" + userId
-						+ "'",
-						new BeanPropertyRowMapper<CustomerAccountEntity>(
-								CustomerAccountEntity.class));
+				.query(CustomerQuery.FIND_CUSTOMER_ACCOUNT_BY_ID + "'" + userId	+ "'",
+						new BeanPropertyRowMapper<CustomerAccountEntity>(CustomerAccountEntity.class));
 		return accountList;
 	}
 }

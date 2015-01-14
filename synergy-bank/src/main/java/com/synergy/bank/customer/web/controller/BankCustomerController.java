@@ -313,8 +313,10 @@ public class BankCustomerController {
 
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "accountSummary", method = RequestMethod.GET)
-	public String showAccountByUserId(Model model) {
-		String userId = "aaa111";
+	public String showAccountByUserId(Model model, HttpSession session) {
+		/*String userId = "51234597";*/
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	    String userId=loginForm.getUserId();
 		List<CustomerAccountForm> customerAccountForms = customerAccountService
 				.findCustomerAccountByUserId(userId);
 		model.addAttribute("customerAccountForms", customerAccountForms);
