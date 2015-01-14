@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankPayeeServiceImpl")
@@ -79,6 +81,15 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 		}
 
 		return payeeDetailsForms;
+	}
+	
+	@Override
+	public PayeeDetailsForm findAllPayeesByUserId(String userid){
+		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+		PayeeDetailsEntity payeeDetailsEntity = bankPayeeDao.findPayeeByUserId(userid);
+		if(payeeDetailsEntity != null)
+			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
+		return payeeDetailsForm;
 	}
 	
 	@Override
