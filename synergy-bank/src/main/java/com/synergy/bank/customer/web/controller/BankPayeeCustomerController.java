@@ -141,7 +141,7 @@ public class BankPayeeCustomerController {
 	 
 	 @RequestMapping(value="editPayeeById",method=RequestMethod.GET)
 		public String editPayeeById(@RequestParam("userid") String userid, Model model){
-			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayees(userid));
+			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayeesByUserId(userid));
 			return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;
 			
 		}
