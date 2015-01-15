@@ -1,12 +1,15 @@
 package com.synergy.bank.customer.web.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +109,37 @@ public class BankPayeeCustomerController {
 		 model.addAttribute("showPayeeList", payeeDetailsFormList);
 		 return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_PAYEE_LIST_PAGE;
 	 }
+	 
+	 @RequestMapping(value = "/findPhotoByEmail", method = RequestMethod.GET)
+		public void findPhotoByEmail(@RequestParam("email") String email,
+				HttpServletResponse response) throws IOException {
+			response.setContentType("image/jpg");
+			byte[] photo = bankPayeeService.findPhotoByEmail(email);
+			/*System.out.println("Inside find photo by id");*/
+			if (photo != null) {
+				System.out.println("found photo");
+				ServletOutputStream outputStream = response.getOutputStream();
+				outputStream.write(photo);
+				outputStream.flush();
+				outputStream.close();
+			}
+		}
+	 
+	 @RequestMapping(value = "/findPhotoByUserId", method = RequestMethod.GET)
+		public void findPhotoByUsedId(Model model, HttpServletResponse response, HttpSession session) throws IOException {
+		 LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	        String userId=loginForm.getUserId();
+		 	response.setContentType("image/jpg");
+			byte[] photo = bankPayeeService.findPhotoByUsedId(userId);
+			/*System.out.println("Inside find photo by id");*/
+			if (photo != null) {
+				System.out.println("found photo");
+				ServletOutputStream outputStream = response.getOutputStream();
+				outputStream.write(photo);
+				outputStream.flush();
+				outputStream.close();
+			}
+		}
 	 
 	 /**
 	    * Handle request to download an Excel document

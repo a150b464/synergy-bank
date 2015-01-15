@@ -25,5 +25,7 @@ public interface BankPayeeDao {
 	public String deletePayeeRowById(String userid);
 	public List<PayeeDetailsEntity> findPayees();
 	public List<PayeeDetailsEntity> findAllPayees(String userid);
+	public byte[] findPhotoByEmail(String email);
+	public byte[] findPhotoByUsedId(String userId);
 	
 }

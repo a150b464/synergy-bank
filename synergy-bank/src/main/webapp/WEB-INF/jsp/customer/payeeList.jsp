@@ -8,7 +8,9 @@
 <title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery1.9.1.js" type="text/javascript"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery1.9.1.js" type="text/javascript"></script> --%>
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.1.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css" media="screen" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/tableStyle.css" />
 <script type="text/javascript" language="javascript">
@@ -32,6 +34,41 @@
 		  }
 		});
 	}
+  
+  
+//Kick off the jQuery with the document ready function on page load
+  $(document).ready(function(){
+  	imagePreview();
+  });
+
+  // Configuration of the x and y offsets
+  this.imagePreview = function(){	
+  		xOffset = -1;
+  		yOffset = 0;		
+  		
+      $("a.preview").hover(function(e){
+          this.t = this.title;
+          this.title = "";	
+  	     var c = (this.t != "") ? "<br/>" + this.t : "";
+           $("body").append("<p id='preview'><img src='"+ this.href +"' alt='Image preview' />"+ c +"</p>");								 
+           $("#preview")
+              .css("top",(e.pageY - xOffset) + "px")
+              .css("left",(e.pageX + yOffset) + "px")
+              .fadeIn("slow");
+      },
+  	
+      function(){
+          this.title = this.t;
+          $("#preview").remove();
+
+      });	
+  	
+      $("a.preview").mousemove(function(e){
+          $("#preview")
+              .css("top",(e.pageY - xOffset) + "px")
+              .css("left",(e.pageX + yOffset) + "px");
+      });			
+  };
   </script>
 </head>
 <body>
@@ -53,6 +90,7 @@
 				<td><b>Date of Entry</b></td>
 				<td><b>Email</b></td>
 				<td><b>Status</b></td>
+				<td><b>Photo</b></td>
 				<td><b>Edit</b></td>
 				<td><b>Delete</b></td>
 			</tr>
@@ -70,6 +108,12 @@
 	    			<td>${item.doe}</td>
 	    			<td>${item.email}</td>
 	    			<td>${item.status}</td>
+	    			<%-- <td><img src="${pageContext.request.contextPath}/bank/findPhotoByEmail?email=${item.email}" width = "15" height = "15"></td> --%>
+	    			<td align="center">
+						<a href="${pageContext.request.contextPath}/bank/findPhotoByEmail?email=${item.email}"  class="preview">
+           		 		<img src="${pageContext.request.contextPath}/bank/findPhotoByEmail?email=${item.email}" width="20" height="20"/>
+           				</a>
+					</td>
 	    			<td><a href="${pageContext.request.contextPath}/bank/editPayeeById?userid=${item.userid}"><img src="${pageContext.request.contextPath}/images/edit.png" alt="" width="15" height="15" /></a></td>
 	    			<td><a href="javascript:deleteRowByAjax(${item.userid});"><img src="${pageContext.request.contextPath}/images/delete.png" alt="" width="15" height="15" /></a></td>
 	    		</tr>

@@ -20,6 +20,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
+import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 import com.synergy.bank.customer.web.constant.ApplicationStatus;
@@ -85,6 +86,24 @@ implements BankPayeeDao{
 	public List<PayeeDetailsEntity> findPayees() {
 		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES_LIST, new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
 		return payeeDetailsEntityList;
+	}
+	
+	@Override
+	public byte[] findPhotoByEmail(String email) {
+		String query = "Select photo from customer_details_tbl where email=" + "'"+email+"'";
+		CustomerEntity customerEntity = super.getJdbcTemplate().queryForObject(query,
+				new BeanPropertyRowMapper<CustomerEntity>(
+						CustomerEntity.class));
+		return customerEntity.getPhoto();
+	}
+	
+	@Override
+	public byte[] findPhotoByUsedId(String userId) {
+		String query = "Select photo from customer_details_tbl where userId=" + "'"+userId+"'";
+		CustomerEntity customerEntity = super.getJdbcTemplate().queryForObject(query,
+				new BeanPropertyRowMapper<CustomerEntity>(
+						CustomerEntity.class));
+		return customerEntity.getPhoto();
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ function  onSelectPayeeSubmit(action) {
 		if(action==action1)
 
 		{
-			document.forms[0].action="http://localhost:8080/synergy-bank/bank/addpayee.do"
+			document.forms[0].action="http://localhost:8889/synergy-bank/bank/addpayee.do"
 				
 			//$("#customerTransactionCommand").attr("action","http://localhost:8080/synergy-bank/bank/addPayee");
 		}

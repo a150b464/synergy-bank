@@ -133,7 +133,6 @@ public class BankCustomerDaoImpl extends JdbcDaoSupport implements
 		return null;
 	}
 	
-
 	@Override
 	public List<CustomerEntity> getCustomerListForRowNumbers(
 			int initialRowNumber, int maximumRowNumbers) {

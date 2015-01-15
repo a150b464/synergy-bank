@@ -106,6 +106,10 @@ public class LoginController {
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.INVALID_LOGIN_PAGE;
 	}
 	
+	@RequestMapping(value="/customerHome", method=RequestMethod.GET)
+	public String customerHome(Model model){
+		return "redirect:bank/homescreen.htm";
+	}
 	
 	@RequestMapping(value="homescreen.htm",method = RequestMethod.GET)
 	public String handleRequestInternal(HttpServletRequest request,
