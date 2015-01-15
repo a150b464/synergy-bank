@@ -7,6 +7,7 @@ package com.synergy.bank.customer.dao.impl;
  */
 
 
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -17,8 +18,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.support.SqlLobValue;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
+import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
@@ -76,6 +81,13 @@ implements BankPayeeDao{
 	}
 	
 	@Override
+	public PayeeDetailsEntity findAllPayeesByEmail(String email) {
+		PayeeDetailsEntity payeeDetailsEntity= super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_ALL_PAYEES_BY_EMAIL + "'"+ 
+	email +"'",new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
+		return payeeDetailsEntity;
+	}
+	
+	@Override
 	public List<PayeeDetailsEntity> findAllPayees(String userid) {
 		List<PayeeDetailsEntity> payeeDetailsEntityList = super.getJdbcTemplate().query(CustomerQuery.FIND_ALL_PAYEES+"'"+userid+"'"  
 								,new BeanPropertyRowMapper<PayeeDetailsEntity>(PayeeDetailsEntity.class));
@@ -113,6 +125,36 @@ implements BankPayeeDao{
 		if(a > 0)
 			message = "Deleted";
 		return message;
+	}
+	
+	@Override
+	public String updatePayee(PayeeDetailsEntity payeeDetailsEntity) {
+		// To insert a photo into the database we need to
+		// create the LobHandler object and wrap it with default lob handler
+		LobHandler lobHandler = new DefaultLobHandler();
+		// Create a sqllobvalue object and pass the photo and lobhandler as
+		// arguements
+		CustomerEntity customerEntity = new CustomerEntity();
+		SqlLobValue sqlLobValue = new SqlLobValue(customerEntity.getPhoto(),
+				lobHandler);
+		// Create a array of columnsType and pass the datatype for each column .
+		// This is spring neccessity
+		int[] columnsType = new int[] {Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
+		int[] columnsType1 = new int[] {Types.BLOB, Types.VARCHAR};
+		// We introduce a new coloumn photo in insert query
+		if(customerEntity.getPhoto()!=null && customerEntity.getPhoto().length>0) {
+			super.getJdbcTemplate().update("update payee_information_tbl set payeeName=?,payeeNickName=?,mobile=? where email=?",
+						new Object[] { /*sqlLobValue,	*/payeeDetailsEntity.getPayeeName(),payeeDetailsEntity.getPayeeNickName(),payeeDetailsEntity.getMobile(),payeeDetailsEntity.getEmail() }, columnsType);
+			super.getJdbcTemplate().update("update customer_details_tbl set photo=? where email=?",
+					new Object[] { sqlLobValue, customerEntity.getEmail()}, columnsType1);
+		}
+		else{
+			columnsType = new int[] {Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
+			super.getJdbcTemplate().update("update payee_information_tbl set payeeName=?,payeeNickName=?,mobile=? where email=?",
+					new Object[] { payeeDetailsEntity.getPayeeName(),payeeDetailsEntity.getPayeeNickName(),payeeDetailsEntity.getMobile(),payeeDetailsEntity.getEmail() }, columnsType);
+		}
+		return "update";
+
 	}
 	
 

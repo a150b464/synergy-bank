@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
+import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
@@ -84,12 +86,20 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	}
 	
 	@Override
-	public PayeeDetailsForm findAllPayeesByUserId(String userid){
+	public PayeeDetailsForm findAllPayeesByEmail(String email){
 		PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
-		PayeeDetailsEntity payeeDetailsEntity = bankPayeeDao.findPayeeByUserId(userid);
+		PayeeDetailsEntity payeeDetailsEntity = bankPayeeDao.findAllPayeesByEmail(email);
 		if(payeeDetailsEntity != null)
 			BeanUtils.copyProperties(payeeDetailsEntity, payeeDetailsForm);
 		return payeeDetailsForm;
+	}
+	
+	@Override
+	public String updatePayee(PayeeDetailsForm form) {
+		PayeeDetailsEntity payeeDetailsEntity=new PayeeDetailsEntity();
+		BeanUtils.copyProperties(form, payeeDetailsEntity);
+		bankPayeeDao.updatePayee(payeeDetailsEntity);
+		return "updated";
 	}
 	
 	@Override
