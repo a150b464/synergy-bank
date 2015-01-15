@@ -117,7 +117,18 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 	public String checkPayeeName(String payeeName) {
 		return bankPayeeDao.checkPayeeAccountNumber(payeeName);
 	}
+	
+	@Override
+	public byte[] findPhotoByEmail(String email) {
+		return bankPayeeDao.findPhotoByEmail(email);
+	}
+	
 
+	@Override
+	public byte[] findPhotoByUsedId(String userId) {
+		return bankPayeeDao.findPhotoByUsedId(userId);
+	}
+	
 	@Override
 	public String checkPayeeName(String payeeName, String payeeAcoountNumber) {
 		// TODO Auto-generated method stub

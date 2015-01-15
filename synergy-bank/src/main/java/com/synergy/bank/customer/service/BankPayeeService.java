@@ -26,5 +26,7 @@ public interface BankPayeeService {
 	public List<PayeeDetailsForm> findPayees();
 	public List<PayeeDetailsForm> findAllPayees(String userid);
 	public PayeeDetailsForm findAllPayeesByUserId(String userid);
+	public byte[] findPhotoByEmail(String email);
+	public byte[] findPhotoByUsedId(String userId);
 	
 }

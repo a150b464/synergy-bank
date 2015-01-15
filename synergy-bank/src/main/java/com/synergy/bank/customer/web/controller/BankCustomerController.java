@@ -155,6 +155,7 @@ public class BankCustomerController {
 			ServletOutputStream outputStream = response.getOutputStream();
 			outputStream.write(photo);
 			outputStream.flush();
+			outputStream.close();
 		}
 	}
 	
