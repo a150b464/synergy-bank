@@ -1,4 +1,3 @@
-
 <div class="meta">
 		<div class="metalinks">
 			<a href="#"><img src="${pageContext.request.contextPath}/images/meta1.gif" alt="" width="15" height="14" /></a>
@@ -19,7 +18,9 @@
 			    <c:if test="${sessionScope.userSessionData.approve!='no'}">
 			<li><a href="${pageContext.request.contextPath}/bank/addpayee.do">Add Payee</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/selectPayee">Fund Transfer</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/showPayees">Payees</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/accountSummary">Account Summary</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/applyloan">Apply for Loan</a></li>
 			<li><a href="#">Accounts</a></li>
 			<li><a href="#">Credit Card</a></li>
 			</c:if>
