@@ -12,6 +12,11 @@
       name="bankGallerySoapWebService"
       implementation="com.synergy.bank.soap.web.provider.BankGallerySoapWebService"
       url-pattern="/bankGallerySoapWebService"/>
+     
+       <endpoint
+      name="SynerBankEmailProvider"
+      implementation="com.synergy.bank.email.provider.SynerBankEmailProvider"
+      url-pattern="/ebank/emailWebService"/>
       
   <endpoint
       name="bankPayeeSoapWebService"
