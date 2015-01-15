@@ -2,6 +2,7 @@ package com.synergy.bank.common.dao.impl;
 
 import java.io.IOException;
 import java.sql.Types;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +74,7 @@ public class BankAuthDaoImpl extends JdbcDaoSupport implements BankAuthDao {
 	public List<String> imageAdminSliderList(){
 		String query = "Select path from image_galary_tbl";
 		List<String> imageList = super.getJdbcTemplate().queryForList(query, String.class);
+		//Collections.sort(list)
 		return imageList;
 	}
 
