@@ -19,7 +19,6 @@ import com.synergy.bank.common.query.CommonQuery;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
-import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 /**

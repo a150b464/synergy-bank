@@ -11,14 +11,15 @@
 
 <r:form action="${pageContext.request.contextPath}/bank/updatePayee" method = "post" commandName="EditPayeeForm" enctype="multipart/form-data">
 <%-- <input type = "hidden" value = "${EditPayeeForm.userid}" name = "imageid"> --%>
-User ID: <input type = "text" value = "${EditPayeeForm.userid}" name = "userid" readonly="readonly"><br>
-Payee Account No: <input type = "text" value = "${EditPayeeForm.payeeAccountNo}" name = "payeeAccountNo"><br>
+<%-- User ID: <input type = "text" value = "${EditPayeeForm.userid}" name = "userid" readonly="readonly"><br>
+Payee Account No: <input type = "text" value = "${EditPayeeForm.payeeAccountNo}" name = "payeeAccountNo"><br> --%>
 Payee Name: <input type = "text" value = "${EditPayeeForm.payeeName}" name = "payeeName"><br>
 Payee Nick Name: <input type = "text" value = "${EditPayeeForm.payeeNickName}" name = "payeeNickName"><br>
 Mobile: <input type = "text" value = "${EditPayeeForm.mobile}" name = "mobile"><br>
-Date and Time: <input type = "text" value = "${EditPayeeForm.doe}" name = "doe"><br>
+<%-- Date and Time: <input type = "text" value = "${EditPayeeForm.doe}" name = "doe"><br>
 Email: <input type = "text" value = "${EditPayeeForm.email}" name = "email"><br>
-Status: <input type = "text" value = "${EditPayeeForm.status}" name = "status"><br>
+Status: <input type = "text" value = "${EditPayeeForm.status}" name = "status"><br> --%>
+Photo: <input type = "file" name = "photo"><br>
 
 
 <input type = "submit" name = "Update">

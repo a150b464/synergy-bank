@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.common.web.controller.form.LoginForm;
@@ -173,11 +175,17 @@ public class BankPayeeCustomerController {
 			return "done";
 		}
 	 
-	 @RequestMapping(value="editPayeeById",method=RequestMethod.GET)
-		public String editPayeeById(@RequestParam("userid") String userid, Model model){
-			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayeesByUserId(userid));
+	 @RequestMapping(value="editPayeeByEmail",method=RequestMethod.GET)
+		public String editPayeeByEmail(@RequestParam("email") String email, Model model){
+			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayeesByEmail(email));
 			return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;
 			
+		}
+	 
+	 @RequestMapping(value="updatePayee",method=RequestMethod.POST)
+		public String updatePayee(@ModelAttribute("EditPayeeForm") PayeeDetailsForm payeeDetailsForm,final RedirectAttributes redirectAttributes){
+		 bankPayeeService.updatePayee(payeeDetailsForm);
+			return "redirect:bank/showPayeeList.do";
 		}
 	 
 

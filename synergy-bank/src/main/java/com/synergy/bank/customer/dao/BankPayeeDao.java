@@ -27,5 +27,7 @@ public interface BankPayeeDao {
 	public List<PayeeDetailsEntity> findAllPayees(String userid);
 	public byte[] findPhotoByEmail(String email);
 	public byte[] findPhotoByUsedId(String userId);
+	public PayeeDetailsEntity findAllPayeesByEmail(String email);
+	public String updatePayee(PayeeDetailsEntity payeeDetailsEntity);
 	
 }

@@ -114,7 +114,7 @@
            		 		<img src="${pageContext.request.contextPath}/bank/findPhotoByEmail?email=${item.email}" width="20" height="20"/>
            				</a>
 					</td>
-	    			<td><a href="${pageContext.request.contextPath}/bank/editPayeeById?userid=${item.userid}"><img src="${pageContext.request.contextPath}/images/edit.png" alt="" width="15" height="15" /></a></td>
+	    			<td><a href="${pageContext.request.contextPath}/bank/editPayeeByEmail?email=${item.email}"><img src="${pageContext.request.contextPath}/images/edit.png" alt="" width="15" height="15" /></a></td>
 	    			<td><a href="javascript:deleteRowByAjax(${item.userid});"><img src="${pageContext.request.contextPath}/images/delete.png" alt="" width="15" height="15" /></a></td>
 	    		</tr>
 			</c:forEach>

@@ -10,7 +10,7 @@
 	</div>
 	<div id="header">
 			
-			<img align="right" src="${pageContext.request.contextPath}/bank/findPhotoByUserId" width="50" height="50" style=" border-radius: 50%;"/>
+			<img align="right" src="${pageContext.request.contextPath}/bank/findPhotoByUserId" width="50" height="50" style=" border-radius: 50%;"/><br><br>
 		
 		<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
 		<span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>

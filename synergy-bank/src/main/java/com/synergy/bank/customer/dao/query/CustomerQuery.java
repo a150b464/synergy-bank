@@ -18,6 +18,7 @@ public interface CustomerQuery {
 	public static final String VALIDATE_PAYEE 				= "select * from payee_information_tbl where ";
 	public static final String FIND_PAYEE					= "select * from payee_information_tbl where userid like ";
 	public static final String FIND_ALL_PAYEES					= "select * from payee_information_tbl where userid=";
+	public static final String FIND_ALL_PAYEES_BY_EMAIL					= "select * from payee_information_tbl where email=";
 	public static final String FIND_ALL_PAYEES_LIST					= "select * from payee_information_tbl";
 	public static final String FIND_APPROVED_PAYEE_BY_USERID= "select * from payee_information_tbl where userid=? and status=?";
 	public static final String SHOW_PART_PAYEELIST 			= null;
