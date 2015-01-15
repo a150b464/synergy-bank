@@ -41,8 +41,12 @@ public class BankEmailServiceImpl implements BankEmailService {
 
 	@Override
 	public void sendMail(String from, String[] to, String subject, String body) {
-		// TODO Auto-generated method stub
-		
+		SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
 	}
 	
 	private String birthdayMessagePrefix="<table border=\"0\">"+
