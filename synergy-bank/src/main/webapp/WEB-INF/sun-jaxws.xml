@@ -18,6 +18,11 @@
       implementation="com.synergy.bank.email.provider.SynerBankEmailProvider"
       url-pattern="/ebank/emailWebService"/>
       
+      <endpoint
+      name="SynerBankPayeeProvider"
+      implementation="com.synergy.bank.payee.provider.SynergyBankPayeeProvider"
+      url-pattern="/ebank/payeeWebService"/>
+      
   <endpoint
       name="bankPayeeSoapWebService"
       implementation="com.synergy.bank.soap.web.provider.BankPayeeSoapWebService"

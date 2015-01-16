@@ -19,10 +19,11 @@ Mobile: <input type = "text" value = "${EditPayeeForm.mobile}" name = "mobile"><
 <%-- Date and Time: <input type = "text" value = "${EditPayeeForm.doe}" name = "doe"><br>
 Email: <input type = "text" value = "${EditPayeeForm.email}" name = "email"><br>
 Status: <input type = "text" value = "${EditPayeeForm.status}" name = "status"><br> --%>
+Email: <input type = "text" value = "${EditPayeeForm.email}" name = "email" readonly="readonly"><br>
 Photo: <input type = "file" name = "photo"><br>
 
 
-<input type = "submit" name = "Update">
+<input type = "submit" value = "Update">
 
 </r:form>
 
