@@ -10,13 +10,19 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<!-- This is scanning the package where your controller resides -->
+	<context:component-scan base-package="com.synergy.bank.admin.rest.provider" />
+	
 	<context:component-scan base-package="com.synergy.bank.customer.web.controller" />
 	<context:component-scan base-package="com.synergy.bank.admin.web.controller" />
 	<context:component-scan base-package="com.synergy.bank.common.web.controller" />
 	<context:component-scan base-package="com.synergy.bank.rest.web.provider" />
 
-	<!-- <context:component-scan base-package="com.synergy.bank.util"/> -->
-
+	<!-- 
+	<context:component-scan base-package="com.synergy.bank.util"/> 
+	 enabling spring rest annotations.....................	
+	 spring validations 
+	 enabling json , xml response format
+	-->
 	<mvc:annotation-driven />
 	
   <bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
