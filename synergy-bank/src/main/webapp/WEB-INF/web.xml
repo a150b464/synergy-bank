@@ -106,6 +106,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 	<servlet>
 		<description>
 		</description>
@@ -127,6 +128,7 @@
 		<servlet-name>synergy-bank</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>Delete</servlet-name>
 		<url-pattern>/Delete</url-pattern>
@@ -180,7 +182,6 @@
 		<servlet-name>soapa</servlet-name>
 		<url-pattern>/bankGallerySoapWebService</url-pattern>
 	</servlet-mapping>
-
 	
 	<servlet-mapping>
 		<servlet-name>soapa</servlet-name>
