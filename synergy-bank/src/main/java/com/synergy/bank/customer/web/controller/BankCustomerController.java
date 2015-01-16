@@ -32,6 +32,8 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+
 import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.SecurityQuestionService;
@@ -40,6 +42,7 @@ import com.synergy.bank.common.service.impl.GallaryService;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
+
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.service.CustomerAccountService;
@@ -124,6 +127,8 @@ public class BankCustomerController {
 				+ NavigationConstant.LOGIN_PAGE;
 		
 	}
+	
+	
 
 	@RequestMapping(value = "/editRegistration", method = RequestMethod.GET)
 	public String editRegistration(@RequestParam("userId") String userId,
@@ -346,6 +351,27 @@ public class BankCustomerController {
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
 	}
+	
+	@RequestMapping( value = "applyloan", method = RequestMethod.GET)
+	public String showFrogs1(){
+		
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_LOAN_APPLICATION;
+	}
+	@RequestMapping( value = "homeloan", method = RequestMethod.GET)
+	public String showFrogs2(){
+		
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_HOME_LOAN_APPLICATION;
+	}
+	@RequestMapping( value = "apply", method = RequestMethod.GET)
+	public String showFrogs3(){
+		
+		return NavigationConstant.CUSTOMER_PAGE
+				+ NavigationConstant.CUSTOMER_HOME_LOAN_APPLY;
+	}
+	
+
 
 	/*
 	 * @RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
