@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SynergyEMailServiceProvider", targetNamespace = "http://www.bank.synergy.com/email/", wsdlLocation = "file:/D:/Projects/synergy-bank/src/main/webapp/xsd/synergy-email.wsdl")
+@WebServiceClient(name = "SynergyEMailServiceProvider", targetNamespace = "http://www.bank.synergy.com/email/", wsdlLocation = "file:/C:/Users/Nani/workspace/synergy-bank/src/main/webapp/xsd/synergy-email.wsdl")
 public class SynergyEMailServiceProvider
     extends Service
 {
@@ -30,7 +30,7 @@ public class SynergyEMailServiceProvider
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/D:/Projects/synergy-bank/src/main/webapp/xsd/synergy-email.wsdl");
+            url = new URL("file:/C:/Users/Nani/workspace/synergy-bank/src/main/webapp/xsd/synergy-email.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

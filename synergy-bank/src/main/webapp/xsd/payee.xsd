@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.bank.synergy.com/payee/"
+	xmlns:tns="http://www.bank.synergy.com/payee/" 
+	elementFormDefault="qualified">
+	
+ <!-- Create one instance of the below element -->
+ <element name="payeeVOInput" type="tns:PayeeVO"/>
+ <element name="payeeResponse" type="string"/>
+
+ <!-- Create business object form sending email using email api
+ Bottom up ,we can not reuse the XSD since it is tightly coupled  
+  -->	
+  <complexType name="PayeeVO">
+     <sequence>
+         
+     </sequence>
+  </complexType>
+
+	
+</schema>

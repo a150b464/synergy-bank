@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.bank.synergy.com/payee/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="synergy-payee"
+	targetNamespace="http://www.bank.synergy.com/payee/">
+	<wsdl:types>
+		<xsd:schema>
+		   <xsd:import namespace="http://www.bank.synergy.com/payee/" schemaLocation="payee.xsd"/>	
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="PayeeInput">
+	    <wsdl:part name="payeeInput" element="tns:payeeVOInput"/>
+	</wsdl:message>
+    <!-- 
+       void kill(EmailMessageResponse remailMessageResponse){
+       
+       }
+     -->
+	<wsdl:message name="PayeeResponse">
+	 	<wsdl:part name="payeeResponse" element="tns:payeeResponse"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="SynergyPayeeService">
+	    <wsdl:operation name="findPayees">
+	       <wsdl:input message="tns:PayeeInput"/>
+	       <wsdl:output message="tns:PayeeResponse"/>
+	    </wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="SynergyPayeeServiceBinding" type="tns:SynergyPayeeService">
+	   <soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http"/>
+			<wsdl:operation name="findPayees">
+				<soap:operation soapAction="http://www.bank.synergy.com/payee/findPayees" />
+				 <wsdl:input>
+				 	<soap:body use="literal"/>
+				 </wsdl:input>			
+				  <wsdl:output>
+				  	<soap:body use="literal"/>
+				  </wsdl:output> 
+			</wsdl:operation>
+	</wsdl:binding>
+	
+	 <wsdl:service name="SynergyPayeeServiceProvider">
+	     <wsdl:port name="SynergyPayeeServicePort" binding="tns:SynergyPayeeServiceBinding">
+			  <soap:address location="http://localhost:8889/synergy-bank/bank/payeeWebService"/>		     	     
+	     </wsdl:port>
+	 </wsdl:service>	
+
+</wsdl:definitions>

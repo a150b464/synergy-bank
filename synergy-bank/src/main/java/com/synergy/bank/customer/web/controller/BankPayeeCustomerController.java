@@ -185,7 +185,7 @@ public class BankPayeeCustomerController {
 	 @RequestMapping(value="updatePayee",method=RequestMethod.POST)
 		public String updatePayee(@ModelAttribute("EditPayeeForm") PayeeDetailsForm payeeDetailsForm,final RedirectAttributes redirectAttributes){
 		 bankPayeeService.updatePayee(payeeDetailsForm);
-			return "redirect:bank/showPayeeList.do";
+			return "bank/showPayeeList.do";
 		}
 	 
 
