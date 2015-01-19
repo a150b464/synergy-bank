@@ -352,7 +352,7 @@ public class BankCustomerController {
 				+ NavigationConstant.CUSTOMER_ACCOUNT_SUMMARY;
 	}
 	
-	@RequestMapping( value = "applyloan", method = RequestMethod.GET)
+	/*@RequestMapping( value = "applyloan", method = RequestMethod.GET)
 	public String showFrogs1(){
 		
 		return NavigationConstant.CUSTOMER_PAGE
@@ -371,7 +371,7 @@ public class BankCustomerController {
 				+ NavigationConstant.CUSTOMER_HOME_LOAN_APPLY;
 	}
 	
-
+*/
 
 	/*
 	 * @RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
