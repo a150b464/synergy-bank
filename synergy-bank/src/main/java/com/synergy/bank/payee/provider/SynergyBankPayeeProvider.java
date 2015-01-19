@@ -16,7 +16,7 @@ import com.synergy.bank.payee.PayeeVO;
 import com.synergy.bank.payee.SynergyPayeeService;
 
 
-@WebService(name="SynergyBankPayeeProvider", portName="SynergyBankPayeeProviderPort", serviceName="SynergyBankPayeeProviderService", targetNamespace="http://provider.payee.bank.synergy.com/", endpointInterface="com.synergy.bank.payee.SynergyPayeeService", wsdlLocation="/xsd/synergy-payee.wsdl")
+@WebService(name="SynergyPayeeService", portName="SynergyPayeeServicePort", serviceName="SynergyPayeeServiceProvider", targetNamespace="http://provider.payee.bank.synergy.com/", endpointInterface="com.synergy.bank.payee.SynergyPayeeService", wsdlLocation="/xsd/synergy-payee.wsdl")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
     ObjectFactory.class
