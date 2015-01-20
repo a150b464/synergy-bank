@@ -2,6 +2,9 @@ package com.synergy.bank.customer.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,45 +12,45 @@ import org.springframework.transaction.annotation.Transactional;
 import com.synergy.bank.base.dao.AbstractDaoImpl;
 import com.synergy.bank.customer.dao.BankTransactionDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
-import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 
 @Repository("BankTransactionHibernateDaoImpl")
 @Transactional(propagation = Propagation.REQUIRED, value = "transactionManager")
 public class BankTransactionHibernetDaoImpl extends
-		AbstractDaoImpl<CustomerTransactionEntity, String> implements
+		AbstractDaoImpl<CustomerTransactionsEntity, String> implements
 		BankTransactionDao {
 
 	protected BankTransactionHibernetDaoImpl() {
-		super(CustomerTransactionEntity.class);
+		super(CustomerTransactionsEntity.class);
 	}
 
 	@Override
-	public String addCustomerTransaction(CustomerTransactionEntity entity) {
+	public String addCustomerTransaction(CustomerTransactionsEntity entity) {
 		super.saveOrUpdate(entity);
 		return "success";
 	}
 
 	@Override
-	public String updateCustomerTransaction(CustomerTransactionEntity entity) {
+	public String updateCustomerTransaction(CustomerTransactionsEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactions() {
+	public List<CustomerTransactionsEntity> findCustomerTransactions() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByColumnNameAndValue(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByColumnNameAndValue(
 			String columnName, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByUserId(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByUserId(
 			String userid) {
 		// TODO Auto-generated method stub
 		return null;
@@ -61,24 +64,15 @@ public class BankTransactionHibernetDaoImpl extends
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByAccountNumber(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByAccountNumber(
 			String accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByAccountNumber(
-			String customerAccountNumber, String accountNumber) {
-		@SuppressWarnings("unchecked")
-		List<CustomerTransactionEntity> list = getCurrentSession()
-				.createQuery(
-						"from "
-								+ CustomerTransactionEntity.class.getName()
-								+ " CustomerTransactionEntity where CustomerTransactionEntity."
-								+ customerAccountNumber + " like '"
-								+ accountNumber + "'").list();
-		return list;
+		// Criterion criterion = Restrictions.eq("accountID", accountNumber);
+		Criteria criteria = super.findByCriteria();
+		List<CustomerTransactionsEntity> customerTransactionsEntities = criteria
+				.add(Restrictions.eq("accountID", accountNumber))
+				.addOrder(Order.desc("transactionDate")).setFirstResult(0)
+				.setMaxResults(3).list();
+		return customerTransactionsEntities;
 	}
 
 }

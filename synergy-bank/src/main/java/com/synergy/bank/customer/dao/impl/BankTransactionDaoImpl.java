@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.synergy.bank.customer.dao.BankTransactionDao;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("BankTransactionDaoImpl")
@@ -27,54 +28,48 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 	}
 
 	@Override
-	public String addCustomerTransaction(CustomerTransactionEntity entity) {
+	public String addCustomerTransaction(CustomerTransactionsEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String updateCustomerTransaction(CustomerTransactionEntity entity) {
+	public String updateCustomerTransaction(CustomerTransactionsEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactions() {
+	public List<CustomerTransactionsEntity> findCustomerTransactions() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByColumnNameAndValue(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByColumnNameAndValue(
 			String columnName, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByUserId(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByUserId(
 			String userid) {
 
 		return null;
 	}
 
 	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByAccountNumber(
+	public List<CustomerTransactionsEntity> findCustomerTransactionByAccountNumber(
 			String accountNumber) {
-		List<CustomerTransactionEntity> transactionList = super
+		/*List<CustomerTransactionEntity> transactionList = super
 				.getJdbcTemplate()
 				.query(CustomerQuery.FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER
 						+ "'" + accountNumber + "'",
 						new BeanPropertyRowMapper<CustomerTransactionEntity>(
-								CustomerTransactionEntity.class));
-		return transactionList;
-	}
-
-	@Override
-	public List<CustomerTransactionEntity> findCustomerTransactionByAccountNumber(
-			String customerAccountNumber, String accountNumber) {
-		// TODO Auto-generated method stub
+								CustomerTransactionEntity.class));*/
 		return null;
 	}
+
 
 }
