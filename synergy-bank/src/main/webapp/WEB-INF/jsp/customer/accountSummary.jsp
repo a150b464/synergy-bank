@@ -89,7 +89,7 @@
 		<br /> <br /> <br /> <br /> <br />
 
 
-		<div id="blocks"></div>
+		<div id="btm_blocks"></div>
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif"
