@@ -44,7 +44,7 @@
 	
 	 <wsdl:service name="SynergyPayeeServiceProvider">
 	     <wsdl:port name="SynergyPayeeServicePort" binding="tns:SynergyPayeeServiceBinding">
-			  <soap:address location="http://localhost:8889/synergy-bank/bank/payeeWebService"/>		     	     
+			  <soap:address location="http://localhost:8889/synergy-bank/ebank/payeeWebService"/>		     	     
 	     </wsdl:port>
 	 </wsdl:service>	
 
