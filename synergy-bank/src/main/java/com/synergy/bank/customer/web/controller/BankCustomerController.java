@@ -392,9 +392,14 @@ public class BankCustomerController {
 	 */
 
 	@RequestMapping(value = "viewMiniStatement", method = RequestMethod.GET)
-	public String viewMiniStatement(Model model) {
-		String customerAccountNumber = "customerAccountNumber";
+	public String viewMiniStatement(Model model,HttpSession session) {
+	String customerAccountNumber = "customerAccountNumber";
+	//Doubt
+	LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	String userId = loginForm.getUserId();
+	//get account number for above userId
 		String accountNumber = "AAA001";
+		//String accnumber = bankTransactionService.findAccountNumberbyUserId(userId);
 		List<CustomerTransactionForm> transactionForms = bankTransactionService
 				.findCustomerTransactionByAccountNumber(customerAccountNumber,
 						accountNumber);
