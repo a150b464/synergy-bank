@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.BankTransactionDao;
-import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
+import com.synergy.bank.customer.web.controller.form.CustomerTransactionsForm;
 
 @Service("BankTransactionServiceImpl")
 @Scope("singleton")
@@ -34,7 +35,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
 
-		CustomerTransactionEntity entity = new CustomerTransactionEntity();
+		CustomerTransactionsEntity entity = new CustomerTransactionsEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
 		/*System.out.println("Entity at beanUtils" + entity);*/
 		bankTransactionDao.addCustomerTransaction(entity);
@@ -42,14 +43,14 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	}
 
 	@Override
-	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
+	public List<CustomerTransactionsForm> findCustomerTransactionByAccountNumber(
 			String accountNumber) {
-		List<CustomerTransactionEntity> customerTransactionEntityList = bankTransactionDao
+		List<CustomerTransactionsEntity> customerTransactionEntityList = bankTransactionHibernetDao
 				.findCustomerTransactionByAccountNumber(accountNumber);
-		List<CustomerTransactionForm> customerTransactionFormList = new ArrayList<CustomerTransactionForm>(
+		List<CustomerTransactionsForm> customerTransactionFormList = new ArrayList<CustomerTransactionsForm>(
 				customerTransactionEntityList.size());
 		for (int i = 0; i < customerTransactionEntityList.size(); i++) {
-			CustomerTransactionForm customerTransactionForm = new CustomerTransactionForm();
+			CustomerTransactionsForm customerTransactionForm = new CustomerTransactionsForm();
 			BeanUtils.copyProperties(customerTransactionEntityList.get(i),
 					customerTransactionForm);
 			customerTransactionFormList.add(customerTransactionForm);
@@ -57,7 +58,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		return customerTransactionFormList;
 	}
 
-	@Override
+	/*@Override
 	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
 			String customerAccountNumber, String accountNumber) {
 		List<CustomerTransactionEntity> customerTransactionEntities = bankTransactionHibernetDao
@@ -72,7 +73,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 			customerTransactionForms.add(customerTransactionForm);
 		}
 		return customerTransactionForms;
-	}
+	}*/
 	// This method finds the accountnumber by Userid
 public String findAccountNumberbyUserId(String Userid){
 	
@@ -87,6 +88,13 @@ public String findAccountNumberbyUserId(String Userid){
 			return bankPayeeDao.checkTransactionAmountNumber(transactionAmount);
 			
 	
+	}
+
+	@Override
+	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
+			String customerAccountNumber, String accountNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
