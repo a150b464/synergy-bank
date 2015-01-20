@@ -100,7 +100,7 @@
 					<li><a href="#">Convallis nonummy tellus</a></li>
 					<li><a href="#">In tincidunt mauris</a></li>
 					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
+					<li><a href="#">Convallis nummy tellus</a></li>
 					<li><a href="#">In tincidunt mauris</a></li>
 				</ul>
 			</div>
@@ -145,6 +145,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
