@@ -65,9 +65,13 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements
 	@Override
 	public List<E> findByCriteria(Criterion criterion) {
 		Criteria criteria = getCurrentSession().createCriteria(entityClass);
-
 		criteria.add(criterion);
 		return criteria.list();
+	}
+	
+	public Criteria findByCriteria() {
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		return criteria;
 	}
 
 	@SuppressWarnings("unchecked")

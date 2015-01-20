@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.synergy.bank.customer.service.BankTransactionService;
-import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
-import com.synergy.bank.rest.web.provider.wrapper.CustomerTransactionWrapper;
+import com.synergy.bank.customer.web.controller.form.CustomerTransactionsForm;
+import com.synergy.bank.rest.web.provider.wrapper.CustomerTransactionsWrapper;
 
 @Controller
 @Scope("request")
@@ -23,31 +23,31 @@ public class CustomerTransactionHistoryRestProvider {
 	@Qualifier("BankTransactionServiceImpl")
 	private BankTransactionService bankTransactionService;
 
-	@RequestMapping(value = "ministatement", method = RequestMethod.GET,produces="application/xml")
+	//http://localhost:8090/synergy-bank/rest/ministatement
+	//method = GET
+	 //produces = application/xml
+	@RequestMapping(value = "ministatement", method = RequestMethod.GET,
+			produces = "application/xml")
 	public @ResponseBody
-	CustomerTransactionWrapper viewMiniStatementXML(
+	CustomerTransactionsWrapper viewMiniStatementXML(
 			@RequestParam("accountNumber") String accountNumber) {
-		String customerAccountNumber = "customerAccountNumber";
 		// String accountNumber = "AAA001";
-		List<CustomerTransactionForm> transactionForms = bankTransactionService
-				.findCustomerTransactionByAccountNumber(customerAccountNumber,
-						accountNumber);
-		CustomerTransactionWrapper customerTransactionWrapper = new CustomerTransactionWrapper();
+		List<CustomerTransactionsForm> transactionForms = bankTransactionService
+				.findCustomerTransactionByAccountNumber(accountNumber);
+		CustomerTransactionsWrapper customerTransactionWrapper = new CustomerTransactionsWrapper();
 		customerTransactionWrapper.setCustomerTransactions(transactionForms);
 		// it will not go to view resolver
 		return customerTransactionWrapper;
 	}
-	
-	@RequestMapping(value = "ministatement", method = RequestMethod.GET,produces="application/json")
+
+	@RequestMapping(value = "ministatement", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody
-	CustomerTransactionWrapper viewMiniStatementJSON(
+	CustomerTransactionsWrapper viewMiniStatementJSON(
 			@RequestParam("accountNumber") String accountNumber) {
-		String customerAccountNumber = "customerAccountNumber";
 		// String accountNumber = "AAA001";
-		List<CustomerTransactionForm> transactionForms = bankTransactionService
-				.findCustomerTransactionByAccountNumber(customerAccountNumber,
-						accountNumber);
-		CustomerTransactionWrapper customerTransactionWrapper = new CustomerTransactionWrapper();
+		List<CustomerTransactionsForm> transactionForms = bankTransactionService
+				.findCustomerTransactionByAccountNumber(accountNumber);
+		CustomerTransactionsWrapper customerTransactionWrapper = new CustomerTransactionsWrapper();
 		customerTransactionWrapper.setCustomerTransactions(transactionForms);
 		// it will not go to view resolver
 		return customerTransactionWrapper;
