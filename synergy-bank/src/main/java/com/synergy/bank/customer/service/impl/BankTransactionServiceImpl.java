@@ -73,7 +73,14 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		}
 		return customerTransactionForms;
 	}
-
+	// This method finds the accountnumber by Userid
+public String findAccountNumberbyUserId(String Userid){
+	
+	//String userid = bankTransactionDao.
+	//Add dao code for getting the account number by userId
+	return Userid;
+	
+}
 	@Override
 	public String checkTransactionAmountNumber(String transactionAmount) {
 
