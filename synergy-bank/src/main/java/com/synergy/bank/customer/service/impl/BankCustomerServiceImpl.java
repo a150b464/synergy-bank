@@ -56,7 +56,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		// char[] password=bankJdbcDao.generatePassword();
 		String userid = bankJdbcDao.nextUserID();
 		customerForm.setUserId(userid);
-		userIdAndPassword="Bank userid ="+userid;
+		userIdAndPassword=userid;
 		// customerForm.setPassword(String.valueOf(password));
 		
 		//Generating the password for four characters
@@ -69,7 +69,7 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 	     System.out.println("generated password is- ("+genpass+")____________");
 	     System.out.println("****************************************************");
 		customerForm.setPassword(genpass);
-		userIdAndPassword=userIdAndPassword+" , password = "+genpass;
+		userIdAndPassword=userIdAndPassword+","+genpass;
 		
 		CustomerEntity customerEntity = new CustomerEntity();
 		// attribute and datatype should be match
