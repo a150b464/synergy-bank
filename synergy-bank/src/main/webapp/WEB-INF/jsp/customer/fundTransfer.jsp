@@ -18,12 +18,43 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/makePayment-validations.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-
-<script type = "text/javascript">
+<link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/BeatPicker.css" type="text/css" media="all"/>
+<%-- <link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/jquery-ui.css" /> --%>
+<%-- <link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/jquery.ui.theme.css" /> --%>
+     <link rel="stylesheet"
+     href="${pageContext.request.contextPath}/css/datePickerStyle.css" type="text/css" media="all"/>	
+	
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/customer-validations.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script> --%>
+<script type="text/javascript"
+     src="${pageContext.request.contextPath}/js/BeatPicker.js"></script>
+<!-- <script type = "text/javascript">
    $(function() {
     $( "#datepicker" ).datepicker();
   });
-  </script>
+  </script> -->
+  
+<script type="text/javascript">
+ $(document).ready(function() {
+	 $("#dot").datepicker({
+         dateFormat: 'yy-mm-dd',
+         showOn: 'button',
+         buttonImage: "${pageContext.request.contextPath}/images/datePickerPopup.gif",
+         buttonImageOnly: true,
+         showOtherMonths : true,
+         selectOtherMonths : true,
+         changeYear:true,
+         yearRange: "c-50:c+0",
+         showWeek: false
+    }).next('button').text('').button({
+       text: true
+    });
+ });	 
+</script>	
   
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
@@ -98,6 +129,12 @@
 						<td  id="tAmountError" style="font-size:10;color: red;"></td>
 					</tr>
 
+					<%-- <tr>
+						<td><b>Date of Transaction to happen:</b></td>
+						<td><ff:input path="transactionDate" id ="dot" size="8" align="right"/></td>
+ 
+					</tr> --%>
+					
 					<tr>
 					<td><b>Quick Comments</b></td>
 						<td><ff:input path="transactionRemark" name="comments" size="60" width="40" align="right" /></td>

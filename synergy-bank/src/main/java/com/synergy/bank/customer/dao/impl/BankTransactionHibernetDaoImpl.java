@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.synergy.bank.base.dao.AbstractDaoImpl;
 import com.synergy.bank.customer.dao.BankTransactionDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 
 @Repository("BankTransactionHibernateDaoImpl")
@@ -28,6 +30,11 @@ public class BankTransactionHibernetDaoImpl extends
 	public String addCustomerTransaction(CustomerTransactionsEntity entity) {
 		super.saveOrUpdate(entity);
 		return "success";
+	}
+	
+	@Override
+	public void save(CustomerTransactionsEntity entity){
+		super.saveOrUpdate(entity);
 	}
 
 	@Override
@@ -73,6 +80,12 @@ public class BankTransactionHibernetDaoImpl extends
 				.addOrder(Order.desc("transactionDate")).setFirstResult(0)
 				.setMaxResults(3).list();
 		return customerTransactionsEntities;
+	}
+
+	@Override
+	public String addTransactions(CustomerTransactionEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

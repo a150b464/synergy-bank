@@ -1,6 +1,7 @@
 package com.synergy.bank.customer.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.BankTransactionDao;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
@@ -35,10 +37,22 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
 
-		CustomerTransactionsEntity entity = new CustomerTransactionsEntity();
+		CustomerTransactionEntity entity = new CustomerTransactionEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
 		/*System.out.println("Entity at beanUtils" + entity);*/
-		bankTransactionDao.addCustomerTransaction(entity);
+		
+		CustomerTransactionsEntity customerTransactionsEntity = new CustomerTransactionsEntity();
+		customerTransactionsEntity.setAccountID(transactionForm.getPayeeAccountNumber());
+		customerTransactionsEntity.setAmmount(Integer.parseInt(transactionForm.getTransactionAmount()));
+		customerTransactionsEntity.setCreditDr("CR");
+		customerTransactionsEntity.setDescription(transactionForm.getTransactionRemark());
+		customerTransactionsEntity.setTransactionDate(transactionForm.getTransactionDate());
+		customerTransactionsEntity.setTransactionId(transactionForm.getTransactionId());
+		
+		bankTransactionHibernetDao.save(customerTransactionsEntity);
+		bankTransactionDao.addTransactions(entity);
+		
+		
 		return "success";
 	}
 

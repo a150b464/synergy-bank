@@ -1,5 +1,7 @@
 package com.synergy.bank.customer.dao.impl;
 
+import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -7,7 +9,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -28,9 +29,15 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 	}
 
 	@Override
-	public String addCustomerTransaction(CustomerTransactionsEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public String addTransactions(CustomerTransactionEntity entity) {
+		int[] columnsType = new int[] { Types.VARCHAR,
+				Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.VARCHAR,
+				Types.INTEGER};
+		Object data[] = new Object[] { entity.getCustomerAccountNumber(), entity.getCustomerAccountType(),
+				entity.getPayeeAccountNumber(), entity.getTransactionAmount(), entity.getTransactionDate(), entity.getTransactionRemark(),
+				entity.getTransactionPwd()};
+		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER_TRANSACTION, data, columnsType);
+		return "saved";
 	}
 
 	@Override
@@ -62,14 +69,27 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 	@Override
 	public List<CustomerTransactionsEntity> findCustomerTransactionByAccountNumber(
 			String accountNumber) {
-		/*List<CustomerTransactionEntity> transactionList = super
-				.getJdbcTemplate()
-				.query(CustomerQuery.FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER
-						+ "'" + accountNumber + "'",
-						new BeanPropertyRowMapper<CustomerTransactionEntity>(
-								CustomerTransactionEntity.class));*/
+		/*
+		 * List<CustomerTransactionEntity> transactionList = super
+		 * .getJdbcTemplate()
+		 * .query(CustomerQuery.FIND_TRANSACTION_BY_CUSTOMER_ACCOUNT_NUMBER +
+		 * "'" + accountNumber + "'", new
+		 * BeanPropertyRowMapper<CustomerTransactionEntity>(
+		 * CustomerTransactionEntity.class));
+		 */
 		return null;
 	}
 
+	@Override
+	public String addCustomerTransaction(CustomerTransactionsEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(CustomerTransactionsEntity entity) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
