@@ -28,13 +28,16 @@ public class SynergyBankRegistrationProvider implements SynergyRegistrationServi
 	@Override
 	public RegistrationOutputVO addCustomer(RegistrationInputVO registrationInput) {
 		ApplicationContext applicationContext=ContextLoader.getCurrentWebApplicationContext();
-		BankCustomerService bankEmailService=(BankCustomerService)applicationContext.getBean("BankCustomerServiceImpl");
+		BankCustomerService bankCustomerService=(BankCustomerService)applicationContext.getBean("BankCustomerServiceImpl");
 		CustomerForm customerForm = new CustomerForm();
 		BeanUtils.copyProperties(registrationInput, customerForm);
-		bankEmailService.addCustomer(customerForm);
+		String message = bankCustomerService.addCustomer(customerForm);
+		String[] str = message.split(",");
+		String userid = str[0];
+		String password = str[1];
 		RegistrationOutputVO registrationOutputVO = new RegistrationOutputVO();
-		registrationOutputVO.setUserId(registrationInput.getUserId());
-		registrationOutputVO.setPassword(registrationInput.getPassword());
+		registrationOutputVO.setUserId(userid);
+		registrationOutputVO.setPassword(password);
 		registrationOutputVO.setEmail(registrationInput.getEmail());
 		registrationOutputVO.setMobile(registrationInput.getMobile());
 		registrationOutputVO.setDescription(registrationInput.getDescription());
