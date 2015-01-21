@@ -13,21 +13,20 @@
       implementation="com.synergy.bank.soap.web.provider.BankGallerySoapWebService"
       url-pattern="/bankGallerySoapWebService"/>
      
-       <endpoint
+  <endpoint
       name="SynerBankEmailProvider"
       implementation="com.synergy.bank.email.provider.SynerBankEmailProvider"
       url-pattern="/ebank/emailWebService"/>
       
-      <endpoint
-      name="SynergyBankRegistrationProvider"
-      implementation="com.synergy.bank.registration.provider.SynergyBankRegistrationProvider"
-      url-pattern="/ebank/bankRegistrationService"/>
-     
-     
-      <endpoint
+  <endpoint
       name="SynerBankPayeeProvider"
       implementation="com.synergy.bank.payee.provider.SynergyBankPayeeProvider"
       url-pattern="/ebank/payeeWebService"/>
+      
+  <endpoint
+      name="SynerBankRegistrationProvider"
+      implementation="com.synergy.bank.registration.provider.SynergyBankRegistrationProvider"
+      url-pattern="/ebank/registrationWebService"/>
       
   <endpoint
       name="bankPayeeSoapWebService"
