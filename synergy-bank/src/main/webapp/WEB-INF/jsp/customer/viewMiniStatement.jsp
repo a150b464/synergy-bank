@@ -6,44 +6,57 @@
 <head>
 <title>${pageContext.request.contextPath}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
-<link href="${pageContext.request.contextPath}/css/breadcrumb.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/style.css" />
+<link href="${pageContext.request.contextPath}/css/breadcrumb.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
 </head>
 
 <body>
 	<%@include file="cheader.jsp"%>
-	<br><br>
-	
+	<br>
+	<br>
+
 	<div id="content">
+		<br> <br>
+		<h3>Mini Statement</h3>
 		<br>
-	<br><h3>Mini Statement</h3><br>	
-		<ff:form action="viewMiniStatement" method="get" >
-			<table align="center" width="60%" border="1" cellspacing="3" cellpadding="3">
+		<ff:form action="viewMiniStatement" method="get">
+			<table align="center" width="100%" border="1" cellspacing="3"
+				cellpadding="3">
 				<tr>
-					<td>Payee Account Number</td><td>Transaction Amount</td><td>Transaction Date</td>
+					<td>Serial Number</td>
+					<td>Account Id</td>
+					<td>Amount</td>
+					<td>CR/DR</td>
+					<td>Transaction Remark</td>
+					<td>Transaction Date</td>
+					<td>Transaction Id</td>
 				</tr>
-				
+
 				<c:forEach items="${customerTransactionForms}" var="item">
 					<tr>
 						<td>${item.payeeAccountNumber}</td>
 						<td>${item.transactionAmount}</td>
 						<td>${item.transactionDate}</td>
-					</tr>	
+						<td></td>
+						<td></td>
+					</tr>
 				</c:forEach>
 			</table>
-			
-	</ff:form>
-			<br><input id="button" type="submit" value="email notice" size = "20"/><br>
-			<div class="metalinks">
-			<a href="#"><img src="${pageContext.request.contextPath}/images/pdf.jpg" alt="" width="30" height="30" /></a>
-			</div>
+
+		</ff:form>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-	
+		<input id="button" type="submit" value="email notice" size="20" /><br>
+		<div class="metalinks">
+			<a href="#"><img
+				src="${pageContext.request.contextPath}/images/pdf.jpg" alt=""
+				width="20" height="10" /></a>
+		</div>
+		<br> <br> <br> <br> <br>
+
 	</div>
 
 
@@ -63,60 +76,62 @@
 
 
 
-<div id="blocks">																																																																																																																													
-			
+	<div id="blocks"></div>
+	<div id="info">
+		<div>
+			<img src="${pageContext.request.contextPath}/images/title5.gif"
+				alt="" width="160" height="26" />
+			<ul>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Massa ac laoreet iaculipede</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+			</ul>
 		</div>
-		<div id="info">
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title6.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title7.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title8.gif" alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
+		<div>
+			<img src="${pageContext.request.contextPath}/images/title6.gif"
+				alt="" width="160" height="26" />
+			<ul>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Massa ac laoreet iaculipede</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+			</ul>
+		</div>
+		<div>
+			<img src="${pageContext.request.contextPath}/images/title7.gif"
+				alt="" width="160" height="26" />
+			<ul>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Massa ac laoreet iaculipede</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+			</ul>
+		</div>
+		<div>
+			<img src="${pageContext.request.contextPath}/images/title8.gif"
+				alt="" width="160" height="26" />
+			<ul>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Massa ac laoreet iaculipede</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+				<li><a href="#">Maecenas hendrerit</a></li>
+				<li><a href="#">Convallis nonummy tellus</a></li>
+				<li><a href="#">In tincidunt mauris</a></li>
+			</ul>
 		</div>
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	</div>
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
