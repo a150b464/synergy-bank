@@ -2,6 +2,7 @@ package com.synergy.bank.customer.dao;
 
 import java.util.List;
 
+import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 
@@ -32,5 +33,9 @@ public abstract interface BankTransactionDao {
 
 	public abstract List<CustomerTransactionsEntity> findCustomerTransactionByAccountNumber(
 			String accountNumber);
+
+	public String addTransactions(CustomerTransactionEntity entity);
+	
+	public void save(CustomerTransactionsEntity entity);
 
 }
