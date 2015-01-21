@@ -193,15 +193,15 @@
 		<url-pattern>/ebank/payeeWebService</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>soapa</servlet-name>
-		<url-pattern>/ebank/registrationWebService</url-pattern>
-	</servlet-mapping>
-	
 	
 	<servlet-mapping>
 		<servlet-name>soapa</servlet-name>
 		<url-pattern>/bankPayeeSoapWebService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>soapa</servlet-name>
+		<url-pattern>/ebank/bankRegistrationService</url-pattern>
 	</servlet-mapping>
 
 </web-app>
