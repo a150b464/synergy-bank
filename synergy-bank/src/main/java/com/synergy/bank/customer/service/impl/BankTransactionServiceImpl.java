@@ -51,8 +51,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		
 		bankTransactionHibernetDao.save(customerTransactionsEntity);
 		bankTransactionDao.addTransactions(entity);
-		
-		
+			
 		return "success";
 	}
 
