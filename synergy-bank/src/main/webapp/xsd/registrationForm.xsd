@@ -11,6 +11,7 @@ targetNamespace="http://www.bank.synergy.com/registration/"
  <!-- Create business object form sending email using email api
  Bottom up ,we can not reuse the XSD since it is tightly coupled  
   -->	
+  
   <complexType name="RegistrationInputVO">
      <sequence>
          <element name="salutation" type="string" maxOccurs="1" minOccurs="1"/>
