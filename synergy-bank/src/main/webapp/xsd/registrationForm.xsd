@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.bank.synergy.com/registration/"
+	xmlns:tns="http://www.bank.synergy.com/registration/" 
+	elementFormDefault="qualified">
+	
+ <!-- Create one instance of the below element -->
+ <element name="registrationVOInput" type="tns:RegistrationInputVO"/>
+ <element name="registrationVOOutput" type="tns:RegistrationOutputVO"/>
+
+ <!-- Create business object form sending email using email api
+ Bottom up ,we can not reuse the XSD since it is tightly coupled  
+  -->	
+  <complexType name="RegistrationInputVO">
+     <sequence>
+         <element name="salutation" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="firstName" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="middleName" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="lastName" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="userId" type="string" maxOccurs="1" minOccurs="1" />
+         <element name="password" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="gender" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="maritalStatus" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="dob" type="dateTime" minOccurs="1"  maxOccurs="1"/>
+         <element name="category" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="motherMaidenName" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="fatherName" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="email" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="mobile" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="ssn" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="occupation" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="occupationType" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="education" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="grossAnualIncome" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="sourceOfFunds" type="string" maxOccurs="1" minOccurs="1"/>
+         <element name="photo" type="base64Binary" maxOccurs="1" minOccurs="1"/>
+<!--          <element name="questionList" type="tns:CustomerRegistrationQuestionsEntityVO" minOccurs="1" maxOccurs="unbounded"/>
+ -->         <!-- <element name="question2" type="tns:CustomerRegistrationQuestionsEntityVO" maxOccurs="unbounded" minOccurs="1"/>
+         <element name="question3" type="tns:CustomerRegistrationQuestionsEntityVO" maxOccurs="unbounded" minOccurs="1"/> -->
+         <element name="description" type="string" maxOccurs="1" minOccurs="1"/>
+     </sequence>
+  </complexType>
+  
+  <!-- <complexType name="CustomerRegistrationQuestionsEntityVO">
+     <sequence>
+         <element name="description" type="string" maxOccurs="1" minOccurs="1" />
+         <element name="answer" type="string" minOccurs="1"  maxOccurs="1"/>
+     </sequence>
+  </complexType> -->
+  
+  <complexType name="RegistrationOutputVO">
+     <sequence>
+         <element name="userId" type="string" maxOccurs="1" minOccurs="1" />
+         <element name="password" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="email" type="string" maxOccurs="1" minOccurs="1" />
+         <element name="mobile" type="string" minOccurs="1"  maxOccurs="1"/>
+         <element name="description" type="string" maxOccurs="1" minOccurs="1" />
+     </sequence>
+  </complexType>
+
+	
+</schema>
