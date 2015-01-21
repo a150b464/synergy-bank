@@ -16,6 +16,7 @@ import com.synergy.bank.registration.RegistrationInputVO;
 import com.synergy.bank.registration.RegistrationOutputVO;
 import com.synergy.bank.registration.SynergyRegistrationService;
 
+
 //synergy-email.wsdl =>>>>>SynergyEMailService
 //==name =portType
 @WebService(name="SynergyRegistrationService",portName="SynergyRegistrationServicePort",serviceName="SynergyRegistrationServiceProvider",targetNamespace="http://www.bank.synergy.com/registration/",endpointInterface="com.synergy.bank.registration.SynergyRegistrationService",wsdlLocation="/xsd/synergy-registration.wsdl")
