@@ -1,5 +1,6 @@
 package com.synergy.bank.customer.service.impl;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +37,19 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 			customerAccountForms.add(customerAccountForm);
 		}
 		return customerAccountForms;
+	}
+	
+	@Override
+	public double getBalance(String userid){
+			
+		double amount = customerAccountDao.getBalance(userid);
+		
+		return amount;
+	}
+	
+	@Override
+	public String updateAmount(double remAmount, String userid){
+		customerAccountDao.updateAmount(remAmount, userid);
+		return "success";
 	}
 }

@@ -1,8 +1,9 @@
 package com.synergy.bank.customer.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.BankTransactionDao;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionEntity;
 import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.service.BankTransactionService;
+import com.synergy.bank.customer.service.CustomerAccountService;
+import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionsForm;
 
@@ -34,9 +39,14 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Qualifier("BankTransactionHibernateDaoImpl")
 	private BankTransactionDao bankTransactionHibernetDao;
 
+	@Autowired
+	@Qualifier("CustomerAccountServiceImpl")
+	private CustomerAccountService customerAccountService;
+	
 	@Override
-	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
+	public String addCustomerTransaction(CustomerTransactionForm transactionForm, HttpSession session) {
 
+		
 		CustomerTransactionEntity entity = new CustomerTransactionEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
 		/*System.out.println("Entity at beanUtils" + entity);*/
@@ -51,6 +61,20 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		
 		bankTransactionHibernetDao.save(customerTransactionsEntity);
 		bankTransactionDao.addTransactions(entity);
+		
+	    /*CustomerForm customerForm = new CustomerForm();
+	    String userid = customerForm.getUserId();*/
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	    String userid=loginForm.getUserId();
+	    double amount = customerAccountService.getBalance(userid);
+	    double transactionAmount = Double.parseDouble(transactionForm.getTransactionAmount());
+	    double remAmount;
+	    if(amount > transactionAmount)
+	    	remAmount = amount - transactionAmount;
+	    else
+	    	remAmount = transactionAmount - amount;
+	    
+	    customerAccountService.updateAmount(remAmount, userid);
 			
 		return "success";
 	}
@@ -106,6 +130,12 @@ public String findAccountNumberbyUserId(String Userid){
 	@Override
 	public List<CustomerTransactionForm> findCustomerTransactionByAccountNumber(
 			String customerAccountNumber, String accountNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
