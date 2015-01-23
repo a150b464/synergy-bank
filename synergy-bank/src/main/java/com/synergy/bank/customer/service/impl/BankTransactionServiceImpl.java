@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.dao.BankPayeeDao;
@@ -19,7 +20,6 @@ import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.service.CustomerAccountService;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
-import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionsForm;
 
@@ -43,6 +43,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Qualifier("CustomerAccountServiceImpl")
 	private CustomerAccountService customerAccountService;
 	
+	@Transactional
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm, HttpSession session) {
 
@@ -71,9 +72,9 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	    double remAmount;
 	    if(amount > transactionAmount)
 	    	remAmount = amount - transactionAmount;
-	    else
-	    	remAmount = transactionAmount - amount;
-	    
+	    else{
+	    	remAmount = amount - transactionAmount;
+	    }
 	    customerAccountService.updateAmount(remAmount, userid);
 			
 		return "success";
