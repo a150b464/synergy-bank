@@ -8,4 +8,10 @@ public interface CustomerAccountService {
 
 	public List<CustomerAccountForm> findCustomerAccountByUserId(String userId);
 
+	public double getBalance(String userid);
+
+	/*public String updateAmount(double remAmount);*/
+
+	public String updateAmount(double remAmount, String userid);
+
 }

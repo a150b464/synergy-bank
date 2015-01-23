@@ -1,5 +1,6 @@
 package com.synergy.bank.customer.dao.impl;
 
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -33,5 +34,23 @@ public class CustomerAccountDaoImpl extends JdbcDaoSupport implements
 				.query(CustomerQuery.FIND_CUSTOMER_ACCOUNT_BY_ID + "'" + userId	+ "'",
 						new BeanPropertyRowMapper<CustomerAccountEntity>(CustomerAccountEntity.class));
 		return accountList;
+	}
+	
+	@Override
+	public double getBalance(String userid){
+				
+		String sql = "select totalAvailBalance from customer_account_info_tbl where userid="+"'"+userid+"'";
+		double amount = (double) super.getJdbcTemplate().queryForLong(sql);
+		
+		return amount;
+	}
+	
+	@Override
+	public String updateAmount(double remAmount, String userid){
+		CustomerAccountEntity customerAccountEntity = new CustomerAccountEntity();
+		String sql = "UPDATE customer_account_info_tbl set totalAvailBalance="+remAmount+" , availBalance="+remAmount+" where userid="+"'"+userid+"'";
+				
+		super.getJdbcTemplate().update(sql);
+		return "success";
 	}
 }

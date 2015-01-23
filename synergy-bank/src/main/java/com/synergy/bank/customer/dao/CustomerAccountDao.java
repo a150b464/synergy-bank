@@ -6,5 +6,11 @@ import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 
 public interface CustomerAccountDao {
 
-	List<CustomerAccountEntity> findCustomerAccountByUserId(String userId);
+	public List<CustomerAccountEntity> findCustomerAccountByUserId(String userId);
+
+	public double getBalance(String userId);
+
+	/*public String updateAmount(double remAmount);*/
+
+	public String updateAmount(double remAmount, String userid);
 }

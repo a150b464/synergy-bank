@@ -1,5 +1,7 @@
 package com.synergy.bank.customer.web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -51,8 +53,8 @@ public class BankTransactionController {
 
 	@RequestMapping(value = "makePayments", method = RequestMethod.POST)
 	public String showCustomerRegistrationPage(
-			@ModelAttribute(value = "customerTransactionCommand") CustomerTransactionForm customerTransactionForm) {
-		bankTrasactionService.addCustomerTransaction(customerTransactionForm);
+			@ModelAttribute(value = "customerTransactionCommand") CustomerTransactionForm customerTransactionForm, HttpSession session) {
+		bankTrasactionService.addCustomerTransaction(customerTransactionForm, session);
 		return NavigationConstant.CUSTOMER_PAGE
 				+ NavigationConstant.FUND_TRANSFER_PAGE;
 	}
