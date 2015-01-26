@@ -17,14 +17,16 @@ import com.synergy.bank.email.EMailSenderVO;
 @Controller
 @Scope("request")
 public class SynergyBankemailRestProvider {
+	
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
 	
-	@RequestMapping(value = "sendEmail", method = RequestMethod.POST,produces = "application/xml")
+	@RequestMapping(value = "sendEmail", method = RequestMethod.POST,produces = "text/plain")
 	public  @ResponseBody String sendEmail(@RequestBody EMailSenderVO pemailMessageInput) {
-		String names[]=pemailMessageInput.getReceipients().toArray(new String[pemailMessageInput.getReceipients().size()]);
-		bankEmailService.sendMail(pemailMessageInput.getSender(), names, pemailMessageInput.getSubject(), pemailMessageInput.getBody());
+		//String names[]=pemailMessageInput.getReceipients().toArray(new String[pemailMessageInput.getReceipients().size()]);
+		//bankEmailService.sendMail(pemailMessageInput.getSender(), names, pemailMessageInput.getSubject(), pemailMessageInput.getBody());
+		System.out.println(pemailMessageInput.getSender());
 		//Here we have to write business to send the email
 		System.out.println("pemailMessageInput  = "+pemailMessageInput);
 		return "Ahaha email is sent................";
