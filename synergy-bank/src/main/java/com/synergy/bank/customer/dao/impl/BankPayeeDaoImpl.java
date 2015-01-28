@@ -219,4 +219,12 @@ public String checkPayeeName(String payeeName, String payeeAcoountNumber) {
 	return "valid";
 }
 
+@Override
+public List<PayeeDetailsEntity> findPayeesByEmail(String email) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
 }

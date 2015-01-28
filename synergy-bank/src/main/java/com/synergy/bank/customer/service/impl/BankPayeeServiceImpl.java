@@ -13,9 +13,11 @@ import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
 import com.synergy.bank.customer.dao.BankPayeeDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.dao.entity.CustomerTransactionsEntity;
 import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 import com.synergy.bank.customer.service.BankPayeeService;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
+import com.synergy.bank.customer.web.controller.form.CustomerTransactionsForm;
 import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Service("BankPayeeServiceImpl")
@@ -144,5 +146,20 @@ public class BankPayeeServiceImpl implements BankPayeeService {
 		// TODO Auto-generated method stub
 		return bankPayeeDao.checkPayeeName(payeeName, payeeAcoountNumber);
 	}
+
+	@Override
+	public List<PayeeDetailsForm> findPayeesByEmail(String email) {
+		List<PayeeDetailsEntity> payeeDetailsEntity = bankPayeeDao.findPayeesByEmail(email);
+		List<PayeeDetailsForm> payeeDetailsFormList = new ArrayList<PayeeDetailsForm>(payeeDetailsEntity.size());
+		for(int i=0; i<payeeDetailsFormList.size(); i++){
+			PayeeDetailsForm payeeDetailsForm = new PayeeDetailsForm();
+			BeanUtils.copyProperties(payeeDetailsFormList.get(i), payeeDetailsForm);
+			payeeDetailsFormList.add(payeeDetailsForm);
+		}
+		return payeeDetailsFormList;
+	}
+
+	
+	
 
 }

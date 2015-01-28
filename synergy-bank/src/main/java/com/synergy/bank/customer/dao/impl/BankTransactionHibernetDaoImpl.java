@@ -77,7 +77,7 @@ public class BankTransactionHibernetDaoImpl extends
 		Criteria criteria = super.findByCriteria();
 		List<CustomerTransactionsEntity> customerTransactionsEntities = criteria
 				.add(Restrictions.eq("accountID", accountNumber))
-				.addOrder(Order.desc("transactionDate")).setFirstResult(0)
+				.addOrder(Order.desc("ammount")).setFirstResult(0)
 				.setMaxResults(3).list();
 		return customerTransactionsEntities;
 	}
