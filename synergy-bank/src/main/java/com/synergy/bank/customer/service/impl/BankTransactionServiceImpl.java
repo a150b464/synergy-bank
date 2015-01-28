@@ -45,7 +45,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	
 	@Transactional
 	@Override
-	public String addCustomerTransaction(CustomerTransactionForm transactionForm, HttpSession session) {
+	public String addCustomerTransaction(CustomerTransactionForm transactionForm, String userid) {
 
 		
 		CustomerTransactionEntity entity = new CustomerTransactionEntity();
@@ -65,8 +65,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		
 	    /*CustomerForm customerForm = new CustomerForm();
 	    String userid = customerForm.getUserId();*/
-		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
-	    String userid=loginForm.getUserId();
+		
 	    double amount = customerAccountService.getBalance(userid);
 	    double transactionAmount = Double.parseDouble(transactionForm.getTransactionAmount());
 	    double remAmount;

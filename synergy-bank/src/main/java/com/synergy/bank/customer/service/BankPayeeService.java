@@ -29,5 +29,6 @@ public interface BankPayeeService {
 	public byte[] findPhotoByUsedId(String userId);
 	public PayeeDetailsForm findAllPayeesByEmail(String email);
 	public String updatePayee(PayeeDetailsForm form);
+	public List<PayeeDetailsForm> findPayeesByEmail(String email);
 	
 }
