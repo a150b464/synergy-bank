@@ -129,11 +129,11 @@
 						<td  id="tAmountError" style="font-size:10;color: red;"></td>
 					</tr>
 
-					<%-- <tr>
+					<tr>
 						<td><b>Date of Transaction to happen:</b></td>
 						<td><ff:input path="transactionDate" id ="dot" size="8" align="right"/></td>
  
-					</tr> --%>
+					</tr>
 					
 					<tr>
 					<td><b>Quick Comments</b></td>
