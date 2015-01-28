@@ -40,7 +40,7 @@ public class CustomerTransactionHistoryRestProvider {
 		return customerTransactionWrapper;
 	}
 
-	@RequestMapping(value = "ministatement", method = RequestMethod.GET, produces = "application/json")
+	/*@RequestMapping(value = "ministatement", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody
 	CustomerTransactionsWrapper viewMiniStatementJSON(
 			@RequestParam("accountNumber") String accountNumber) {
@@ -51,6 +51,6 @@ public class CustomerTransactionHistoryRestProvider {
 		customerTransactionWrapper.setCustomerTransactions(transactionForms);
 		// it will not go to view resolver
 		return customerTransactionWrapper;
-	}
+	}*/
 
 }
