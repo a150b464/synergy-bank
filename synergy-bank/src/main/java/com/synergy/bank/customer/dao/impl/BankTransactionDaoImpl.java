@@ -27,6 +27,34 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 	public void setBankDataSource(DataSource dataSource) {
 		super.setDataSource(dataSource);
 	}
+	
+	
+	private int nextSNo(){
+		String sql="select max(id) from customer_transactions_tbl";
+		int p=super.getJdbcTemplate().queryForInt(sql);
+		p=p+1;
+		return p;
+	}
+	
+	private int nextTransactionId(){
+		String sql="select max(transactionId) from transaction_id_generator_tbl";
+		int trasactionId=super.getJdbcTemplate().queryForInt(sql);
+		trasactionId++;
+		return trasactionId;
+	}
+	
+	@Override
+	public String addTransactionsHistory(
+			CustomerTransactionsEntity entity) {
+		int[] columnsType = new int[] { Types.BIGINT,
+				Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.DATE,
+				Types.BIGINT};
+		Object data[] = new Object[] { nextSNo(), entity.getAccountID(),
+				entity.getAmmount(), entity.getCreditDr(), entity.getDescription(), new Date(),
+				nextTransactionId()};
+		super.getJdbcTemplate().update(CustomerQuery.INSERT_CUSTOMER_TRANSACTIONS_HISTORY, data, columnsType);
+		return "saved";
+	}
 
 	@Override
 	public String addTransactions(CustomerTransactionEntity entity) {
@@ -91,5 +119,7 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

@@ -35,9 +35,9 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Qualifier("BankTransactionDaoImpl")
 	private BankTransactionDao bankTransactionDao;
 
-	@Autowired
+	/*@Autowired
 	@Qualifier("BankTransactionHibernateDaoImpl")
-	private BankTransactionDao bankTransactionHibernetDao;
+	private BankTransactionDao bankTransactionHibernetDao;*/
 
 	@Autowired
 	@Qualifier("CustomerAccountServiceImpl")
@@ -60,7 +60,8 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 		customerTransactionsEntity.setTransactionDate(transactionForm.getTransactionDate());
 		customerTransactionsEntity.setTransactionId(transactionForm.getTransactionId());
 		
-		bankTransactionHibernetDao.save(customerTransactionsEntity);
+		//bankTransactionHibernetDao.save(customerTransactionsEntity);
+		bankTransactionDao.addTransactionsHistory(customerTransactionsEntity);
 		bankTransactionDao.addTransactions(entity);
 		
 	    /*CustomerForm customerForm = new CustomerForm();
@@ -83,7 +84,7 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public List<CustomerTransactionsForm> findCustomerTransactionByAccountNumber(
 			String accountNumber) {
-		List<CustomerTransactionsEntity> customerTransactionEntityList = bankTransactionHibernetDao
+		/*List<CustomerTransactionsEntity> customerTransactionEntityList = bankTransactionHibernetDao
 				.findCustomerTransactionByAccountNumber(accountNumber);
 		List<CustomerTransactionsForm> customerTransactionFormList = new ArrayList<CustomerTransactionsForm>(
 				customerTransactionEntityList.size());
@@ -92,8 +93,8 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 			BeanUtils.copyProperties(customerTransactionEntityList.get(i),
 					customerTransactionForm);
 			customerTransactionFormList.add(customerTransactionForm);
-		}
-		return customerTransactionFormList;
+		}*/
+		return null;
 	}
 
 	/*@Override
