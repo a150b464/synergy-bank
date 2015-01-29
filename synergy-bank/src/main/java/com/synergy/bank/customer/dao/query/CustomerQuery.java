@@ -33,4 +33,7 @@ public interface CustomerQuery {
 	public static final String DELETE_FROM_PAYEE_INFO_TBL = "delete from payee_information_tbl where userid=";
 	public static final String INSERT_CUSTOMER_TRANSACTION = "insert into customer_transaction_tbl (customerAccountNumber,customerAccountType,payeeAccountNumber," +
 			"transactionAmount,transactionDate,transactionRemark,transactionPwd) values(?,?,?,?,?,?,?)";
+	
+	public static final String INSERT_CUSTOMER_TRANSACTIONS_HISTORY = "insert into customer_transactions_tbl (id,accountID,ammount," +
+			"creditDr,description,transactionDate,transactionId) values(?,?,?,?,?,?,?)";
 }

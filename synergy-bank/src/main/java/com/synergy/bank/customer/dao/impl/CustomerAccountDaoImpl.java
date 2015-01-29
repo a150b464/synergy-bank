@@ -1,6 +1,5 @@
 package com.synergy.bank.customer.dao.impl;
 
-import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;

@@ -36,6 +36,8 @@ public abstract interface BankTransactionDao {
 
 	public String addTransactions(CustomerTransactionEntity entity);
 	
+	public String addTransactionsHistory(CustomerTransactionsEntity customerTransactionEntity);
+	
 	public void save(CustomerTransactionsEntity entity);
 
 }

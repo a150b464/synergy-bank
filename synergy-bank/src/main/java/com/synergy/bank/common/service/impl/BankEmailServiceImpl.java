@@ -1,5 +1,6 @@
 package com.synergy.bank.common.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import javax.activation.DataHandler;
@@ -85,7 +86,12 @@ public class BankEmailServiceImpl implements BankEmailService {
 				MimeMessage message = mailSender.createMimeMessage();
 				try {
 					
-					message.setFrom(new InternetAddress(from));
+					try {
+						message.setFrom(new InternetAddress(from,"Aditya Sethi"));
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					message.setRecipients(Message.RecipientType.TO,
 					            InternetAddress.parse(to));
 					message.setSubject(subject);
