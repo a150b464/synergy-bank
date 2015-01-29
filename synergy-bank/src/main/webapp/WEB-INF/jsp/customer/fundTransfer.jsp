@@ -120,7 +120,7 @@
 				
 					<tr>
 						<td><b>Receivers account number</b></td>
- 							<td><ff:input path="payeeAccountNumber" value="${payeeAccountNumber}" size="60" width="40" align="right" readonly="true"/></td>
+ 							<td><ff:input path="payeeAccountNumber" value="${param.payeeAccountNumber}" size="60" width="40" align="right" readonly="true"/></td>
 					</tr>
 					
 					<tr>
