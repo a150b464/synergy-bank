@@ -17,6 +17,7 @@
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type="text/javascript">
+    var contextPath="${pageContext.request.contextPath}";
 	$(function() {
 		$("#datepicker").datepicker();
 	});
@@ -54,7 +55,8 @@
 					
 					<tr>
 					<td><b>Select a Payee to Make Payment:</b></td>
-					<td><ff:select path="payeeAccountNumber" width="2">
+					<td>
+					<ff:select path="payeeAccountNumber" width="2">
 					<ff:options items="${payeeDetailsFormList}" />
 					</ff:select></td>
 				</tr>
