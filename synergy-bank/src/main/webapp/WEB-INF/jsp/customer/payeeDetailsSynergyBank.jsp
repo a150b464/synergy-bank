@@ -35,7 +35,7 @@
 					 var payeeName=$("#payeeName").val();
 					// alert("payeeAccount = "+payeeAccount);
 					 if(payeeName.length==0){
-						 alert("Payee AccountNo cannot be blank.")
+						 alert("Payee Name cannot be blank.")
 						 $("#payeeName").focus();
 						 return;
 					 }
