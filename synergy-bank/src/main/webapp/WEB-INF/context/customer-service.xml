@@ -13,6 +13,8 @@
 
    <context:component-scan base-package="com.synergy.bank.customer.service.impl"/>
    <context:component-scan base-package="com.synergy.bank.admin.service.impl"/>
+   <context:component-scan base-package="com.synergy.bank.loan.service.impl"/>
+
 
 </beans>
 	

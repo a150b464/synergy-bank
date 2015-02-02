@@ -21,7 +21,7 @@
 
 	<div id="content" style="padding-left: 30px">
 		<h3 align="center" style="font-family: Palatino Linotype; font-size: 20px; color: orange">
-		<a href = "">Apply for Loan</a>
+		<a href = "${pageContext.request.contextPath}/bank/apply.do">Apply for Auto Loan</a>
 		</h3><br /><br /><br />
 		<h2>
 			<u>Check Loan Eligibility </u>
