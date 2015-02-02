@@ -28,12 +28,12 @@
 				cellpadding="3">
 				<tr>
 					<td>Serial Number</td>
-					<td>Account Id</td>
+					<td>Account Number</td>
 					<td>Amount</td>
 					<td>CR/DR</td>
 					<td>Transaction Remark</td>
-					<td>Transaction Date</td>
 					<td>Transaction Id</td>
+					<td>Transaction Date</td>
 				</tr>
 
 				<c:forEach items="${customerTransactionForms}" var="item">
@@ -41,6 +41,8 @@
 						<td>${item.payeeAccountNumber}</td>
 						<td>${item.transactionAmount}</td>
 						<td>${item.transactionDate}</td>
+						<td></td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
