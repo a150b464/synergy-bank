@@ -40,6 +40,8 @@ public interface NavigationConstant {
 	final public static String EDIT_GALLERY_PAGE = "editGallery";
 	final public static String EDIT_PAYEE_TABLE = "editPayeeTable";
 	public static final String CUSTOMER_LOAN_APPLICATION = "showloanmodule";
+	public static final String CUSTOMER_LOAN_FORM = "loanForm";
+	public static final String CUSTOMER_LOAN_INFO = "loanInfo";
 	public static final String CUSTOMER_HOME_LOAN_APPLICATION = "homeloan";
 	public static final String CUSTOMER_HOME_LOAN_APPLY = "apply";
 
