@@ -42,6 +42,7 @@ public interface NavigationConstant {
 	public static final String CUSTOMER_LOAN_APPLICATION = "showloanmodule";
 	public static final String CUSTOMER_LOAN_FORM = "loanForm";
 	public static final String CUSTOMER_LOAN_INFO = "loanInfo";
+	public static final String CUSTOMER_LOAN_CHECKLIST = "showLoanApplicationCheckList";
 	public static final String CUSTOMER_HOME_LOAN_APPLICATION = "homeloan";
 	public static final String CUSTOMER_HOME_LOAN_APPLY = "apply";
 
