@@ -21,7 +21,7 @@
 
 	<div id="content" style="padding-left: 30px">
 		<h3 align="center" style="font-family: Palatino Linotype; font-size: 20px; color: orange">
-		<a href = "${pageContext.request.contextPath}/bank/apply.do">Apply for Auto Loan</a>
+		<a href = "${pageContext.request.contextPath}/loan/apply.do">Apply for Auto Loan</a>
 		</h3><br /><br /><br />
 		<h2>
 			<u>Check Loan Eligibility </u>
@@ -29,37 +29,37 @@
 		<br />
 		<table align="center" width="100%" border="0" cellspacing="4"
 			cellpadding="4">
-			<tr>
+			<tr style = "text-align: left">
 				<td></td>
 				<td><h3>Personal Line of Credit</h3></td>
 				<td><h3>Personal Installment Loan</h3></td>
 			</tr>
 
-			<tr>
+			<tr style = "text-align: left">
 				<td>Type</td>
 				<td>Line of credit that you can draw against as the need arises</td>
 				<td>Installment loan with a fixed term</td>
 			</tr>
 
-			<tr>
+			<tr style = "text-align: left">
 				<td>APR</td>
 				<td>Variable Rate, based on Wall Street Journal Prime Rate</td>
 				<td>Fixed Rate</td>
 			</tr>
 
-			<tr>
+			<tr style = "text-align: left">
 				<td>Monthly Payment</td>
 				<td>Variable, based on a percentage of the outstanding balance</td>
 				<td>Fixed, based on initial disbursement</td>
 			</tr>
 
-			<tr>
+			<tr style = "text-align: left">
 				<td>Access to Funds</td>
 				<td>As needed, by check or online transfer</td>
 				<td>One-time, lump sum</td>
 			</tr>
 
-			<tr>
+			<tr style = "text-align: left">
 				<td>Loan Amounts</td>
 				<td>Min: $1,000<br />Max: $25,000
 				</td>

@@ -20,7 +20,7 @@
 		width="892" height="260" />
 		
 	<div id="content" style="padding-left: 30px" >
-		<b>	Please review our </b><a href = "${pageContext.request.contextPath}/bank/checkList.do">Application Check-list</a><b> before you begin.</b>
+		<b>	Please review our </b><a href = "${pageContext.request.contextPath}/loan/checkList.do">Application Check-list</a><b> before you begin.</b>
 		<br />
 		<h2>
 			<u>Loan Form </u>
@@ -29,12 +29,12 @@
 	
 		<ff:form action = "" method="post" commandName="addLoanForm">
 			<table align="center" width="100%" border="0" cellspacing="4" cellpadding="4">
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>What is the zip code of your place of residence?</b></td>
 					<td><ff:input path="zipCode" size="40" style="background:#D0F5A9; font-family: Palatino Linotype" /></td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>What is the purpose of your loan?</b></td>
 					<td>
 						<select name = "purpose">
@@ -48,22 +48,22 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>Are you looking to purchase a vehicle greater than 8 years old or a vehicle with over 80,000 miles?</b></td>
 					<td><ff:radiobutton path="purchase" value="Y" />Yes <ff:radiobutton	path="purchase" value="N" />No</td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>Do you intend to apply for joint credit with a co-applicant?</b></td>
 					<td><ff:radiobutton path="jointCredit" value="Y" />Yes <ff:radiobutton	path="jointCredit" value="N" />No</td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>If Yes does the co-applicant intend to apply for joint credit and has the co-applicant given you permission to apply jointly on her or his behalf?</b></td>
 					<td><ff:radiobutton path="permission" value="Y" />Yes <ff:radiobutton	path="permission" value="N" />No</td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>Are you, or your co-applicant, an employee or retiree of Synergy Bank or one of Synergy Bank's's Affilates?</b></td>
 					<td>
 						<select name = "relation">
@@ -75,7 +75,7 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr style = "text-align: left">
 					<td><b>If you received a pre-approved certificate number enter code:</b></td>
 					<td><ff:input path="preApprovedNo" size="40" style="background:#D0F5A9; font-family: Palatino Linotype" /><b>Optional</b></td>
 				</tr>
@@ -83,7 +83,7 @@
 			</table><br />
 		<div align = "center"><input type="button" value="Continue" style="background: #04B45F; font-family: Palatino Linotype; font-size: 17px;" /></div>
 		<br />
-		<b>	If you wish to cancel your application, please </b><a href = "${pageContext.request.contextPath}/bank/loanForm.do">click here.</a>
+		<b>	If you wish to cancel your application, please </b><a href = "${pageContext.request.contextPath}/loan/loanForm.do">click here.</a>
 		</ff:form>
 	</div>
 	<br />
