@@ -50,17 +50,17 @@
 				
 				<tr style = "text-align: left">
 					<td><b>Are you looking to purchase a vehicle greater than 8 years old or a vehicle with over 80,000 miles?</b></td>
-					<td><ff:radiobutton path="purchase" value="Y" />Yes <ff:radiobutton	path="purchase" value="N" />No</td>
+					<td><ff:radiobutton path="purchase" value="yes" />Yes <ff:radiobutton	path="purchase" value="no" />No</td>
 				</tr>
 				
 				<tr style = "text-align: left">
 					<td><b>Do you intend to apply for joint credit with a co-applicant?</b></td>
-					<td><ff:radiobutton path="jointCredit" value="Y" />Yes <ff:radiobutton	path="jointCredit" value="N" />No</td>
+					<td><ff:radiobutton path="jointCredit" value="yes" />Yes <ff:radiobutton	path="jointCredit" value="no" />No</td>
 				</tr>
 				
 				<tr style = "text-align: left">
 					<td><b>If Yes does the co-applicant intend to apply for joint credit and has the co-applicant given you permission to apply jointly on her or his behalf?</b></td>
-					<td><ff:radiobutton path="permission" value="Y" />Yes <ff:radiobutton	path="permission" value="N" />No</td>
+					<td><ff:radiobutton path="permission" value="yes" />Yes <ff:radiobutton	path="permission" value="no" />No</td>
 				</tr>
 				
 				<tr style = "text-align: left">
