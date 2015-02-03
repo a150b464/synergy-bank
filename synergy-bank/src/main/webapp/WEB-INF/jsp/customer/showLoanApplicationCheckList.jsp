@@ -24,49 +24,49 @@
 	<br />
 		<table align="center" width="100%" border="0" cellspacing="4"
 			cellpadding="4">
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>10 to 15 minutes to complete the application.</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>The dollar amount that you would like to borrow.</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>One form of photo identification (ID):<br />- Driver's license, state-issued ID or US passport</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>Previous address, if at current address less than two years.</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>Previous employer, if with current less than two years.</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>Your annual income and any other income to be considered.</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>If you are applying with a co-applicant, you will need their:<br />- Current address and previous, if less than two years<br />- Current employer and previous, if less than two years<br />- Annual income and any other income to be considered</b></td>
 			</tr>
 			
-			<tr>
+			<tr style = "text-align: left">
 				<td><img src="${pageContext.request.contextPath}/images/checkList.jpg" width = "30" height = "30"></td>
 				<td><b>If you are purchasing a vehicle from a private seller, or are refinancing, you will need:<br />-Vehicle selling price, year, make and model<br />-Vehicle trade in value, year, make and model<br />-Down payment, if any</b></td>
 			</tr>
 	
 		</table>	
 		<h3 align="center" style="font-family: Palatino Linotype; font-size: 20px; color: orange">
-	    	<a href = "${pageContext.request.contextPath}/bank/apply.do">Back to loan form</a>
+	    	<a href = "${pageContext.request.contextPath}/loan/apply.do">Back to loan form</a>
 	    </h3><br />
 	</div>
 </body>
