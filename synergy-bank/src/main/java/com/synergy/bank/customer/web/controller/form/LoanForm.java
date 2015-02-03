@@ -2,6 +2,7 @@ package com.synergy.bank.customer.web.controller.form;
 
 public class LoanForm {
 
+	private int id;
 	private int zipCode;
 	private String purpose;
 	private String purchase;
@@ -9,6 +10,14 @@ public class LoanForm {
 	private String permission;
 	private String relation;
 	private int preApprovedNo;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getZipCode() {
 		return zipCode;
 	}
