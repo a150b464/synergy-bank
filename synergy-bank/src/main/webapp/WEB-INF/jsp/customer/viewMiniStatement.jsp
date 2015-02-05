@@ -19,7 +19,7 @@
 	<br>
 	<br>
 
-	<div id="content">
+	<div id="content" align = "center">
 		<br> <br>
 		<h3>Mini Statement</h3>
 		<br>
