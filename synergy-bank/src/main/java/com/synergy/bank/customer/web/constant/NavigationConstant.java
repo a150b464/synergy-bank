@@ -45,5 +45,8 @@ public interface NavigationConstant {
 	public static final String CUSTOMER_LOAN_CHECKLIST = "showLoanApplicationCheckList";
 	public static final String CUSTOMER_HOME_LOAN_APPLICATION = "homeloan";
 	public static final String CUSTOMER_HOME_LOAN_APPLY = "apply";
-
+	public static final String CUSTOMER_LOAN_PURCHASE_YES = "purchaseYes";
+	public static final String CUSTOMER_LOAN_PURCHASE_NO = "purchaseNo";
+	public static final String CUSTOMER_ABOUT_YOUR_LOAN = "aboutYourLoan";
+	public static final String CUSTOMER_LOAN_APPLICANT_INFORMATION = "applicantInformation";
 }
