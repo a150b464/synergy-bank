@@ -79,7 +79,7 @@ public class BankAdminController {
 		return "redirect:showPendingApprovalCustomerList";
 	}
 	
-	@RequestMapping(value="blockCustomers", method=RequestMethod.GET)
+	@RequestMapping(value="customers", method=RequestMethod.GET)
 	public String showApprovedCustomerList(Model model){
 		
 		List<ApprovedCustomerForm> approvedCustomerList = bankAdminService.findApprovedCustomerList();
@@ -91,6 +91,7 @@ public class BankAdminController {
 	@RequestMapping(value="blockCustomers", method=RequestMethod.POST)
 	public String blockCustomer(@RequestParam("blockCheckbox") String[] blockedIds,final RedirectAttributes redirectAttributes){
 		String msg="Message";
+		System.out.println(blockedIds);
 		if(blockedIds.length>0){
 			
 			if(!bankAdminService.blockCustomer(blockedIds)){
@@ -100,13 +101,35 @@ public class BankAdminController {
 				msg = blockedIds.length+" customer(s) are blocked successfully.";
 			}
 		}
+		
 		else{
-			msg = "No customer was selected to block.";
+			msg = "No customer was selected to block";
 		}
 		redirectAttributes.addFlashAttribute("msg", msg);
-		return "redirect:blockCustomers";
+		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.BLOCK_CUSTOMER_LIST_PAGE;
 	}
 	
+
+	@RequestMapping(value="unblockCustomers", method=RequestMethod.POST)
+	public String unblockCustomer(@RequestParam("unblock") String[] unblockedIds,final RedirectAttributes redirectAttributes){
+		String msg="Message";
+		System.out.println(unblockedIds);
+		if(unblockedIds.length>0){
+			
+			if(!bankAdminService.unblockCustomer(unblockedIds)){
+				msg = "Failed to unblock customer.";
+			}
+			else{
+				msg = unblockedIds.length+" customer(s) are un blocked successfully.";
+			}
+		}
+		
+		else{
+			msg = "No customer was selected to unblock";
+		}
+		redirectAttributes.addFlashAttribute("msg", msg);
+		return NavigationConstantAdmin.ADMIN_PAGE+NavigationConstantAdmin.BLOCK_CUSTOMER_LIST_PAGE;
+	}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

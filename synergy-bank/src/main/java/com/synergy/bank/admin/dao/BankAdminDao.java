@@ -12,4 +12,5 @@ public interface BankAdminDao {
 	public List<CustomerAccountEntity> approvePendingCustomers(String[] cusomerUserNames);
 	public List<ApprovedCustomerEntity> findApprovedCustomerList();
 	public boolean blockCustomer(String[] cusomerUserNames);
+	public boolean unblockCustomer(String[] unblockedIds);
 }

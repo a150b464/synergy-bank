@@ -78,5 +78,11 @@ public class BankAdminServiceImpl implements BankAdminService{
 		/*System.out.println("S Impl"+cusomerUserNames);*/
 		return bankAdminDao.blockCustomer(cusomerUserNames);
 	}
+
+	@Override
+	public boolean unblockCustomer(String[] unblockedIds) {
+		
+		return bankAdminDao.unblockCustomer(unblockedIds);
+	}
 	
 }

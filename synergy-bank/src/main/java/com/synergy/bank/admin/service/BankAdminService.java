@@ -12,4 +12,5 @@ public interface BankAdminService {
 	public List<CustomerAccountForm> approvePendingCustomers(String[] cusomerUserNames);
 	public List<ApprovedCustomerForm> findApprovedCustomerList();
 	public boolean blockCustomer(String[] cusomerUserNames);
+	public boolean unblockCustomer(String[] unblockedIds);
 }
