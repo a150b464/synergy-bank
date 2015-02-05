@@ -23,10 +23,10 @@
       implementation="com.synergy.bank.payee.provider.SynergyBankPayeeProvider"
       url-pattern="/ebank/payeeWebService"/>
       
-  <endpoint
+  <!-- <endpoint
       name="SynerBankRegistrationProvider"
       implementation="com.synergy.bank.registration.provider.SynergyBankRegistrationProvider"
-      url-pattern="/ebank/registrationWebService"/>
+      url-pattern="/ebank/registrationWebService"/> -->
       
   <endpoint
       name="bankPayeeSoapWebService"
