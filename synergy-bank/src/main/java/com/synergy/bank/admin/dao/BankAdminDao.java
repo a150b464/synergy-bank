@@ -13,4 +13,5 @@ public interface BankAdminDao {
 	public List<ApprovedCustomerEntity> findApprovedCustomerList();
 	public boolean blockCustomer(String[] cusomerUserNames);
 	public boolean unblockCustomer(String[] unblockedIds);
+	public boolean lockUnlockCustomer(String userid, String status);
 }

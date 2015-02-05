@@ -14,6 +14,14 @@ public class LoginForm {
 	private String active;
 	private String approve;
 	private int loginCount;
+	
+	public boolean validateUserId(String userid){
+		 if(this.userId.equals(userid)){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	}
 
 	public int getLoginCount() {
 		return loginCount;

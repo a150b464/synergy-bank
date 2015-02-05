@@ -12,6 +12,15 @@ public class ApprovedCustomerForm {
 	private String totalAvailBalance;
 	private String currency;
 	
+	private String lockStatus;
+
+	public String getLockStatus() {
+		return lockStatus;
+	}
+	public void setLockStatus(String lockStatus) {
+		this.lockStatus = lockStatus;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}

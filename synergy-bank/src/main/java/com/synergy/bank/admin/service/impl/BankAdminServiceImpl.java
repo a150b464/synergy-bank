@@ -85,4 +85,9 @@ public class BankAdminServiceImpl implements BankAdminService{
 		return bankAdminDao.unblockCustomer(unblockedIds);
 	}
 	
+	@Override
+	public boolean lockUnlockCustomer(String userid, String status){
+		return bankAdminDao.lockUnlockCustomer(userid, status);
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.synergy.bank.common.dao.BankAuthDao;
@@ -41,6 +42,7 @@ public class BankAuthServiceImpl implements BankAuthService{
 
 
 	@Override
+	@PostAuthorize("returnObject.validateUserId(principal.username)")
 	public LoginForm findLoginDetailByUserName(String userid) {
 		LoginEntity loginEntity=bankAuthDao.findLoginDetailByUserName(userid);
 		LoginForm loginForm=new LoginForm();
