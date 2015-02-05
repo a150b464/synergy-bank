@@ -113,10 +113,8 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 
 	@Override
 	public List<ApprovedCustomerEntity> findApprovedCustomerList() {
-		
 		List<ApprovedCustomerEntity> approvedCustomerEntities = super.getJdbcTemplate().query(AdminQuery.FIND_APPROVED_CUSTOMERLIST,
 				new BeanPropertyRowMapper<ApprovedCustomerEntity>(ApprovedCustomerEntity.class));
-		
 		return approvedCustomerEntities;
 	}
 	
@@ -152,6 +150,15 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 			e.printStackTrace();
 			return false;
 		}
+		return true;
+	}
+	
+	@Override
+	public boolean lockUnlockCustomer(String userid,String status) {
+		if("lock".equalsIgnoreCase(status))
+		super.getJdbcTemplate().update(AdminQuery.BLOCK_CUSTOMER_QUERY+"'"+userid+"'");
+		else
+		super.getJdbcTemplate().update(AdminQuery.UNBLOCK_CUSTOMER_QUERY+"'"+userid+"'");
 		return true;
 	}
 }

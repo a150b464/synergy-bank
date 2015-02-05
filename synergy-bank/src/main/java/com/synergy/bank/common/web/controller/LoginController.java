@@ -16,11 +16,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.synergy.bank.common.service.BankAuthService;
 import com.synergy.bank.common.service.BankEmailService;
@@ -112,7 +112,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="homescreen.htm",method = RequestMethod.GET)
-	public String handleRequestInternal(HttpServletRequest request,
+	public String handleRequestInternal(@RequestHeader(value="User-Agent", defaultValue="foo") String userAgent,HttpServletRequest request,
 			HttpServletResponse response,Model model) throws Exception {
 		System.out.print("Yes we care");
 		String nextPage="guest";

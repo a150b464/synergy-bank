@@ -11,7 +11,14 @@ public class ApprovedCustomerEntity {
 	private String accountType;
 	private String totalAvailBalance;
 	private String currency;
+	private String lockStatus;
 
+	public String getLockStatus() {
+		return lockStatus;
+	}
+	public void setLockStatus(String lockStatus) {
+		this.lockStatus = lockStatus;
+	}
 	public String getCurrency() {
 		return currency;
 	}

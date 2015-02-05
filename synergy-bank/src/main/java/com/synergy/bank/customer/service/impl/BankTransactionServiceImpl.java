@@ -46,8 +46,6 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Transactional
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm, String userid) {
-
-		
 		CustomerTransactionEntity entity = new CustomerTransactionEntity();
 		BeanUtils.copyProperties(transactionForm, entity);
 		/*System.out.println("Entity at beanUtils" + entity);*/
