@@ -18,7 +18,7 @@
 	rel="stylesheet">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/getCurrentDate.js"></script>
 </head>
 
@@ -75,20 +75,47 @@
 						<td>${statusOf}</td>
 					</tr>
 				</tbody>
-			</table> <br> 
-			<form>
-			<h3 align="center">
-			Full Detailed Statement: Select starting date and ending date
-			</h3> <br>
-			<label for="startdate">Starting Date: </label>
-			<input id="startdate" name="startdate" type="date" max="" value="" /> 
-			<label for="enddate">Closing Date: </label>
-			<input id="enddate" name ="enddate" type="date" max = "" value="" /> 
+			</table>
 			<br>
-			</form>
+			<ff:form action="" method="post">
+				<h3 align="center">Full Detailed Statement: Select starting
+					date and ending date</h3>
+				<br> <div id = "detaillstmt">
+				<label for="startdate">Starting Date: </label>
+				<input id="startdate" name="startdate" type="date" max="" value="" />
+				<label for="enddate">Closing Date: </label>
+				<input id="enddate" name="enddate" type="date" max="" value="" />	
+				<input type="submit" /> </div>
+					<br>
+<table align="center" width="100%" border="1" cellspacing="3"
+				cellpadding="3">
+				<tr align = "center">
+					<th>Transaction Id</th>
+					<th>Customer Account Number</th>
+					<th>Amount</th>
+					<th>Account type</th>
+					<th>Transaction Amount</th>
+					<th>Transaction Remark</th>
+					<th>Transaction Date</th>
+				</tr>
+
+				<c:forEach items="${customerTransactionHistoryForms}" var="item">
+					<tr align="center">
+						<td>${item.id}</td>
+						<td>${item.customerAccountNumber}</td>
+						<td>${item.ammount}</td>
+						<td>${item.creditDr}</td>
+						<td>${item.description}</td>
+						<td>${item.transactionId}</td>
+						<td>${item.transactionDate}</td>
+					</tr>
+				</c:forEach>
+			</table>
+				
+			</ff:form>
 			<ul id="menu">
 				<li><h3 align="center">
-						<a href="viewMiniStatement">View Mini Statement</a>
+						<a href="viewMiniStatement">View Mini Statement</a>		
 					</h3></li>
 			</ul>
 
