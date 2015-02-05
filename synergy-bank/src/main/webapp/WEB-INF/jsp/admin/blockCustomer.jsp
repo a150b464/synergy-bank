@@ -26,74 +26,31 @@
 	src="${pageContext.request.contextPath}/js/jquery1.9.1.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-
-		$("#checkAll").change(function() {
-
-			if ($("#checkAll").is(':checked')) {
-
-				$(".chkbox").prop("checked", true);
-
-			} else {
-
-				$(".chkbox").prop("checked", false);
-
-			}
-
-		});
-
+function switchLock(userid){
+	var status="";
+    var result=$("#"+userid).attr("src");
+	 var p=result.indexOf("lock-2.png");
+	 if(p>0){
+		 status="unlock";
+	 }else{
+		 status="lock";
+	 }
+	$.ajax({
+		url:"${pageContext.request.contextPath}/bank/lockUnlockCustomers",
+		data:{pstatus:status,puserid:userid},
+		success:function(data) {
+	    if(data=='yes') {
+			 if(status=='lock'){
+				 $("#"+userid).attr("src", "${pageContext.request.contextPath}/images/lock-2.png"); 
+			 }else{
+				 $("#"+userid).attr("src", "${pageContext.request.contextPath}/images/unlock.png"); 
+			 }
+	    }else{
+	    	 
+	    }
+	  }
 	});
-	
-	/* 
-	$(document).ready(function() {
-		  $('.nav-toggle').click(function(){
-			//get collapse content selector
-			var collapse_content_selector = $(this).attr('type');				
-
-			//make the collapse content to be shown or hide
-			var toggle_switch = $(this);
-			$(collapse_content_selector).toggle(function(){
-			  if($(this).css('display')=='none'){
-                              //change the button label to be 'Show'
-				toggle_switch.html('${pageContext.request.contextPath}/images/lock-2.png');
-			  }else{
-                              //change the button label to be 'Hide'
-				toggle_switch.html('${pageContext.request.contextPath}/images/unlock.png');
-			  }
-			});
-		  });
-
-		});	
-	
-	$(document).ready(function() {
-		  $('#hideshow').toggle(function(){ 
-			  $('#hideshow').id('unlock');
-			  $('#hideshow').hide('lock');
-		  
-		  
-		  },function(){
-			  $('#hideshow').id('lock');
-			  
-			  
-			  
-		  });
-		  } */
-	
-	
-	function OnSubmitForm()
-	{
-	  if(document.pressed == 'blockCust')
-	  {
-	   document.blockedCustomerListForm.action ="blockCustomers";
-	  }
-	  else
-	  if(document.pressed == 'unblockCust')
-	  {
-	    document.blockedCustomerListForm.action ="unblockCustomers";
-	  }
-	  return true;
-	}
-	
+}
 </script>
 
 <style type="text/css">
@@ -104,17 +61,15 @@
 	font-weight: bold;
 }
 
-
-
 .round-border {
-			border: 1px solid #eee;
-			border: 1px solid rgba(0, 0, 0, 0.05);
-			-webkit-border-radius: 4px;
-			-moz-border-radius: 4px;
-			border-radius: 4px;
-			padding: 10px;
-			margin-bottom: 5px;
-		}
+	border: 1px solid #eee;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 5px;
+}
 </style>
 
 
@@ -143,80 +98,77 @@
 		<h5>${msg}</h5>
 		</p>
 
-		<ff:form name="blockedCustomerListForm" method="post" onsubmit="return onsubmitform();" commandName="blockCustomerCommand">
-<!-- //action="blockCustomers"  -->
-			<table align="center" id="tab1">
+		<table align="center" id="tab1">
+			<thead>
+				<tr>
 
-				<thead>
+					<td><b>SNO</b></td>
+					<td><b>First Name</b></td>
+					<td><b>Middle Name</b></td>
+					<td><b>Last Name</b></td>
+					<td><b>Email ID</b></td>
+					<td><b>Account No.</b></td>
+					<td><b>Total Available Balance</b></td>
+					<td><b>Currency</b></td>
+					<td><b>Block </b> &nbsp; <input type="checkbox"
+						onchange="checkAll()" id="checkAll" value=" All" />(All)</td>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				<c:forEach items="${approvedCustomerList}" var="item"
+					varStatus="myIndex">
 
 					<tr>
 
-						<td><b>SNO</b></td>
-						<td><b>First Name</b></td>
-						<td><b>Middle Name</b></td>
-						<td><b>Last Name</b></td>
-						<td><b>Email ID</b></td>
-						<td><b>Account No.</b></td>
-						<td><b>Total Available Balance</b></td>
-						<td><b>Currency</b></td>
-						<td><b>Block </b> &nbsp; <input type="checkbox"
-							onchange="checkAll()" id="checkAll" value=" All" />(All)</td>
+						<td>${myIndex.count}</td>
 
-					</tr>
+						<td>${item.firstName}</td>
+						<td>${item.middleName}</td>
+						<td>${item.lastName}</td>
 
-				</thead>
+						<td>${item.email}</td>
 
-				<tbody>
+						<td>${item.customerAccountNo}</td>
 
-					<c:forEach items="${approvedCustomerList}" var="item"
-						varStatus="myIndex">
+						<td>${item.totalAvailBalance}</td>
 
-						<tr>
+						<td>${item.currency}</td>
 
-							<td>${myIndex.count}</td>
-
-							<td>${item.firstName} </td>
-							<td>${item.middleName} </td>
-							<td>${item.lastName}</td>
-
-							<td>${item.email}</td>
-
-							<td>${item.customerAccountNo}</td>
-
-							<td>${item.totalAvailBalance}</td>
-
-							<td>${item.currency}</td>
-
-							<td><input type="checkbox" name="blockCheckbox"
-								class="chkbox" value="${item.userId}" /></td>
-<!-- Trying something -->
-							<%-- <td><a href="#" id="hideshow">
+						<td><input type="checkbox" name="blockCheckbox"
+							class="chkbox" value="${item.userId}" /></td>
+						<!-- Trying something -->
+						<%-- <td><a href="#" id="hideshow">
 								<img src="${pageContext.request.contextPath}/images/lock-2.png" width="40" height="40" id="lock">
 								<img src="${pageContext.request.contextPath}/images/unlock.png" width="40" height="40" id="unlock">
 							</a></td> --%>
-							
-							<td><input type="image" src="${pageContext.request.contextPath}/images/lock-2.png" name="blockCust" class="nav-toggle" 
-							onclick="document.pressed=this.id" id="blockCust" width="40" height="40"/></td>
-							
-							<td><input type="image" src="${pageContext.request.contextPath}/images/unlock.png" name="unblockCust" class="nav-toggle" 
-							onclick="document.pressed=this.id" id="unblockCust" width="40" height="40"/></td>
-							
-							
-						</tr>
 
-					</c:forEach>
+						<td>
+						
+						<c:choose>
+		    		 	<c:when test="${item.lockStatus eq 'no'}">
+		    		 	<a href="javascript:switchLock('${item.userId}');">
+						  <img width="30" height="30" id="${item.userId}" src="${pageContext.request.contextPath}/images/lock-2.png"/>
+						</a>
+		    		 	</c:when>
+		    		 	<c:otherwise>
+		    		 		<a href="javascript:switchLock('${item.userId}');">
+						  <img  width="30" height="30" id="${item.userId}" src="${pageContext.request.contextPath}/images/unlock.png"/>
+						</a>
+		    		 	</c:otherwise>
+		    		 </c:choose> 
+						
+						
+					</tr>
 
-				</tbody>
+				</c:forEach>
 
-			</table>
+			</tbody>
 
-
-			<!-- <div align="right">
-				<input type="submit" value="Block" id="submitBtn" />
-			</div> -->
-
-
-		</ff:form>
+		</table>
 
 
 		<br /> <br /> <br /> <br /> <br /> <br />
