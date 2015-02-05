@@ -18,11 +18,13 @@
 	rel="stylesheet">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/getCurrentDate.js"></script>
 </head>
 
 <body>
 	<%@include file="cheader.jsp"%>
-		
+
 	<div id="content">
 		<h1 align="center">Accounts Details</h1>
 		<br>
@@ -73,8 +75,17 @@
 						<td>${statusOf}</td>
 					</tr>
 				</tbody>
-			</table>
-
+			</table> <br> 
+			<form>
+			<h3 align="center">
+			Full Detailed Statement: Select starting date and ending date
+			</h3> <br>
+			<label for="startdate">Starting Date: </label>
+			<input id="startdate" name="startdate" type="date" max="" value="" /> 
+			<label for="enddate">Closing Date: </label>
+			<input id="enddate" name ="enddate" type="date" max = "" value="" /> 
+			<br>
+			</form>
 			<ul id="menu">
 				<li><h3 align="center">
 						<a href="viewMiniStatement">View Mini Statement</a>
@@ -84,9 +95,9 @@
 
 		</ff:form>
 		<br /> <br /> <br /> <br /> <br />
-</div>
+	</div>
 
-			
+
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
