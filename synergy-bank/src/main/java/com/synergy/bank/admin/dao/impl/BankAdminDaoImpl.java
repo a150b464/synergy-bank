@@ -138,4 +138,20 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 /*		System.out.println("D Impl"+cusomerUserNames);
 */		return true;
 	}
+
+
+	@Override
+	public boolean unblockCustomer(String[] unblockedIds) {
+		try{
+			for (String unblockedUserIds : unblockedIds) {
+				super.getJdbcTemplate().update(AdminQuery.UNBLOCK_CUSTOMER_QUERY+"'"+unblockedUserIds+"'");
+			}			
+		}
+		catch(Exception e){
+			
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
