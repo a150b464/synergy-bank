@@ -36,4 +36,6 @@ public interface CustomerQuery {
 	
 	public static final String INSERT_CUSTOMER_TRANSACTIONS_HISTORY = "insert into customer_transactions_tbl (id,accountID,ammount," +
 			"creditDr,description,transactionDate,transactionId) values(?,?,?,?,?,?,?)";
+	public static final String INSERT_LOAN_FORM = "insert into loan_form_tbl(zipCode, purpose, purchase, jointCredit, permission, relation, preApprovedNo) values(?, ?, ?, ?, ?, ?, ?)";
+	public static final String INSERT_LOAN_INFO_FORM = "insert into loan_info_tbl(checkAmount, repaymentTerm, trading) values(?, ?, ?)";
 }

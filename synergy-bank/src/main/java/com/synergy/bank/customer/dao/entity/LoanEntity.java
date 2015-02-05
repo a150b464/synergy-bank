@@ -1,7 +1,19 @@
-package com.synergy.bank.customer.web.controller.form;
+package com.synergy.bank.customer.dao.entity;
 
-public class LoanForm {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "loan_form_tbl")
+public class LoanEntity implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2784826897835738083L;
 	private int id;
 	private Integer zipCode;
 	private String purpose;
@@ -12,7 +24,8 @@ public class LoanForm {
 	private Integer preApprovedNo;
 	private String userid;
 	
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -21,12 +34,6 @@ public class LoanForm {
 	}
 	
 	
-	public Integer getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(Integer zipCode) {
-		this.zipCode = zipCode;
-	}
 	public String getPurpose() {
 		return purpose;
 	}
@@ -57,7 +64,12 @@ public class LoanForm {
 	public void setRelation(String relation) {
 		this.relation = relation;
 	}
-	
+	public Integer getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
+	}
 	public Integer getPreApprovedNo() {
 		return preApprovedNo;
 	}
@@ -72,13 +84,11 @@ public class LoanForm {
 	}
 	@Override
 	public String toString() {
-		return "LoanForm [id=" + id + ", zipCode=" + zipCode + ", purpose="
+		return "LoanEntity [id=" + id + ", zipCode=" + zipCode + ", purpose="
 				+ purpose + ", purchase=" + purchase + ", jointCredit="
 				+ jointCredit + ", permission=" + permission + ", relation="
 				+ relation + ", preApprovedNo=" + preApprovedNo + ", userid="
 				+ userid + "]";
 	}
-	
-	
 	
 }
