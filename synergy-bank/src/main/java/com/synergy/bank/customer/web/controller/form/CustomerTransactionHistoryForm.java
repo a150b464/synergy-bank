@@ -6,9 +6,19 @@ public class CustomerTransactionHistoryForm {
 
 	private int id;
 	private String customerAccountNumber;
+	private String ammount;
 	private String creditDr;
 	private String description;
 	private long transactionId;
+	private Date transactionDate;
+
+	public String getAmmount() {
+		return ammount;
+	}
+
+	public void setAmmount(String ammount) {
+		this.ammount = ammount;
+	}
 
 	@Override
 	public String toString() {
@@ -18,8 +28,6 @@ public class CustomerTransactionHistoryForm {
 				+ ", transactionId=" + transactionId + ", transactionDate="
 				+ transactionDate + "]";
 	}
-
-	private Date transactionDate;
 
 	public int getId() {
 		return id;
