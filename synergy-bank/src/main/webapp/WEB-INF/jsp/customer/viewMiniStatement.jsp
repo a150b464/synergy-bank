@@ -27,31 +27,31 @@
 			<table align="center" width="100%" border="1" cellspacing="3"
 				cellpadding="3">
 				<tr>
-					<td>Serial Number</td>
-					<td>Account Number</td>
-					<td>Amount</td>
-					<td>CR/DR</td>
-					<td>Transaction Remark</td>
-					<td>Transaction Id</td>
-					<td>Transaction Date</td>
+					<th>Transaction Id</th>
+					<th>Customer Account Number</th>
+					<th>Amount</th>
+					<th>Account type</th>
+					<th>Transaction Amount</th>
+					<th>Transaction Remark</th>
+					<th>Transaction Date</th>
 				</tr>
 
-				<c:forEach items="${customerTransactionForms}" var="item">
+				<c:forEach items="${customerTransactionHistoryForms}" var="item">
 					<tr>
-						<td>${item.payeeAccountNumber}</td>
-						<td>${item.transactionAmount}</td>
+						<td>${item.id}</td>
+						<td>${item.customerAccountNumber}</td>
+						<td>${item.ammount}</td>
+						<td>${item.creditDr}</td>
+						<td>${item.description}</td>
+						<td>${item.transactionId}</td>
 						<td>${item.transactionDate}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
 					</tr>
 				</c:forEach>
 			</table>
 
 		</ff:form>
-		<br>
-		<input id="button" type="submit" value="email notice" size="20" /><br>
+		<br> <input id="button" type="submit" value="email notice"
+			size="20" /><br>
 		<div class="metalinks">
 			<a href="#"><img
 				src="${pageContext.request.contextPath}/images/pdf.jpg" alt=""
