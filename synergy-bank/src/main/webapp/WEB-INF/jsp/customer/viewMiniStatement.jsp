@@ -37,7 +37,7 @@
 				</tr>
 
 				<c:forEach items="${customerTransactionHistoryForms}" var="item">
-					<tr>
+					<tr align="center">
 						<td>${item.id}</td>
 						<td>${item.customerAccountNumber}</td>
 						<td>${item.ammount}</td>
