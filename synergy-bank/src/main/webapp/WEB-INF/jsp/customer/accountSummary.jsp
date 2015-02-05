@@ -22,10 +22,7 @@
 
 <body>
 	<%@include file="cheader.jsp"%>
-	<h1 align="center">
-		<img src="${pageContext.request.contextPath}/images/account.jpg"
-			alt="" width="700" height="250" />
-	</h1>
+		
 	<div id="content">
 		<h1 align="center">Accounts Details</h1>
 		<br>
@@ -87,82 +84,9 @@
 
 		</ff:form>
 		<br /> <br /> <br /> <br /> <br />
+</div>
 
-
-		<div id="blocks"></div>
-		<div id="info">
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title5.gif"
-					alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title6.gif"
-					alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title7.gif"
-					alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-			<div>
-				<img src="${pageContext.request.contextPath}/images/title8.gif"
-					alt="" width="160" height="26" />
-				<ul>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Massa ac laoreet iaculipede</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-					<li><a href="#">Maecenas hendrerit</a></li>
-					<li><a href="#">Convallis nonummy tellus</a></li>
-					<li><a href="#">In tincidunt mauris</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	
+			
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
