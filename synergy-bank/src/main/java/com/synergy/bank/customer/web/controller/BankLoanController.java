@@ -82,8 +82,8 @@ public class BankLoanController {
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_APPLICANT_INFORMATION;
 	}
 	
-	@RequestMapping(value = "addLoanInfoForm.do", method = RequestMethod.POST)
-	public String addApplicationInfoForm(@ModelAttribute(value ="loanInfoForm") LoanApplicationInfoForm loanApplicationInfoForm, Model model, HttpSession session){
+	@RequestMapping(value = "addApplicationLoanInfoForm.do", method = RequestMethod.POST)
+	public String addApplicationInfoForm(@ModelAttribute(value ="addApplicationForm") LoanApplicationInfoForm loanApplicationInfoForm, Model model, HttpSession session){
 		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
 	    String userid=loginForm.getUserId();
 	    loanApplicationInfoForm.setUserid(userid);
