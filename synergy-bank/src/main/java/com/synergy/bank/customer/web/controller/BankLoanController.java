@@ -54,7 +54,7 @@ public class BankLoanController {
 			return "redirect:/loan/purchaseYes.do";
 		else if(loanForm.getPurchase().equalsIgnoreCase("no"))
 			return "redirect:/loan/purchaseNo.do";
-		return "redirect:/";
+		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_FORM;
 	}
 	
 	@RequestMapping(value = "loanInfo.do", method = RequestMethod.GET)
@@ -80,6 +80,15 @@ public class BankLoanController {
 		LoanApplicationInfoForm loanApplicationInfo = new LoanApplicationInfoForm();
 		model.addAttribute("addApplicationForm", loanApplicationInfo);
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_APPLICANT_INFORMATION;
+	}
+	
+	@RequestMapping(value = "addLoanInfoForm.do", method = RequestMethod.POST)
+	public String addApplicationInfoForm(@ModelAttribute(value ="loanInfoForm") LoanApplicationInfoForm loanApplicationInfoForm, Model model, HttpSession session){
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	    String userid=loginForm.getUserId();
+	    loanApplicationInfoForm.setUserid(userid);
+	    bankLoanService.addApplicationInfoForm(loanApplicationInfoForm);
+		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_SUCCESS;
 	}
 	
 	@RequestMapping(value = "purchaseYes.do", method = RequestMethod.GET)
