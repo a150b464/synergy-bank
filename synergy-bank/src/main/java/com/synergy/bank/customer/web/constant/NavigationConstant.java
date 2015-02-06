@@ -49,4 +49,5 @@ public interface NavigationConstant {
 	public static final String CUSTOMER_LOAN_PURCHASE_NO = "purchaseNo";
 	public static final String CUSTOMER_ABOUT_YOUR_LOAN = "aboutYourLoan";
 	public static final String CUSTOMER_LOAN_APPLICANT_INFORMATION = "applicantInformation";
+	public static final String CUSTOMER_LOAN_SUCCESS = "loanSuccess";
 }
