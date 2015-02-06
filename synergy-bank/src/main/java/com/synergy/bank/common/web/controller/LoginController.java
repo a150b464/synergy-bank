@@ -108,7 +108,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/customerHome", method=RequestMethod.GET)
 	public String customerHome(Model model){
-		return "redirect:bank/homescreen.htm";
+		return "redirect:/bank/homescreen.htm";
 	}
 	
 	@RequestMapping(value="homescreen.htm",method = RequestMethod.GET)
