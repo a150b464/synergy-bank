@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
+import com.synergy.bank.customer.web.controller.form.LoanApplicationInfoForm;
 import com.synergy.bank.customer.web.controller.form.LoanForm;
 import com.synergy.bank.customer.web.controller.form.LoanInfoForm;
 import com.synergy.bank.loan.service.BankLoanService;
@@ -43,6 +44,19 @@ public class BankLoanController {
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_FORM;
 	}
 	
+	@RequestMapping(value = "addForm.do", method = RequestMethod.POST)
+	public String addLoanForm(@ModelAttribute(value ="addLoanForm") LoanForm loanForm, Model model, HttpSession session){
+		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
+	    String userid=loginForm.getUserId();
+	    loanForm.setUserid(userid);
+		bankLoanService.addLoanForm(loanForm);
+		if(loanForm.getPurchase().equalsIgnoreCase("yes"))
+			return "redirect:/loan/purchaseYes.do";
+		else if(loanForm.getPurchase().equalsIgnoreCase("no"))
+			return "redirect:/loan/purchaseNo.do";
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value = "loanInfo.do", method = RequestMethod.GET)
 	public String loanInfo(Model model){
 		LoanInfoForm loanInfoForm = new LoanInfoForm();
@@ -57,8 +71,15 @@ public class BankLoanController {
 	    loanInfoForm.setUserid(userid);
 	    bankLoanService.addLoanInfoForm(loanInfoForm);
 	    if(loanInfoForm.getTrading().equalsIgnoreCase("no"))
-	    	return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_APPLICANT_INFORMATION;
+	    	return "redirect:/loan/addApplicationForm.do";
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_ABOUT_YOUR_LOAN;
+	}
+	
+	@RequestMapping(value = "addApplicationForm.do", method = RequestMethod.GET)
+	public String applicationInfoForm(Model model){
+		LoanApplicationInfoForm loanApplicationInfo = new LoanApplicationInfoForm();
+		model.addAttribute("addApplicationForm", loanApplicationInfo);
+		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_APPLICANT_INFORMATION;
 	}
 	
 	@RequestMapping(value = "purchaseYes.do", method = RequestMethod.GET)
@@ -71,16 +92,4 @@ public class BankLoanController {
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_PURCHASE_NO;
 	}
 	
-	@RequestMapping(value = "addForm.do", method = RequestMethod.POST)
-	public String addLoanForm(@ModelAttribute(value ="addLoanForm") LoanForm loanForm, Model model, HttpSession session){
-		LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
-	    String userid=loginForm.getUserId();
-	    loanForm.setUserid(userid);
-		bankLoanService.addLoanForm(loanForm);
-		if(loanForm.getPurchase().equalsIgnoreCase("yes"))
-			return "redirect:/loan/purchaseYes.do";
-		else if(loanForm.getPurchase().equalsIgnoreCase("no"))
-			return "redirect:/loan/purchaseNo.do";
-		return "redirect:/";
-	}
 }

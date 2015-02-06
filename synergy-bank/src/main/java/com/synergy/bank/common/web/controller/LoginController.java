@@ -95,7 +95,7 @@ public class LoginController {
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public String auth(Model model) {
 		model.addAttribute("applicationMessage",
-				"You have successfully logout from the application.");
+				"Please Log in using your credentials!");
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
 	}
 	
