@@ -1,15 +1,22 @@
 package com.synergy.bank.customer.web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
@@ -99,6 +106,19 @@ public class BankLoanController {
 	@RequestMapping(value = "purchaseNo.do", method = RequestMethod.GET)
 	public String purchaseNo(Model model){
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.CUSTOMER_LOAN_PURCHASE_NO;
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		// to actually be able to convert Multipart instance to byte[]
+		// we have to register a custom editor
+		//binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+       // now Spring knows how to handle multipart object and convert them
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+       // Create a new CustomDateEditor
+       CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+       // Register it as custom editor for the Date type
+       binder.registerCustomEditor(Date.class, editor);
 	}
 	
 }

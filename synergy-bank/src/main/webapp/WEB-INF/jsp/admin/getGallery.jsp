@@ -107,7 +107,7 @@ select * from image_galary_tbl
 	<%-- 	<a href="index.html" class="logo"><img src="${pageContext.request.contextPath}/images/clogo.jpg" alt="setalpm" width="40" height="40" /></a>
 	 --%>	
 	 <span class="slogan">&nbsp;<font color="green"><b>&nbsp;&nbsp;Synergy Bank</b></font></span>
-		<ul id="menu">
+		<%-- <ul id="menu">
 			<li><a href="#">Home			</a></li>
 			<li><a href="#">Employer		</a></li>
 			<li><a href="#">Personal Bank	</a></li>
@@ -117,7 +117,8 @@ select * from image_galary_tbl
 			<li><a href="#">Help			</a></li>
 			<li class="last"><a href="#">Register</a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
-		</ul>
+		</ul> --%>
+		<%@include file="aheader.jsp"%>
 <%-- 		<img src="${pageContext.request.contextPath}/images/bank_logo.jpg" alt="" width="192" height="63" />
  --%>		<img src="${pageContext.request.contextPath}/images/registrationPic.png" alt="" width="892" height="280" />
 		
