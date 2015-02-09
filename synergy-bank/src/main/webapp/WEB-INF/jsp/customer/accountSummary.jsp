@@ -1,5 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="ff"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,75 +20,34 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/getCurrentDate.js"></script>
+	src="${pageContext.request.contextPath}/js/getCurrentDate.js"></script>	
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+<%-- <script type="text/javascript"	
+src="${pageContext.request.contextPath}/js/verifyDate.js"></script> --%>
 </head>
-
 <body>
 	<%@include file="cheader.jsp"%>
 
 	<div id="content">
 		<h1 align="center">Accounts Details</h1>
 		<br>
-		<ff:form action="accountSummary" method="get">
-			<table align="center">
-				<thead>
-					<tr>
-						<td>Name</td>
-						<td>Currency</td>
-						<td>Account Type</td>
-						<td>Total Available Balance</td>
-						<td>Email</td>
-					</tr>
-				</thead>
-
-				<tbody>
-
-					<c:forEach items="${customerAccountForms}" var="item">
-						<tr>
-							<td>${item.customerName}</td>
-							<td>${item.currency}</td>
-							<td>${item.accountType}</td>
-							<td>${item.totalAvailBalance}</td>
-							<td>${item.customerEmail}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 			<br>
-			<br>
-			<h1 align="center">Accounts Summary</h1>
-			<br>
-			<table align="center">
-				<thead>
-					<tr>
-						<td>Total Deposit</td>
-						<td>Total Liability</td>
-						<td>Total Asset</td>
-						<td>Status as of</td>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr>
-						<td>${totalDeposit}</td>
-						<td>${totalLiability}</td>
-						<td>${totalAsset}</td>
-						<td>${statusOf}</td>
-					</tr>
-				</tbody>
-			</table>
-			<br>
-			<ff:form action="" method="post">
+		<ff:form id="detailsummaryform" action="${pageContext.request.contextPath}/bank/detailedSummary" method="post" modelAttribute="detailTransaction">
 				<h3 align="center">Full Detailed Statement: Select starting
-					date and ending date</h3>
+					date and ending date </h3>
 				<br> <div id = "detaillstmt">
 				<label for="startdate">Starting Date: </label>
-				<input id="startdate" name="startdate" type="date" max="" value="" />
-				<label for="enddate">Closing Date: </label>
-				<input id="enddate" name="enddate" type="date" max="" value="" />	
-				<input type="submit" /> </div>
+				<input id="startdate" name="startDate" type="date" max=""  value="${startDate}"  /> 
+				<label for="enddate">Closing Date: </label>	
+				<input id="enddate" name="endDate" type="date" max="" value="${endDate}" />	
+				<input type="submit" name = "Submit"  /> 
+				</div> </ff:form>
 					<br>
-<table align="center" width="100%" border="1" cellspacing="3"
+<table align="center" class="table table-hover" width="100%" border="1" cellspacing="3"
 				cellpadding="3">
 				<tr align = "center">
 					<th>Transaction Id</th>
@@ -110,17 +70,14 @@
 						<td>${item.transactionDate}</td>
 					</tr>
 				</c:forEach>
-			</table>
-				
-			</ff:form>
-			<ul id="menu">
+			</table>		
+			
+				<ul id="menu">
 				<li><h3 align="center">
-						<a href="viewMiniStatement">View Mini Statement</a>		
+						<a href="viewMiniStatement">View MiniStatement</a>
 					</h3></li>
 			</ul>
-
-
-		</ff:form>
+			
 		<br /> <br /> <br /> <br /> <br />
 	</div>
 
