@@ -11,14 +11,14 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery1.9.1.js"
 	type="text/javascript"></script>
-<link rel="stylesheet" type="text/css"
+<%-- <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/style.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/tableStyle.css" />
 <link href="${pageContext.request.contextPath}/css/breadcrumb.css"
 	rel="stylesheet">
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script>
+	src="${pageContext.request.contextPath}/js/breadcrumb.js"></script> --%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/getCurrentDate.js"></script>	
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@ src="${pageContext.request.contextPath}/js/verifyDate.js"></script> --%>
 	<%@include file="cheader.jsp"%>
 
 	<div id="content">
-		<h1 align="center">Accounts Details</h1>
+		<h3 align="center">Accounts Details</h3>
 		<br>
 			<br>
 		<ff:form id="detailsummaryform" action="${pageContext.request.contextPath}/bank/detailedSummary" method="post" modelAttribute="detailTransaction">
@@ -73,9 +73,9 @@ src="${pageContext.request.contextPath}/js/verifyDate.js"></script> --%>
 			</table>		
 			
 				<ul id="menu">
-				<li><h3 align="center">
+				<h3 align="center">
 						<a href="viewMiniStatement">View MiniStatement</a>
-					</h3></li>
+					</h3>
 			</ul>
 			
 		<br /> <br /> <br /> <br /> <br />
