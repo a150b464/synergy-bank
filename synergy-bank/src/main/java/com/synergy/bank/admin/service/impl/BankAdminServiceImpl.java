@@ -14,8 +14,10 @@ import com.synergy.bank.admin.dao.BankAdminDao;
 import com.synergy.bank.admin.dao.entity.ApprovedCustomerEntity;
 import com.synergy.bank.admin.service.BankAdminService;
 import com.synergy.bank.admin.web.controller.form.ApprovedCustomerForm;
+import com.synergy.bank.customer.dao.entity.CreditEntity;
 import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
+import com.synergy.bank.customer.web.controller.CreditForm;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
@@ -89,5 +91,26 @@ public class BankAdminServiceImpl implements BankAdminService{
 	public boolean lockUnlockCustomer(String userid, String status){
 		return bankAdminDao.lockUnlockCustomer(userid, status);
 	}
-	
+
+	@Override
+	public List<CreditForm> findPendingCreditCardList() {
+		
+			
+			List<CreditEntity> pendingCreditCardEntityList = bankAdminDao.findPendingCreditCardList();  
+			List<CreditForm> pendingApprovalCreditCardList= new ArrayList<CreditForm>();
+			
+			for (CreditEntity creditEntity : pendingCreditCardEntityList) {
+				CreditForm cf = new CreditForm();
+				BeanUtils.copyProperties(creditEntity, cf);
+				pendingApprovalCreditCardList.add(cf);
+			}		
+			return pendingApprovalCreditCardList;
+		}
+
+	@Override
+	public byte[] findCustomerPhotoById(String userId) {
+byte[] photos=bankAdminDao.findFrogPhotoById(userId);
+		
+		return photos;
+	}
 }

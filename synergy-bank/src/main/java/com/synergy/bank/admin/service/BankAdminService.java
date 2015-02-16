@@ -3,6 +3,7 @@ package com.synergy.bank.admin.service;
 import java.util.List;
 
 import com.synergy.bank.admin.web.controller.form.ApprovedCustomerForm;
+import com.synergy.bank.customer.web.controller.CreditForm;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
@@ -14,4 +15,7 @@ public interface BankAdminService {
 	public boolean blockCustomer(String[] cusomerUserNames);
 	public boolean unblockCustomer(String[] unblockedIds);
 	public boolean lockUnlockCustomer(String userid, String status);
+	public List<CreditForm> findPendingCreditCardList();
+//	public List<CreditCardAccountForm> approvePendingCreditCards(String[] selectedCreditCardsUserIds);
+	public byte[] findCustomerPhotoById(String userId);
 }

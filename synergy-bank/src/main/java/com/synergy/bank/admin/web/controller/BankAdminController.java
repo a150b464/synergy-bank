@@ -1,6 +1,10 @@
 package com.synergy.bank.admin.web.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +25,7 @@ import com.synergy.bank.admin.web.constant.NavigationConstantAdmin;
 import com.synergy.bank.admin.web.controller.form.ApprovedCustomerForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
+import com.synergy.bank.customer.web.controller.CreditForm;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 
@@ -44,6 +49,69 @@ public class BankAdminController {
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
 
+	@RequestMapping(value = "showPendingApprovalCreditCardList", method = RequestMethod.GET)
+	public String findPendingApprovalCreditCardList(Model model) {
+		List<CreditForm> pendingCreditCardList = bankAdminService.findPendingCreditCardList();
+		model.addAttribute("pendingCreditCardList", pendingCreditCardList);
+		return NavigationConstantAdmin.ADMIN_PAGE
+				+ NavigationConstantAdmin.PENDING_APPROVAL_CREDITCARD_LIST_PAGE;
+	}
+	
+	@RequestMapping(value = "showPhotoById", method = RequestMethod.GET)
+	public void showPhotoById(@RequestParam("userId") String userId, HttpServletResponse response) throws IOException {
+		byte[] customerphoto =bankAdminService.findCustomerPhotoById(userId);
+		response.setContentType("image/jpg");
+		ServletOutputStream outputStream=response.getOutputStream();
+		if(customerphoto!=null){
+			outputStream.write(customerphoto);
+		}else{
+			outputStream.write(new byte[]{});
+		}
+		//outputStream.write(frogphoto);
+		outputStream.flush();
+		outputStream.close();
+	}
+	
+
+//	@RequestMapping(value = "approvePendingCreditCard", method = RequestMethod.POST)
+//	public String approvePendingCreditCards(
+//			@RequestParam("approveCheckbox") String[] selectedCreditCardsUserIds,
+//			final RedirectAttributes redirectAttributes) {
+//		// public String
+//		// approvePendingCustomers(@RequestParam("approveCheckbox") String[]
+//		// approvedIds){
+//		String msg = "Message";
+//		if (selectedCreditCardsUserIds != null
+//				&& selectedCreditCardsUserIds.length > 0) {
+//			List<CreditCardAccountForm> customerAccountForms = bankAdminService
+//					.approvePendingCreditCard(selectedCreditCardsUserIds);
+//			if (customerAccountForms == null) {
+//				msg = "Failed to approve customer.";
+//			} else if (customerAccountForms.size() > 0) {
+//				for (CustomerAccountForm customerAccountForm : customerAccountForms) {
+//					String body = "Dear Customer \n\n Your Account with Name :"
+//							+ customerAccountForm.getCustomerName()
+//							+ " "
+//							+ "and Account No. "
+//							+ customerAccountForm.getCustomerAccountNo()
+//							+ " is been created. \n\n Thanks for banking with Synergy Bank.";
+//					EmailSenderThread emailSenderThread = new EmailSenderThread(
+//							bankEmailService,
+//							customerAccountForm.getCustomerEmail(), body,
+//							"Account creation notification !");
+//					emailSenderThread.start();
+//				}
+//				msg = selectedCustomerUserIds.length
+//						+ " new customer(s) are approved successfully.";
+//			}
+//		} else {
+//			msg = "No customer was selected for approval.";
+//		}
+//
+//		redirectAttributes.addFlashAttribute("msg", msg);
+//		return "redirect:showPendingApprovalCustomerList";
+//	}
+//	
 	@RequestMapping(value = "showPendingApprovalCustomerList", method = RequestMethod.GET)
 	public String findPendingApprovalCustomerList(Model model) {
 		List<CustomerForm> pendingCustomerList = bankAdminService
@@ -91,6 +159,9 @@ public class BankAdminController {
 		redirectAttributes.addFlashAttribute("msg", msg);
 		return "redirect:showPendingApprovalCustomerList";
 	}
+	
+	
+	
 
 	@RequestMapping(value = "customers", method = RequestMethod.GET)
 	public String showApprovedCustomerList(Model model) {

@@ -3,9 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
 <title>${initParam.titlePage}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
@@ -14,11 +11,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/updateLoginPwdvalidations.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tinycarousel.css" type="text/css" media="screen"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tinycarousel.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#slider1').tinycarousel();
+		});
+	</script>
 
 </head>
 <body><%-- 
@@ -60,18 +61,18 @@
 		
 		
 		<h1>Features and Benefits</h1>
-	<div>
+
  <div>
   
-  <a href="#myPopup" data-rel="popup" data-position-to="window">
- <img src="${pageContext.request.contextPath}/images/synergy.png" alt="" width="110" height="90"></a>
+  <!-- <a href="#myPopup" data-rel="popup" data-position-to="window"> -->
+ <a><img src="${pageContext.request.contextPath}/images/synergy.png" alt="" width="110" height="90"></a>
 
 
-  <div data-role="popup" id="myPopup">
+ <%--  <div data-role="popup" id="myPopup">
       <p>Synergy Bank Credit Card</p> 
       <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="${pageContext.request.contextPath}/images/synergy.png" style="width:500px;height:400px;" alt="">
     </div>
-  </div>
+  </div> --%>
    <ul>
 	<li>Dual benefits of Delhi Metro smart card </li>
 	<li>and a credit card</li>
@@ -98,7 +99,7 @@
 </div>
 <br></br>
 <br></br>
-<a href="${pageContext.request.contextPath}/bank/applycreditcard" class="ui-btn">Apply for a Credit Card Today</a>
+<a href="${pageContext.request.contextPath}/bank/applycreditcard">Apply for a Credit Card Today</a>
 <br></br>
 <br></br>
 <div><h3>Important Notices</h3>

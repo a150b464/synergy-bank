@@ -1,5 +1,6 @@
 package com.synergy.bank.admin.dao.query;
 
+
 /**
  * 
  * @author naim
@@ -21,6 +22,8 @@ public interface AdminQuery {
 								"where cd.userId=ca.userid and cd.userId = cl.userId";
 	public static final String BLOCK_CUSTOMER_QUERY = "update customer_login_tbl set active='no' where userId=";
 	public static final String UNBLOCK_CUSTOMER_QUERY = "update customer_login_tbl set active='yes' where userId=";
+	public static final String FIND_PENDING_CREDITCARD_LIST = "select * from credit_details_tbl where approve='no'";
+	public static final String FIND_IMAGE_FROM_TABLE_BY_ID = "select * from credit_details_tbl where userId=";
 	
 }
 

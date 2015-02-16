@@ -24,6 +24,7 @@ public class BankCreditServiceImpl implements BankCreditService{
 	public String addCreditForm(CreditForm creditForm) {
 		CreditEntity creditEntity = new CreditEntity();
 		BeanUtils.copyProperties(creditForm, creditEntity);
+		creditEntity.setApprove("no");
 		String result= bankCreditDao.addCreditForm(creditEntity);
 		return result;
 	}
