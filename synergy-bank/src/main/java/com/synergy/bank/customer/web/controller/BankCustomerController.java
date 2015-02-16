@@ -183,7 +183,7 @@ public class BankCustomerController {
 			HttpServletResponse response) throws IOException {
 		response.setContentType("image/jpg");
 		//byte[] photo = gallaryService.findImageById(imageid);
-        String imagePath=gallaryService.findImageFilePathById(imageid);
+		String imagePath = gallaryService.findImageFilePathById(imageid);
         BufferedImage originalImage = ImageIO.read(new File(imagePath));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write( originalImage, "jpg", baos );
