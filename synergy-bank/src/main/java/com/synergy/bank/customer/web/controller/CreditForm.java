@@ -26,6 +26,13 @@ public class CreditForm {
 	private String sourceOfFunds;
 	private byte[] photo;
 	private String userId;
+	private String approve;
+	public String getApprove() {
+		return approve;
+	}
+	public void setApprove(String approve) {
+		this.approve = approve;
+	}
 	public String getSalutation() {
 		return salutation;
 	}
@@ -158,8 +165,9 @@ public class CreditForm {
 				+ company + ", education=" + education + ", grossAnualIncome="
 				+ grossAnualIncome + ", sourceOfFunds=" + sourceOfFunds
 				+ ", photo=" + Arrays.toString(photo) + ", userId=" + userId
-				+ "]";
+				+ ", approve=" + approve + "]";
 	}
+	
 	
 	
 }

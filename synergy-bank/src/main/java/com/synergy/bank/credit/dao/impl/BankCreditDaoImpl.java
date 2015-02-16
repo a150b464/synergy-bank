@@ -41,7 +41,7 @@ public class BankCreditDaoImpl extends JdbcDaoSupport implements BankCreditDao{
 					creditEntity.getFatherName(), creditEntity.getEmail(), creditEntity.getMobile(),
 					creditEntity.getSsn(),
 					creditEntity.getCompany(), creditEntity.getEducation(),
-					creditEntity.getGrossAnualIncome(), creditEntity.getSourceOfFunds(), dphtoto,
+					creditEntity.getGrossAnualIncome(), creditEntity.getSourceOfFunds(), dphtoto,creditEntity.getApprove()
 					};
 
 			int dataArra[] = new int[] { Types.VARCHAR, Types.VARCHAR,
@@ -49,7 +49,7 @@ public class BankCreditDaoImpl extends JdbcDaoSupport implements BankCreditDao{
 					Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.VARCHAR,
 					Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
 					Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
-					Types.VARCHAR,Types.BLOB
+					Types.VARCHAR,Types.BLOB,Types.VARCHAR
 					 };
 			super.getJdbcTemplate().update(CustomerQuery.INSERT_CREDITFORM, data,
 					dataArra);

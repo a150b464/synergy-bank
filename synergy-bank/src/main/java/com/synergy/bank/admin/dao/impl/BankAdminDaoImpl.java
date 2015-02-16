@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.synergy.bank.admin.dao.BankAdminDao;
 import com.synergy.bank.admin.dao.entity.ApprovedCustomerEntity;
 import com.synergy.bank.admin.dao.query.AdminQuery;
+import com.synergy.bank.customer.dao.entity.CreditEntity;
 import com.synergy.bank.customer.dao.entity.CustomerAccountEntity;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.util.BankDaoUtil;
@@ -161,4 +162,35 @@ public class BankAdminDaoImpl extends JdbcDaoSupport implements BankAdminDao{
 		super.getJdbcTemplate().update(AdminQuery.UNBLOCK_CUSTOMER_QUERY+"'"+userid+"'");
 		return true;
 	}
+
+
+	@Override
+	public List<CreditEntity> findPendingCreditCardList() {
+		List<CreditEntity> CreditCardList = super.getJdbcTemplate().query(AdminQuery.FIND_PENDING_CREDITCARD_LIST,
+				new BeanPropertyRowMapper<CreditEntity>(CreditEntity.class));
+		return CreditCardList;
+		
+	}
+
+
+	@Override
+	public byte[] findFrogPhotoById(String userId) {
+//		String sql = "select * from  credit_tbl where fid=" + fid;
+//		CreditEntity creditEntity = jdbcTemplate.queryForObject(sql,
+//				new BeanPropertyRowMapper(FrogEntity.class));
+//		return frogEntity.getPhoto();
+//	}
+		
+			CreditEntity creditEntity = super
+					.getJdbcTemplate()
+					.queryForObject(
+							AdminQuery.FIND_IMAGE_FROM_TABLE_BY_ID +userId,
+							new BeanPropertyRowMapper<CreditEntity>(
+									CreditEntity.class));
+			return creditEntity.getPhoto();
+		}
+	
+	
 }
+	
+	

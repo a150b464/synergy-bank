@@ -23,8 +23,18 @@ public class CreditEntity {
 	private String education;
 	private String grossAnualIncome;
 	private String sourceOfFunds;
+	private String approve;
+	
+	public String getApprove() {
+		return approve;
+	}
+	public void setApprove(String approve) {
+		this.approve = approve;
+	}
 	private byte[] photo;
 	private String userId;
+	
+	
 	@Override
 	public String toString() {
 		return "CreditEntity [salutation=" + salutation + ", gender=" + gender
@@ -36,8 +46,8 @@ public class CreditEntity {
 				+ ", ssn=" + ssn + ", occupation=" + occupation + ", company="
 				+ company + ", education=" + education + ", grossAnualIncome="
 				+ grossAnualIncome + ", sourceOfFunds=" + sourceOfFunds
-				+ ", photo=" + Arrays.toString(photo) + ", userId=" + userId
-				+ "]";
+				+ ", approve=" + approve + ", photo=" + Arrays.toString(photo)
+				+ ", userId=" + userId + "]";
 	}
 	public String getSalutation() {
 		return salutation;

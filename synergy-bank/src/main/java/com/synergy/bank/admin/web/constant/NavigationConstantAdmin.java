@@ -12,5 +12,6 @@ public interface NavigationConstantAdmin {
 	final public static String PENDING_APPROVAL_CUSTOMER_LIST_PAGE="pendingApprovalCustomerList";
 	final public static String BLOCK_CUSTOMER_LIST_PAGE="blockCustomer";
 	final public static String ADMIN_ERROR_PAGE="adminErrorPage";
+	public static final String PENDING_APPROVAL_CREDITCARD_LIST_PAGE = "pendingApprovalCreditCardList";
 
 }
