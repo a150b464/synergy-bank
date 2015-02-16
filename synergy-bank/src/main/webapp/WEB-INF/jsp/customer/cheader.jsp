@@ -22,7 +22,7 @@
 			<li><a href="${pageContext.request.contextPath}/bank/selectPayee">Fund Transfer</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/accountSummary">Account Summary</a></li>
 			<li><a href="#">Accounts</a></li>
-			<li><a href="#">Credit Card</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/creditcard">Credit Card</a></li>
 			</c:if>
 			
 			<li><a href="${pageContext.request.contextPath}/bank/resetPasswordInit">Reset Password</a></li>
