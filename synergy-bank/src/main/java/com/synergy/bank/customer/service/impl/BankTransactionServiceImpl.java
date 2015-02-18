@@ -43,6 +43,12 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Qualifier("CustomerAccountServiceImpl")
 	private CustomerAccountService customerAccountService;
 	
+	
+	
+	public void setBankTransactionDao(BankTransactionDao bankTransactionDao) {
+		this.bankTransactionDao = bankTransactionDao;
+	}
+
 	@Transactional
 	@Override
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm, String userid) {
@@ -138,6 +144,20 @@ public String findAccountNumberbyUserId(String Userid){
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CustomerTransactionsForm> findTransactionsByIDTest(
+			String accountID) {
+		List<CustomerTransactionsEntity> customerTransactionsEntity = bankTransactionDao.findTransactionsByIDTest(accountID);
+		List<CustomerTransactionsForm> customerTransactionsForm = new ArrayList<CustomerTransactionsForm>(customerTransactionsEntity.size());
+		
+		for(int i = 0; i < customerTransactionsEntity.size(); i++){
+			CustomerTransactionsForm form = new CustomerTransactionsForm();
+			BeanUtils.copyProperties(customerTransactionsEntity.get(i), form);
+			customerTransactionsForm.add(form);
+		}
+		return customerTransactionsForm;
 	}
 
 }

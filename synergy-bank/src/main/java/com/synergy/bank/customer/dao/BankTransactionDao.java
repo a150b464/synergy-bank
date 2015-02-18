@@ -39,5 +39,7 @@ public abstract interface BankTransactionDao {
 	public String addTransactionsHistory(CustomerTransactionsEntity customerTransactionEntity);
 	
 	public void save(CustomerTransactionsEntity entity);
+	
+	public List<CustomerTransactionsEntity> findTransactionsByIDTest(String accountID);
 
 }
