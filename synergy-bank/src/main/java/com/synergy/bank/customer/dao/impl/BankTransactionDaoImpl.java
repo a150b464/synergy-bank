@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -118,6 +119,14 @@ public class BankTransactionDaoImpl extends JdbcDaoSupport implements
 	public void save(CustomerTransactionsEntity entity) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public List<CustomerTransactionsEntity> findTransactionsByIDTest(
+			String accountID) {
+		List<CustomerTransactionsEntity> customerTransactionsEntity = super.getJdbcTemplate().query("select * from customer_transactions_tbl e where e.accountID like "+"'"+accountID+"'", new BeanPropertyRowMapper<CustomerTransactionsEntity>(CustomerTransactionsEntity.class));
+		return customerTransactionsEntity;
 	}
 
 	

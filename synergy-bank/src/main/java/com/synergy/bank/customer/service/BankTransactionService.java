@@ -19,4 +19,6 @@ public interface BankTransactionService {
 
 	public String addCustomerTransaction(CustomerTransactionForm transactionForm,
 			String userid);
+	
+	public List<CustomerTransactionsForm> findTransactionsByIDTest(String accountID);
 }
