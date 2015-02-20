@@ -24,7 +24,9 @@ import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 @Repository("GallaryDaoImpl")
 @Transactional(value="jdbctransactionManager",propagation=Propagation.REQUIRED)
-public class GallaryDaoImpl extends JdbcDaoSupport implements GallaryDao {
+public class GallaryDaoImpl extends 
+JdbcDaoSupport 
+implements GallaryDao {
 	
 	@Autowired
 	@Qualifier("bankDataSource")

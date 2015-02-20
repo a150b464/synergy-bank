@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="customer_transaction_tbl")
 public class CustomerTransactionEntity {
+	
 	private int transactionPwd;
 	private int transactionId;
 	private String customerAccountNumber;

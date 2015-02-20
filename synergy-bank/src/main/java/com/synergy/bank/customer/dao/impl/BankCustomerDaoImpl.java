@@ -23,6 +23,7 @@ import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 /**
  * @author this nagendra.yadav
+ * 
  * @since 9th July 1014 This is contract for customer for the bank.
  */
 

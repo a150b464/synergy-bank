@@ -13,7 +13,7 @@ import com.synergy.bank.customer.dao.entity.CustomerLoginDetailEntity;
 @Repository("BankCustomerLoginHibernateDaoImpl")
 @Transactional(propagation=Propagation.REQUIRED,value="transactionManager")
 public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerLoginDetailEntity,String> {
-	
+	 
 	protected BankCustomerLoginHibernateDaoImpl() {
         super(CustomerLoginDetailEntity.class);
     }
@@ -27,7 +27,6 @@ public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerL
 	@Override
 	public List<CustomerEntity> getCustomerListForRowNumbers(
 			int initialRowNumber, int maximumRowNumbers) {
-		
 		return null;
 	}
 	
