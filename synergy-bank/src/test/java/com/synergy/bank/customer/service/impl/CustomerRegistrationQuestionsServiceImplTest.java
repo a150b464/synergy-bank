@@ -20,6 +20,7 @@ import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestio
 
 /**
  * @author nagendra.yadav
+ * 
  *  This is junit for service layer
  *  Here we have mocked DAO Layer using mockito mocking framework
  *  
@@ -75,7 +76,8 @@ public class CustomerRegistrationQuestionsServiceImplTest {
 		
 		//customerRegistrationQuestionsDao
 		///Stubbing 
-		when(customerRegistrationQuestionsDao.findCustomerQuestionsAndAnswerByCustomerId("E040404")).thenReturn(customerRegistrationQuestions);
+		when(customerRegistrationQuestionsDao.findCustomerQuestionsAndAnswerByCustomerId("E040404")).
+		thenReturn(customerRegistrationQuestions);
 	
 	}	
 	
@@ -86,7 +88,8 @@ public class CustomerRegistrationQuestionsServiceImplTest {
 
 	@Test
 	public void testFindCustomerQuestionsAndAnswerByCustomerId() {
-		List<CustomerRegistrationQuestionsForm> customerRegistrationQuestionsForms=customerRegistrationQuestionsServiceImpl.findCustomerQuestionsAndAnswerByCustomerId("E040404");
+		List<CustomerRegistrationQuestionsForm> customerRegistrationQuestionsForms=
+				customerRegistrationQuestionsServiceImpl.findCustomerQuestionsAndAnswerByCustomerId("E040404");
 		assertNotNull(customerRegistrationQuestionsForms);
 		assertEquals(3, customerRegistrationQuestionsForms.size());
 		CustomerRegistrationQuestionsForm custForm=customerRegistrationQuestionsForms.get(0);
