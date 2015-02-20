@@ -176,11 +176,14 @@ public class BankPayeeCustomerController {
 		}
 	 
 	 @RequestMapping(value="editPayeeByEmail",method=RequestMethod.GET)
-		public String editPayeeByEmail(@RequestParam("email") String email, Model model){
-			model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayeesByEmail(email));
+	 public String editPayeeByEmail(@RequestParam("email") String email, Model model){
+		 PayeeDetailsForm payeeDetailsForm=bankPayeeService.findAllPayeesByEmail(email);
+		 //100 lines
+		 //100 lines
+			model.addAttribute("EditPayeeForm", payeeDetailsForm);
 			return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;
 			
-		}
+	}
 	 
 	 @RequestMapping(value="updatePayee",method=RequestMethod.POST)
 		public String updatePayee(@ModelAttribute("EditPayeeForm") PayeeDetailsForm payeeDetailsForm,final RedirectAttributes redirectAttributes){

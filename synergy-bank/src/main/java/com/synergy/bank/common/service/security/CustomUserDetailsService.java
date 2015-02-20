@@ -42,23 +42,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException, DataAccessException {
 		// Declare a null Spring User
 		UserDetails user = null;
-		
 		try {
-			
-			// Search database for a user that matches the specified username
-			// You can provide a custom DAO to access your persistence layer
-			// Or use JDBC to access your database
-			// DbUser is our custom domain user. This is not the same as Spring's User
-			//DbUser dbUser = userDAO.searchDatabase(username);
 			 LoginForm loginForm=bankAuthService.findLoginDetailByUserName(username);
-			
-			//callng EJB component
-			
-			// Populate the Spring User object with details from the dbUser
-			// Here we just pass the username, password, and access level
-			// getAuthorities() will translate the access level to the correct role type
-			 //decrypting the user password to validate with Spring security 
-			user =  new User(
+			 
+			 user =  new User(
 					loginForm.getUserId(), 
 					loginForm.getPassword(),
 					true,
@@ -71,13 +58,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 			logger.error("Error in retrieving user");
 			throw new UsernameNotFoundException("Error in retrieving user");
 		}
-	
-		//creating session and storing data for logged in user into the session.
-		//to support older functionality
-		
-		// Return user to Spring for processing.
-		// Take note we're not the one evaluating whether this user is authenticated or valid
-		// We just merely retrieve a user that matches the specified username
 		return user;
 	}
 	
