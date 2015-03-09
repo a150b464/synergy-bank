@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -34,15 +35,40 @@ public class CustomerRegistrationQuestionsServiceImplTest {
 	@Mock
 	private BankCustomerDaoImpl bankCustomerDao;
 	
+	@InjectMocks
 	private CustomerRegistrationQuestionsServiceImpl customerRegistrationQuestionsServiceImpl;
 	
 	@Before
 	public void init() {
-		customerRegistrationQuestionsServiceImpl=new CustomerRegistrationQuestionsServiceImpl();
+	
+	}	
+	
+
+	@Test
+	public void testAddCustomerQuestionsAndAnswerByCustomerId() {
+	}
+	
+	@Test
+	public void testFindCustomerQuestionsAndAnswerByCustomerIdWhenSizeZero() {
+				List<CustomerRegistrationQuestionsEntity> customerRegistrationQuestions=new ArrayList<CustomerRegistrationQuestionsEntity>();
+				//customerRegistrationQuestionsDao
+				///Stubbing 
+				when(customerRegistrationQuestionsDao.findCustomerQuestionsAndAnswerByCustomerId("E09595")).
+				thenReturn(customerRegistrationQuestions);
+				List<CustomerRegistrationQuestionsForm> customerRegistrationQuestionsForms=
+						customerRegistrationQuestionsServiceImpl.findCustomerQuestionsAndAnswerByCustomerId("E09595");
+				assertNotNull(customerRegistrationQuestionsForms);
+				assertEquals(0, customerRegistrationQuestionsForms.size());
+	}
+
+	@Test
+	public void testFindCustomerQuestionsAndAnswerByCustomerId() {
+		
+		//customerRegistrationQuestionsServiceImpl=new CustomerRegistrationQuestionsServiceImpl();
 		//Here in service layer we are setting mock  dao layer. means we call any method of service
 		//layer here it will call dummy dao layer method.
-		customerRegistrationQuestionsServiceImpl.setBankCustomerDao(bankCustomerDao);
-		customerRegistrationQuestionsServiceImpl.setCustomerRegistrationQuestionsDao(customerRegistrationQuestionsDao);
+		//customerRegistrationQuestionsServiceImpl.setBankCustomerDao(bankCustomerDao);
+		//customerRegistrationQuestionsServiceImpl.setCustomerRegistrationQuestionsDao(customerRegistrationQuestionsDao);
 		
 		//stubing
 		//mocking behavior
@@ -78,16 +104,7 @@ public class CustomerRegistrationQuestionsServiceImplTest {
 		///Stubbing 
 		when(customerRegistrationQuestionsDao.findCustomerQuestionsAndAnswerByCustomerId("E040404")).
 		thenReturn(customerRegistrationQuestions);
-	
-	}	
-	
-
-	@Test
-	public void testAddCustomerQuestionsAndAnswerByCustomerId() {
-	}
-
-	@Test
-	public void testFindCustomerQuestionsAndAnswerByCustomerId() {
+		
 		List<CustomerRegistrationQuestionsForm> customerRegistrationQuestionsForms=
 				customerRegistrationQuestionsServiceImpl.findCustomerQuestionsAndAnswerByCustomerId("E040404");
 		assertNotNull(customerRegistrationQuestionsForms);
@@ -95,6 +112,16 @@ public class CustomerRegistrationQuestionsServiceImplTest {
 		CustomerRegistrationQuestionsForm custForm=customerRegistrationQuestionsForms.get(0);
 		assertEquals("Cricket",custForm.getAnswer());
 		assertEquals("Q001",custForm.getQuestionId());
+		
+		custForm=customerRegistrationQuestionsForms.get(1);
+		assertEquals("padera",custForm.getAnswer());
+		assertEquals("Q002",custForm.getQuestionId());
+		
+		
+		custForm=customerRegistrationQuestionsForms.get(2);
+		assertEquals("pizza",custForm.getAnswer());
+		assertEquals("Q003",custForm.getQuestionId());
+		
 		
 	}
 
