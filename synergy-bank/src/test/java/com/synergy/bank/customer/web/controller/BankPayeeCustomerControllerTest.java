@@ -32,7 +32,7 @@ import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //This should scan only controller package
-@ContextConfiguration({ "classpath*:test-ganesha-web-app-context.xml" })
+//@ContextConfiguration({ "classpath*:test-ganesha-web-app-context.xml" })
 public class BankPayeeCustomerControllerTest {
 
 	@Mock
@@ -57,7 +57,7 @@ public class BankPayeeCustomerControllerTest {
 	
 
 	@Test
-	public void testFindPayeeByEmail() {
+	public void testEditPayeeByEmail() {
 		/*model.addAttribute("EditPayeeForm", bankPayeeService.findAllPayeesByEmail(email));
 		return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;*/
 		PayeeDetailsForm detailsForm=new PayeeDetailsForm();
@@ -80,7 +80,7 @@ public class BankPayeeCustomerControllerTest {
 			andExpect(status().isOk())
 			/*.andExpect(view().name("/WEB-INF/jsp/customer/editPayeeTable.jsp"))
 			.andExpect(forwardedUrl("/WEB-INF/jsp/customer/editPayeeTable.jsp"))*/
-			.andExpect(model().attribute("EditPayeeForm", hasProperty("email", is("nk@gmail.com"))))
+			.andExpect(model().attribute("EditPayeeForm", hasProperty("email", is("moc.liamg@kn"))))
 			.andExpect(model().attribute("EditPayeeForm", hasProperty("mobile", is("030303"))))
 			.andExpect(model().attribute("EditPayeeForm", hasProperty("payeeName", is("Nagendra Yadav"))))
 			.andExpect(model().attribute("EditPayeeForm", hasProperty("payeeNickName", is("Nagen"))))
@@ -118,10 +118,6 @@ public class BankPayeeCustomerControllerTest {
 		fail("Not yet implemented");
 	}
 
-	@Ignore
-	public void testEditPayeeByEmail() {
-		fail("Not yet implemented");
-	}
 
 	@Ignore
 	public void testUpdatePayee() {
