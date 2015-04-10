@@ -18,6 +18,13 @@
 		$(document).ready(function(){
 			$('#slider1').tinycarousel();
 		});
+		
+		function uploadImage(pimageName){
+			alert("pimageName = "+pimageName);
+			$("#imageName").val(pimageName);
+			$("#uploadImageForm").submit();
+		}
+		
 	</script>
 
 </head>
@@ -63,10 +70,21 @@
 		</div> -->
 		<hr style="color: black"/>
 		<hr style="color: red"/>
+		<form id="uploadImageForm" action="${pageContext.request.contextPath}/bank/changeImage.do" method="post">
+			<input type="hidden" id="imageName" name="imageName"/>
+		</form>
+		
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
-				<img src="${pageContext.request.contextPath}/images/jobseekers.jpg" alt="" width="160" height="160"/>
+				<img src="${pageContext.request.contextPath}/images/jobseekers.jpg" 
+				alt="" width="160" height="160"/>
+				
+				<span style="float:right;">
+				<a href="javascript:uploadImage('jobseekers.jpg');">
+				<img src="${pageContext.request.contextPath}/images/edit.png" 
+				alt=""/></a>
+				</span>
 			</div>
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title6.gif" alt="" width="160" height="26" />

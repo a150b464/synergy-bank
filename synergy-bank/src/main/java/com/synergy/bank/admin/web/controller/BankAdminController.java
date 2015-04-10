@@ -1,9 +1,15 @@
 package com.synergy.bank.admin.web.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.synergy.bank.admin.service.BankAdminService;
 import com.synergy.bank.admin.web.constant.NavigationConstantAdmin;
 import com.synergy.bank.admin.web.controller.form.ApprovedCustomerForm;
+import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
 import com.synergy.bank.common.service.impl.EmailSenderThread;
 import com.synergy.bank.customer.web.controller.CreditForm;
@@ -48,6 +56,35 @@ public class BankAdminController {
 	@Autowired
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
+	
+	
+	
+	@RequestMapping(value = "uploadNewPhoto.do", method = RequestMethod.POST)
+	public String uploadNewPhoto(@ModelAttribute("gallaryPhotoForm") GallaryPhotoForm gallaryPhotoForm,Model model,HttpServletRequest request) {
+		InputStream in = new ByteArrayInputStream(gallaryPhotoForm.getImage());
+        BufferedImage image;
+		try {
+			image = ImageIO.read(in);
+			String afileName = request.getSession().getServletContext().getRealPath("/images/" + gallaryPhotoForm.getPath());
+			 ImageIO.write(image, "jpg",new File(afileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Here we have to write logix
+		return NavigationConstantAdmin.ADMIN_PAGE
+				+ NavigationConstantAdmin.ADMIN_HOME_PAGE;
+	}
+	
+	@RequestMapping(value = "changeImage.do", method = RequestMethod.POST)
+	public String changeImage(@RequestParam("imageName") String pimageName,Model model) {
+		GallaryPhotoForm gallaryPhotoForm=new GallaryPhotoForm();
+		gallaryPhotoForm.setPath(pimageName);
+		model.addAttribute("gallaryPhotoForm",gallaryPhotoForm);
+		return NavigationConstantAdmin.ADMIN_PAGE
+				+ NavigationConstantAdmin.CHANGE_IMAGE_ADMIN_PAGE;
+	}
+		
 
 	@RequestMapping(value = "showPendingApprovalCreditCardList", method = RequestMethod.GET)
 	public String findPendingApprovalCreditCardList(Model model) {
