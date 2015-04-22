@@ -30,4 +30,10 @@ public class BankCustomerLoginHibernateDaoImpl extends AbstractDaoImpl<CustomerL
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public CustomerLoginDetailEntity findById(String id) {
+		CustomerLoginDetailEntity customerEntity=super.findById(id);
+		return customerEntity;
+	}
+	
 }

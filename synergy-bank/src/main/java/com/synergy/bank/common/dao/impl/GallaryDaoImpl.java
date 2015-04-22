@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.synergy.bank.common.dao.GallaryDao;
 import com.synergy.bank.common.dao.entity.GallaryPhotoEntity;
+import com.synergy.bank.common.web.controller.LoginController;
 import com.synergy.bank.customer.dao.query.CustomerQuery;
 
 
@@ -27,6 +30,12 @@ import com.synergy.bank.customer.dao.query.CustomerQuery;
 public class GallaryDaoImpl extends 
 JdbcDaoSupport 
 implements GallaryDao {
+	
+
+	/**
+     * Initiate Logger for this class
+     */
+    private static final Log logger = LogFactory.getLog(LoginController.class);
 	
 	@Autowired
 	@Qualifier("bankDataSource")
@@ -47,8 +56,19 @@ implements GallaryDao {
 	
 	@Override
 	public String findImageFilePathById(int imageid) {
-		String path = super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_IMAGE_FROM_FILE +imageid, 
+		String path="";
+		try {
+			path = super.getJdbcTemplate().queryForObject(CustomerQuery.FIND_IMAGE_FROM_FILE +imageid, 
 															String.class);
+		}catch(Exception exception){
+			if(logger.isWarnEnabled()){
+				logger.warn("this path does not exist");
+			}
+			if(logger.isErrorEnabled()){
+				logger.error(exception.getMessage());
+			}
+
+		}
 		return path;
 	}
 	

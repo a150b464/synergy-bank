@@ -1,5 +1,8 @@
 package com.synergy.bank.loan.web.action.form;
 
+import java.util.List;
+
+
 /**
  * 
  * @author nagendra
@@ -18,6 +21,7 @@ public class CarForm {
 	private byte[] image;
 	
 	public String getEmail() {
+		
 		return email;
 	}
 

@@ -99,12 +99,12 @@ public class BankPayeeCustomerController {
         payeeDetailsForm.setMobile("********"+mobile);
         model.addAttribute("addPayeeCommand", payeeDetailsForm);
         /* System.out.println("in controller"); */
-        return NavigationConstant.CUSTOMER_PAGE
+        return NavigationConstant.CUSTOMER_PAGE	
                  + NavigationConstant.ADD_PAYEE_PAGE;
    }
 	 
 	 @RequestMapping(value = "showPayeeList.do", method = RequestMethod.GET)
-		public String findAllPayees(Model model,HttpSession session) {
+	 public String findAllPayees(Model model,HttpSession session) {
 		 LoginForm loginForm=(LoginForm)session.getAttribute(NavigationConstant.USER_SESSION_DATA);
 	        String userid=loginForm.getUserId();
 		 List<PayeeDetailsForm> payeeDetailsFormList = bankPayeeService.findAllPayees(userid);
@@ -180,6 +180,9 @@ public class BankPayeeCustomerController {
 		 PayeeDetailsForm payeeDetailsForm=bankPayeeService.findAllPayeesByEmail(email);
 		 //100 lines
 		 //100 lines
+		   String pemail=payeeDetailsForm.getEmail();
+		   pemail=new StringBuilder(pemail).reverse().toString();
+		   payeeDetailsForm.setEmail(pemail);
 			model.addAttribute("EditPayeeForm", payeeDetailsForm);
 			return NavigationConstant.CUSTOMER_PAGE + NavigationConstant.EDIT_PAYEE_TABLE;
 			
