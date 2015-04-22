@@ -24,6 +24,7 @@ public interface AdminQuery {
 	public static final String UNBLOCK_CUSTOMER_QUERY = "update customer_login_tbl set active='yes' where userId=";
 	public static final String FIND_PENDING_CREDITCARD_LIST = "select * from credit_details_tbl where approve='no'";
 	public static final String FIND_IMAGE_FROM_TABLE_BY_ID = "select * from credit_details_tbl where userId=";
+	public static final String FIND_ALL_PORTFOLIOS = "select sno,imageUrl,thumbUrl,imageTitle,description from portfolio_tbl";
 	
 }
 

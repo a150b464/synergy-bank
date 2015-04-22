@@ -2,6 +2,8 @@ package com.synergy.bank.customer.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.synergy.bank.base.dao.AbstractDaoImpl;
+import com.synergy.bank.common.web.controller.LoginController;
 import com.synergy.bank.customer.dao.BankCustomerDao;
 import com.synergy.bank.customer.dao.entity.CustomerEntity;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
@@ -18,6 +21,11 @@ import com.synergy.bank.customer.dao.entity.PayeeDetailsEntity;
 @Transactional(propagation = Propagation.REQUIRED, value = "transactionManager")
 public class BankCustomerHibernateDaoImpl extends
 		AbstractDaoImpl<CustomerEntity, String> implements BankCustomerDao {
+	
+	/**
+     * Initiate Logger for this class
+     */
+    private static final Log logger = LogFactory.getLog(BankCustomerHibernateDaoImpl.class);
 
 	protected BankCustomerHibernateDaoImpl() {
 		super(CustomerEntity.class);
@@ -92,7 +100,8 @@ public class BankCustomerHibernateDaoImpl extends
 
 		@SuppressWarnings("unchecked")
 		List<CustomerEntity> list = (List<CustomerEntity>) criteria.list();
-		System.out.println("list inside criteria="+list);
+		if(logger.isDebugEnabled())
+		logger.debug("list inside criteria="+list);
 		return list;
 	}
 

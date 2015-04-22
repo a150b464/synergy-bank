@@ -75,6 +75,10 @@ public class BankCustomerServiceImpl implements BankCustomerService {
 		// attribute and datatype should be match
 		BeanUtils.copyProperties(customerForm, customerEntity);
 		customerEntity.setApprove("no");
+		//setting customerId
+		for(CustomerRegistrationQuestionsEntity customerRegistrationQuestionsEntity:customerEntity.getQuestionList()){
+			customerRegistrationQuestionsEntity.setCustomerId(userid);
+		}
 		
 		CustomerLoginDetailEntity customerLoginDetailEntity = new CustomerLoginDetailEntity();
 		customerLoginDetailEntity.setUserId(customerForm.getUserId());

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -38,6 +40,12 @@ import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestio
 
 @Controller
 public class LoginController {
+	
+	/**
+     * Initiate Logger for this class
+     */
+    private static final Log logger = LogFactory.getLog(LoginController.class);
+
 
 	@Autowired
 	@Qualifier("BankCustomerHibernateDaoImpl")
@@ -63,7 +71,7 @@ public class LoginController {
 	private CustomerRegistrationQuestionsService customerRegistrationQuestionsService;
 	
 	
-	@RequestMapping(value = "passwordReset.do", method = RequestMethod.GET)
+	@RequestMapping()
 	public @ResponseBody String checkPassword(@RequestParam("ooldPassword") String oldPassword) {
 		
 		System.out.println("--------Inside passwordRest.do--------");
@@ -89,6 +97,7 @@ public class LoginController {
 		session.invalidate();
 		model.addAttribute("applicationMessage",
 				"You have successfully logout from the application.");
+		//WEB-INF/jsp/common/login
 		return NavigationConstant.COMMON_PAGE + NavigationConstant.LOGIN_PAGE;
 	}
 
@@ -113,13 +122,26 @@ public class LoginController {
 	
 	@RequestMapping(value="homescreen.htm",method = RequestMethod.GET)
 	public String handleRequestInternal(@RequestHeader(value="User-Agent", defaultValue="foo") String userAgent,HttpServletRequest request,
-			HttpServletResponse response,Model model) throws Exception {
-		System.out.print("Yes we care");
+		HttpServletResponse response,Model model) throws Exception {
+		if(logger.isDebugEnabled()) {
+			logger.debug("this is begning of homescreen -> userAgent = "+userAgent);
+		}
+		
+		if(logger.isInfoEnabled()) {
+			logger.info("Yes we care");
+		}
+		
 		String nextPage="guest";
 		// Retrieve user details
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(logger.isInfoEnabled()) {
+			logger.info("authentication  = "+authentication);
+		}
         //retrieving the role of the logged in user.
         Collection<? extends GrantedAuthority> grantedList=authentication.getAuthorities();
+        if(logger.isInfoEnabled()) {
+			logger.info("grantedList  = "+grantedList);
+		}
         //Here we are assuming last role present inside the list will be actual role of
         //logged in user.
         if(grantedList!=null && grantedList.size()>0){
