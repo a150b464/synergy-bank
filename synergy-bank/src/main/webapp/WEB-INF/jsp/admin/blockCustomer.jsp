@@ -38,6 +38,7 @@ function switchLock(userid){
 	$.ajax({
 		url:"${pageContext.request.contextPath}/bank/lockUnlockCustomers",
 		data:{pstatus:status,puserid:userid},
+		timeout:5000,
 		success:function(data) {
 	    if(data=='yes') {
 			 if(status=='lock'){
@@ -46,9 +47,13 @@ function switchLock(userid){
 				 $("#"+userid).attr("src", "${pageContext.request.contextPath}/images/unlock.png"); 
 			 }
 	    }else{
+	    	
+	    	
 	    	 
 	    }
-	  }
+	  },error:function(result) {
+		     alert("Sorry data could not be accessed");
+		  }
 	});
 }
 </script>

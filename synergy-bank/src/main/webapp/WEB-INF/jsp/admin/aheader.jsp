@@ -147,7 +147,7 @@
 			<li><a href="${pageContext.request.contextPath}/bank/customers">Block Customer(S)</a></li>
 			<li><a href="${pageContext.request.contextPath}/bank/selectGalleryById">Gallery</a></li>
 			<li><a href="#">Reset Password(s)</a></li>
-			<li><a href="#">Reports</a></li>
+			<li><a href="${pageContext.request.contextPath}/bank/uploadSecurityQuestions">Security Question</a></li>
 			<li class="last"><a href="#">Profile</a></li>
 			<li class="last"><a href="${pageContext.request.contextPath}/bank/logout">logout</a></li>
     
