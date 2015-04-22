@@ -63,6 +63,10 @@ var ccontextPath="${pageContext.request.contextPath}";
 	});
 </script>
 
+<style type="text/css">
+
+</style>
+
 </head>
 
 
@@ -87,7 +91,7 @@ var ccontextPath="${pageContext.request.contextPath}";
         <p class="submit">
 
      <!--   <input type="button" name="commit" style="background: url(images/logs.jpg); width:100px; height:35px;" />         -->
-     <a href="${pageContext.request.contextPath}/bank/customerRegistration"><img width="100" height="35" src="${pageContext.request.contextPath}/images/register.jpg"></img></a>
+     <a href="${pageContext.request.contextPath}/bank/customerRegistration"><img width="100" height="35" src="${pageContext.request.contextPath}/images/register.jpg" ></img></a>
         <input type="image" src="${pageContext.request.contextPath}/images/logs.jpg" name="commit" value="Login" id="signid" width="100" height="35/">
          
         </p>

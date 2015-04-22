@@ -217,8 +217,8 @@
 				style="background:#D0F5A9; font-family: Palatino Linotype" />
 			<br />
 			<b>Do you own or rent? </b>
-			<ff:radiobutton name="ownOrRent" path="ownOrRent" value="yes" />Yes <ff:radiobutton
-				name="permission" path="purchase" value="no" />No
+			<ff:radiobutton  path="ownOrRent" value="yes" />Yes <ff:radiobutton
+				 path="ownOrRent" value="no" />No
 			<b>What is your monthly mortgage or rent payment? </b>
 			<ff:input path="rent" name="rent" size="40"
 				style="background:#D0F5A9; font-family: Palatino Linotype" />

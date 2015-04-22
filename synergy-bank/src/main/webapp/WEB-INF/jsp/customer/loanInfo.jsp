@@ -16,13 +16,14 @@
 </head>
 <body onload="javascript:breadcrumbs()">
 	<%@include file="cheader.jsp"%>
-	<img src="${pageContext.request.contextPath}/images/loan.jpg"
-		width="892" height="260" />
-
+		<br />
+		<br />
+	
 	<div id="content" style="padding-left: 30px">
-		<h3 align="center" style="font-family: Palatino Linotype; font-size: 20px; color: orange">
+		<div>
 		<a href = "${pageContext.request.contextPath}/loan/apply.do">Apply for Auto Loan</a>
-		</h3><br /><br /><br />
+		<img src="${pageContext.request.contextPath}/images/loan.jpg"/>
+		</div>
 		<h2>
 			<u>Check Loan Eligibility </u>
 		</h2>

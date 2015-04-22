@@ -67,7 +67,8 @@
 		<div id="info">
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title5.gif" alt="" width="160" height="26" />
-				<img src="${pageContext.request.contextPath}/images/jobseekers.jpg" alt="" width="160" height="160"/>
+				<img src="${pageContext.request.contextPath}/images/jobseekers.jpg" 
+				alt="" width="160" height="160"/>
 			</div>
 			<div>
 				<img src="${pageContext.request.contextPath}/images/title6.gif" alt="" width="160" height="26" />
