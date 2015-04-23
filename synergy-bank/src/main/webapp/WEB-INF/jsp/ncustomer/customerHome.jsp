@@ -5,64 +5,26 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Portfolio | Nova</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sl-slide.css">
-
-    <script src="${pageContext.request.contextPath}/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-57-precomposed.png">
-    
-    <style type="text/css">
-    	.input-large {
-  			width: 410px;
- 			 height: 24px !important;
-  			margin-bottom: 10px !important;
- 					 line-height: 30px !important;
-  padding: 11px 19px !important;
-  font-size: 17.5px !important;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-}
-
-.input-large[class=input-large] {
-    width: 400px;
-}
-    
-    </style>
+      <%@include file="/customerImport.jsp" %>
 </head>
 
 <body>
 
     <!--Header-->
-      <%@include file="/aheader.jsp" %>
+      <%@include file="/cheader.jsp" %>
     <!-- /header -->
 
     <section class="title">
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
-                    <h1>Portfolio</h1>
+                    <h1>Customer Home</h1>
                 </div>
                 <div class="span6">
                     <ul class="breadcrumb pull-right">
                         <li><a href="index.html">Home</a> <span class="divider">/</span></li>
                         <li><a href="#">Pages</a> <span class="divider">/</span></li>
-                        <li class="active">Portfolio</li>
+                        <li class="active">Customer Home</li>
                     </ul>
                 </div>
             </div>
@@ -71,37 +33,124 @@
     <!-- / .title -->     
 
     <section id="portfolio" class="container main">    
-    		<h3>Add New Image</h3>
-    	    <table class="table">
-        <tbody>
-            <tr>
-                <td>Image Title </td>
-                <td style="height: 20px;"> <input type="text"  style="width:320px;height:1px;"></td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td><input type="text"  name="description" style="width:620px;height:1px;"></td>
-            </tr>
-            <tr>
-                <td>Image full</td>
-                <td><input type="file" name="photo" style="background-color: pink;"></td>
-            </tr>
-            
-             <tr>
-                <td>Image Thumb</td>
-                <td><input type="file" name="thumb" style="background-color: pink;"></td>
-            </tr>
-            
-             <tr>
-                <td>&nbsp;</td>
-                <td>
-              <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-                <td>
-            </tr>
-        </tbody>
-    </table>
-    
         <ul class="gallery col-4">
+            <!--Item 1-->
+            
+            <c:forEach items="${tportfolioFormsList}" var="item" varStatus="sno">
+            <li>
+                <div class="preview">
+                    <img alt=" " src="${pageContext.request.contextPath}/${item.thumbUrl}">
+                    <div class="overlay">
+                    </div>
+                    <div class="links">
+                        <a data-toggle="modal" href="#modal-${sno.count}"><i class="icon-eye-open"></i></a><a href="#"><i class="icon-link"></i></a>                                
+                    </div>
+                </div>
+                <div class="desc">
+                    <h5>${item.imageTitle}</h5>
+                    <small>${item.description}</small>
+                </div>
+                <div id="modal-${sno.count}" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="${pageContext.request.contextPath}/${item.imageUrl}" alt=" " width="100%" style="max-height:400px">
+                    </div>
+                </div>                 
+            </li>
+            </c:forEach>
+            <!--/Item 4--> 
+
+            <!--Item 5-->
+            <li>
+                <div class="preview">
+                    <img alt=" " src="${pageContext.request.contextPath}/images/portfolio/thumb/item5.jpg">
+                    <div class="overlay">
+                    </div>
+                    <div class="links">
+                        <a data-toggle="modal" href="#modal-5"><i class="icon-eye-open"></i></a><a href="#"><i class="icon-link"></i></a>                                
+                    </div>
+                </div>
+                <div class="desc">
+                    <h5>Lorem ipsum dolor sit amet</h5>
+                    <small>Portfolio item short description</small>
+                </div>
+                <div id="modal-5" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="${pageContext.request.contextPath}/images/portfolio/full/item5.jpg" alt=" " width="100%" style="max-height:400px">
+                    </div>
+                </div>                 
+            </li>
+            <!--/Item 5--> 
+
+            <!--Item 6-->
+            <li>
+                <div class="preview">
+                    <img alt=" " src="${pageContext.request.contextPath}/images/portfolio/thumb/item6.jpg">
+                    <div class="overlay">
+                    </div>
+                    <div class="links">
+                        <a data-toggle="modal" href="#modal-6"><i class="icon-eye-open"></i></a><a href="#"><i class="icon-link"></i></a>                                
+                    </div>
+                </div>
+                <div class="desc">
+                    <h5>Lorem ipsum dolor sit amet</h5>
+                    <small>Portfolio item short description</small>
+                </div>
+                <div id="modal-6" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="${pageContext.request.contextPath}/images/portfolio/full/item6.jpg" alt=" " width="100%" style="max-height:400px">
+                    </div>
+                </div>                 
+            </li>
+            <!--/Item 6-->                 
+
+            <!--Item 7-->
+            <li>
+                <div class="preview">
+                    <img alt=" " src="${pageContext.request.contextPath}/images/portfolio/thumb/item1.jpg">
+                    <div class="overlay">
+                    </div>
+                    <div class="links">
+                        <a data-toggle="modal" href="#modal-7"><i class="icon-eye-open"></i></a><a href="#"><i class="icon-link"></i></a>                                
+                    </div>
+                </div>
+                <div class="desc">
+                    <h5>Lorem ipsum dolor sit amet</h5>
+                    <small>Portfolio item short description</small>
+                </div>
+                <div id="modal-1" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="${pageContext.request.contextPath}/images/portfolio/full/item1.jpg" alt=" " width="100%" style="max-height:400px">
+                    </div>
+                </div>                 
+            </li>
+            <!--/Item 7-->
+
+            <!--Item 8-->
+            <li>
+                <div class="preview">
+                    <img alt=" " src="${pageContext.request.contextPath}/images/portfolio/thumb/item5.jpg">
+                    <div class="overlay">
+                    </div>
+                    <div class="links">
+                        <a data-toggle="modal" href="#modal-8"><i class="icon-eye-open"></i></a><a href="#"><i class="icon-link"></i></a>                                
+                    </div>
+                </div>
+                <div class="desc">
+                    <h5>Lorem ipsum dolor sit amet</h5>
+                    <small>Portfolio item short description</small>
+                </div>
+                <div id="modal-8" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="${pageContext.request.contextPath}/images/portfolio/full/item5.jpg" alt=" " width="100%" style="max-height:400px">
+                    </div>
+                </div>                 
+            </li>
+            <!--/Item 8-->
             
             <!--Item 9-->
             <li>
@@ -200,11 +249,11 @@
     </section>
 
     <!--Bottom-->
-   <%@include file="/abottom.jsp" %>
+   <%@include file="/cbottom.jsp" %>
 <!--/bottom-->
 
 <!--Footer-->
- <%@include file="/afooter.jsp" %>
+ <%@include file="/cfooter.jsp" %>
 <!--/Footer-->
 
 <!--  Login form -->
