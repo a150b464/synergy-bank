@@ -29,10 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
 
 import com.synergy.bank.admin.web.controller.form.GallaryPhotoForm;
 import com.synergy.bank.common.service.BankEmailService;
@@ -42,16 +39,15 @@ import com.synergy.bank.common.service.impl.GallaryService;
 import com.synergy.bank.common.web.controller.form.LoginForm;
 import com.synergy.bank.common.web.controller.form.SecurityQuestionForm;
 import com.synergy.bank.customer.dao.entity.CustomerRegistrationQuestionsEntity;
-
 import com.synergy.bank.customer.service.BankCustomerService;
 import com.synergy.bank.customer.service.BankTransactionService;
 import com.synergy.bank.customer.service.CustomerAccountService;
+import com.synergy.bank.customer.web.constant.CustomerNavigationConstant;
 import com.synergy.bank.customer.web.constant.NavigationConstant;
 import com.synergy.bank.customer.web.controller.form.CustomerAccountForm;
 import com.synergy.bank.customer.web.controller.form.CustomerForm;
 import com.synergy.bank.customer.web.controller.form.CustomerRegistrationQuestionsForm;
 import com.synergy.bank.customer.web.controller.form.CustomerTransactionForm;
-import com.synergy.bank.customer.web.controller.form.PayeeDetailsForm;
 
 @Controller
 @Scope("request")
@@ -81,6 +77,13 @@ public class BankCustomerController {
 	@Autowired
 	@Qualifier("GallaryServiceImpl")
 	private GallaryService gallaryService;
+	
+	
+	@RequestMapping(value = "customerHomePage", method = RequestMethod.GET)
+	public String showCustomerPage(Model model) {
+		return CustomerNavigationConstant.CUSTOMER_PAGE
+				+ CustomerNavigationConstant.CUSTOMER_HOME_PAGE;
+	}
 	
 
 	@RequestMapping(value = "customerRegistration", method = RequestMethod.GET)
