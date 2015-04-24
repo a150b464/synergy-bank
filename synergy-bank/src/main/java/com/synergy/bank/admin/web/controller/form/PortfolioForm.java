@@ -7,6 +7,24 @@ public class PortfolioForm {
 	private String thumbUrl;
 	private String imageTitle;
 	private String description;
+	private byte[] image;
+	private byte[] timage;
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public byte[] getTimage() {
+		return timage;
+	}
+
+	public void setTimage(byte[] timage) {
+		this.timage = timage;
+	}
 
 	public int getSno() {
 		return sno;
