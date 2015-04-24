@@ -57,7 +57,11 @@ public class BankAdminController {
 	@Qualifier("BankEmailServiceImpl")
 	private BankEmailService bankEmailService;
 	
-	
+	@RequestMapping(value = "adminHomePage", method = RequestMethod.GET)
+	public String adminHomePage() {
+		return NavigationConstantAdmin.NADMIN_PAGE
+				+ NavigationConstantAdmin.ADMIN_HOME_PAGE;
+	}
 	
 	@RequestMapping(value = "uploadNewPhoto.do", method = RequestMethod.POST)
 	public String uploadNewPhoto(@ModelAttribute("gallaryPhotoForm") GallaryPhotoForm gallaryPhotoForm,Model model,HttpServletRequest request) {

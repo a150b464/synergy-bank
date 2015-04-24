@@ -44,9 +44,6 @@ public class CustomerEntity implements java.io.Serializable {
 	private List<CustomerRegistrationQuestionsEntity> questionList = new ArrayList<CustomerRegistrationQuestionsEntity>();
 
 
-
-
-
 	@Column(name = "photo", columnDefinition = "longblob")
 	public byte[] getPhoto() {
 		return photo;

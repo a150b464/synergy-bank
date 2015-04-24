@@ -12,7 +12,7 @@ import com.synergy.bank.customer.dao.entity.CustomerEntity;
  * @param <E>
  * @param <I>
  */
-public interface AbstractDao<E, I extends Serializable> {
+public abstract interface AbstractDao<E, I extends Serializable> {
 
 	public E findById(I id);
     public void saveOrUpdate(E e);
