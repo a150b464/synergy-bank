@@ -14,22 +14,23 @@
                         <li><a href="services.html">Services</a></li>
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				    		Portfolio <i class="icon-angle-down"></i>
+				    		Customers <i class="icon-angle-down"></i>
 						</a>
                        		 <ul class="dropdown-menu">
-                                <li><a href="${pageContext.request.contextPath}/bank/addImagePortfolio">Add New Image</a></li>
-                                <li><a href="${pageContext.request.contextPath}/bank/portfolio">Show Images</a></li>
+                                <li><a href="${pageContext.request.contextPath}/bank/addImagePortfolio">Bank Customers</a></li>
+                                <li><a href="${pageContext.request.contextPath}/bank/portfolio">Approve Customer(s)</a></li>
+                                <li><a href="${pageContext.request.contextPath}/bank/portfolio">Block Customer(s)</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Pages <i class="icon-angle-down"></i>
+                            Miscellaneous <i class="icon-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="career.html">Career</a></li>
-                                <li><a href="blog-item.html">Blog Single</a></li>
+                                <li><a href="career.html">Reset Password</a></li>
+                                <li><a href="blog-item.html">Security Questions</a></li>
                                 <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="pricing.html">Profile</a></li>
                                 <li><a href="404.html">404</a></li>
                                 <li><a href="typography.html">Typography</a></li>
                                 <li><a href="registration.html">Registration</a></li>
@@ -38,8 +39,8 @@
                                 <li><a href="terms.html">Terms of Use</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li> 
-                        <li><a href="contact-us.html">Contact</a></li>
+                        <li><a href="blog.html">Gallery</a></li> 
+                        <li><a href="contact-us.html">Logout</a></li>
                         <li class="login">
                             <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i></a>
                         </li>
